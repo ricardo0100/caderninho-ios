@@ -1,26 +1,38 @@
 import SwiftUI
 
-struct HomeView: View {
+struct TransactionsView: View {
     @ObservedObject var viewModel: HomeViewModelMock = .init()
     
     var body: some View {
-        List {
-            Section {
-                ForEach(viewModel.buys) {
-                    TransactionCell(item: $0)
+        NavigationStack {
+            List {
+                Section {
+                    ForEach(viewModel.buys) {
+                        TransactionCell(item: $0)
+                    }
+                } header: {
+                    TransactionsHeaderView()
+                        .edges
                 }
-            } header: {
-                HomeHeaderView()
-                    .textCase(nil)
-                    .listRowInsets(EdgeInsets())
+            }
+            .onAppear(perform: viewModel.didAppear)
+            .toolbar {
+                ToolbarItem(placement: .navigation) {
+                    HStack {
+                        Image(systemName: "arrow.up.arrow.down")
+                            .foregroundColor(.brand)
+                        Text("Transactions")
+                            .foregroundColor(.brand)
+                            .font(.title)
+                    }
+                }
             }
         }
-        .listStyle(.grouped)
     }
 }
 
 fileprivate struct TransactionCell: View {
-    let item: Transaction
+    let item: TransactionModel
     
     var body: some View {
         HStack {
@@ -43,7 +55,7 @@ fileprivate struct TransactionCell: View {
                             .font(.subheadline)
                             .foregroundColor(.gray)
                         Circle()
-                            .foregroundColor(item.account.color.color)
+                            .foregroundColor(Color(hex: item.account.color))
                             .frame(width: 12, height: 12)
                     }
                 }
@@ -52,10 +64,10 @@ fileprivate struct TransactionCell: View {
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
+struct TransactionsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            HomeView(viewModel: HomeViewModelMock())
+            TransactionsView(viewModel: HomeViewModelMock())
         }
     }
 }

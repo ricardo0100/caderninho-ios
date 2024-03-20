@@ -1,6 +1,7 @@
 import Foundation
 
 extension CGFloat {
+    static let spacingZero: Self = 0
     static let spacingNano: Self = 2
     static let spacingSmall: Self = 4
     static let spacingMedium: Self = 8

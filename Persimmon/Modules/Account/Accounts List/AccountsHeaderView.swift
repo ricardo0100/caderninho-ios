@@ -1,14 +1,10 @@
 import SwiftUI
 
-struct CategoriesHeaderView: View {
+struct AccountsHeaderView: View {
+    let addAction: () -> Void
+    
     var body: some View {
         VStack(alignment: .leading, spacing: .zero) {
-            HeaderTitle(
-                title: "Categories",
-                systemImage: "briefcase.circle"
-            )
-            .padding(.horizontal)
-            
             HStack {
                 VStack(alignment:.leading) {
                     Text("Total: ")
@@ -21,30 +17,27 @@ struct CategoriesHeaderView: View {
                         .font(.headline)
                         .foregroundColor(.primary)
                 }
+                
                 Spacer()
-                Button(action: {
-                    
-                }, label: {
+                Button(action: addAction, label: {
                     Image(systemName: "plus")
                 })
                 .buttonStyle(.borderedProminent)
                 .tint(.brand)
             }
-            .padding()
         }
     }
 }
 
-struct CategoriesHeaderView_Previews: PreviewProvider {
+struct AccountsHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         List {
             Section {
                 Text("Test")
             } header: {
-                CategoriesHeaderView()
+                AccountsHeaderView(addAction: {})
                     .textCase(nil)
-                    .listRowInsets(EdgeInsets())
             }
-        }.listStyle(.grouped)
+        }
     }
 }

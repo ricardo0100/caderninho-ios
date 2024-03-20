@@ -9,11 +9,16 @@ struct CategoryItem: Identifiable {
 }
 
 protocol CategoriesViewModelProtocol: ObservableObject {
+    var showingSheet: Bool { get }
     var categories: [CategoryItem] { get }
     func fetchCategories()
+    func didTapAdd()
 }
 
 class CategoriesViewModelMock: CategoriesViewModelProtocol {
+    @Published var categories: [CategoryItem] = []
+    @Published var showingSheet = false
+    
     static var availableCategories: [CategoryItem] = [
         CategoryItem(name: "House", color: NiceColor.red, icon: "house.fill", total: 2.92),
         CategoryItem(name: "Food", color: NiceColor.green, icon: "fork.knife", total: 19.1),
@@ -23,15 +28,16 @@ class CategoriesViewModelMock: CategoriesViewModelProtocol {
         CategoryItem(name: "Health", color: NiceColor.yellow, icon: "heart.fill", total: 19.9),
         CategoryItem(name: "Shopping", color: NiceColor.teal, icon: "cart.fill", total: 22.9)
     ]
-
     
-    @Published var categories: [CategoryItem] = []
-
     init() {
         fetchCategories()
     }
 
     func fetchCategories() {
         self.categories = Self.availableCategories
+    }
+    
+    func didTapAdd() {
+        showingSheet = true
     }
 }

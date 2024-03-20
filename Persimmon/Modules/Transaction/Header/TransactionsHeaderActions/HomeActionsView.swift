@@ -4,17 +4,13 @@ struct HomeActionsView: View {
     @ObservedObject var viewModel = HomeActionsViewModelMock()
     
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack(alignment: .top, spacing: 0) {
-                ForEach(viewModel.actions) { button in
-                    VerticalButton(iconName: button.iconName, text: button.text, action: {
+        HStack(alignment: .top) {
+            ForEach(viewModel.actions) { button in
+                VerticalButton(iconName: button.iconName, text: button.text, action: {
 
-                    })
-                }
+                }).frame(minWidth: 0, maxWidth: .infinity)
             }
-            .padding()
         }
-        .background(.bar)
     }
 }
 
@@ -28,23 +24,19 @@ struct VerticalButton: View {
             VStack {
                 ZStack {
                     Circle()
-                        .foregroundColor(.brand)
+                        .foregroundColor(.secondary)
                     Image(systemName: iconName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24, height: 24)
                         .foregroundColor(.brandText)
-                        .font(.title)
                 }
-                .frame(width: 48, height: 48)
                 
                 Text(text)
-                    .font(.subheadline)
+                    .font(.caption2)
                     .lineLimit(2)
-                    .frame(maxHeight: .infinity)
             }
             .foregroundColor(Color.primary)
-            .padding(.horizontal, .spacingSmall)
         })
     }
 }
@@ -56,9 +48,7 @@ struct HomeActionsView_Previews: PreviewProvider {
             } header: {
                 HomeActionsView()
                     .textCase(nil)
-                    .listRowInsets(EdgeInsets())
             }
         }
-        .listStyle(.grouped)
     }
 }

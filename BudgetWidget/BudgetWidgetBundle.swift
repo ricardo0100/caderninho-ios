@@ -5,6 +5,5 @@ import SwiftUI
 struct BudgetWidgetBundle: WidgetBundle {
     var body: some Widget {
         BudgetWidget()
-        BudgetWidgetLiveActivity()
     }
 }

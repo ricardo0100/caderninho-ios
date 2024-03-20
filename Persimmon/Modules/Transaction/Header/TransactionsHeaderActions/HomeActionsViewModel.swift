@@ -24,7 +24,7 @@ class HomeActionsViewModelMock: HomeActionsViewModelProtocol {
             Action(iconName: "creditcard", text: "Credit Buy"),
             Action(iconName: "arrow.down.to.line.circle", text: "Transfer In"),
             Action(iconName: "arrow.up.to.line.circle", text: "Transfer Out"),
-            Action(iconName: "plus.forwardslash.minus", text: "Adjust"),
+            Action(iconName: "plus.forwardslash.minus", text: "Adjustent"),
         ]
     }
 }

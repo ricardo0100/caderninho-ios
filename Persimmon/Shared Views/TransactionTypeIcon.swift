@@ -33,11 +33,11 @@ struct TransactionTypeIcon: View {
     var body: some View {
         ZStack {
             Circle()
-                .stroke(foregroundColor, lineWidth: 1)
+                .stroke(foregroundColor.opacity(0.5), lineWidth: 1)
             icon
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 32, height: 32)
+                .frame(width: 21, height: 21)
                 .foregroundColor(foregroundColor)
         }.frame(width: 42, height: 42)
     }

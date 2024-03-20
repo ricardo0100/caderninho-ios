@@ -18,7 +18,7 @@ struct ImageIconView: View {
             image
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 24, height: 24)
+                .frame(width: 16, height: 16)
                 .foregroundColor(color)
         }.frame(width: 42, height: 42)
     }
