@@ -20,16 +20,11 @@ struct TransactionsView: View {
                     
                 }
             }
-            .onAppear(perform: viewModel.didAppear)
             .toolbar {
                 ToolbarItem(placement: .navigation) {
-                    HStack {
-                        Image(systemName: "arrow.up.arrow.down")
-                            .foregroundColor(.brand)
-                        Text("Transactions")
-                            .foregroundColor(.brand)
-                            .font(.title)
-                    }
+                    NavigationToolbarView(
+                        imageName: "arrow.up.arrow.down",
+                        title: "Transactions")
                 }
             }
         }

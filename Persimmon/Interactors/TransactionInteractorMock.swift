@@ -4,13 +4,13 @@ import Combine
 protocol TransactionInteractorProtocol {
     var transactions: AnyPublisher<[TransactionModel], InteractorError> { get }
     func getTransaction(with id: UUID) -> AnyPublisher<TransactionModel, InteractorError>
-    func fetchTransactions()
     func saveTransaction(id: UUID?, name: String, price: Double, account: AccountModel, type: TransactionType) -> AnyPublisher<TransactionModel, InteractorError>
+    func sumOfAllTransactions(of account: AccountModel) -> AnyPublisher<Double, InteractorError>
 }
 
-class TransactionInteractor: TransactionInteractorProtocol {
+class TransactionInteractorMock: TransactionInteractorProtocol {
     var transactions: AnyPublisher<[TransactionModel], InteractorError>
-    static let currentValue = CurrentValueSubject<[TransactionModel], InteractorError>([])
+    static let currentValue = CurrentValueSubject<[TransactionModel], InteractorError>(exampleTransactions)
     
     init() {
         transactions = Self.currentValue.eraseToAnyPublisher()
@@ -19,45 +19,41 @@ class TransactionInteractor: TransactionInteractorProtocol {
     static let exampleTransactions = [
         TransactionModel(
             name: "T-shirt", price: 19.99,
-            account: AccountInteractor.exampleAccounts.randomElement()!,
+            account: AccountInteractorMock.exampleAccounts.randomElement()!,
             type: TransactionType.allCases.randomElement()!),
         TransactionModel(
             name: "Shoes", price: 49.99,
-            account: AccountInteractor.exampleAccounts.randomElement()!,
+            account: AccountInteractorMock.exampleAccounts.randomElement()!,
             type: TransactionType.allCases.randomElement()!),
         TransactionModel(
             name: "Jeans", price: 39.99,
-            account: AccountInteractor.exampleAccounts.randomElement()!,
+            account: AccountInteractorMock.exampleAccounts.randomElement()!,
             type: TransactionType.allCases.randomElement()!),
         TransactionModel(
             name: "Sunglasses", price: 29.99,
-            account: AccountInteractor.exampleAccounts.randomElement()!,
+            account: AccountInteractorMock.exampleAccounts.randomElement()!,
             type: TransactionType.allCases.randomElement()!),
         TransactionModel(
             name: "Backpack", price: 59.99,
-            account: AccountInteractor.exampleAccounts.randomElement()!,
+            account: AccountInteractorMock.exampleAccounts.randomElement()!,
             type: TransactionType.allCases.randomElement()!),
         TransactionModel(
             name: "Hoodie", price: 29.99,
-            account: AccountInteractor.exampleAccounts.randomElement()!,
+            account: AccountInteractorMock.exampleAccounts.randomElement()!,
             type: TransactionType.allCases.randomElement()!),
         TransactionModel(
             name: "Sweatpants", price: 34.99,
-            account: AccountInteractor.exampleAccounts.randomElement()!,
+            account: AccountInteractorMock.exampleAccounts.randomElement()!,
             type: TransactionType.allCases.randomElement()!),
         TransactionModel(
             name: "Jacket", price: 79.99,
-            account: AccountInteractor.exampleAccounts.randomElement()!,
+            account: AccountInteractorMock.exampleAccounts.randomElement()!,
             type: TransactionType.allCases.randomElement()!),
         TransactionModel(
             name: "Hat", price: 14.99,
-            account: AccountInteractor.exampleAccounts.randomElement()!,
+            account: AccountInteractorMock.exampleAccounts.randomElement()!,
             type: TransactionType.allCases.randomElement()!),
     ]
-    
-    func fetchTransactions() {
-        Self.currentValue.value = Self.exampleTransactions
-    }
     
     func getTransaction(with id: UUID) -> AnyPublisher<TransactionModel, InteractorError> {
         guard let account = Self.currentValue.value.first(where: { item in item.id == id }) else {
@@ -91,6 +87,18 @@ class TransactionInteractor: TransactionInteractorProtocol {
                     .setFailureType(to: InteractorError.self)
                     .eraseToAnyPublisher()
             }
+            .eraseToAnyPublisher()
+    }
+    
+    func sumOfAllTransactions(of account: AccountModel) -> AnyPublisher<Double, InteractorError> {
+        Self.currentValue
+            .replaceError(with: [])
+            .flatMap {
+                return Just($0.filter { $0.account.id == account.id }
+                    .map { $0.price }
+                    .reduce(.zero, +))
+            }
+            .setFailureType(to: InteractorError.self)
             .eraseToAnyPublisher()
     }
 }

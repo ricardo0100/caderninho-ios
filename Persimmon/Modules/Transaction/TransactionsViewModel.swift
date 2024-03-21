@@ -3,7 +3,6 @@ import Combine
 
 protocol HomeViewModelProtocol: ObservableObject {
     var buys: [TransactionModel] { get }
-    func didAppear()
 }
 
 class HomeViewModelMock: HomeViewModelProtocol {
@@ -11,15 +10,11 @@ class HomeViewModelMock: HomeViewModelProtocol {
     let interactor: TransactionInteractorProtocol
     var cancellables: [AnyCancellable] = []
     
-    init(interactor: TransactionInteractor = .init()) {
+    init(interactor: TransactionInteractorMock = .init()) {
         self.interactor = interactor
         interactor.transactions
             .replaceError(with: [])
             .assign(to: \.buys, on: self)
             .store(in: &cancellables)
-    }
-
-    func didAppear() {
-        interactor.fetchTransactions()
     }
 }

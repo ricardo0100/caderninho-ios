@@ -18,7 +18,7 @@ class EditAccountViewModel: ObservableObject {
     
     var cancelables: [AnyCancellable] = []
 
-    let interactor = AccountInteractor()
+    let interactor = AccountInteractorMock()
     
     init(accountBinding: Binding<AccountModel?>) {
         self.accountBinding = accountBinding

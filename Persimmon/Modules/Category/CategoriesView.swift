@@ -26,13 +26,7 @@ struct CategoriesView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigation) {
-                    HStack {
-                        Image(systemName: "briefcase")
-                            .foregroundColor(.brand)
-                        Text("Categories")
-                            .foregroundColor(.brand)
-                            .font(.title)
-                    }
+                    NavigationToolbarView(imageName: "briefcase", title: "Categories")
                 }
             }
         }

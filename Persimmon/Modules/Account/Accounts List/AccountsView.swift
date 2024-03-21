@@ -9,9 +9,15 @@ struct AccountsView: View {
                 Section {
                     ForEach(viewModel.accounts, id: \.self) { account in
                         NavigationLink(destination: {
-                            AccountDetails(account: account)
+                            AccountDetailsView(viewModel: AccountDetailsViewModel(
+                                accountId: account.id,
+                                accountInteractor: AccountInteractorMock(),
+                                transactionInteractor: TransactionInteractorMock()))
                         }, label: {
-                            AccountCell(account: account)
+                            AccountCellView(viewModel: AccountCellViewModel(
+                                accountId: account.id,
+                                accountInteractor: AccountInteractorMock(),
+                                transactionInteractor: TransactionInteractorMock()))
                                 .onLongPressGesture {
                                     viewModel.didLongPress(account: account)
                                 }
@@ -48,13 +54,7 @@ struct AccountsView: View {
             })
             .toolbar {
                 ToolbarItem(placement: .navigation) {
-                    HStack {
-                        Image(systemName: "creditcard")
-                            .foregroundColor(.brand)
-                        Text("Accounts")
-                            .foregroundColor(.brand)
-                            .font(.title)
-                    }
+                    NavigationToolbarView(imageName: "creditcard", title: "Accounts")
                 }
             }
             .alert("Delete?", isPresented: $viewModel.isShowingDeleteAlert) {
@@ -65,24 +65,6 @@ struct AccountsView: View {
                 } label: {
                     Text("Delete")
                 }
-            }
-        }
-    }
-}
-
-struct AccountCell: View {
-    let account: AccountModel
-    
-    var body: some View {
-        HStack {
-            LettersIconView(
-                text: account.name.firstLetters(),
-                color: Color(hex: account.color))
-            VStack(alignment: .leading) {
-                Text(account.name)
-                    .font(.headline)
-                Text("\(account.currency) \(account.amount.formatted())")
-                    .font(.subheadline)
             }
         }
     }

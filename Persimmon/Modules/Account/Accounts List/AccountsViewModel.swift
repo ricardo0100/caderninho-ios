@@ -35,7 +35,7 @@ class AccountsViewModelMock: AccountsViewModelProtocol {
     private var cancellables: Set<AnyCancellable> = []
     private let accountsInteractor: AccountInteractorProtocol
     
-    required init(accountsInteractor: AccountInteractorProtocol = AccountInteractor()) {
+    required init(accountsInteractor: AccountInteractorProtocol = AccountInteractorMock()) {
         self.accountsInteractor = accountsInteractor
         accountsInteractor.accounts
             .replaceError(with: [])
