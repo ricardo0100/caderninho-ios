@@ -4,16 +4,16 @@ import Combine
 protocol AccountInteractorProtocol {
     var accounts: AnyPublisher<[AccountModel], InteractorError> { get }
     func getAccount(with id: UUID) -> AnyPublisher<AccountModel, InteractorError>
-    func fetchAccounts()
     func saveAccount(id: UUID?, name: String, color: String, currency: String) -> AnyPublisher<AccountModel, InteractorError>
+    func deleteAccount(account: AccountModel) -> AnyPublisher<Void, InteractorError>
 }
 
 class AccountInteractor: AccountInteractorProtocol {
     var accounts: AnyPublisher<[AccountModel], InteractorError>
-    static let currentValue = CurrentValueSubject<[AccountModel], InteractorError>([])
+    private static let sharedAccountsSubject = CurrentValueSubject<Set<AccountModel>, InteractorError>(Set(exampleAccounts))
     
     init() {
-        accounts = Self.currentValue.eraseToAnyPublisher()
+        accounts = Self.sharedAccountsSubject.map{ $0.sorted(by: { $0.name > $1.name }) }.eraseToAnyPublisher()
     }
     
     static let exampleAccounts = [
@@ -21,22 +21,10 @@ class AccountInteractor: AccountInteractorProtocol {
         AccountModel(name: "Feijão Trust Me", color: NiceColor.orange2.rawValue, currency: "US$"),
         AccountModel(name: "Banco do Brasil", color: NiceColor.yellow2.rawValue, currency: "R$"),
         AccountModel(name: "Bankito de Cuba", color: NiceColor.green2.rawValue, currency: "R$"),
-        AccountModel(name: "Maya Bank", color: NiceColor.red.rawValue, currency: "R$"),
-        AccountModel(name: "Feijão Trust Me", color: NiceColor.orange2.rawValue, currency: "US$"),
-        AccountModel(name: "Banco do Brasil", color: NiceColor.yellow2.rawValue, currency: "R$"),
-        AccountModel(name: "Bankito de Cuba", color: NiceColor.green2.rawValue, currency: "R$"),
-        AccountModel(name: "Maya Bank", color: NiceColor.red.rawValue, currency: "R$"),
-        AccountModel(name: "Feijão Trust Me", color: NiceColor.orange2.rawValue, currency: "US$"),
-        AccountModel(name: "Banco do Brasil", color: NiceColor.yellow2.rawValue, currency: "R$"),
-        AccountModel(name: "Bankito de Cuba", color: NiceColor.green2.rawValue, currency: "R$"),
     ]
     
-    func fetchAccounts() {
-        Self.currentValue.value = Self.exampleAccounts
-    }
-    
     func getAccount(with id: UUID) -> AnyPublisher<AccountModel, InteractorError> {
-        guard let account = Self.currentValue.value.first(where: { item in item.id == id }) else {
+        guard let account = Self.sharedAccountsSubject.value.first(where: { item in item.id == id }) else {
             let error = InteractorError.getAccountError(errorDescription: "Account with id: \(id) not found")
             return Fail<AccountModel, InteractorError>(error: error)
                 .eraseToAnyPublisher()
@@ -49,7 +37,7 @@ class AccountInteractor: AccountInteractorProtocol {
     func saveAccount(id: UUID?, name: String, color: String, currency: String) -> AnyPublisher<AccountModel, InteractorError> {
         guard let id = id else {
             let newAccount = AccountModel(name: name, color: color, currency: currency)
-            Self.currentValue.send(Self.currentValue.value + [newAccount])
+            Self.sharedAccountsSubject.value.insert(newAccount)
             return Just(newAccount)
                 .setFailureType(to: InteractorError.self)
                 .eraseToAnyPublisher()
@@ -61,11 +49,22 @@ class AccountInteractor: AccountInteractorProtocol {
                 updatedAccount.name = name
                 updatedAccount.color = color
                 updatedAccount.currency = currency
-                Self.currentValue.send(Self.currentValue.value.map { $0.id == id ? updatedAccount : $0 })
+                Self.sharedAccountsSubject.value.remove(account)
+                Self.sharedAccountsSubject.value.insert(updatedAccount)
                 return Just(updatedAccount)
                     .setFailureType(to: InteractorError.self)
                     .eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
+    }
+    
+    func deleteAccount(account: AccountModel) -> AnyPublisher<Void, InteractorError> {
+        Deferred {
+            if Self.sharedAccountsSubject.value.remove(account) == nil {
+                return Fail<Void, InteractorError>(error: InteractorError.deleteAccountError(errorDescription: "")).eraseToAnyPublisher()
+            } else {
+                return Just(()).setFailureType(to: InteractorError.self).eraseToAnyPublisher()
+            }
+        }.eraseToAnyPublisher()
     }
 }

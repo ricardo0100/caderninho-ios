@@ -8,14 +8,31 @@ struct AccountsView: View {
             List {
                 Section {
                     ForEach(viewModel.accounts, id: \.self) { account in
-                        AccountCell(account: account)
-                            .onTapGesture {
-                                viewModel.didTapAccount(account: account)
-                            }
+                        NavigationLink(destination: {
+                            AccountDetails(account: account)
+                        }, label: {
+                            AccountCell(account: account)
+                                .onLongPressGesture {
+                                    viewModel.didLongPress(account: account)
+                                }
+                                .swipeActions {
+                                    Button("Delete") {
+                                        viewModel.didTapDelete(account: account)
+                                    }.tint(.red)
+                                    Button("Edit") {
+                                        viewModel.didTapEdit(account: account)
+                                    }.tint(.blue)
+                                }
+                        })
                     }
                 } header: {
                     AccountsHeaderView(addAction: viewModel.didTapAdd)
                         .textCase(nil)
+                        .listRowInsets(EdgeInsets(
+                            top: .spacingMedium,
+                            leading: .zero,
+                            bottom: .spacingLarge,
+                            trailing: .zero))
                 }
             }
             .sheet(isPresented: $viewModel.isShowingEditingView) {
@@ -29,7 +46,6 @@ struct AccountsView: View {
                     ProgressView()
                 }
             })
-            .onAppear(perform: viewModel.didAppear)
             .toolbar {
                 ToolbarItem(placement: .navigation) {
                     HStack {
@@ -39,6 +55,15 @@ struct AccountsView: View {
                             .foregroundColor(.brand)
                             .font(.title)
                     }
+                }
+            }
+            .alert("Delete?", isPresented: $viewModel.isShowingDeleteAlert) {
+                Button(role: .destructive) {
+                    withAnimation {
+                        viewModel.didConfirmDelete()
+                    }
+                } label: {
+                    Text("Delete")
                 }
             }
         }

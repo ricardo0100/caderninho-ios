@@ -5,18 +5,27 @@ protocol AccountsViewModelProtocol: ObservableObject {
     init(accountsInteractor: AccountInteractorProtocol)
     
     var isShowingEditingView: Bool { get }
+    var isShowingDeleteAlert: Bool { get }
     var accounts: [AccountModel] { get }
     var isFetching: Bool { get }
     
     func didTapAdd()
-    func didAppear()
-    func didTapAccount(account: AccountModel)
+    func didTapEdit(account: AccountModel)
+    func didLongPress(account: AccountModel)
+    func didTapDelete(account: AccountModel)
+    func didConfirmDelete()
 }
 
 class AccountsViewModelMock: AccountsViewModelProtocol {
     @Published var accounts: [AccountModel] = []
     @Published var isShowingEditingView = false
+    @Published var isShowingDeleteAlert = false
     @Published var isFetching = false
+    var deletingAccount: AccountModel? {
+        didSet {
+            isShowingDeleteAlert = deletingAccount != nil
+        }
+    }
     @Published var editingAccount: AccountModel? {
         didSet {
             isShowingEditingView = false
@@ -38,12 +47,28 @@ class AccountsViewModelMock: AccountsViewModelProtocol {
         isShowingEditingView = true
     }
     
-    func didAppear() {
-        accountsInteractor.fetchAccounts()
-    }
-    
-    func didTapAccount(account: AccountModel) {
+    func didTapEdit(account: AccountModel) {
         editingAccount = account
         isShowingEditingView = true
+    }
+
+    func didLongPress(account: AccountModel) {
+        editingAccount = account
+        isShowingEditingView = true
+    }
+    
+    func didTapDelete(account: AccountModel) {
+        deletingAccount = account
+        isShowingDeleteAlert = true
+    }
+    
+    func didConfirmDelete() {
+        Just(deletingAccount)
+            .compactMap { $0 }
+            .flatMap { self.accountsInteractor.deleteAccount(account: $0) }
+            .sink(
+                receiveCompletion: { _ in},
+                receiveValue: { _ in })
+            .store(in: &cancellables)
     }
 }

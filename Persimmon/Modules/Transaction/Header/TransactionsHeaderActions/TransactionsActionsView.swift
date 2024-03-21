@@ -1,10 +1,10 @@
 import SwiftUI
 
-struct HomeActionsView: View {
-    @ObservedObject var viewModel = HomeActionsViewModelMock()
+struct TransactionsActionsView: View {
+    @ObservedObject var viewModel = TransactionsActionsViewModelMock()
     
     var body: some View {
-        HStack(alignment: .top) {
+        HStack(alignment: .top, spacing: .spacingMedium) {
             ForEach(viewModel.actions) { button in
                 VerticalButton(iconName: button.iconName, text: button.text, action: {
 
@@ -24,7 +24,7 @@ struct VerticalButton: View {
             VStack {
                 ZStack {
                     Circle()
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.brand)
                     Image(systemName: iconName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -45,9 +45,15 @@ struct HomeActionsView_Previews: PreviewProvider {
     static var previews: some View {
         List {
             Section {
+                Text("Hi")
             } header: {
-                HomeActionsView()
+                TransactionsActionsView()
                     .textCase(nil)
+                    .listRowInsets(EdgeInsets(
+                        top: .zero,
+                        leading: .zero,
+                        bottom: .zero,
+                        trailing: .zero))
             }
         }
     }

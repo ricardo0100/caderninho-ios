@@ -6,12 +6,12 @@ struct Action: Identifiable {
     let text: String
 }
 
-protocol HomeActionsViewModelProtocol: ObservableObject {
+protocol TransactionsActionsViewModelProtocol: ObservableObject {
     var actions: [Action] { get }
     func fetchActions()
 }
 
-class HomeActionsViewModelMock: HomeActionsViewModelProtocol {
+class TransactionsActionsViewModelMock: TransactionsActionsViewModelProtocol {
     @Published var actions: [Action] = []
     
     init() {

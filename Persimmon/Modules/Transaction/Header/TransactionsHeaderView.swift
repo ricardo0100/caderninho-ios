@@ -4,7 +4,11 @@ struct TransactionsHeaderView: View {
     var body: some View {
         VStack(alignment: .leading) {
             BudgetPanel()
-            HomeActionsView()
+                .padding()
+                .background(Color.secondary.opacity(0.2))
+                .cornerRadius(16)
+            TransactionsActionsView()
+                .padding(.vertical)
         }
         .textCase(nil)
     }

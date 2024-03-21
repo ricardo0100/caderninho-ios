@@ -12,7 +12,12 @@ struct TransactionsView: View {
                     }
                 } header: {
                     TransactionsHeaderView()
-                        .edges
+                        .listRowInsets(EdgeInsets(
+                            top: .zero,
+                            leading: .zero,
+                            bottom: .zero,
+                            trailing: .zero))
+                    
                 }
             }
             .onAppear(perform: viewModel.didAppear)
