@@ -8,14 +8,16 @@ struct EditAccountItemView: View {
 
     var body: some View {
         List {
-            LabelTextField(label: "Account Name:",
-                           placeholder: "Bank of Earth",
-                           errorMessage: $viewModel.nameErroMessage,
-                           text: $viewModel.name)
-            LabelTextField(label: "Currency",
-                           placeholder: "R$",
-                           errorMessage: $viewModel.currencyErroMessage,
-                           text: $viewModel.currency)
+//            LabelTextField(keyboardType: .default,
+//                           label: "Account Name:",
+//                           placeholder: "Bank of Earth",
+//                           errorMessage: $viewModel.nameErroMessage,
+//                           text: $viewModel.name)
+//            LabelTextField(keyboardType: .default,
+//                           label: "Currency",
+//                           placeholder: "R$",
+//                           errorMessage: $viewModel.currencyErroMessage,
+//                           text: $viewModel.currency)
             HStack {
                 Text("Color")
                     .font(.subheadline)
@@ -40,13 +42,16 @@ struct EditAccountItemView: View {
         .sheet(isPresented: $isShowingColorPicker) {
             NiceColorPicker(selected: $viewModel.niceColor)
         }
+        .onReceive(viewModel.$shouldDismiss) {
+            if $0 { dismiss() }
+        }
     }
 }
 
 struct EditAccountItemView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            let viewModel = EditAccountViewModel(accountBinding: .constant(nil))
+            let viewModel = EditAccountViewModel(accountId: nil)
             EditAccountItemView(viewModel: viewModel)
         }
     }

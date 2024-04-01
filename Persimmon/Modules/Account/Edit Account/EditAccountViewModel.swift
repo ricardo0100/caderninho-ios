@@ -13,20 +13,24 @@ class EditAccountViewModel: ObservableObject {
             color = niceColor.color
         }
     }
-    
-    let accountBinding: Binding<AccountModel?>
+    @Published var shouldDismiss: Bool = false
     
     var cancelables: [AnyCancellable] = []
-
+    var accountId: UUID?
     let interactor = AccountInteractorMock()
     
-    init(accountBinding: Binding<AccountModel?>) {
-        self.accountBinding = accountBinding
-        if let account = accountBinding.wrappedValue {
-            self.name = account.name
-            self.color = Color(hex: account.color)
-            self.currency = account.currency
-        }
+    init(accountId: UUID?, accountInteractor: AccountInteractorProtocol = AccountInteractorMock()) {
+        guard let accountId = accountId else { return }
+        self.accountId = accountId
+        
+        accountInteractor
+            .getAccount(with: accountId)
+            .sink { _ in } receiveValue: { account in
+                self.name = account.name
+                self.color = Color(hex: account.color)
+                self.currency = account.currency
+            }
+            .store(in: &cancelables)
     }
     
     func didTapSave() {
@@ -34,14 +38,14 @@ class EditAccountViewModel: ObservableObject {
         currencyErroMessage = currency.isEmpty ? "Campo obrigatório" : nil
         guard nameErroMessage == nil && currencyErroMessage == nil else { return }
         interactor.saveAccount(
-            id: accountBinding.wrappedValue?.id,
+            id: self.accountId,
             name: name,
             color: color.hex,
             currency: currency
         ).sink { completion in
             switch completion {
             case .finished:
-                self.accountBinding.wrappedValue = nil
+                self.shouldDismiss = true
             default: break
             }
         } receiveValue: { _ in }.store(in: &cancelables)

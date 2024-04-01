@@ -5,11 +5,11 @@ struct ContainerView: View {
     
     var body: some View {
         TabView {
-            TransactionsView()
+            TransactionsListView(viewModel: TransactionsListViewModel())
                 .tabItem {
                     Label("Transactions", systemImage: "arrow.up.arrow.down")
                 }
-            AccountsView()
+            AccountsListView()
                 .tabItem {
                     Label("Accounts", systemImage: "creditcard")
                 }

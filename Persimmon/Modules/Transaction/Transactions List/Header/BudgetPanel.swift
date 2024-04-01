@@ -21,8 +21,6 @@ struct BudgetPanel: View {
 
 struct BudgetPanel_Previews: PreviewProvider {
     static var previews: some View {
-//        ScrollView(.horizontal) {
         BudgetPanel()
-//        }
     }
 }

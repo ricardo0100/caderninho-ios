@@ -9,11 +9,10 @@ struct LettersIconView: View {
             Circle()
                 .stroke(color, lineWidth: 2)
             Text(text)
-                .font(.callout)
+                .font(.caption)
                 .bold()
                 .foregroundColor(color)
         }
-        .frame(width: 36, height: 36)
     }
 }
 

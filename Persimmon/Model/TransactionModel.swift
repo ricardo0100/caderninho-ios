@@ -1,6 +1,10 @@
 import Foundation
 
-enum TransactionType: String, CaseIterable {
+enum TransactionType: String, CaseIterable, Identifiable {
+    var id: Self {
+        self
+    }
+    
     case buyDebit
     case buyCredit
     case transferIn
@@ -8,24 +12,36 @@ enum TransactionType: String, CaseIterable {
     case adjustment
     
     var text: String {
-        switch self {
+        switch self { 
         case .buyDebit: return "Buy in Debit"
         case .buyCredit: return "Buy in Credit"
         case .transferIn: return "Transfer In"
-        case .transferOut: return "Transfer out"
+        case .transferOut: return "Transfer Out"
         case .adjustment: return "Adjustment"
+        }
+    }
+    
+    var iconName: String {
+        switch self {
+        case .buyCredit:
+            return "creditcard"
+        case .buyDebit:
+            return "banknote"
+        case .transferIn:
+            return "arrow.down.to.line.circle"
+        case .transferOut:
+            return "arrow.up.to.line.circle"
+        case .adjustment:
+            return "plus.forwardslash.minus"
         }
     }
 }
 
-struct TransactionModel: Identifiable {
+struct TransactionModel: Identifiable, Hashable {
     let id = UUID()
     var name: String
     var price: Double
-    var account: AccountModel
+    var accountId: UUID
+//    var category: CategoryItem
     var type: TransactionType
-    
-    var currency: String {
-        return "\(account.currency) \(price.formatted())"
-    }
 }

@@ -8,6 +8,7 @@ struct AccountCellView: View {
             LettersIconView(
                 text: viewModel.name.firstLetters(),
                 color: Color(hex: viewModel.color))
+            .frame(width: 32)
             VStack(alignment: .leading) {
                 Text(viewModel.name)
                     .font(.headline)

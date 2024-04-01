@@ -1,26 +1,11 @@
 import Foundation
 import Combine
 
-protocol AccountsViewModelProtocol: ObservableObject {
-    init(accountsInteractor: AccountInteractorProtocol)
-    
-    var isShowingEditingView: Bool { get }
-    var isShowingDeleteAlert: Bool { get }
-    var accounts: [AccountModel] { get }
-    var isFetching: Bool { get }
-    
-    func didTapAdd()
-    func didTapEdit(account: AccountModel)
-    func didLongPress(account: AccountModel)
-    func didTapDelete(account: AccountModel)
-    func didConfirmDelete()
-}
-
-class AccountsViewModelMock: AccountsViewModelProtocol {
+class AccountsListViewModel: ObservableObject {
     @Published var accounts: [AccountModel] = []
     @Published var isShowingEditingView = false
     @Published var isShowingDeleteAlert = false
-    @Published var isFetching = false
+
     var deletingAccount: AccountModel? {
         didSet {
             isShowingDeleteAlert = deletingAccount != nil
@@ -67,7 +52,7 @@ class AccountsViewModelMock: AccountsViewModelProtocol {
             .compactMap { $0 }
             .flatMap { self.accountsInteractor.deleteAccount(account: $0) }
             .sink(
-                receiveCompletion: { _ in},
+                receiveCompletion: { _ in },
                 receiveValue: { _ in })
             .store(in: &cancellables)
     }

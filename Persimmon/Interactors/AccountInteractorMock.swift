@@ -24,38 +24,34 @@ class AccountInteractorMock: AccountInteractorProtocol {
     ]
     
     func getAccount(with id: UUID) -> AnyPublisher<AccountModel, InteractorError> {
-        guard let account = Self.sharedAccountsSubject.value.first(where: { item in item.id == id }) else {
-            let error = InteractorError.getAccountError(errorDescription: "Account with id: \(id) not found")
-            return Fail<AccountModel, InteractorError>(error: error)
-                .eraseToAnyPublisher()
+        Self.sharedAccountsSubject.map { accounts in
+            accounts.first { $0.id == id}
         }
-        return Just(account)
-            .setFailureType(to: InteractorError.self)
-            .eraseToAnyPublisher()
+        .compactMap { $0 }
+        .eraseToAnyPublisher()
     }
     
     func saveAccount(id: UUID?, name: String, color: String, currency: String) -> AnyPublisher<AccountModel, InteractorError> {
-        guard let id = id else {
-            let newAccount = AccountModel(name: name, color: color, currency: currency)
-            Self.sharedAccountsSubject.value.insert(newAccount)
-            return Just(newAccount)
-                .setFailureType(to: InteractorError.self)
-                .eraseToAnyPublisher()
-        }
-
-        return getAccount(with: id)
-            .flatMap { account in
-                var updatedAccount = account
-                updatedAccount.name = name
-                updatedAccount.color = color
-                updatedAccount.currency = currency
-                Self.sharedAccountsSubject.value.remove(account)
-                Self.sharedAccountsSubject.value.insert(updatedAccount)
-                return Just(updatedAccount)
-                    .setFailureType(to: InteractorError.self)
-                    .eraseToAnyPublisher()
+        Deferred {
+            var updatingAccount: AccountModel
+            if let id = id, let account = Self.sharedAccountsSubject.value.first(where: { $0.id == id }) {
+                updatingAccount = account
+                updatingAccount.name = name
+                updatingAccount.color = color
+                updatingAccount.currency = currency
+                var accounts = Self.sharedAccountsSubject.value
+                accounts.remove(account)
+                accounts.insert(updatingAccount)
+                Self.sharedAccountsSubject.send(accounts)
+                TransactionInteractorMock.sendUpdateSignal()
+            } else {
+                updatingAccount = AccountModel(name: name, color: color, currency: currency)
             }
-            .eraseToAnyPublisher()
+            
+            return Just(updatingAccount)
+        }
+        .setFailureType(to: InteractorError.self)
+        .eraseToAnyPublisher()
     }
     
     func deleteAccount(account: AccountModel) -> AnyPublisher<Void, InteractorError> {
@@ -66,5 +62,9 @@ class AccountInteractorMock: AccountInteractorProtocol {
                 return Just(()).setFailureType(to: InteractorError.self).eraseToAnyPublisher()
             }
         }.eraseToAnyPublisher()
+    }
+    
+    static func sendUpdateSignal() {
+        sharedAccountsSubject.send(sharedAccountsSubject.value)
     }
 }

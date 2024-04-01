@@ -7,4 +7,5 @@ enum InteractorError: Error {
     case saveTransactionError(errorDescription: String)
     case getTransactionError(errorDescription: String)
     case fetchTransactionsError(errorDescription: String)
+    case deleteTransactionsError(errorDescription: String)
 }
