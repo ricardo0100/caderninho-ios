@@ -47,6 +47,7 @@
 		CFA1DE6C2A0C32B50055E3CD /* BudgetWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = CFA1DE682A0C32B20055E3CD /* BudgetWidget.intentdefinition */; };
 		CFA1DE6D2A0C32B50055E3CD /* BudgetWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = CFA1DE682A0C32B20055E3CD /* BudgetWidget.intentdefinition */; };
 		CFA1DE702A0C32B50055E3CD /* BudgetWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CFA1DE5B2A0C32B20055E3CD /* BudgetWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CFB7F5612BBEBFE6009956E9 /* SelectTransactionTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F5602BBEBFE6009956E9 /* SelectTransactionTypeView.swift */; };
 		CFBEE23E2A07F3A000586164 /* TransactionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE23D2A07F3A000586164 /* TransactionsListView.swift */; };
 		CFBEE2412A07F9A000586164 /* AccountsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2402A07F9A000586164 /* AccountsListView.swift */; };
 		CFBEE2432A07FA3900586164 /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2422A07FA3900586164 /* AccountsViewModel.swift */; };
@@ -129,6 +130,7 @@
 		CFA1DE682A0C32B20055E3CD /* BudgetWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = BudgetWidget.intentdefinition; sourceTree = "<group>"; };
 		CFA1DE692A0C32B50055E3CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFA1DE6B2A0C32B50055E3CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFB7F5602BBEBFE6009956E9 /* SelectTransactionTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTransactionTypeView.swift; sourceTree = "<group>"; };
 		CFBEE23D2A07F3A000586164 /* TransactionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListView.swift; sourceTree = "<group>"; };
 		CFBEE2402A07F9A000586164 /* AccountsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListView.swift; sourceTree = "<group>"; };
 		CFBEE2422A07FA3900586164 /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModel.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 			children = (
 				CFDC21962BAF094000295432 /* EditTransactionView.swift */,
 				CFDC21982BAF094900295432 /* EditTransactionViewModel.swift */,
+				CFB7F5602BBEBFE6009956E9 /* SelectTransactionTypeView.swift */,
 			);
 			path = "Edit Transaction";
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				CF15B3532BACEBC500E8E050 /* Double+Extension.swift in Sources */,
 				CFE6D7BD2BA9277500E76AB8 /* LabeledView.swift in Sources */,
 				CF7A804F2A0DBAE20067F5A8 /* ImageIconView.swift in Sources */,
+				CFB7F5612BBEBFE6009956E9 /* SelectTransactionTypeView.swift in Sources */,
 				CFBEE2452A080AA700586164 /* String+Extension.swift in Sources */,
 				CFDC21972BAF094000295432 /* EditTransactionView.swift in Sources */,
 				CF3116F32A1444FD00171A4D /* EditAccountViewModel.swift in Sources */,

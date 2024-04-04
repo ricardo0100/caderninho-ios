@@ -62,25 +62,6 @@ struct TransactionsListView: View {
                     EditTransactionView(viewModel: createEditTransactionViewModel())
                 }
             }
-            .sheet(isPresented: $viewModel.isShowingActionsPopover, content: {
-                List {
-                    Section {
-                        ForEach(TransactionType.allCases) { type in
-                            Button {
-                                viewModel.didTapAdd(type: type)
-                            } label: {
-                                HStack {
-                                    Image(systemName: type.iconName)
-                                    Text(type.text)
-                                }.foregroundColor(.brand)
-                            }
-                        }
-                    } header: {
-                        Text("Choose a type")
-                    }
-                }
-                .presentationDetents([.medium])
-            })
             .alert("Delete?", isPresented: $viewModel.isShowingDeleteAlert) {
                 Button(role: .destructive) {
                     withAnimation {

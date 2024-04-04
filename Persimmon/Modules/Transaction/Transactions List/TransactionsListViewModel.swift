@@ -5,7 +5,6 @@ class TransactionsListViewModel: ObservableObject {
     @Published var transactions: [TransactionModel] = []
     @Published var isShowingEditingView = false
     @Published var isShowingDeleteAlert = false
-    @Published var isShowingActionsPopover = false
     
     var editingTransaction: TransactionModel?
     var cancellables: [AnyCancellable] = []
@@ -43,12 +42,10 @@ class TransactionsListViewModel: ObservableObject {
     }
     
     func didTapAdd() {
-        isShowingActionsPopover = true
+        isShowingEditingView = true
     }
     
-    func didTapAdd(type: TransactionType) {
-        isShowingActionsPopover = false
-        isShowingEditingView = true
-        editingTransaction = nil
+    func didDismissActionsPopover() {
+        print("didDismissActionsPopover")
     }
 }

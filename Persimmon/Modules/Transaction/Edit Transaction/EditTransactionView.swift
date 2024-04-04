@@ -10,16 +10,36 @@ struct EditTransactionView: View {
     var body: some View {
         Form {
             LabeledView(labelText: "Name") {
-                TextField("John", text: $viewModel.name)
+                TextField("Transaction Name", text: $viewModel.name)
             }
+            
+            NavigationLink {
+                SelectTransactionTypeView(selectedType: $viewModel.type)
+            } label: {
+                if let type = viewModel.type {
+                    HStack {
+                        Image(systemName: type.iconName)
+                        Text(type.text)
+                    }
+                } else {
+                    Text("Select type").foregroundColor(.secondary)
+                }
+            }
+
             
             NavigationLink(destination: {
                 SelectAccountView(viewModel: SelectAccountViewModel(selectedAccount: $viewModel.selectedAccount))
             }, label: {
                 LabeledView(labelText: "Account") {
-                    HStack {
-                        LettersIconView(text: viewModel.accountName.firstLetters(), color: Color(hex: viewModel.accountColor)).frame(width: 24)
-                        Text(viewModel.accountName)
+                    if let account = viewModel.selectedAccount {
+                        HStack {
+                            LettersIconView(text: account.name.firstLetters(),
+                                            color: Color(hex: account.color))
+                            .frame(width: 24)
+                            Text(account.name)
+                        }
+                    } else {
+                        Text("Select account").foregroundColor(.secondary)
                     }
                 }
             })
@@ -27,7 +47,6 @@ struct EditTransactionView: View {
             LabeledView(labelText: "Value") {
                 CurrencyTextField(currency: viewModel.selectedAccount?.currency ?? "", value: $viewModel.value)
             }
-            Text(String(viewModel.value))
         }
 //            LabelTextField(keyboardType: .decimalPad, label: "Value", placeholder: "", errorMessage: .constant(nil), text: .constant("R$ 1,99"))
 //            LabelTextField(keyboardType: .decimalPad, label: "Datetime", placeholder: "", errorMessage: .constant(nil), text: $viewModel.datetime)
@@ -38,10 +57,12 @@ struct EditTransactionView: View {
 
         .toolbar {
             ToolbarItem(placement: .navigation) {
-                HStack {
-                    Image(systemName: viewModel.type.iconName)
-                    Text(viewModel.type.text)
-                }.foregroundColor(.brand)
+                if let type = viewModel.type {
+                    HStack {
+                        Image(systemName: type.iconName)
+                        Text(type.text)
+                    }.foregroundColor(.brand)
+                }
             }
             ToolbarItem(placement: .confirmationAction) {
                 Button("Save", action: viewModel.didTapSave).foregroundColor(.brand)
@@ -49,6 +70,7 @@ struct EditTransactionView: View {
         }.onReceive(viewModel.$shouldDismiss) { shouldDismiss in
             if shouldDismiss { dismiss() }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 

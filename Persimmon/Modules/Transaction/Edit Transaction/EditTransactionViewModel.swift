@@ -3,17 +3,10 @@ import Combine
 
 class EditTransactionViewModel: ObservableObject {
     @Published var name = ""
-    @Published var type: TransactionType = .adjustment
-    @Published var accountName = ""
-    @Published var accountColor = ""
+    @Published var type: TransactionType?
     @Published var datetime = ""
     @Published var location = ""
-    @Published var selectedAccount: AccountModel? = nil {
-        didSet {
-            accountName = selectedAccount?.name ?? ""
-            accountColor = selectedAccount?.color ?? ""
-        }
-    }
+    @Published var selectedAccount: AccountModel?
     @Published var value: Double = 0
     @Published var shouldDismiss: Bool = false
     
@@ -51,7 +44,7 @@ class EditTransactionViewModel: ObservableObject {
     }
     
     func didTapSave() {
-        guard let selectedAccount = selectedAccount else {
+        guard let selectedAccount = selectedAccount, let type = type else {
             return
         }
         transactionInteractor.saveTransaction(
