@@ -5,8 +5,4 @@ struct AccountModel: Identifiable, Hashable {
     var name: String
     var color: String
     var currency: String
-    
-    var amount: Double {
-        3.13
-    }
 }

@@ -32,7 +32,8 @@ struct AccountDetailsView: View {
                 ToolbarItem(placement: .principal) {
                     if let account = viewModel.account {
                         HStack {
-                            LettersIconView(text: account.name.firstLetters(), color: Color(hex: account.color)).frame(width: 24)
+                            LettersIconView(text: account.name.firstLetters(),
+                                            color: Color(hex: account.color))
                             Text(account.name)
                                 .font(.headline)
                         }

@@ -1,9 +1,17 @@
 import Foundation
 
+struct TransactionModel: Identifiable, Hashable {
+    let id = UUID()
+    var name: String
+    var value: Double
+    var accountId: UUID
+    var date: Date
+    var type: TransactionType
+    var place: PlaceModel?
+}
+
 enum TransactionType: String, CaseIterable, Identifiable {
-    var id: Self {
-        self
-    }
+    var id: Self { self }
     
     case buyDebit
     case buyCredit
@@ -12,7 +20,7 @@ enum TransactionType: String, CaseIterable, Identifiable {
     case adjustment
     
     var text: String {
-        switch self { 
+        switch self {
         case .buyDebit: return "Buy in Debit"
         case .buyCredit: return "Buy in Credit"
         case .transferIn: return "Transfer In"
@@ -35,13 +43,4 @@ enum TransactionType: String, CaseIterable, Identifiable {
             return "plus.forwardslash.minus"
         }
     }
-}
-
-struct TransactionModel: Identifiable, Hashable {
-    let id = UUID()
-    var name: String
-    var price: Double
-    var accountId: UUID
-//    var category: CategoryItem
-    var type: TransactionType
 }

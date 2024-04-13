@@ -9,8 +9,7 @@ struct TransactionCellView: View {
                 Image(systemName: transaction.type.iconName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .foregroundColor(.brand)
-                    .frame(width: 32, height: 32)
+                    .frame(width: 24, height: 24)
                 VStack(alignment: .leading, spacing: .spacingSmall) {
                     HStack {
                         Text(transaction.name)
@@ -18,19 +17,15 @@ struct TransactionCellView: View {
                         Spacer()
                         Text(transaction.type.text)
                             .font(.caption)
-                            .foregroundColor(.gray)
                     }
                     HStack {
-                        Text("\(account.currency) \(transaction.price.formatted())")
+                        Text("\(account.currency) \(transaction.value.formatted())")
                             .font(.subheadline)
                         Spacer()
-                        HStack {
+                        HStack(spacing: .spacingSmall) {
                             Text("\(account.name)")
                                 .font(.subheadline)
-                                .foregroundColor(.gray)
-                            Circle()
-                                .foregroundColor(Color(hex: account.color))
-                                .frame(width: 12, height: 12)
+                            LettersIconView(text: account.name.firstLetters(), color: Color(hex: account.color), size: 14)
                         }
                     }
                 }

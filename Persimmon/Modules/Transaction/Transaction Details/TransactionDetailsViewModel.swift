@@ -1,10 +1,12 @@
 import Foundation
 import Combine
+import MapKit
 
 class TransactionDetailsViewModel: ObservableObject {
     @Published var transaction: TransactionModel?
     @Published var account: AccountModel?
     @Published var isShowingEdit = false
+    @Published var region: MKCoordinateRegion = .init()
     
     var cancellables: [AnyCancellable] = []
     
@@ -18,6 +20,12 @@ class TransactionDetailsViewModel: ObservableObject {
                 }
             } receiveValue: {
                 self.transaction = $0
+                if let place = $0.place {
+                    self.region = .init(
+                        center: .init(latitude: place.latitude, longitude: place.longitude),
+                        latitudinalMeters: 50,
+                        longitudinalMeters: 50)
+                }
             }
             .store(in: &cancellables)
         

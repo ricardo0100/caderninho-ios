@@ -1,52 +1,70 @@
 import SwiftUI
+import MapKit
 
 struct TransactionDetailsView: View {
-    @ObservedObject var viewModel:TransactionDetailsViewModel
+    @ObservedObject var viewModel: TransactionDetailsViewModel
     
     var body: some View {
         if let transaction = viewModel.transaction, let account = viewModel.account {
             List {
-                HStack {
-                    Text("Name:").font(.subheadline).bold()
-                    Spacer()
-                    Text(transaction.name)
-                }
-                HStack {
-                    Text("Type:").font(.subheadline).bold()
-                    Spacer()
-                    HStack {
-                        Image(systemName: transaction.type.iconName)
-                            .frame(width: 22, height: 22)
-                        Text(transaction.type.text)
+                Section {
+                    LabeledView(labelText: "Name") {
+                        Text(transaction.name)
                     }
-                }
-                HStack {
-                    Text("Account:").font(.subheadline).bold()
-                    Spacer()
-                    HStack {
-                        Circle()
-                            .foregroundColor(Color(hex: account.color))
-                            .frame(width: 22)
-                        Text(account.name)
+                    
+                    LabeledView(labelText: "Type") {
+                        HStack(spacing: .spacingMedium) {
+                            Image(systemName: transaction.type.iconName)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 22, height: 22)
+                                .foregroundColor(Color.secondary)
+                            Text(transaction.type.text)
+                        }
                     }
-                }
-                HStack {
-                    Text("Value:").font(.subheadline).bold()
-                    Spacer()
-                    Text(transaction.price.toCurrency(with: account.currency))
-                }
-                HStack {
-                    Text("Date and time:").font(.subheadline).bold()
-                    Spacer()
-                    Text("Today at 18:22")
-                }
-                HStack {
-                    Text("Location:").font(.subheadline).bold()
-                    Spacer()
-                    Text("Florianópolis, Morro das Pedras")
+                    
+                    LabeledView(labelText: "Account") {
+                        HStack(spacing: .spacingMedium) {
+                            LettersIconView(text: account.name.firstLetters(),
+                                            color: Color(hex: account.color))
+                            Text(account.name).font(.title3)
+                        }
+                    }
+                    
+                    LabeledView(labelText: "Value") {
+                        Text(transaction.value.toCurrency(with: account.currency)).font(.title3)
+                    }
+                    
+                    LabeledView(labelText: "Date") {
+                        Text(transaction.date.formatted(date: .complete, time: .shortened)).font(.subheadline)
+                    }
+                    
+                    if let place = viewModel.transaction?.place {
+                        LabeledView(labelText: "Location") {
+                            VStack(alignment: .leading) {
+                                Text(place.title).font(.caption).bold().foregroundColor(.primary)
+                                Text(place.subtitle).font(.caption2)
+                            }
+                        }
+                    }
+                }  header: {
+                    if let place = transaction.place {
+                        Map(coordinateRegion: $viewModel.region,
+                            showsUserLocation: true,
+                            annotationItems: [place]) { place in
+                            MapMarker (coordinate: .init(
+                                latitude: place.latitude,
+                                longitude: place.longitude), tint: .brand)
+                        }
+                            .listRowInsets(.init(top: .zero,
+                                                 leading: .zero,
+                                                 bottom: .spacingBig,
+                                                 trailing: .zero))
+                            .cornerRadius(8)
+                            .frame(height: 180)
+                    }
                 }
             }
-            .navigationTitle("Transaction Details")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Edit", action: viewModel.didTapEdit)
@@ -63,7 +81,7 @@ struct TransactionDetailsView: View {
 
 struct TransactionDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        let transactionId = TransactionInteractorMock.exampleTransactions.randomElement()!.id
+        let transactionId = TransactionInteractorMock.exampleTransactions.first!.id
         NavigationStack {
             TransactionDetailsView(viewModel: TransactionDetailsViewModel(
                 transactionId: transactionId,

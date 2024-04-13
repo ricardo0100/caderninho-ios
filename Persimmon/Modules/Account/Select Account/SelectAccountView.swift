@@ -8,9 +8,7 @@ struct SelectAccountView: View {
     var body: some View {
         List(viewModel.accounts, id: \.self, selection: viewModel.account) { account in
             HStack {
-                Circle()
-                    .fill(Color(hex: account.color))
-                    .frame(width: 14)
+                LettersIconView(text: account.name, color: Color(hex: account.color))
                 Text(account.name)
                 Spacer()
                 if viewModel.account.wrappedValue?.id == account.id {

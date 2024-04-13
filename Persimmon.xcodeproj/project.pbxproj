@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CF15B33D2BAA257E00E8E050 /* TransactionInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B33C2BAA257E00E8E050 /* TransactionInteractorMock.swift */; };
+		CF15B33D2BAA257E00E8E050 /* TransactionInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B33C2BAA257E00E8E050 /* TransactionInteractor.swift */; };
 		CF15B3412BAB048A00E8E050 /* AccountDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B3402BAB048A00E8E050 /* AccountDetailsView.swift */; };
 		CF15B34A2BAC3D1200E8E050 /* NavigationToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B3492BAC3D1200E8E050 /* NavigationToolbarView.swift */; };
 		CF15B34C2BAC40FE00E8E050 /* AccountDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B34B2BAC40FE00E8E050 /* AccountDetailsViewModel.swift */; };
@@ -48,6 +48,11 @@
 		CFA1DE6D2A0C32B50055E3CD /* BudgetWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = CFA1DE682A0C32B20055E3CD /* BudgetWidget.intentdefinition */; };
 		CFA1DE702A0C32B50055E3CD /* BudgetWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CFA1DE5B2A0C32B20055E3CD /* BudgetWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CFB7F5612BBEBFE6009956E9 /* SelectTransactionTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F5602BBEBFE6009956E9 /* SelectTransactionTypeView.swift */; };
+		CFB7F56B2BC0228B009956E9 /* SelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F56A2BC0228B009956E9 /* SelectDateView.swift */; };
+		CFB7F56E2BC02A47009956E9 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F56D2BC02A47009956E9 /* Date+Extension.swift */; };
+		CFB7F5732BC085AD009956E9 /* SelectLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F5722BC085AD009956E9 /* SelectLocationView.swift */; };
+		CFB7F5752BC08944009956E9 /* SelectLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F5742BC08944009956E9 /* SelectLocationViewModel.swift */; };
+		CFB7F5772BC0AC94009956E9 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F5762BC0AC94009956E9 /* PlaceModel.swift */; };
 		CFBEE23E2A07F3A000586164 /* TransactionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE23D2A07F3A000586164 /* TransactionsListView.swift */; };
 		CFBEE2412A07F9A000586164 /* AccountsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2402A07F9A000586164 /* AccountsListView.swift */; };
 		CFBEE2432A07FA3900586164 /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2422A07FA3900586164 /* AccountsViewModel.swift */; };
@@ -65,7 +70,7 @@
 		CFE6D7C22BA9DB2F00E76AB8 /* BudgetPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1624CE2A0BBC02008C441F /* BudgetPanel.swift */; };
 		CFF292A62A13B8FE00C1A66A /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF292A52A13B8FE00C1A66A /* AddCategoryView.swift */; };
 		CFF292A82A13B93F00C1A66A /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF292A72A13B93F00C1A66A /* EditAccountView.swift */; };
-		CFF292AB2A1418B400C1A66A /* AccountInteractorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF292AA2A1418B400C1A66A /* AccountInteractorMock.swift */; };
+		CFF292AB2A1418B400C1A66A /* AccountInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF292AA2A1418B400C1A66A /* AccountInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,7 +98,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		CF15B33C2BAA257E00E8E050 /* TransactionInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionInteractorMock.swift; sourceTree = "<group>"; };
+		CF15B33C2BAA257E00E8E050 /* TransactionInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionInteractor.swift; sourceTree = "<group>"; };
 		CF15B3402BAB048A00E8E050 /* AccountDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsView.swift; sourceTree = "<group>"; };
 		CF15B3492BAC3D1200E8E050 /* NavigationToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationToolbarView.swift; sourceTree = "<group>"; };
 		CF15B34B2BAC40FE00E8E050 /* AccountDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -131,6 +136,12 @@
 		CFA1DE692A0C32B50055E3CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFA1DE6B2A0C32B50055E3CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CFB7F5602BBEBFE6009956E9 /* SelectTransactionTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTransactionTypeView.swift; sourceTree = "<group>"; };
+		CFB7F56A2BC0228B009956E9 /* SelectDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateView.swift; sourceTree = "<group>"; };
+		CFB7F56D2BC02A47009956E9 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		CFB7F56F2BC0517B009956E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CFB7F5722BC085AD009956E9 /* SelectLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationView.swift; sourceTree = "<group>"; };
+		CFB7F5742BC08944009956E9 /* SelectLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewModel.swift; sourceTree = "<group>"; };
+		CFB7F5762BC0AC94009956E9 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		CFBEE23D2A07F3A000586164 /* TransactionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListView.swift; sourceTree = "<group>"; };
 		CFBEE2402A07F9A000586164 /* AccountsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListView.swift; sourceTree = "<group>"; };
 		CFBEE2422A07FA3900586164 /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModel.swift; sourceTree = "<group>"; };
@@ -146,7 +157,7 @@
 		CFE6D7BE2BA9B4C000E76AB8 /* TransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
 		CFF292A52A13B8FE00C1A66A /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
 		CFF292A72A13B93F00C1A66A /* EditAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountView.swift; sourceTree = "<group>"; };
-		CFF292AA2A1418B400C1A66A /* AccountInteractorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInteractorMock.swift; sourceTree = "<group>"; };
+		CFF292AA2A1418B400C1A66A /* AccountInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +249,7 @@
 		CF2CB0A32A06F8D600CBA434 /* Persimmon */ = {
 			isa = PBXGroup;
 			children = (
+				CFB7F56F2BC0517B009956E9 /* Info.plist */,
 				CF3116EF2A14437B00171A4D /* Model */,
 				CF2CB0A42A06F8D600CBA434 /* PersimmonApp.swift */,
 				CFF292A92A14188A00C1A66A /* Interactors */,
@@ -282,6 +294,7 @@
 				CF2CB0BF2A06FD9700CBA434 /* Color+Extension.swift */,
 				CFBEE2442A080AA700586164 /* String+Extension.swift */,
 				CF15B3522BACEBC500E8E050 /* Double+Extension.swift */,
+				CFB7F56D2BC02A47009956E9 /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -291,6 +304,7 @@
 			children = (
 				CF3116F02A14438600171A4D /* AccountModel.swift */,
 				CFE6D7BE2BA9B4C000E76AB8 /* TransactionModel.swift */,
+				CFB7F5762BC0AC94009956E9 /* PlaceModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -337,6 +351,15 @@
 			path = BudgetWidget;
 			sourceTree = "<group>";
 		};
+		CFB7F5782BC0AE17009956E9 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				CFB7F5722BC085AD009956E9 /* SelectLocationView.swift */,
+				CFB7F5742BC08944009956E9 /* SelectLocationViewModel.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		CFBEE23F2A07F98E00586164 /* Account */ = {
 			isa = PBXGroup;
 			children = (
@@ -373,6 +396,7 @@
 		CFBEE24D2A08449000586164 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				CFB7F5782BC0AE17009956E9 /* Location */,
 				CF2CB0B82A06FC1800CBA434 /* Container */,
 				CF2CB0B52A06FBCC00CBA434 /* Transaction */,
 				CFBEE23F2A07F98E00586164 /* Account */,
@@ -387,6 +411,7 @@
 				CFDC21962BAF094000295432 /* EditTransactionView.swift */,
 				CFDC21982BAF094900295432 /* EditTransactionViewModel.swift */,
 				CFB7F5602BBEBFE6009956E9 /* SelectTransactionTypeView.swift */,
+				CFB7F56A2BC0228B009956E9 /* SelectDateView.swift */,
 			);
 			path = "Edit Transaction";
 			sourceTree = "<group>";
@@ -422,9 +447,9 @@
 		CFF292A92A14188A00C1A66A /* Interactors */ = {
 			isa = PBXGroup;
 			children = (
-				CFF292AA2A1418B400C1A66A /* AccountInteractorMock.swift */,
+				CFF292AA2A1418B400C1A66A /* AccountInteractor.swift */,
 				CFE6D7BA2BA8AF4700E76AB8 /* InteractorError.swift */,
-				CF15B33C2BAA257E00E8E050 /* TransactionInteractorMock.swift */,
+				CF15B33C2BAA257E00E8E050 /* TransactionInteractor.swift */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -536,7 +561,7 @@
 				CF72A07F2BB9FB9900E0FDB1 /* CurrencyTextField.swift in Sources */,
 				CF15B34C2BAC40FE00E8E050 /* AccountDetailsViewModel.swift in Sources */,
 				CF7A80492A0DAC580067F5A8 /* CategoriesView.swift in Sources */,
-				CF15B33D2BAA257E00E8E050 /* TransactionInteractorMock.swift in Sources */,
+				CF15B33D2BAA257E00E8E050 /* TransactionInteractor.swift in Sources */,
 				CF2CB0C02A06FD9700CBA434 /* Color+Extension.swift in Sources */,
 				CF2CB0A52A06F8D600CBA434 /* PersimmonApp.swift in Sources */,
 				CF44BE312A0FB5000006019F /* Color.swift in Sources */,
@@ -547,17 +572,20 @@
 				CFBEE23E2A07F3A000586164 /* TransactionsListView.swift in Sources */,
 				CF15B3412BAB048A00E8E050 /* AccountDetailsView.swift in Sources */,
 				CF15B3612BAE5BD600E8E050 /* TransactionCellView.swift in Sources */,
-				CFF292AB2A1418B400C1A66A /* AccountInteractorMock.swift in Sources */,
+				CFF292AB2A1418B400C1A66A /* AccountInteractor.swift in Sources */,
 				CF15B3532BACEBC500E8E050 /* Double+Extension.swift in Sources */,
+				CFB7F5772BC0AC94009956E9 /* PlaceModel.swift in Sources */,
 				CFE6D7BD2BA9277500E76AB8 /* LabeledView.swift in Sources */,
 				CF7A804F2A0DBAE20067F5A8 /* ImageIconView.swift in Sources */,
 				CFB7F5612BBEBFE6009956E9 /* SelectTransactionTypeView.swift in Sources */,
 				CFBEE2452A080AA700586164 /* String+Extension.swift in Sources */,
 				CFDC21972BAF094000295432 /* EditTransactionView.swift in Sources */,
 				CF3116F32A1444FD00171A4D /* EditAccountViewModel.swift in Sources */,
+				CFB7F56B2BC0228B009956E9 /* SelectDateView.swift in Sources */,
 				CF15B34F2BACE84F00E8E050 /* AccountCellView.swift in Sources */,
 				CF1624CF2A0BBC02008C441F /* BudgetPanel.swift in Sources */,
 				CFF292A82A13B93F00C1A66A /* EditAccountView.swift in Sources */,
+				CFB7F56E2BC02A47009956E9 /* Date+Extension.swift in Sources */,
 				CFDC219E2BAF29AF00295432 /* SelectAccountView.swift in Sources */,
 				CFF292A62A13B8FE00C1A66A /* AddCategoryView.swift in Sources */,
 				CFA1DE6D2A0C32B50055E3CD /* BudgetWidget.intentdefinition in Sources */,
@@ -569,9 +597,11 @@
 				CFBEE2432A07FA3900586164 /* AccountsViewModel.swift in Sources */,
 				CF9D2A722A0996800003DC39 /* NiceColorPicker.swift in Sources */,
 				CF3116F12A14438600171A4D /* AccountModel.swift in Sources */,
+				CFB7F5732BC085AD009956E9 /* SelectLocationView.swift in Sources */,
 				CF7A804B2A0DAC660067F5A8 /* CategoriesViewModel.swift in Sources */,
 				CFDC219C2BAF293D00295432 /* SelectAccountViewModel.swift in Sources */,
 				CF7A804D2A0DAC740067F5A8 /* CategoriesHeaderView.swift in Sources */,
+				CFB7F5752BC08944009956E9 /* SelectLocationViewModel.swift in Sources */,
 				CF15B35C2BAE006600E8E050 /* TransactionDetailsView.swift in Sources */,
 				CFE6D7BB2BA8AF4700E76AB8 /* InteractorError.swift in Sources */,
 			);
@@ -730,6 +760,8 @@
 				DEVELOPMENT_TEAM = AKNQLC48L4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Persimmon/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Use location to save where transactions happen.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -760,6 +792,8 @@
 				DEVELOPMENT_TEAM = AKNQLC48L4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Persimmon/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Use location to save where transactions happen.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

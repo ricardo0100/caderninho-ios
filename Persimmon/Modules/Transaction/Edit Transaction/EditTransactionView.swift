@@ -1,83 +1,97 @@
 import SwiftUI
 import Combine
+import MapKit
 
 struct EditTransactionView: View {
     @Environment(\.dismiss) var dismiss
-    
     @ObservedObject var viewModel: EditTransactionViewModel
-    @State var value = ""
     
     var body: some View {
         Form {
-            LabeledView(labelText: "Name") {
-                TextField("Transaction Name", text: $viewModel.name)
-            }
-            
-            NavigationLink {
-                SelectTransactionTypeView(selectedType: $viewModel.type)
-            } label: {
-                if let type = viewModel.type {
-                    HStack {
-                        Image(systemName: type.iconName)
-                        Text(type.text)
-                    }
-                } else {
-                    Text("Select type").foregroundColor(.secondary)
+            Section {
+                LabeledView(labelText: "Name", error: $viewModel.nameError) {
+                    TextField("Transaction Name", text: $viewModel.name)
                 }
-            }
-
-            
-            NavigationLink(destination: {
-                SelectAccountView(viewModel: SelectAccountViewModel(selectedAccount: $viewModel.selectedAccount))
-            }, label: {
-                LabeledView(labelText: "Account") {
-                    if let account = viewModel.selectedAccount {
-                        HStack {
-                            LettersIconView(text: account.name.firstLetters(),
-                                            color: Color(hex: account.color))
-                            .frame(width: 24)
-                            Text(account.name)
+                
+                LabeledView(labelText: "Type") {
+                    NavigationLink {
+                        SelectTransactionTypeView(selectedType: $viewModel.type)
+                    } label: {
+                        HStack(spacing: .spacingSmall) {
+                            Image(systemName: viewModel.type.iconName)
+                            Text(viewModel.type.text)
                         }
-                    } else {
-                        Text("Select account").foregroundColor(.secondary)
                     }
                 }
-            })
-            
-            LabeledView(labelText: "Value") {
-                CurrencyTextField(currency: viewModel.selectedAccount?.currency ?? "", value: $viewModel.value)
+                
+                LabeledView(labelText: "Account", error: $viewModel.accountError) {
+                    NavigationLink(destination: {
+                        SelectAccountView(viewModel: SelectAccountViewModel(selectedAccount: $viewModel.selectedAccount))
+                    }, label: {
+                        if let account = viewModel.selectedAccount {
+                            HStack(spacing: .spacingSmall) {
+                                LettersIconView(text: account.name.firstLetters(),
+                                                color: Color(hex: account.color))
+                                Text(account.name)
+                            }
+                        } else {
+                            Text("Select account").foregroundColor(.secondary)
+                        }
+                    })
+                }
+                
+                LabeledView(labelText: "Value") {
+                    CurrencyTextField(currency: viewModel.selectedAccount?.currency ?? "",
+                                      value: $viewModel.value)
+                }
+                
+                LabeledView(labelText: "Date and Time") {
+                    let picker = SelectDateView(date: $viewModel.date)
+                    NavigationLink(destination: picker) {
+                        VStack(alignment: .leading) {
+                            Text(viewModel.date.formatted(date: .complete, time: .omitted))
+                            Text(viewModel.date.formatted(date: .omitted, time: .shortened)).font(.footnote)
+                        }
+                    }
+                }
+                
+                LabeledView(labelText: "Location") {
+                    NavigationLink {
+                        SelectLocationView(viewModel: SelectLocationViewModel(selectedLocation: $viewModel.place))
+                    } label: {
+                        if let place = viewModel.place {
+                            VStack(alignment: .leading) {
+                                Text(place.title).foregroundColor(.primary)
+                                Text(place.subtitle).font(.footnote)
+                            }
+                        } else {
+                            Text("Select a Place").foregroundColor(.secondary)
+                        }
+                    }
+                }
             }
         }
-//            LabelTextField(keyboardType: .decimalPad, label: "Value", placeholder: "", errorMessage: .constant(nil), text: .constant("R$ 1,99"))
-//            LabelTextField(keyboardType: .decimalPad, label: "Datetime", placeholder: "", errorMessage: .constant(nil), text: $viewModel.datetime)
-//            VStack(alignment: .leading) {
-//                Text("Account").font(.subheadline).bold().foregroundColor(.brand)
-//                Text(viewModel.location)
-//            }
-
         .toolbar {
             ToolbarItem(placement: .navigation) {
-                if let type = viewModel.type {
-                    HStack {
-                        Image(systemName: type.iconName)
-                        Text(type.text)
-                    }.foregroundColor(.brand)
-                }
+                Button("Cancel", action: viewModel.didTapCancel)
             }
             ToolbarItem(placement: .confirmationAction) {
-                Button("Save", action: viewModel.didTapSave).foregroundColor(.brand)
+                Button("Save", action: viewModel.didTapSave)
             }
-        }.onReceive(viewModel.$shouldDismiss) { shouldDismiss in
+        }
+        .onReceive(viewModel.$shouldDismiss) { shouldDismiss in
             if shouldDismiss { dismiss() }
         }
+        .tint(.brand)
         .navigationBarBackButtonHidden(true)
+        .onAppear(perform: viewModel.didAppear)
     }
 }
 
 struct EditTransactionView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            EditTransactionView(viewModel: EditTransactionViewModel(transactionId: TransactionInteractorMock.exampleTransactions.randomElement()!.id))
+            EditTransactionView(viewModel: EditTransactionViewModel(transactionId: TransactionInteractorMock.exampleTransactions.first!.id))
         }
     }
 }

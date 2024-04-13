@@ -8,4 +8,9 @@ enum InteractorError: Error {
     case getTransactionError(errorDescription: String)
     case fetchTransactionsError(errorDescription: String)
     case deleteTransactionsError(errorDescription: String)
+    
+    case saveLocationError(errorDescription: String)
+    case getLocationError(errorDescription: String)
+    case fetchLocationsError(errorDescription: String)
+    case deleteLocationsError(errorDescription: String)
 }

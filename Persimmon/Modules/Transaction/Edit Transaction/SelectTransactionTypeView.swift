@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SelectTransactionTypeView: View {
     @Environment(\.dismiss) var dismiss
-    @Binding var selectedType: TransactionType?
+    @Binding var selectedType: TransactionType
     
     var body: some View {
         List {

@@ -8,10 +8,10 @@ struct BudgetPanel: View {
                 .init(value: 40, color: Color.blue)
             ]).frame(width: 120, height: 120)
             VStack(alignment: .leading) {
-                Text("Available for May")
+                Text("Some interesting information and graph")
                     .bold()
-                Text("R$ 623,43 of R$ 1234,32")
-                Text("R$ 23,43 / day")
+                Text("R$ 123,43 of R$ 1234,56")
+                Text("R$ 123,43 / day")
             }
             Spacer()
         }

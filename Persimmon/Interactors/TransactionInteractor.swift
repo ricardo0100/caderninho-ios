@@ -4,7 +4,14 @@ import Combine
 protocol TransactionInteractorProtocol {
     var transactions: AnyPublisher<[TransactionModel], InteractorError> { get }
     func getTransaction(with id: UUID) -> AnyPublisher<TransactionModel, InteractorError>
-    func saveTransaction(id: UUID?, name: String, price: Double, account: AccountModel, type: TransactionType) -> AnyPublisher<TransactionModel, InteractorError>
+    func saveTransaction(
+        id: UUID?,
+        name: String,
+        price: Double,
+        account: AccountModel,
+        date: Date,
+        type: TransactionType,
+        place: PlaceModel?) -> AnyPublisher<TransactionModel, InteractorError>
     func allTransactions(of account: AccountModel) -> AnyPublisher<[TransactionModel], InteractorError>
     func sumOfAllTransactions(of account: AccountModel) -> AnyPublisher<Double, InteractorError>
     func deleteTransaction(transaction: TransactionModel) -> AnyPublisher<Void, InteractorError>
@@ -20,40 +27,50 @@ class TransactionInteractorMock: TransactionInteractorProtocol {
     
     static let exampleTransactions = [
         TransactionModel(
-            name: "T-shirt", price: 19.99,
+            name: "T-shirt", value: 19.99,
             accountId: AccountInteractorMock.exampleAccounts.randomElement()!.id,
+            date: Date(),
+            type: TransactionType.allCases.randomElement()!,
+            place: PlaceModel(title: "Restaurante Big Star", subtitle: "Anita Garibaldi - SC", latitude: -27.686319, longitude: -51.131922)),
+        TransactionModel(
+            name: "Shoes", value: 49.99,
+            accountId: AccountInteractorMock.exampleAccounts.randomElement()!.id,
+            date: Date(),
             type: TransactionType.allCases.randomElement()!),
         TransactionModel(
-            name: "Shoes", price: 49.99,
+            name: "Jeans", value: 39.99,
             accountId: AccountInteractorMock.exampleAccounts.randomElement()!.id,
+            date: Date(),
             type: TransactionType.allCases.randomElement()!),
         TransactionModel(
-            name: "Jeans", price: 39.99,
+            name: "Sunglasses", value: 29.99,
             accountId: AccountInteractorMock.exampleAccounts.randomElement()!.id,
+            date: Date(),
             type: TransactionType.allCases.randomElement()!),
         TransactionModel(
-            name: "Sunglasses", price: 29.99,
+            name: "Backpack", value: 59.99,
             accountId: AccountInteractorMock.exampleAccounts.randomElement()!.id,
+            date: Date(),
             type: TransactionType.allCases.randomElement()!),
         TransactionModel(
-            name: "Backpack", price: 59.99,
+            name: "Hoodie", value: 29.99,
             accountId: AccountInteractorMock.exampleAccounts.randomElement()!.id,
+            date: Date(),
             type: TransactionType.allCases.randomElement()!),
         TransactionModel(
-            name: "Hoodie", price: 29.99,
+            name: "Sweatpants", value: 34.99,
             accountId: AccountInteractorMock.exampleAccounts.randomElement()!.id,
+            date: Date(),
             type: TransactionType.allCases.randomElement()!),
         TransactionModel(
-            name: "Sweatpants", price: 34.99,
+            name: "Jacket", value: 79.99,
             accountId: AccountInteractorMock.exampleAccounts.randomElement()!.id,
+            date: Date(),
             type: TransactionType.allCases.randomElement()!),
         TransactionModel(
-            name: "Jacket", price: 79.99,
+            name: "Hat", value: 14.99,
             accountId: AccountInteractorMock.exampleAccounts.randomElement()!.id,
-            type: TransactionType.allCases.randomElement()!),
-        TransactionModel(
-            name: "Hat", price: 14.99,
-            accountId: AccountInteractorMock.exampleAccounts.randomElement()!.id,
+            date: Date(),
             type: TransactionType.allCases.randomElement()!),
     ]
     
@@ -68,30 +85,42 @@ class TransactionInteractorMock: TransactionInteractorProtocol {
             .eraseToAnyPublisher()
     }
     
-    func saveTransaction(id: UUID?, name: String, price: Double, account: AccountModel, type: TransactionType) -> AnyPublisher<TransactionModel, InteractorError> {
-        Deferred {
+    func saveTransaction(
+        id: UUID?,
+        name: String,
+        price: Double,
+        account: AccountModel,
+        date: Date,
+        type: TransactionType,
+        place: PlaceModel?) -> AnyPublisher<TransactionModel, InteractorError> {
             guard let id = id else {
-                let newTransaction = TransactionModel(name: name, price: price, accountId: account.id, type: type)
+                let newTransaction = TransactionModel(
+                    name: name,
+                    value: price,
+                    accountId: account.id,
+                    date: date,
+                    type: type,
+                    place: place)
                 Self.currentValue.value.insert(newTransaction)
                 return Just(newTransaction)
                     .setFailureType(to: InteractorError.self)
                     .eraseToAnyPublisher()
             }
             return self.getTransaction(with: id)
-        }.flatMap { transaction in
-            var updatedTransaction = transaction
-            updatedTransaction.name = name
-            updatedTransaction.price = price
-            updatedTransaction.accountId = account.id
-            updatedTransaction.type = type
-            Self.currentValue.value.remove(transaction)
-            Self.currentValue.value.insert(updatedTransaction)
-            return Just(updatedTransaction)
-                .setFailureType(to: InteractorError.self)
-                .eraseToAnyPublisher()
-            }
-            .eraseToAnyPublisher()
-    }
+                .flatMap { transaction in
+                    var updatedTransaction = transaction
+                    updatedTransaction.name = name
+                    updatedTransaction.value = price
+                    updatedTransaction.accountId = account.id
+                    updatedTransaction.type = type
+                    updatedTransaction.date = date
+                    updatedTransaction.place = place
+                    Self.currentValue.value.remove(transaction)
+                    Self.currentValue.value.insert(updatedTransaction)
+                    return Just(updatedTransaction)
+                        .setFailureType(to: InteractorError.self)
+                }.eraseToAnyPublisher()
+        }
     
     func allTransactions(of account: AccountModel) -> AnyPublisher<[TransactionModel], InteractorError> {
         Self.currentValue
@@ -108,7 +137,7 @@ class TransactionInteractorMock: TransactionInteractorProtocol {
             .replaceError(with: [])
             .flatMap {
                 return Just($0.filter { $0.accountId == account.id }
-                    .map { $0.price }
+                    .map { $0.value }
                     .reduce(.zero, +))
             }
             .setFailureType(to: InteractorError.self)

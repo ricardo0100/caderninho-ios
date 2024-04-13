@@ -3,16 +3,19 @@ import Combine
 
 struct CurrencyTextField: View {
     let currency: String
+    let font: Font
     @Binding var value: Double
     @State var text: String = ""
     
-    init(currency: String, value: Binding<Double>) {
+    init(currency: String, value: Binding<Double>, font: Font = .body) {
         self.currency = currency
         self._value = value
+        self.font = font
     }
     
     var body: some View {
         TextField("Hey", text: $text)
+            .font(font)
             .keyboardType(.decimalPad)
             .onChange(of: text) { newValue in
                 self.text = currencyFormattedNumber(newValue, currency: currency)
