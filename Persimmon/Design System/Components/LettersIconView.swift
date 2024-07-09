@@ -28,7 +28,8 @@ struct LettersIconView_Previews: PreviewProvider {
         VStack {
             LettersIconView(text: "Action Test".firstLetters(), color: NiceColor.gray.color, size: 44)
             LettersIconView(text: "Maya Regina".firstLetters(), color: NiceColor.blue.color, size: 44)
-            LettersIconView(text: "Ric".firstLetters(), color: NiceColor.pink2.color, size: 44)
+            LettersIconView(text: "Ric".firstLetters(), color: NiceColor.pink2.color, size: 14)
+            LettersIconView(text: "Ric G".firstLetters(), color: NiceColor.pink2.color, size: 12)
         }
     }
 }
