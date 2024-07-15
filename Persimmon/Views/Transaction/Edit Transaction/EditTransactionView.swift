@@ -1,101 +1,168 @@
-//import SwiftUI
-//import Combine
-//import MapKit
-//
-//struct EditTransactionView: View {
-//    @Environment(\.dismiss) var dismiss
-//    @ObservedObject private var viewModel: EditTransactionViewModel
-//    
-//    init(transactionID: UUID? = nil) {
-//        self.viewModel = EditTransactionViewModel(transactionId: transactionID)
-//    }
-//
-//    var body: some View {
-//        Form {
-//            Section {
-//                LabeledView(labelText: "Name", error: $viewModel.nameError) {
-//                    TextField("Transaction Name", text: $viewModel.name)
-//                }
-//                
-//                LabeledView(labelText: "Type") {
-//                    NavigationLink {
-//                        SelectTransactionTypeView(selectedType: $viewModel.type)
-//                    } label: {
-//                        HStack(spacing: .spacingSmall) {
-//                            Image(systemName: viewModel.type.iconName)
-//                            Text(viewModel.type.text)
-//                        }
-//                    }
-//                }
-//                
-//                LabeledView(labelText: "Account", error: $viewModel.accountError) {
-//                    NavigationLink(destination: {
-//                        SelectAccountView(selected: $viewModel.selectedAccount)
-//                    }, label: {
-//                        if let account = viewModel.selectedAccount {
-//                            HStack(spacing: .spacingSmall) {
-//                                LettersIconView(text: account.name.firstLetters(),
-//                                                color: Color(hex: account.color))
-//                                Text(account.name)
-//                            }
-//                        } else {
-//                            Text("Select account").foregroundColor(.secondary)
-//                        }
-//                    })
-//                }
-//                
-//                LabeledView(labelText: "Value") {
-//                    CurrencyTextField(currency: viewModel.selectedAccount?.currency ?? "",
-//                                      value: $viewModel.value)
-//                }
-//                
-//                LabeledView(labelText: "Date and Time") {
-//                    let picker = SelectDateView(date: $viewModel.date)
-//                    NavigationLink(destination: picker) {
-//                        VStack(alignment: .leading) {
-//                            Text(viewModel.date.formatted(date: .complete, time: .omitted))
-//                            Text(viewModel.date.formatted(date: .omitted, time: .shortened)).font(.footnote)
-//                        }
-//                    }
-//                }
-//                
-//                LabeledView(labelText: "Location") {
-//                    NavigationLink {
-//                        SelectLocationView(viewModel: SelectLocationViewModel(selectedLocation: $viewModel.place))
-//                    } label: {
-//                        if let place = viewModel.place {
-//                            VStack(alignment: .leading) {
-//                                Text(place.title).foregroundColor(.primary)
-//                                Text(place.subtitle).font(.footnote)
-//                            }
-//                        } else {
-//                            Text("Select a Place").foregroundColor(.secondary)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        .toolbar {
-//            ToolbarItem(placement: .navigation) {
-//                Button("Cancel", action: viewModel.didTapCancel)
-//            }
-//            ToolbarItem(placement: .confirmationAction) {
-//                Button("Save", action: viewModel.didTapSave)
-//            }
-//        }
-//        .onReceive(viewModel.$shouldDismiss) { shouldDismiss in
-//            if shouldDismiss { dismiss() }
-//        }
-//        .tint(.brand)
-//        .navigationBarBackButtonHidden(true)
-//        .onAppear(perform: viewModel.didAppear)
-//    }
-//}
-//
-//struct EditTransactionView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NavigationStack {
-//            EditTransactionView()
-//        }
-//    }
-//}
+import SwiftUI
+import Combine
+import MapKit
+
+struct EditTransactionView: View {
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
+    private let transaction: Transaction?
+    
+    @State var name: String
+    @State var nameError: String? = ""
+    @State var account: Account?
+    @State var accountError: String? = ""
+    @State var value: Double
+    @State var type: Transaction.TransactionType
+    @State var date: Date
+    @State var place: Transaction.Place?
+    
+    init(transaction: Transaction?) {
+        self.transaction = transaction
+        _name = State(initialValue: transaction?.name ?? "")
+        _account = State(initialValue: transaction?.account ?? nil)
+        _value = State(initialValue: transaction?.value ?? .zero)
+        _type = State(initialValue: transaction?.type ?? .buyCredit)
+        _date = State(initialValue: transaction?.date ?? Date())
+        _place = State(initialValue: transaction?.place ?? nil)
+    }
+    
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    LabeledView(labelText: "Name", error: $nameError) {
+                        TextField("Transaction Name", text: $name)
+                    }
+                    
+                    LabeledView(labelText: "Type") {
+                        NavigationLink {
+                            SelectTransactionTypeView(selectedType: $type)
+                        } label: {
+                            HStack(spacing: .spacingSmall) {
+                                Image(systemName: type.iconName)
+                                Text(type.text)
+                            }
+                        }
+                    }
+                    
+                    LabeledView(labelText: "Account", error: $accountError) {
+                        NavigationLink(destination: {
+                            SelectAccountView(selected: $account)
+                        }, label: {
+                            if let account = account {
+                                HStack(spacing: .spacingSmall) {
+                                    LettersIconView(text: account.name.firstLetters(),
+                                                    color: Color(hex: account.color))
+                                    Text(account.name)
+                                }
+                            } else {
+                                Text("Select account").foregroundColor(.secondary)
+                            }
+                        })
+                    }
+                    
+                    LabeledView(labelText: "Value") {
+                        CurrencyTextField(currency: account?.currency ?? "",
+                                          value: $value)
+                    }
+                    
+                    LabeledView(labelText: "Date and Time") {
+                        let picker = SelectDateView(date: $date)
+                        NavigationLink(destination: picker) {
+                            VStack(alignment: .leading) {
+                                Text(date.formatted(date: .complete, time: .omitted))
+                                Text(date.formatted(date: .omitted, time: .shortened))
+                            }.font(.footnote)
+                        }
+                    }
+                    
+                    LabeledView(labelText: "Location") {
+                        NavigationLink {
+                            SelectLocationView(place: $place)
+                        } label: {
+                            if let place = place {
+                                VStack(alignment: .leading) {
+                                    Text(place.name ?? "")
+                                        .foregroundColor(.primary)
+                                    if let subtitle = place.title {
+                                        Text(subtitle).font(.footnote)
+                                    }
+                                }
+                            } else {
+                                Text("Select a Place")
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                    }
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigation) {
+                    Button("Cancel", action: didTapCancel)
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save", action: didTapSave)
+                }
+            }
+        }
+    }
+    
+    func didTapCancel() {
+        dismiss()
+    }
+    
+    func didTapSave() {
+        withAnimation {
+            clearErrors()
+            guard !name.isEmpty else {
+                nameError = "Mandatory field"
+                return
+            }
+            guard account != nil else {
+                accountError = "Select an account"
+                return
+            }
+            saveTransaction()
+        }
+    }
+    
+    func clearErrors() {
+        nameError = nil
+        accountError = nil
+    }
+    
+    func saveTransaction() {
+        guard let account = account else {
+            return
+        }
+        if let transaction = transaction {
+            transaction.name = name
+            transaction.account = account
+            transaction.value = value
+            transaction.date = date
+            transaction.place = place
+        } else {
+            let transaction = Transaction(
+                id: UUID(),
+                name: name,
+                value: value,
+                account: account,
+                date: date,
+                type: type,
+                place: place)
+            modelContext.insert(transaction)
+        }
+        do {
+            try modelContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        dismiss()
+    }
+}
+
+#Preview {
+    EditTransactionView(transaction: nil)
+        .modelContainer(DataController.previewContainer)
+}

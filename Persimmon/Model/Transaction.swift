@@ -3,15 +3,19 @@ import CoreLocation
 import SwiftData
 
 @Model class Transaction {
-    @Attribute(.unique) var id: UUID
+    @Attribute(.unique)
+    var id: UUID
+    
+    @Relationship(deleteRule: .noAction, inverse: \Account.transactions)
+    var account: Account
+    
     var name: String
     var value: Double
-    @Relationship(deleteRule: .noAction, inverse: \Account.transactions) var account: Account
     var date: Date
     var type: TransactionType
-    var place: PlaceModel?
+    var place: Place?
     
-    init(id: UUID, name: String, value: Double, account: Account, date: Date, type: TransactionType, place: PlaceModel?) {
+    init(id: UUID, name: String, value: Double, account: Account, date: Date, type: TransactionType, place: Place?) {
         self.id = id
         self.name = name
         self.value = value
@@ -21,14 +25,23 @@ import SwiftData
         self.place = place
     }
     
-    struct PlaceModel: Codable {
-        var title: String
-        var subtitle: String
-        var latitude: CLLocationDegrees
-        var longitude: CLLocationDegrees
+    struct Place: Codable, Identifiable, Hashable {
+        var id: String
+        var name: String?
+        var title: String?
+        var subtitle: String?
+        var latitude: CLLocationDegrees?
+        var longitude: CLLocationDegrees?
+        
+        var coordinate: CLLocationCoordinate2D? {
+            guard let latitude = latitude, let longitude = longitude else { return nil }
+            return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        }
     }
     
-    enum TransactionType: String, Codable, CaseIterable {
+    enum TransactionType: String, Codable, CaseIterable, Identifiable {
+        var id: Int { hashValue }
+        
         case buyDebit
         case buyCredit
         case transferIn

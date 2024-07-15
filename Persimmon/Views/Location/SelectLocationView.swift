@@ -1,64 +1,116 @@
-//import SwiftUI
-//import MapKit
-//
-//struct SelectLocationView: View {
-//    @Environment(\.dismiss) var dismiss
-//    @StateObject var viewModel: SelectLocationViewModel
-//    
-//    var body: some View {
-//        VStack(alignment: .leading) {
-//            Map(coordinateRegion: $viewModel.region,
-//                showsUserLocation: true,
-//                annotationItems: viewModel.markers) { place in
-//                MapMarker (coordinate: .init(
-//                    latitude: place.latitude,
-//                    longitude: place.longitude), tint: .brand)
-//            }
-//            .cornerRadius(16)
-//            .frame(height: 220)
-//            .padding()
-//            HStack {
-//                Button {
-//                    viewModel.didTapLocationButton()
-//                } label: {
-//                    Image(systemName: "location.circle").resizable().frame(width: 24, height: 24)
-//                }.buttonStyle(.bordered)
-//                TextField("Search place", text: $viewModel.searchText).textFieldStyle(.roundedBorder)
-//            }.padding()
-//            
-//            List(viewModel.placesSubject, id: \.self, selection: $viewModel.selectedPlace) { location in
-//                HStack {
-//                    VStack(alignment: .leading) {
-//                        Text(location.title).font(.caption).bold().foregroundColor(.primary)
-//                        Text(location.subtitle).font(.caption2)
-//                    }
-//                }
-//            }
-//        }
-//        .onAppear(perform: viewModel.didAppear)
-//        .toolbar {
-//            ToolbarItem {
-//                Button(action: viewModel.didTapClearButton) {
-//                    Image(systemName: "clear")
-//                }
-//            }
-//        }
-//        .onReceive(viewModel.$shouldDismiss) { shouldDismiss in
-//            if shouldDismiss { dismiss() }
-//        }
-//    }
-//}
-//
-//struct SelectLocationView_Previews: PreviewProvider {
-//    @State static var location: PlaceModel? = PlaceModel(
-//        title: "HiperBom",
-//        subtitle: "Florianópolis SC",
-//        latitude: -27.7045892,
-//        longitude: -48.5042036)
-//    
-//    static var previews: some View {
-//        NavigationStack {
-//            SelectLocationView(viewModel: SelectLocationViewModel(selectedLocation: $location)).tint(.brand)
-//        }
-//    }
-//}
+import SwiftUI
+import MapKit
+
+struct SelectLocationView: View {
+    @Environment(\.dismiss) var dismiss
+    @ObservedObject var viewModel: SelectLocationViewModel
+    
+    init(place: Binding<Transaction.Place?>) {
+        viewModel = SelectLocationViewModel(placeBinding: place)
+    }
+    
+    var body: some View {
+        VStack {
+            if viewModel.searchIsPresented {
+                TextField("Search", text: $viewModel.searchText)
+                    .textFieldStyle(.roundedBorder)
+                    .padding()
+            }
+            ZStack(alignment: .bottomTrailing) {
+                Map(position: $viewModel.mapPosition) {
+                    if let place = viewModel.highlightedPlace,
+                       let coordinate = place.coordinate,
+                       let name = place.name {
+                        Marker(name, coordinate: coordinate)
+                    }
+                }
+                .mapStyle(.imagery)
+                
+                Button(action: {
+                    withAnimation {
+                        viewModel.didTapLocationButton()
+                    }
+                }) {
+                    Image(systemName: "location.circle.fill")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                        .tint(.white)
+                }
+                .padding()
+            }
+            .frame(height: 180)
+            .cornerRadius(8).clipped()
+            .padding()
+            
+            Form {
+                ForEach(Array(viewModel.places)) { place in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(place.name ?? "-")
+                                .font(.headline)
+                            Text(place.title ?? "-")
+                                .font(.caption2)
+                            if let subtitle = place.subtitle {
+                                Text(subtitle)
+                                    .font(.caption2)
+                            }
+                        }
+                        Spacer()
+                        Image(systemName: viewModel.highlightedPlace?.id == place.id ? "checkmark.circle" : "")
+                            .renderingMode(.template)
+                            .tint(.brand)
+                    }
+                    .onTapGesture {
+                        viewModel.didTapPlace(place)
+                    }
+                }
+            }
+            .onAppear(perform: viewModel.onAppear)
+            .navigationBarBackButtonHidden()
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: {
+                        withAnimation {
+                            viewModel.didTapSearchButton()
+                        }
+                    }) {
+                        Image(systemName: "magnifyingglass")
+                    }
+                }
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: {
+                        viewModel.didTapTrash()
+                    }) {
+                        Image(systemName: "trash")
+                    }
+                }
+                
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Save", action: {
+                        viewModel.didTapSave()
+                        dismiss()
+                    })
+                }
+                
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+            }
+        }
+    }
+}
+
+#Preview {
+    let place = Transaction.Place(
+        id: "1",
+        name: "Trem de Minas",
+        title: "Restaurante",
+        subtitle: "Florianópolis SC",
+        latitude: -27.7074301,
+        longitude: -48.5104108)
+    NavigationStack {
+        SelectLocationView(place: .constant(place))
+    }.tint(.brand)
+}

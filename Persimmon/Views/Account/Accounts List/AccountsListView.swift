@@ -10,26 +10,13 @@ struct AccountsListView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(accounts, id: \.self) { account in
-                    NavigationLink(destination: AccountDetailsView(account: account)) {
-                        HStack {
-                            LettersIconView(
-                                text: account.name.firstLetters(),
-                                color: Color(hex: account.color),
-                                size: 32)
-                            VStack(alignment: .leading) {
-                                Text(account.name)
-                                    .font(.headline)
-                                Text(account.balance.toCurrency(with: account.currency))
-                                    .font(.subheadline)
-                            }
-                        }
+            List(accounts) { account in
+                NavigationLink(destination: AccountDetailsView(account: account)) {
+                    AccountCellView(account: account)
                         .onLongPressGesture {
                             self.editingAccount = account
                             isShowindEdit = true
                         }
-                    }
                 }
             }
             .toolbar {

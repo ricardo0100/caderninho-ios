@@ -11,15 +11,12 @@
 		CF15B34A2BAC3D1200E8E050 /* NavigationToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B3492BAC3D1200E8E050 /* NavigationToolbarView.swift */; };
 		CF15B34F2BACE84F00E8E050 /* AccountCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B34E2BACE84F00E8E050 /* AccountCellView.swift */; };
 		CF15B3532BACEBC500E8E050 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B3522BACEBC500E8E050 /* Double+Extension.swift */; };
-		CF15B35A2BAE005F00E8E050 /* TransactionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B3592BAE005F00E8E050 /* TransactionDetailsViewModel.swift */; };
 		CF15B35C2BAE006600E8E050 /* TransactionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B35B2BAE006600E8E050 /* TransactionDetailsView.swift */; };
-		CF15B35F2BAE5BB400E8E050 /* TransactionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B35E2BAE5BB400E8E050 /* TransactionCellViewModel.swift */; };
 		CF15B3612BAE5BD600E8E050 /* TransactionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B3602BAE5BD600E8E050 /* TransactionCellView.swift */; };
 		CF1624CF2A0BBC02008C441F /* BudgetPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1624CE2A0BBC02008C441F /* BudgetPanel.swift */; };
 		CF2CB0A52A06F8D600CBA434 /* PersimmonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2CB0A42A06F8D600CBA434 /* PersimmonApp.swift */; };
 		CF2CB0A92A06F8D900CBA434 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2CB0A82A06F8D900CBA434 /* Assets.xcassets */; };
 		CF2CB0AC2A06F8D900CBA434 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2CB0AB2A06F8D900CBA434 /* Preview Assets.xcassets */; };
-		CF2CB0B72A06FBF200CBA434 /* TransactionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2CB0B62A06FBF200CBA434 /* TransactionsListViewModel.swift */; };
 		CF2CB0BB2A06FC3E00CBA434 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2CB0BA2A06FC3E00CBA434 /* ContainerView.swift */; };
 		CF2CB0C02A06FD9700CBA434 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2CB0BF2A06FD9700CBA434 /* Color+Extension.swift */; };
 		CF3116F12A14438600171A4D /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3116F02A14438600171A4D /* Account.swift */; };
@@ -48,16 +45,16 @@
 		CFB7F56B2BC0228B009956E9 /* SelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F56A2BC0228B009956E9 /* SelectDateView.swift */; };
 		CFB7F56E2BC02A47009956E9 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F56D2BC02A47009956E9 /* Date+Extension.swift */; };
 		CFB7F5732BC085AD009956E9 /* SelectLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F5722BC085AD009956E9 /* SelectLocationView.swift */; };
-		CFB7F5752BC08944009956E9 /* SelectLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F5742BC08944009956E9 /* SelectLocationViewModel.swift */; };
 		CFBEE23E2A07F3A000586164 /* TransactionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE23D2A07F3A000586164 /* TransactionsListView.swift */; };
 		CFBEE2412A07F9A000586164 /* AccountsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2402A07F9A000586164 /* AccountsListView.swift */; };
 		CFBEE2452A080AA700586164 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2442A080AA700586164 /* String+Extension.swift */; };
 		CFBEE24A2A081B7100586164 /* LettersIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2492A081B7100586164 /* LettersIconView.swift */; };
 		CFBEE2532A08471100586164 /* PizzaGraphicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2522A08471100586164 /* PizzaGraphicView.swift */; };
 		CFDC21972BAF094000295432 /* EditTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDC21962BAF094000295432 /* EditTransactionView.swift */; };
-		CFDC21992BAF094900295432 /* EditTransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDC21982BAF094900295432 /* EditTransactionViewModel.swift */; };
 		CFDC219E2BAF29AF00295432 /* SelectAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDC219D2BAF29AF00295432 /* SelectAccountView.swift */; };
 		CFE563522C34C95100F8EA72 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE563512C34C94700F8EA72 /* DataController.swift */; };
+		CFE563552C3F433B00F8EA72 /* SelectLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE563542C3F433400F8EA72 /* SelectLocationViewModel.swift */; };
+		CFE563592C3F4F9B00F8EA72 /* CLLocationCoordinate2D+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE563582C3F4F9500F8EA72 /* CLLocationCoordinate2D+Extension.swift */; };
 		CFE6D7BD2BA9277500E76AB8 /* LabeledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE6D7BC2BA9277500E76AB8 /* LabeledView.swift */; };
 		CFE6D7BF2BA9B4C000E76AB8 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE6D7BE2BA9B4C000E76AB8 /* Transaction.swift */; };
 		CFE6D7C02BA9CAE800E76AB8 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF44BE322A0FB55A0006019F /* Spacing.swift */; };
@@ -95,16 +92,13 @@
 		CF15B3492BAC3D1200E8E050 /* NavigationToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationToolbarView.swift; sourceTree = "<group>"; };
 		CF15B34E2BACE84F00E8E050 /* AccountCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCellView.swift; sourceTree = "<group>"; };
 		CF15B3522BACEBC500E8E050 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
-		CF15B3592BAE005F00E8E050 /* TransactionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsViewModel.swift; sourceTree = "<group>"; };
 		CF15B35B2BAE006600E8E050 /* TransactionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsView.swift; sourceTree = "<group>"; };
-		CF15B35E2BAE5BB400E8E050 /* TransactionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCellViewModel.swift; sourceTree = "<group>"; };
 		CF15B3602BAE5BD600E8E050 /* TransactionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCellView.swift; sourceTree = "<group>"; };
 		CF1624CE2A0BBC02008C441F /* BudgetPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetPanel.swift; sourceTree = "<group>"; };
 		CF2CB0A12A06F8D600CBA434 /* Persimmon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Persimmon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2CB0A42A06F8D600CBA434 /* PersimmonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersimmonApp.swift; sourceTree = "<group>"; };
 		CF2CB0A82A06F8D900CBA434 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF2CB0AB2A06F8D900CBA434 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		CF2CB0B62A06FBF200CBA434 /* TransactionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListViewModel.swift; sourceTree = "<group>"; };
 		CF2CB0BA2A06FC3E00CBA434 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		CF2CB0BF2A06FD9700CBA434 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		CF3116F02A14438600171A4D /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
@@ -130,16 +124,16 @@
 		CFB7F56D2BC02A47009956E9 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		CFB7F56F2BC0517B009956E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CFB7F5722BC085AD009956E9 /* SelectLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationView.swift; sourceTree = "<group>"; };
-		CFB7F5742BC08944009956E9 /* SelectLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewModel.swift; sourceTree = "<group>"; };
 		CFBEE23D2A07F3A000586164 /* TransactionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListView.swift; sourceTree = "<group>"; };
 		CFBEE2402A07F9A000586164 /* AccountsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListView.swift; sourceTree = "<group>"; };
 		CFBEE2442A080AA700586164 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		CFBEE2492A081B7100586164 /* LettersIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LettersIconView.swift; sourceTree = "<group>"; };
 		CFBEE2522A08471100586164 /* PizzaGraphicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaGraphicView.swift; sourceTree = "<group>"; };
 		CFDC21962BAF094000295432 /* EditTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTransactionView.swift; sourceTree = "<group>"; };
-		CFDC21982BAF094900295432 /* EditTransactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTransactionViewModel.swift; sourceTree = "<group>"; };
 		CFDC219D2BAF29AF00295432 /* SelectAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAccountView.swift; sourceTree = "<group>"; };
 		CFE563512C34C94700F8EA72 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		CFE563542C3F433400F8EA72 /* SelectLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewModel.swift; sourceTree = "<group>"; };
+		CFE563582C3F4F9500F8EA72 /* CLLocationCoordinate2D+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extension.swift"; sourceTree = "<group>"; };
 		CFE6D7BC2BA9277500E76AB8 /* LabeledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledView.swift; sourceTree = "<group>"; };
 		CFE6D7BE2BA9B4C000E76AB8 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		CFF292A52A13B8FE00C1A66A /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
@@ -177,9 +171,8 @@
 		CF15B3572BAE004500E8E050 /* Transactions List */ = {
 			isa = PBXGroup;
 			children = (
-				CF15B35D2BAE5BA000E8E050 /* TransactionCell */,
+				CF15B3602BAE5BD600E8E050 /* TransactionCellView.swift */,
 				CFBEE23D2A07F3A000586164 /* TransactionsListView.swift */,
-				CF2CB0B62A06FBF200CBA434 /* TransactionsListViewModel.swift */,
 				CFBEE2462A08155D00586164 /* Header */,
 			);
 			path = "Transactions List";
@@ -188,19 +181,9 @@
 		CF15B3582BAE004E00E8E050 /* Transaction Details */ = {
 			isa = PBXGroup;
 			children = (
-				CF15B3592BAE005F00E8E050 /* TransactionDetailsViewModel.swift */,
 				CF15B35B2BAE006600E8E050 /* TransactionDetailsView.swift */,
 			);
 			path = "Transaction Details";
-			sourceTree = "<group>";
-		};
-		CF15B35D2BAE5BA000E8E050 /* TransactionCell */ = {
-			isa = PBXGroup;
-			children = (
-				CF15B35E2BAE5BB400E8E050 /* TransactionCellViewModel.swift */,
-				CF15B3602BAE5BD600E8E050 /* TransactionCellView.swift */,
-			);
-			path = TransactionCell;
 			sourceTree = "<group>";
 		};
 		CF2CB0982A06F8D600CBA434 = {
@@ -259,6 +242,7 @@
 		CF2CB0B92A06FC2200CBA434 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CFE563582C3F4F9500F8EA72 /* CLLocationCoordinate2D+Extension.swift */,
 				CF2CB0BF2A06FD9700CBA434 /* Color+Extension.swift */,
 				CFBEE2442A080AA700586164 /* String+Extension.swift */,
 				CF15B3522BACEBC500E8E050 /* Double+Extension.swift */,
@@ -322,8 +306,8 @@
 		CFB7F5782BC0AE17009956E9 /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				CFE563542C3F433400F8EA72 /* SelectLocationViewModel.swift */,
 				CFB7F5722BC085AD009956E9 /* SelectLocationView.swift */,
-				CFB7F5742BC08944009956E9 /* SelectLocationViewModel.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -377,7 +361,6 @@
 			isa = PBXGroup;
 			children = (
 				CFDC21962BAF094000295432 /* EditTransactionView.swift */,
-				CFDC21982BAF094900295432 /* EditTransactionViewModel.swift */,
 				CFB7F5602BBEBFE6009956E9 /* SelectTransactionTypeView.swift */,
 				CFB7F56A2BC0228B009956E9 /* SelectDateView.swift */,
 			);
@@ -519,7 +502,6 @@
 				CF2CB0A52A06F8D600CBA434 /* PersimmonApp.swift in Sources */,
 				CF44BE312A0FB5000006019F /* Color.swift in Sources */,
 				CFBEE2532A08471100586164 /* PizzaGraphicView.swift in Sources */,
-				CF15B35F2BAE5BB400E8E050 /* TransactionCellViewModel.swift in Sources */,
 				CFE6D7BF2BA9B4C000E76AB8 /* Transaction.swift in Sources */,
 				CFBEE23E2A07F3A000586164 /* TransactionsListView.swift in Sources */,
 				CF15B3412BAB048A00E8E050 /* AccountDetailsView.swift in Sources */,
@@ -539,19 +521,17 @@
 				CFDC219E2BAF29AF00295432 /* SelectAccountView.swift in Sources */,
 				CFF292A62A13B8FE00C1A66A /* AddCategoryView.swift in Sources */,
 				CFA1DE6D2A0C32B50055E3CD /* BudgetWidget.intentdefinition in Sources */,
-				CFDC21992BAF094900295432 /* EditTransactionViewModel.swift in Sources */,
 				CF15B34A2BAC3D1200E8E050 /* NavigationToolbarView.swift in Sources */,
 				CFBEE2412A07F9A000586164 /* AccountsListView.swift in Sources */,
-				CF2CB0B72A06FBF200CBA434 /* TransactionsListViewModel.swift in Sources */,
-				CF15B35A2BAE005F00E8E050 /* TransactionDetailsViewModel.swift in Sources */,
 				CF9D2A722A0996800003DC39 /* NiceColorPicker.swift in Sources */,
 				CF3116F12A14438600171A4D /* Account.swift in Sources */,
 				CFB7F5732BC085AD009956E9 /* SelectLocationView.swift in Sources */,
 				CF7A804B2A0DAC660067F5A8 /* CategoriesViewModel.swift in Sources */,
 				CFE563522C34C95100F8EA72 /* DataController.swift in Sources */,
+				CFE563592C3F4F9B00F8EA72 /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				CF7A804D2A0DAC740067F5A8 /* CategoriesHeaderView.swift in Sources */,
-				CFB7F5752BC08944009956E9 /* SelectLocationViewModel.swift in Sources */,
 				CF15B35C2BAE006600E8E050 /* TransactionDetailsView.swift in Sources */,
+				CFE563552C3F433B00F8EA72 /* SelectLocationViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,7 +695,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -748,7 +728,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

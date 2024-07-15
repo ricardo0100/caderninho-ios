@@ -12,6 +12,22 @@ class DataController {
                 color: NiceColor.allCases.randomElement()!.rawValue,
                 currency: accountCurrencyExamples.randomElement()!)
     }
+    
+    static func createRandomTransaction() -> Transaction {
+        Transaction(id: UUID(),
+                    name: transactionNameExamples.randomElement()!,
+                    value: Double((1...999).randomElement()!),
+                    account: createRandomAccount(),
+                    date: Date(),
+                    type: .buyDebit,
+                    place: Transaction.Place(
+                        id: UUID().uuidString,
+                        name: "Trem de Minas",
+                        title: "Restaurante",
+                        subtitle: "Florianópolis SC",
+                        latitude: -27.707511,
+                        longitude: -48.510450))
+    }
 
     static let previewContainer: ModelContainer = {
         do {
