@@ -5,7 +5,7 @@ import SwiftUI
 class SelectLocationViewModel: NSObject, ObservableObject {
     @Binding var selectedPlace: Transaction.Place?
     @Published var highlightedPlace: Transaction.Place? = nil
-    @Published var places: Set<Transaction.Place> = []
+    @Published var places: [Transaction.Place] = []
     @Published var searchText = ""
     @Published var mapPosition: MapCameraPosition
     @Published var searchIsPresented = false
@@ -57,7 +57,6 @@ class SelectLocationViewModel: NSObject, ObservableObject {
     private func updatePlaces(with mapItems: [MKMapItem]) {
         var searchPlaces = mapItems.compactMap { mapItem in
             Transaction.Place(
-                id: mapItem.identifier?.rawValue ?? UUID().uuidString,
                 name: mapItem.name,
                 title: mapItem.placemark.title,
                 subtitle: mapItem.placemark.subtitle,
@@ -65,10 +64,20 @@ class SelectLocationViewModel: NSObject, ObservableObject {
                 longitude: mapItem.placemark.coordinate.longitude)
         }
         
-        if let place = self.selectedPlace {
+        if let place = self.selectedPlace, !searchPlaces.contains(place) {
             searchPlaces.append(place)
         }
-        self.places = Set(searchPlaces)
+        self.places = searchPlaces.sorted {
+            let leftPlaceCoordinate = CLLocation(latitude: $0.latitude ?? .zero, longitude: $0.longitude ?? .zero)
+            let rightPlaceCoordinate = CLLocation(latitude: $1.latitude ?? .zero, longitude: $1.longitude ?? .zero)
+            let userCoordinate = CLLocation(
+                latitude: mapPosition.camera?.centerCoordinate.latitude ?? .zero,
+                longitude: mapPosition.camera?.centerCoordinate.longitude ?? .zero)
+            if selectedPlace == $0 {
+                return true
+            }
+            return userCoordinate.distance(from: leftPlaceCoordinate) < userCoordinate.distance(from: rightPlaceCoordinate)
+        }
     }
     
     func didTapLocationButton () {

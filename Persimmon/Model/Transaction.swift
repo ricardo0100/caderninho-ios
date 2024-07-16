@@ -26,7 +26,9 @@ import SwiftData
     }
     
     struct Place: Codable, Identifiable, Hashable {
-        var id: String
+        var id: Int {
+            hashValue
+        }
         var name: String?
         var title: String?
         var subtitle: String?

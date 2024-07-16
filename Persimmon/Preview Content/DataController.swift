@@ -21,7 +21,6 @@ class DataController {
                     date: Date(),
                     type: .buyDebit,
                     place: Transaction.Place(
-                        id: UUID().uuidString,
                         name: "Trem de Minas",
                         title: "Restaurante",
                         subtitle: "Florianópolis SC",

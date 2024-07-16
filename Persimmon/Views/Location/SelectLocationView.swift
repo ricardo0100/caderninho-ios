@@ -43,7 +43,7 @@ struct SelectLocationView: View {
             .padding()
             
             Form {
-                ForEach(Array(viewModel.places)) { place in
+                ForEach(viewModel.places) { place in
                     HStack {
                         VStack(alignment: .leading) {
                             Text(place.name ?? "-")
@@ -104,7 +104,6 @@ struct SelectLocationView: View {
 
 #Preview {
     let place = Transaction.Place(
-        id: "1",
         name: "Trem de Minas",
         title: "Restaurante",
         subtitle: "Florianópolis SC",
