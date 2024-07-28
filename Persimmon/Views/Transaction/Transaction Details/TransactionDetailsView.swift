@@ -55,7 +55,7 @@ struct TransactionDetailsView: View {
                     }
                 }
             } header: {
-                if let place = transaction.place, let coordinate = place.coordinate {
+                if let place = transaction.place, let coordinate = place.location?.coordinate {
                         Map(bounds: MapCameraBounds(minimumDistance: 500)) {
                             Marker(place.title ?? "", coordinate: coordinate)
                         }

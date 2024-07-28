@@ -32,6 +32,7 @@
 		CF7A804D2A0DAC740067F5A8 /* CategoriesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A804C2A0DAC740067F5A8 /* CategoriesHeaderView.swift */; };
 		CF7A804F2A0DBAE20067F5A8 /* ImageIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A804E2A0DBAE20067F5A8 /* ImageIconView.swift */; };
 		CF8104522C037BE4009599B8 /* ProcessInfo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8104512C037BE4009599B8 /* ProcessInfo+Extension.swift */; };
+		CF95BC162C566EED00C8C1CE /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC152C566EE900C8C1CE /* Category.swift */; };
 		CF9D2A722A0996800003DC39 /* NiceColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9D2A712A09967F0003DC39 /* NiceColorPicker.swift */; };
 		CFA1DE5E2A0C32B20055E3CD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFA1DE5D2A0C32B20055E3CD /* WidgetKit.framework */; };
 		CFA1DE602A0C32B20055E3CD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFA1DE5F2A0C32B20055E3CD /* SwiftUI.framework */; };
@@ -110,6 +111,7 @@
 		CF7A804C2A0DAC740067F5A8 /* CategoriesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesHeaderView.swift; sourceTree = "<group>"; };
 		CF7A804E2A0DBAE20067F5A8 /* ImageIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIconView.swift; sourceTree = "<group>"; };
 		CF8104512C037BE4009599B8 /* ProcessInfo+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+Extension.swift"; sourceTree = "<group>"; };
+		CF95BC152C566EE900C8C1CE /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		CF9D2A712A09967F0003DC39 /* NiceColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiceColorPicker.swift; sourceTree = "<group>"; };
 		CFA1DE5B2A0C32B20055E3CD /* BudgetWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BudgetWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFA1DE5D2A0C32B20055E3CD /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -255,6 +257,7 @@
 		CF3116EF2A14437B00171A4D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CF95BC152C566EE900C8C1CE /* Category.swift */,
 				CF3116F02A14438600171A4D /* Account.swift */,
 				CFE6D7BE2BA9B4C000E76AB8 /* Transaction.swift */,
 			);
@@ -524,6 +527,7 @@
 				CF15B34A2BAC3D1200E8E050 /* NavigationToolbarView.swift in Sources */,
 				CFBEE2412A07F9A000586164 /* AccountsListView.swift in Sources */,
 				CF9D2A722A0996800003DC39 /* NiceColorPicker.swift in Sources */,
+				CF95BC162C566EED00C8C1CE /* Category.swift in Sources */,
 				CF3116F12A14438600171A4D /* Account.swift in Sources */,
 				CFB7F5732BC085AD009956E9 /* SelectLocationView.swift in Sources */,
 				CF7A804B2A0DAC660067F5A8 /* CategoriesViewModel.swift in Sources */,

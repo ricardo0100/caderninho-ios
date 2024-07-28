@@ -19,8 +19,9 @@ class SelectLocationViewModel: NSObject, ObservableObject {
         highlightedPlace = placeBinding.wrappedValue
         mapPosition = .userLocation(fallback: .automatic)
         super.init()
-        if let coordinate = placeBinding.wrappedValue?.coordinate {
-            mapPosition = .camera(MapCamera(centerCoordinate: coordinate, distance: 1000))
+        if let location = placeBinding.wrappedValue?.location {
+            mapPosition = .camera(MapCamera(centerCoordinate: location.coordinate,
+                                            distance: 1000))
         } else {
             isLocating = true
         }
@@ -68,15 +69,16 @@ class SelectLocationViewModel: NSObject, ObservableObject {
             searchPlaces.append(place)
         }
         self.places = searchPlaces.sorted {
-            let leftPlaceCoordinate = CLLocation(latitude: $0.latitude ?? .zero, longitude: $0.longitude ?? .zero)
-            let rightPlaceCoordinate = CLLocation(latitude: $1.latitude ?? .zero, longitude: $1.longitude ?? .zero)
+            guard let left = $0.location, let right = $1.location else {
+                return false
+            }
             let userCoordinate = CLLocation(
                 latitude: mapPosition.camera?.centerCoordinate.latitude ?? .zero,
                 longitude: mapPosition.camera?.centerCoordinate.longitude ?? .zero)
             if selectedPlace == $0 {
                 return true
             }
-            return userCoordinate.distance(from: leftPlaceCoordinate) < userCoordinate.distance(from: rightPlaceCoordinate)
+            return userCoordinate.distance(from: left) < userCoordinate.distance(from: right)
         }
     }
     
@@ -102,9 +104,9 @@ class SelectLocationViewModel: NSObject, ObservableObject {
     func didTapPlace(_ place: Transaction.Place) {
         highlightedPlace = place
         searchIsPresented = false
-        if let coordinate = place.coordinate {
+        if let coordinate = place.location {
             withAnimation {
-                mapPosition = .camera(MapCamera(centerCoordinate: coordinate, distance: 1000))
+                mapPosition = .camera(MapCamera(centerCoordinate: coordinate.coordinate, distance: 1000))
             }
         }
     }

@@ -2,7 +2,7 @@ import Foundation
 import SwiftData
 
 @Model class Account {
-    @Attribute(.unique) var id: UUID = UUID()
+    @Attribute(.unique) var id: UUID
     var name: String
     var color: String
     var currency: String
@@ -12,7 +12,8 @@ import SwiftData
         transactions.map { $0.value }.reduce(0, +)
     }
     
-    init(name: String, color: String, currency: String) {
+    init(id: UUID, name: String, color: String, currency: String) {
+        self.id = id
         self.name = name
         self.color = color
         self.currency = currency

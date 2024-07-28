@@ -8,7 +8,8 @@ class DataController {
     static let accountCurrencyExamples = ["R$", "元", "US$"]
 
     static func createRandomAccount() -> Account {
-        Account(name: accountNameExamples.randomElement()!,
+        Account(id: UUID(),
+                name: accountNameExamples.randomElement()!,
                 color: NiceColor.allCases.randomElement()!.rawValue,
                 currency: accountCurrencyExamples.randomElement()!)
     }
@@ -35,6 +36,7 @@ class DataController {
 
             let accounts = accountNameExamples.map {
                 Account(
+                    id: UUID(),
                     name: $0,
                     color: NiceColor.allCases.randomElement()!.rawValue,
                     currency: accountCurrencyExamples.randomElement()!)

@@ -19,7 +19,7 @@ struct SelectLocationView: View {
             ZStack(alignment: .bottomTrailing) {
                 Map(position: $viewModel.mapPosition) {
                     if let place = viewModel.highlightedPlace,
-                       let coordinate = place.coordinate,
+                       let coordinate = place.location?.coordinate,
                        let name = place.name {
                         Marker(name, coordinate: coordinate)
                     }
@@ -56,9 +56,11 @@ struct SelectLocationView: View {
                             }
                         }
                         Spacer()
-                        Image(systemName: viewModel.highlightedPlace?.id == place.id ? "checkmark.circle" : "")
-                            .renderingMode(.template)
-                            .tint(.brand)
+                        if viewModel.highlightedPlace?.id == place.id {
+                            Image(systemName: "checkmark.circle")
+                                .renderingMode(.template)
+                                .tint(.brand)
+                        }
                     }
                     .onTapGesture {
                         viewModel.didTapPlace(place)

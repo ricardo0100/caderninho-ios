@@ -11,9 +11,9 @@ struct AccountDetailsView: View {
                 if account.transactions.count > 0 {
                     ForEach(account.transactions) { transaction in
                         NavigationLink(destination: {
-                            
+                            TransactionDetailsView(transaction: transaction)
                         }) {
-                            Text(transaction.name)
+                            TransactionCellView(transaction: transaction)
                         }
                     }
                 } else {

@@ -63,7 +63,8 @@ struct EditAccountView: View {
             account.currency = currency
             account.color = niceColor.rawValue
         } else {
-            let account = Account(name: name,
+            let account = Account(id: UUID(),
+                                  name: name,
                                   color: niceColor.rawValue,
                                   currency: currency)
             modelContext.insert(account)

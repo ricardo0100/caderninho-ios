@@ -3,8 +3,7 @@ import CoreLocation
 import SwiftData
 
 @Model class Transaction {
-    @Attribute(.unique)
-    var id: UUID
+    @Attribute(.unique) var id: UUID
     
     @Relationship(deleteRule: .noAction, inverse: \Account.transactions)
     var account: Account
@@ -35,9 +34,9 @@ import SwiftData
         var latitude: CLLocationDegrees?
         var longitude: CLLocationDegrees?
         
-        var coordinate: CLLocationCoordinate2D? {
+        var location: CLLocation? {
             guard let latitude = latitude, let longitude = longitude else { return nil }
-            return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            return CLLocation(latitude: latitude, longitude: longitude)
         }
     }
     
