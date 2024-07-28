@@ -8,6 +8,7 @@ import SwiftData
     var currency: String
     
     @Relationship(deleteRule: .cascade) var transactions: [Transaction] = []
+    
     @Attribute(.ephemeral) var balance: Double {
         transactions.map { $0.value }.reduce(0, +)
     }

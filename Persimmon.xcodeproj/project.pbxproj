@@ -27,9 +27,7 @@
 		CF44BE362A0FB6330006019F /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2442A080AA700586164 /* String+Extension.swift */; };
 		CF72A07F2BB9FB9900E0FDB1 /* CurrencyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF72A07E2BB9FB9900E0FDB1 /* CurrencyTextField.swift */; };
 		CF7A80462A0DA8CC0067F5A8 /* PizzaGraphicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2522A08471100586164 /* PizzaGraphicView.swift */; };
-		CF7A80492A0DAC580067F5A8 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A80482A0DAC580067F5A8 /* CategoriesView.swift */; };
-		CF7A804B2A0DAC660067F5A8 /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A804A2A0DAC660067F5A8 /* CategoriesViewModel.swift */; };
-		CF7A804D2A0DAC740067F5A8 /* CategoriesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A804C2A0DAC740067F5A8 /* CategoriesHeaderView.swift */; };
+		CF7A80492A0DAC580067F5A8 /* CategoriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A80482A0DAC580067F5A8 /* CategoriesListView.swift */; };
 		CF7A804F2A0DBAE20067F5A8 /* ImageIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A804E2A0DBAE20067F5A8 /* ImageIconView.swift */; };
 		CF8104522C037BE4009599B8 /* ProcessInfo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8104512C037BE4009599B8 /* ProcessInfo+Extension.swift */; };
 		CF95BC162C566EED00C8C1CE /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC152C566EE900C8C1CE /* Category.swift */; };
@@ -106,9 +104,7 @@
 		CF44BE302A0FB5000006019F /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CF44BE322A0FB55A0006019F /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		CF72A07E2BB9FB9900E0FDB1 /* CurrencyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextField.swift; sourceTree = "<group>"; };
-		CF7A80482A0DAC580067F5A8 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
-		CF7A804A2A0DAC660067F5A8 /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
-		CF7A804C2A0DAC740067F5A8 /* CategoriesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesHeaderView.swift; sourceTree = "<group>"; };
+		CF7A80482A0DAC580067F5A8 /* CategoriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListView.swift; sourceTree = "<group>"; };
 		CF7A804E2A0DBAE20067F5A8 /* ImageIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIconView.swift; sourceTree = "<group>"; };
 		CF8104512C037BE4009599B8 /* ProcessInfo+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+Extension.swift"; sourceTree = "<group>"; };
 		CF95BC152C566EE900C8C1CE /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -267,12 +263,18 @@
 		CF7A80472A0DAC480067F5A8 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				CF7A80482A0DAC580067F5A8 /* CategoriesView.swift */,
-				CF7A804A2A0DAC660067F5A8 /* CategoriesViewModel.swift */,
-				CF7A804C2A0DAC740067F5A8 /* CategoriesHeaderView.swift */,
+				CF95BC172C56705A00C8C1CE /* Categories List */,
 				CFF292A52A13B8FE00C1A66A /* AddCategoryView.swift */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		CF95BC172C56705A00C8C1CE /* Categories List */ = {
+			isa = PBXGroup;
+			children = (
+				CF7A80482A0DAC580067F5A8 /* CategoriesListView.swift */,
+			);
+			path = "Categories List";
 			sourceTree = "<group>";
 		};
 		CFA1DE4F2A0BCA340055E3CD /* Design System */ = {
@@ -500,7 +502,7 @@
 				CF2CB0BB2A06FC3E00CBA434 /* ContainerView.swift in Sources */,
 				CF44BE332A0FB55A0006019F /* Spacing.swift in Sources */,
 				CF72A07F2BB9FB9900E0FDB1 /* CurrencyTextField.swift in Sources */,
-				CF7A80492A0DAC580067F5A8 /* CategoriesView.swift in Sources */,
+				CF7A80492A0DAC580067F5A8 /* CategoriesListView.swift in Sources */,
 				CF2CB0C02A06FD9700CBA434 /* Color+Extension.swift in Sources */,
 				CF2CB0A52A06F8D600CBA434 /* PersimmonApp.swift in Sources */,
 				CF44BE312A0FB5000006019F /* Color.swift in Sources */,
@@ -530,10 +532,8 @@
 				CF95BC162C566EED00C8C1CE /* Category.swift in Sources */,
 				CF3116F12A14438600171A4D /* Account.swift in Sources */,
 				CFB7F5732BC085AD009956E9 /* SelectLocationView.swift in Sources */,
-				CF7A804B2A0DAC660067F5A8 /* CategoriesViewModel.swift in Sources */,
 				CFE563522C34C95100F8EA72 /* DataController.swift in Sources */,
 				CFE563592C3F4F9B00F8EA72 /* CLLocationCoordinate2D+Extension.swift in Sources */,
-				CF7A804D2A0DAC740067F5A8 /* CategoriesHeaderView.swift in Sources */,
 				CF15B35C2BAE006600E8E050 /* TransactionDetailsView.swift in Sources */,
 				CFE563552C3F433B00F8EA72 /* SelectLocationViewModel.swift in Sources */,
 			);

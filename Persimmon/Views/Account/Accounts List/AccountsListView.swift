@@ -2,8 +2,7 @@ import SwiftUI
 import SwiftData
 
 struct AccountsListView: View {
-    @Query(sort: [SortDescriptor(\Account.name)])
-    var accounts: [Account]
+    @Query(sort: [SortDescriptor(\Account.name)]) var accounts: [Account]
     
     @State var isShowindEdit: Bool = false
     @State var editingAccount: Account?

@@ -7,6 +7,9 @@ import SwiftData
     
     @Relationship(deleteRule: .noAction, inverse: \Account.transactions)
     var account: Account
+
+    @Relationship(deleteRule: .noAction, inverse: \Category.transactions)
+    var category: Category?
     
     var name: String
     var value: Double
@@ -14,11 +17,19 @@ import SwiftData
     var type: TransactionType
     var place: Place?
     
-    init(id: UUID, name: String, value: Double, account: Account, date: Date, type: TransactionType, place: Place?) {
+    init(id: UUID,
+         name: String,
+         value: Double,
+         account: Account,
+         category: Category?,
+         date: Date,
+         type: TransactionType,
+         place: Place?) {
         self.id = id
         self.name = name
         self.value = value
         self.account = account
+        self.category = category
         self.date = date
         self.type = type
         self.place = place

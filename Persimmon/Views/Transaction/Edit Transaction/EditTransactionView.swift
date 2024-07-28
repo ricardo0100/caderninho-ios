@@ -147,6 +147,7 @@ struct EditTransactionView: View {
                 name: name,
                 value: value,
                 account: account,
+                category: nil,
                 date: date,
                 type: type,
                 place: place)

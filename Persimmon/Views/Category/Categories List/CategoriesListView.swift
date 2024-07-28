@@ -1,13 +1,14 @@
 import SwiftUI
+import SwiftData
 
-struct CategoriesView: View {
-    @ObservedObject var viewModel = CategoriesViewModelMock()
+struct CategoriesListView: View {
+    @Query(sort: [SortDescriptor(\Category.name)]) var categories: [Category]
     
     var body: some View {
         NavigationStack {
             List {
                 Section {
-                    ForEach(viewModel.categories) { category in
+                    ForEach(categories) { category in
                         NavigationLink {
                             Text("👽")
                         } label: {
@@ -16,14 +17,11 @@ struct CategoriesView: View {
 
                         
                     }
-                } header: {
-                    CategoriesHeaderView(addAction: viewModel.didTapAdd)
-                        .textCase(nil)
                 }
             }
-            .sheet(isPresented: $viewModel.showingSheet) {
-                AddCategoryView()
-            }
+//            .sheet(isPresented: $showingSheet) {
+//                AddCategoryView()
+//            }
             .toolbar {
                 ToolbarItem(placement: .navigation) {
                     NavigationToolbarView(imageName: "briefcase", title: "Categories")
@@ -31,14 +29,22 @@ struct CategoriesView: View {
             }
         }
     }
+    
+    func didTapAdd() {
+        
+    }
 }
 
 struct CategoryCell: View {
-    let category: CategoryItem
+    let category: Category
     
     var body: some View {
         HStack {
-            ImageIconView(image: Image(systemName: category.icon), color: category.color.color)
+            if let icon = category.icon {
+                ImageIconView(image: Image(systemName: icon), color: Color(hex: category.color))
+            } else {
+                LettersIconView(text: category.name, color: Color(hex: category.color))
+            }
             VStack(alignment: .leading) {
                 Text(category.name)
                     .font(.headline)
@@ -49,10 +55,9 @@ struct CategoryCell: View {
     }
 }
 
-struct CategoriesView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            CategoriesView(viewModel: CategoriesViewModelMock())
-        }
+#Preview {
+    NavigationStack {
+        CategoriesListView()
+            .modelContainer(DataController.previewContainer)
     }
 }

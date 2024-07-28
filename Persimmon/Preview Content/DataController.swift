@@ -6,7 +6,8 @@ class DataController {
     static let accountNameExamples = ["Banco do Brasil", "Maya Trust", "Feijão Bank"]
     static let transactionNameExamples = ["Almoço", "Jantar", "Mansão"]
     static let accountCurrencyExamples = ["R$", "元", "US$"]
-
+    static let categoryNameExamples = ["Alimentação", "Transporte", "Aluguel"]
+    
     static func createRandomAccount() -> Account {
         Account(id: UUID(),
                 name: accountNameExamples.randomElement()!,
@@ -19,6 +20,7 @@ class DataController {
                     name: transactionNameExamples.randomElement()!,
                     value: Double((1...999).randomElement()!),
                     account: createRandomAccount(),
+                    category: createRandomCategory(),
                     date: Date(),
                     type: .buyDebit,
                     place: Transaction.Place(
@@ -27,6 +29,13 @@ class DataController {
                         subtitle: "Florianópolis SC",
                         latitude: -27.707511,
                         longitude: -48.510450))
+    }
+
+    static func createRandomCategory() -> Category {
+        Category(id: UUID(),
+                 name: categoryNameExamples.randomElement()!,
+                 color: NiceColor.allCases.randomElement()!.rawValue,
+                 icon: nil)
     }
 
     static let previewContainer: ModelContainer = {
@@ -42,6 +51,15 @@ class DataController {
                     currency: accountCurrencyExamples.randomElement()!)
             }
             accounts.forEach { container.mainContext.insert($0) }
+            
+            let categories = categoryNameExamples.map {
+                Category(id: UUID(),
+                         name: $0,
+                         color: NiceColor.allCases.randomElement()!.rawValue,
+                         icon: nil)
+            }
+            categories.forEach { container.mainContext.insert($0) }
+
             try container.mainContext.save()
             transactionNameExamples.forEach {
                 let transaction = Transaction(
@@ -49,6 +67,7 @@ class DataController {
                     name: $0,
                     value: Double((0...99999).randomElement()!) / 100,
                     account: accounts.randomElement()!,
+                    category: categories.randomElement()!,
                     date: Date(),
                     type: .adjustment,
                     place: nil)
