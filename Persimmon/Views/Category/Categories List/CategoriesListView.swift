@@ -2,7 +2,10 @@ import SwiftUI
 import SwiftData
 
 struct CategoriesListView: View {
-    @Query(sort: [SortDescriptor(\Category.name)]) var categories: [Category]
+    @Query(sort: [SortDescriptor(\Category.name)])
+    var categories: [Category]
+    
+    @State var isShowindEdit: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -10,48 +13,32 @@ struct CategoriesListView: View {
                 Section {
                     ForEach(categories) { category in
                         NavigationLink {
-                            Text("👽")
+                            CategoryDetails(category: category)
                         } label: {
                             CategoryCell(category: category)
                         }
-
-                        
                     }
                 }
             }
-//            .sheet(isPresented: $showingSheet) {
-//                AddCategoryView()
-//            }
+            .sheet(isPresented: $isShowindEdit) {
+                EditCategoryView()
+            }
             .toolbar {
                 ToolbarItem(placement: .navigation) {
                     NavigationToolbarView(imageName: "briefcase", title: "Categories")
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(action: didTapAdd) {
+                        Image(systemName: "plus")
+                            .foregroundColor(.brand)
+                    }
                 }
             }
         }
     }
     
     func didTapAdd() {
-        
-    }
-}
-
-struct CategoryCell: View {
-    let category: Category
-    
-    var body: some View {
-        HStack {
-            if let icon = category.icon {
-                ImageIconView(image: Image(systemName: icon), color: Color(hex: category.color))
-            } else {
-                LettersIconView(text: category.name, color: Color(hex: category.color))
-            }
-            VStack(alignment: .leading) {
-                Text(category.name)
-                    .font(.headline)
-                Text("R$ \(category.total.formatted())")
-                    .font(.subheadline)
-            }
-        }
+        isShowindEdit = true
     }
 }
 

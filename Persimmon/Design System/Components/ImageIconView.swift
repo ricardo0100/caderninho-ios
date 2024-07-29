@@ -10,22 +10,19 @@ import SwiftUI
 struct ImageIconView: View {
     let image: Image
     let color: Color
+    let size: CGFloat
     
     var body: some View {
-        ZStack {
-            Circle()
-                .stroke(color, lineWidth: 1)
-            image
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 16, height: 16)
-                .foregroundColor(color)
-        }.frame(width: 42, height: 42)
+        image
+            .resizable()
+            .symbolRenderingMode(.multicolor)
+            .foregroundStyle(color)
+            .aspectRatio(contentMode: .fit)
+            .frame(width: size, height: size)
     }
 }
 
-struct ImageIconView_Previews: PreviewProvider {
-    static var previews: some View {
-        ImageIconView(image: Image(systemName: "bag"), color: .primary)
-    }
+#Preview {
+    ImageIconView(image: Image(systemName: "dog.fill"), color: NiceColor.orange.color, size: 32)
+    ImageIconView(image: Image(systemName: "rainbow"), color: NiceColor.orange.color, size: 32)
 }

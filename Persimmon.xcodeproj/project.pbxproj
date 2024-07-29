@@ -31,6 +31,9 @@
 		CF7A804F2A0DBAE20067F5A8 /* ImageIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A804E2A0DBAE20067F5A8 /* ImageIconView.swift */; };
 		CF8104522C037BE4009599B8 /* ProcessInfo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8104512C037BE4009599B8 /* ProcessInfo+Extension.swift */; };
 		CF95BC162C566EED00C8C1CE /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC152C566EE900C8C1CE /* Category.swift */; };
+		CF95BC1A2C5675DE00C8C1CE /* NiceIconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC192C5675DE00C8C1CE /* NiceIconPicker.swift */; };
+		CF95BC1C2C57C55800C8C1CE /* CategoryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC1B2C57C54D00C8C1CE /* CategoryCellView.swift */; };
+		CF95BC1F2C58188600C8C1CE /* CategoryDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC1E2C58188600C8C1CE /* CategoryDetails.swift */; };
 		CF9D2A722A0996800003DC39 /* NiceColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9D2A712A09967F0003DC39 /* NiceColorPicker.swift */; };
 		CFA1DE5E2A0C32B20055E3CD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFA1DE5D2A0C32B20055E3CD /* WidgetKit.framework */; };
 		CFA1DE602A0C32B20055E3CD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFA1DE5F2A0C32B20055E3CD /* SwiftUI.framework */; };
@@ -58,7 +61,7 @@
 		CFE6D7BF2BA9B4C000E76AB8 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE6D7BE2BA9B4C000E76AB8 /* Transaction.swift */; };
 		CFE6D7C02BA9CAE800E76AB8 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF44BE322A0FB55A0006019F /* Spacing.swift */; };
 		CFE6D7C22BA9DB2F00E76AB8 /* BudgetPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1624CE2A0BBC02008C441F /* BudgetPanel.swift */; };
-		CFF292A62A13B8FE00C1A66A /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF292A52A13B8FE00C1A66A /* AddCategoryView.swift */; };
+		CFF292A62A13B8FE00C1A66A /* EditCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF292A52A13B8FE00C1A66A /* EditCategoryView.swift */; };
 		CFF292A82A13B93F00C1A66A /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF292A72A13B93F00C1A66A /* EditAccountView.swift */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +111,9 @@
 		CF7A804E2A0DBAE20067F5A8 /* ImageIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIconView.swift; sourceTree = "<group>"; };
 		CF8104512C037BE4009599B8 /* ProcessInfo+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+Extension.swift"; sourceTree = "<group>"; };
 		CF95BC152C566EE900C8C1CE /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		CF95BC192C5675DE00C8C1CE /* NiceIconPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiceIconPicker.swift; sourceTree = "<group>"; };
+		CF95BC1B2C57C54D00C8C1CE /* CategoryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellView.swift; sourceTree = "<group>"; };
+		CF95BC1E2C58188600C8C1CE /* CategoryDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetails.swift; sourceTree = "<group>"; };
 		CF9D2A712A09967F0003DC39 /* NiceColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiceColorPicker.swift; sourceTree = "<group>"; };
 		CFA1DE5B2A0C32B20055E3CD /* BudgetWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BudgetWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFA1DE5D2A0C32B20055E3CD /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -134,7 +140,7 @@
 		CFE563582C3F4F9500F8EA72 /* CLLocationCoordinate2D+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extension.swift"; sourceTree = "<group>"; };
 		CFE6D7BC2BA9277500E76AB8 /* LabeledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledView.swift; sourceTree = "<group>"; };
 		CFE6D7BE2BA9B4C000E76AB8 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
-		CFF292A52A13B8FE00C1A66A /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
+		CFF292A52A13B8FE00C1A66A /* EditCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryView.swift; sourceTree = "<group>"; };
 		CFF292A72A13B93F00C1A66A /* EditAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -263,8 +269,9 @@
 		CF7A80472A0DAC480067F5A8 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				CF95BC1D2C58187100C8C1CE /* Category Details */,
 				CF95BC172C56705A00C8C1CE /* Categories List */,
-				CFF292A52A13B8FE00C1A66A /* AddCategoryView.swift */,
+				CF95BC182C56745300C8C1CE /* Edit Category */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -272,9 +279,26 @@
 		CF95BC172C56705A00C8C1CE /* Categories List */ = {
 			isa = PBXGroup;
 			children = (
+				CF95BC1B2C57C54D00C8C1CE /* CategoryCellView.swift */,
 				CF7A80482A0DAC580067F5A8 /* CategoriesListView.swift */,
 			);
 			path = "Categories List";
+			sourceTree = "<group>";
+		};
+		CF95BC182C56745300C8C1CE /* Edit Category */ = {
+			isa = PBXGroup;
+			children = (
+				CFF292A52A13B8FE00C1A66A /* EditCategoryView.swift */,
+			);
+			path = "Edit Category";
+			sourceTree = "<group>";
+		};
+		CF95BC1D2C58187100C8C1CE /* Category Details */ = {
+			isa = PBXGroup;
+			children = (
+				CF95BC1E2C58188600C8C1CE /* CategoryDetails.swift */,
+			);
+			path = "Category Details";
 			sourceTree = "<group>";
 		};
 		CFA1DE4F2A0BCA340055E3CD /* Design System */ = {
@@ -346,6 +370,7 @@
 				CFE6D7BC2BA9277500E76AB8 /* LabeledView.swift */,
 				CF15B3492BAC3D1200E8E050 /* NavigationToolbarView.swift */,
 				CF72A07E2BB9FB9900E0FDB1 /* CurrencyTextField.swift */,
+				CF95BC192C5675DE00C8C1CE /* NiceIconPicker.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -502,6 +527,7 @@
 				CF2CB0BB2A06FC3E00CBA434 /* ContainerView.swift in Sources */,
 				CF44BE332A0FB55A0006019F /* Spacing.swift in Sources */,
 				CF72A07F2BB9FB9900E0FDB1 /* CurrencyTextField.swift in Sources */,
+				CF95BC1F2C58188600C8C1CE /* CategoryDetails.swift in Sources */,
 				CF7A80492A0DAC580067F5A8 /* CategoriesListView.swift in Sources */,
 				CF2CB0C02A06FD9700CBA434 /* Color+Extension.swift in Sources */,
 				CF2CB0A52A06F8D600CBA434 /* PersimmonApp.swift in Sources */,
@@ -524,7 +550,8 @@
 				CFF292A82A13B93F00C1A66A /* EditAccountView.swift in Sources */,
 				CFB7F56E2BC02A47009956E9 /* Date+Extension.swift in Sources */,
 				CFDC219E2BAF29AF00295432 /* SelectAccountView.swift in Sources */,
-				CFF292A62A13B8FE00C1A66A /* AddCategoryView.swift in Sources */,
+				CF95BC1C2C57C55800C8C1CE /* CategoryCellView.swift in Sources */,
+				CFF292A62A13B8FE00C1A66A /* EditCategoryView.swift in Sources */,
 				CFA1DE6D2A0C32B50055E3CD /* BudgetWidget.intentdefinition in Sources */,
 				CF15B34A2BAC3D1200E8E050 /* NavigationToolbarView.swift in Sources */,
 				CFBEE2412A07F9A000586164 /* AccountsListView.swift in Sources */,
@@ -536,6 +563,7 @@
 				CFE563592C3F4F9B00F8EA72 /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				CF15B35C2BAE006600E8E050 /* TransactionDetailsView.swift in Sources */,
 				CFE563552C3F433B00F8EA72 /* SelectLocationViewModel.swift in Sources */,
+				CF95BC1A2C5675DE00C8C1CE /* NiceIconPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

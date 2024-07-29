@@ -9,10 +9,6 @@ import SwiftData
     
     @Relationship(deleteRule: .cascade) var transactions: [Transaction] = []
     
-    @Attribute(.ephemeral) var total: Double {
-        transactions.map { $0.value }.reduce(0, +)
-    }
-    
     init(id: UUID, name: String, color: String, icon: String?) {
         self.id = id
         self.name = name

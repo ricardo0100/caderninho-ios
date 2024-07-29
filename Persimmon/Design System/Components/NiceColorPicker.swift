@@ -64,16 +64,11 @@ struct NiceColorPicker: View {
                 }
             }
         }
+        .padding()
     }
 }
 
-struct NiceColorPicker_Previews: PreviewProvider {
-    @State static var selected: NiceColor = .red
-    
-    static var previews: some View {
-        VStack {
-            NiceColorPicker(selected: $selected)
-            Text(selected.rawValue)
-        }
-    }
+#Preview {
+    @Previewable @State var selected: NiceColor = .red
+    NiceColorPicker(selected: $selected)
 }

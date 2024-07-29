@@ -13,10 +13,10 @@ struct ContainerView: View {
                 .tabItem {
                     Label("Accounts", systemImage: "creditcard")
                 }
-//            CategoriesView()
-//                .tabItem {
-//                    Label("Categories", systemImage: "briefcase")
-//                }
+            CategoriesListView()
+                .tabItem {
+                    Label("Categories", systemImage: "briefcase")
+                }
         }.tint(Color.brand)
     }
 }

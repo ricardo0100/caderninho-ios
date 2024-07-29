@@ -31,11 +31,11 @@ class DataController {
                         longitude: -48.510450))
     }
 
-    static func createRandomCategory() -> Category {
+    static func createRandomCategory(withIcon: Bool = false) -> Category {
         Category(id: UUID(),
                  name: categoryNameExamples.randomElement()!,
                  color: NiceColor.allCases.randomElement()!.rawValue,
-                 icon: nil)
+                 icon: withIcon ? NiceIcon.allCases.randomElement()!.rawValue : nil)
     }
 
     static let previewContainer: ModelContainer = {
