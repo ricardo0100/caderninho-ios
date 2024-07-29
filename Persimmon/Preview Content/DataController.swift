@@ -20,7 +20,7 @@ class DataController {
                     name: transactionNameExamples.randomElement()!,
                     value: Double((1...999).randomElement()!),
                     account: createRandomAccount(),
-                    category: createRandomCategory(),
+                    category: createRandomCategory(withIcon: true),
                     date: Date(),
                     type: .buyDebit,
                     place: Transaction.Place(
@@ -56,7 +56,7 @@ class DataController {
                 Category(id: UUID(),
                          name: $0,
                          color: NiceColor.allCases.randomElement()!.rawValue,
-                         icon: nil)
+                         icon: NiceIcon.allCases.randomElement()!.rawValue)
             }
             categories.forEach { container.mainContext.insert($0) }
 

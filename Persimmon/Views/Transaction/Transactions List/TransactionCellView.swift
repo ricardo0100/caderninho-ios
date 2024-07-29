@@ -12,6 +12,9 @@ struct TransactionCellView: View {
                 .frame(width: 24, height: 24)
             VStack(alignment: .leading, spacing: .spacingSmall) {
                 HStack {
+                    if let category = transaction.category, let icon = category.icon {
+                        ImageIconView(image: Image(systemName: icon), color: Color(hex: category.color), size: 14)
+                    }
                     Text(transaction.name)
                         .font(.headline)
                     Spacer()

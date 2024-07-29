@@ -35,6 +35,12 @@ struct TransactionDetailsView: View {
                     Text(transaction.value.toCurrency(with: transaction.account.currency)).font(.title3)
                 }
                 
+                if let category = transaction.category {
+                    LabeledView(labelText: "Category") {
+                        CategoryCell(category: category)
+                    }
+                }
+                
                 LabeledView(labelText: "Date") {
                     Text(transaction.date.formatted(date: .complete, time: .shortened)).font(.subheadline)
                 }

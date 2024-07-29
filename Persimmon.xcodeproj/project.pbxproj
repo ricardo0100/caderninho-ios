@@ -34,6 +34,7 @@
 		CF95BC1A2C5675DE00C8C1CE /* NiceIconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC192C5675DE00C8C1CE /* NiceIconPicker.swift */; };
 		CF95BC1C2C57C55800C8C1CE /* CategoryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC1B2C57C54D00C8C1CE /* CategoryCellView.swift */; };
 		CF95BC1F2C58188600C8C1CE /* CategoryDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC1E2C58188600C8C1CE /* CategoryDetails.swift */; };
+		CF95BC222C581C1200C8C1CE /* SelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC212C581C0C00C8C1CE /* SelectCategoryView.swift */; };
 		CF9D2A722A0996800003DC39 /* NiceColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9D2A712A09967F0003DC39 /* NiceColorPicker.swift */; };
 		CFA1DE5E2A0C32B20055E3CD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFA1DE5D2A0C32B20055E3CD /* WidgetKit.framework */; };
 		CFA1DE602A0C32B20055E3CD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFA1DE5F2A0C32B20055E3CD /* SwiftUI.framework */; };
@@ -114,6 +115,7 @@
 		CF95BC192C5675DE00C8C1CE /* NiceIconPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiceIconPicker.swift; sourceTree = "<group>"; };
 		CF95BC1B2C57C54D00C8C1CE /* CategoryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellView.swift; sourceTree = "<group>"; };
 		CF95BC1E2C58188600C8C1CE /* CategoryDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetails.swift; sourceTree = "<group>"; };
+		CF95BC212C581C0C00C8C1CE /* SelectCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryView.swift; sourceTree = "<group>"; };
 		CF9D2A712A09967F0003DC39 /* NiceColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiceColorPicker.swift; sourceTree = "<group>"; };
 		CFA1DE5B2A0C32B20055E3CD /* BudgetWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BudgetWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFA1DE5D2A0C32B20055E3CD /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -269,6 +271,7 @@
 		CF7A80472A0DAC480067F5A8 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				CF95BC202C581BFF00C8C1CE /* Select Category */,
 				CF95BC1D2C58187100C8C1CE /* Category Details */,
 				CF95BC172C56705A00C8C1CE /* Categories List */,
 				CF95BC182C56745300C8C1CE /* Edit Category */,
@@ -299,6 +302,14 @@
 				CF95BC1E2C58188600C8C1CE /* CategoryDetails.swift */,
 			);
 			path = "Category Details";
+			sourceTree = "<group>";
+		};
+		CF95BC202C581BFF00C8C1CE /* Select Category */ = {
+			isa = PBXGroup;
+			children = (
+				CF95BC212C581C0C00C8C1CE /* SelectCategoryView.swift */,
+			);
+			path = "Select Category";
 			sourceTree = "<group>";
 		};
 		CFA1DE4F2A0BCA340055E3CD /* Design System */ = {
@@ -539,6 +550,7 @@
 				CF15B3612BAE5BD600E8E050 /* TransactionCellView.swift in Sources */,
 				CF15B3532BACEBC500E8E050 /* Double+Extension.swift in Sources */,
 				CFE6D7BD2BA9277500E76AB8 /* LabeledView.swift in Sources */,
+				CF95BC222C581C1200C8C1CE /* SelectCategoryView.swift in Sources */,
 				CF8104522C037BE4009599B8 /* ProcessInfo+Extension.swift in Sources */,
 				CF7A804F2A0DBAE20067F5A8 /* ImageIconView.swift in Sources */,
 				CFB7F5612BBEBFE6009956E9 /* SelectTransactionTypeView.swift in Sources */,

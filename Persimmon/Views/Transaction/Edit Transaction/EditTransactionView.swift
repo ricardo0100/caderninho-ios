@@ -12,6 +12,7 @@ struct EditTransactionView: View {
     @State var account: Account?
     @State var accountError: String? = ""
     @State var value: Double
+    @State var category: Category?
     @State var type: Transaction.TransactionType
     @State var date: Date
     @State var place: Transaction.Place?
@@ -19,11 +20,12 @@ struct EditTransactionView: View {
     init(transaction: Transaction?) {
         self.transaction = transaction
         _name = State(initialValue: transaction?.name ?? "")
-        _account = State(initialValue: transaction?.account ?? nil)
+        _account = State(initialValue: transaction?.account)
         _value = State(initialValue: transaction?.value ?? .zero)
+        _category = State(initialValue: transaction?.category)
         _type = State(initialValue: transaction?.type ?? .buyCredit)
         _date = State(initialValue: transaction?.date ?? Date())
-        _place = State(initialValue: transaction?.place ?? nil)
+        _place = State(initialValue: transaction?.place)
     }
     
     var body: some View {
@@ -52,7 +54,8 @@ struct EditTransactionView: View {
                             if let account = account {
                                 HStack(spacing: .spacingSmall) {
                                     LettersIconView(text: account.name.firstLetters(),
-                                                    color: Color(hex: account.color))
+                                                    color: Color(hex: account.color),
+                                                    size: 38)
                                     Text(account.name)
                                 }
                             } else {
@@ -63,7 +66,20 @@ struct EditTransactionView: View {
                     
                     LabeledView(labelText: "Value") {
                         CurrencyTextField(currency: account?.currency ?? "",
-                                          value: $value)
+                                          value: $value,
+                                          font: .title2)
+                    }
+                    
+                    LabeledView(labelText: "Category") {
+                        NavigationLink {
+                            SelectCategoryView(selected: $category)
+                        } label: {
+                            if let category = category {
+                                CategoryCell(category: category)
+                            } else {
+                                Text("Select category").foregroundColor(.secondary)
+                            }
+                        }
                     }
                     
                     LabeledView(labelText: "Date and Time") {
@@ -105,6 +121,7 @@ struct EditTransactionView: View {
                 }
             }
         }
+        .tint(.brand)
     }
     
     func didTapCancel() {
@@ -138,6 +155,7 @@ struct EditTransactionView: View {
         if let transaction = transaction {
             transaction.name = name
             transaction.account = account
+            transaction.category = category
             transaction.value = value
             transaction.date = date
             transaction.place = place
@@ -147,7 +165,7 @@ struct EditTransactionView: View {
                 name: name,
                 value: value,
                 account: account,
-                category: nil,
+                category: category,
                 date: date,
                 type: type,
                 place: place)
