@@ -7,6 +7,7 @@ struct PersimmonApp: App {
         WindowGroup {
             ContainerView()
                 .modelContainer(for: [Account.self,
+                                      Category.self,
                                       Transaction.self])
         }
     }

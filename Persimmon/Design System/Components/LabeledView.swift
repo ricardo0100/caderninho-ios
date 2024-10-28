@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 struct LabeledView<Content: View>: View {
     let labelText: String
     @Binding var error: String?
@@ -30,12 +29,10 @@ struct LabeledView<Content: View>: View {
     }
 }
 
-struct LabeledView_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            LabeledView(labelText: "Label", error: .constant("Error message")) {
-                Text("Hello World!")
-            }
+#Preview {
+    List {
+        LabeledView(labelText: "Label", error: .constant("Error message")) {
+            Text("Hello World!")
         }
     }
 }

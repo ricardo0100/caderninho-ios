@@ -17,8 +17,8 @@ struct CurrencyTextField: View {
         TextField("Hey", text: $text)
             .font(font)
             .keyboardType(.decimalPad)
-            .onChange(of: text) { newValue in
-                self.text = currencyFormattedNumber(newValue, currency: currency)
+            .onChange(of: text) {
+                self.text = currencyFormattedNumber(text, currency: currency)
                 self.value = doubleValueFromCurrencyString(self.text)
             }
             .onAppear {
