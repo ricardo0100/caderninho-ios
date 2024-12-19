@@ -2,7 +2,7 @@ import Foundation
 import CoreLocation
 import SwiftData
 
-@Model class Transaction {
+@Model class Transaction: ObservableObject {
     @Attribute(.unique) var id: UUID
     
     @Relationship(deleteRule: .noAction, inverse: \Account.transactions)

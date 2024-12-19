@@ -6,6 +6,7 @@ struct EditTransactionView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     private let transaction: Transaction?
+    @State var showDeleteAlert = false
     
     @State var name: String
     @State var nameError: String? = ""
@@ -75,7 +76,7 @@ struct EditTransactionView: View {
                             SelectCategoryView(selected: $category)
                         } label: {
                             if let category = category {
-                                CategoryCell(category: category)
+                                CategoryCell().environmentObject(category)
                             } else {
                                 Text("Select category").foregroundColor(.secondary)
                             }
@@ -111,7 +112,24 @@ struct EditTransactionView: View {
                         }
                     }
                 }
+                
+                Section {
+                    Button("Delete Transaction") {
+                        showDeleteAlert = true
+                    }.tint(.red)
+                }
             }
+            .confirmationDialog("Delete?", isPresented: $showDeleteAlert, actions: {
+                Button("Delete") {
+                    guard let transaction else { return }
+                    modelContext.delete(transaction)
+                    try? modelContext.save()
+                    dismiss()
+                }.tint(.red)
+                Button("Cancel") {
+                    showDeleteAlert = false
+                }
+            })
             .toolbar {
                 ToolbarItem(placement: .navigation) {
                     Button("Cancel", action: didTapCancel)

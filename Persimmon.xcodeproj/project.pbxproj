@@ -58,6 +58,7 @@
 		CFE563522C34C95100F8EA72 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE563512C34C94700F8EA72 /* DataController.swift */; };
 		CFE563552C3F433B00F8EA72 /* SelectLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE563542C3F433400F8EA72 /* SelectLocationViewModel.swift */; };
 		CFE563592C3F4F9B00F8EA72 /* CLLocationCoordinate2D+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE563582C3F4F9500F8EA72 /* CLLocationCoordinate2D+Extension.swift */; };
+		CFE61F0A2CD6E887002B1AA7 /* ConfigurationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE61F092CD6E87D002B1AA7 /* ConfigurationsView.swift */; };
 		CFE6D7BD2BA9277500E76AB8 /* LabeledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE6D7BC2BA9277500E76AB8 /* LabeledView.swift */; };
 		CFE6D7BF2BA9B4C000E76AB8 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE6D7BE2BA9B4C000E76AB8 /* Transaction.swift */; };
 		CFE6D7C02BA9CAE800E76AB8 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF44BE322A0FB55A0006019F /* Spacing.swift */; };
@@ -140,6 +141,7 @@
 		CFE563512C34C94700F8EA72 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		CFE563542C3F433400F8EA72 /* SelectLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewModel.swift; sourceTree = "<group>"; };
 		CFE563582C3F4F9500F8EA72 /* CLLocationCoordinate2D+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extension.swift"; sourceTree = "<group>"; };
+		CFE61F092CD6E87D002B1AA7 /* ConfigurationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationsView.swift; sourceTree = "<group>"; };
 		CFE6D7BC2BA9277500E76AB8 /* LabeledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledView.swift; sourceTree = "<group>"; };
 		CFE6D7BE2BA9B4C000E76AB8 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		CFF292A52A13B8FE00C1A66A /* EditCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryView.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 		CFBEE24B2A081DFC00586164 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				CFB7F56A2BC0228B009956E9 /* SelectDateView.swift */,
 				CFBEE2522A08471100586164 /* PizzaGraphicView.swift */,
 				CFBEE2492A081B7100586164 /* LettersIconView.swift */,
 				CF9D2A712A09967F0003DC39 /* NiceColorPicker.swift */,
@@ -393,6 +396,7 @@
 				CFB7F5782BC0AE17009956E9 /* Location */,
 				CF2CB0B52A06FBCC00CBA434 /* Transaction */,
 				CFBEE23F2A07F98E00586164 /* Account */,
+				CFE61F082CD6E872002B1AA7 /* Configurations */,
 				CF7A80472A0DAC480067F5A8 /* Category */,
 			);
 			path = Views;
@@ -403,7 +407,6 @@
 			children = (
 				CFDC21962BAF094000295432 /* EditTransactionView.swift */,
 				CFB7F5602BBEBFE6009956E9 /* SelectTransactionTypeView.swift */,
-				CFB7F56A2BC0228B009956E9 /* SelectDateView.swift */,
 			);
 			path = "Edit Transaction";
 			sourceTree = "<group>";
@@ -414,6 +417,14 @@
 				CFDC219D2BAF29AF00295432 /* SelectAccountView.swift */,
 			);
 			path = "Select Account";
+			sourceTree = "<group>";
+		};
+		CFE61F082CD6E872002B1AA7 /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				CFE61F092CD6E87D002B1AA7 /* ConfigurationsView.swift */,
+			);
+			path = Configurations;
 			sourceTree = "<group>";
 		};
 		CFE6D7B82BA62D0400E76AB8 /* Accounts List */ = {
@@ -480,7 +491,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1620;
 				TargetAttributes = {
 					CF2CB0A02A06F8D600CBA434 = {
 						CreatedOnToolsVersion = 14.2;
@@ -562,6 +573,7 @@
 				CFF292A82A13B93F00C1A66A /* EditAccountView.swift in Sources */,
 				CFB7F56E2BC02A47009956E9 /* Date+Extension.swift in Sources */,
 				CFDC219E2BAF29AF00295432 /* SelectAccountView.swift in Sources */,
+				CFE61F0A2CD6E887002B1AA7 /* ConfigurationsView.swift in Sources */,
 				CF95BC1C2C57C55800C8C1CE /* CategoryCellView.swift in Sources */,
 				CFF292A62A13B8FE00C1A66A /* EditCategoryView.swift in Sources */,
 				CFA1DE6D2A0C32B50055E3CD /* BudgetWidget.intentdefinition in Sources */,
@@ -642,6 +654,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -702,6 +715,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -723,7 +737,6 @@
 		CF2CB0B02A06F8D900CBA434 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -756,7 +769,6 @@
 		CF2CB0B12A06F8D900CBA434 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;

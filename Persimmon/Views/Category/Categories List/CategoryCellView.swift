@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct CategoryCell: View {
-    let category: Category
+    @EnvironmentObject var category: Category
     
     var body: some View {
         HStack {
@@ -24,7 +24,7 @@ struct CategoryCell: View {
 
 #Preview {
     List {
-        CategoryCell(category: DataController.createRandomCategory())
-        CategoryCell(category: DataController.createRandomCategory(withIcon: true))
+        CategoryCell().environmentObject(DataController.createRandomCategory())
+        CategoryCell().environmentObject(DataController.createRandomCategory(withIcon: true))
     }
 }

@@ -10,6 +10,7 @@ struct EditCategoryView: View {
     @State var isShowingIconPicker = false
     @State var niceColor: NiceColor = .gray
     @State var niceIcon: NiceIcon? = nil
+    @State var showDeleteAlert = false
     
     var body: some View {
         NavigationStack {
@@ -37,6 +38,11 @@ struct EditCategoryView: View {
                 }.onTapGesture {
                     isShowingIconPicker = true
                 }
+                Section {
+                    Button("Delete account") {
+                        showDeleteAlert = true
+                    }.tint(.red)
+                }
             }
             .sheet(isPresented: $isShowingColorPicker) {
                 NavigationStack {
@@ -56,6 +62,17 @@ struct EditCategoryView: View {
                     Button("Cancel", action: didTapCancel)
                 }
             }
+            .confirmationDialog("Delete?", isPresented: $showDeleteAlert, actions: {
+                Button("Delete") {
+                    guard let category else { return }
+                    modelContext.delete(category)
+                    try? modelContext.save()
+                    dismiss()
+                }.tint(.red)
+                Button("Cancel") {
+                    showDeleteAlert = false
+                }
+            })
             .onAppear {
                 if let category = category {
                     name = category.name

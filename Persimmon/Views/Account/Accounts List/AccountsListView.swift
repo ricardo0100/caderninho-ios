@@ -10,8 +10,9 @@ struct AccountsListView: View {
     var body: some View {
         NavigationStack {
             List(accounts) { account in
-                NavigationLink(destination: AccountDetailsView(account: account)) {
-                    AccountCellView(account: account)
+                NavigationLink(destination: AccountDetailsView().environmentObject(account)) {
+                    AccountCellView()
+                        .environmentObject(account)
                         .onLongPressGesture {
                             self.editingAccount = account
                             isShowindEdit = true

@@ -9,7 +9,8 @@ struct SelectCategoryView: View {
     
     var body: some View {
         List(categories, id: \.self, selection: $selected) { category in
-            CategoryCell(category: category)
+            CategoryCell()
+            .environmentObject(category)
             .onTapGesture {
                 didSelect(category: category)
             }

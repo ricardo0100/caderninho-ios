@@ -9,12 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct CategoryDetails: View {
-    @State var category: Category
+    @EnvironmentObject var category: Category
     @State var isShowindEdit: Bool = false
-    
-    init(category: Category) {
-        self.category = category
-    }
     
     var body: some View {
         List {
@@ -24,9 +20,9 @@ struct CategoryDetails: View {
                 } else {
                     ForEach(category.transactions) { transaction in
                         NavigationLink(destination: {
-                            TransactionDetailsView(transaction: transaction)
+                            TransactionDetailsView().environmentObject(transaction)
                         }) {
-                            TransactionCellView(transaction: transaction)
+                            TransactionCellView().environmentObject(transaction)
                         }
                     }
                 }
@@ -58,13 +54,14 @@ struct CategoryDetails: View {
         .sheet(isPresented: $isShowindEdit) {
             EditCategoryView(category: category)
         }
-        .tint(.brand)
+        
     }
 }
 
 #Preview {
     NavigationStack {
-        CategoryDetails(category: DataController.createRandomCategory(withIcon: true))
+        CategoryDetails()
+            .environmentObject(DataController.createRandomCategory(withIcon: true))
             .modelContainer(DataController.previewContainer)
     }
 }

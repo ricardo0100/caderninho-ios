@@ -1,8 +1,11 @@
 import SwiftUI
+import SwiftData
 import MapKit
 
 struct TransactionDetailsView: View {
-    @State var transaction: Transaction
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var transaction: Transaction
     @State var editingTransaction: Transaction?
     
     var body: some View {
@@ -37,7 +40,8 @@ struct TransactionDetailsView: View {
                 
                 if let category = transaction.category {
                     LabeledView(labelText: "Category") {
-                        CategoryCell(category: category)
+                        CategoryCell()
+                            .environmentObject(category)
                     }
                 }
                 
@@ -61,6 +65,7 @@ struct TransactionDetailsView: View {
                     }
                 }
             } header: {
+                //TODO: Move map to own View
                 if let place = transaction.place, let coordinate = place.location?.coordinate {
                         Map(bounds: MapCameraBounds(minimumDistance: 500)) {
                             Marker(place.title ?? "", coordinate: coordinate)
@@ -83,6 +88,11 @@ struct TransactionDetailsView: View {
         .sheet(item: $editingTransaction) {
             EditTransactionView(transaction: $0)
         }
+        .onChange(of: editingTransaction) {
+            if transaction.modelContext == nil {
+                dismiss()
+            }
+        }
     }
     
     func didTapEdit() {
@@ -92,6 +102,7 @@ struct TransactionDetailsView: View {
 
 #Preview {
     NavigationStack {
-        TransactionDetailsView(transaction: DataController.createRandomTransaction())
+        TransactionDetailsView()
+            .environmentObject(DataController.createRandomTransaction())
     }
 }

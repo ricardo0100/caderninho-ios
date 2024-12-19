@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftData
 
 struct AccountDetailsView: View {
-    @State var account: Account
+    @EnvironmentObject var account: Account
     @State var isShowingEdit: Bool = false
     
     var body: some View {
@@ -11,9 +11,9 @@ struct AccountDetailsView: View {
                 if account.transactions.count > 0 {
                     ForEach(account.transactions) { transaction in
                         NavigationLink(destination: {
-                            TransactionDetailsView(transaction: transaction)
+                            TransactionDetailsView().environmentObject(transaction)
                         }) {
-                            TransactionCellView(transaction: transaction)
+                            TransactionCellView().environmentObject(transaction)
                         }
                     }
                 } else {
@@ -51,6 +51,7 @@ struct AccountDetailsView: View {
 
 #Preview {
     NavigationStack {
-        AccountDetailsView(account: DataController.createRandomAccount())
+        AccountDetailsView()
+            .environmentObject(DataController.createRandomAccount())
     }
 }

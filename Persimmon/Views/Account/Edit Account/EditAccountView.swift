@@ -12,6 +12,7 @@ struct EditAccountView: View {
     @State var currency = ""
     @State var currencyErroMessage: String?
     @State var niceColor: NiceColor = .gray
+    @State var showDeleteAlert = false
     
     var body: some View {
         NavigationStack {
@@ -30,6 +31,11 @@ struct EditAccountView: View {
                 }.onTapGesture {
                     isShowingColorPicker = true
                 }
+                Section {
+                    Button("Delete account") {
+                        showDeleteAlert = true
+                    }.tint(.red)
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
@@ -42,6 +48,17 @@ struct EditAccountView: View {
             .sheet(isPresented: $isShowingColorPicker) {
                 NiceColorPicker(selected: $niceColor).padding()
             }
+            .confirmationDialog("Delete?", isPresented: $showDeleteAlert, actions: {
+                Button("Delete") {
+                    guard let account else { return }
+                    modelContext.delete(account)
+                    try? modelContext.save()
+                    dismiss()
+                }.tint(.red)
+                Button("Cancel") {
+                    showDeleteAlert = false
+                }
+            })
         }.onAppear {
             guard let account = account else { return }
             name = account.name

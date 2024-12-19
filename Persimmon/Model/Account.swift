@@ -1,7 +1,7 @@
 import Foundation
 import SwiftData
 
-@Model class Account {
+@Model class Account: ObservableObject {
     @Attribute(.unique) var id: UUID
     var name: String
     var color: String
@@ -9,7 +9,7 @@ import SwiftData
     
     @Relationship(deleteRule: .cascade) var transactions: [Transaction] = []
     
-    @Attribute(.ephemeral) var balance: Double {
+    @Transient var balance: Double {
         transactions.map { $0.value }.reduce(0, +)
     }
     

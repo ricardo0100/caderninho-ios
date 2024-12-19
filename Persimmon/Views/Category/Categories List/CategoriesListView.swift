@@ -13,9 +13,9 @@ struct CategoriesListView: View {
                 Section {
                     ForEach(categories) { category in
                         NavigationLink {
-                            CategoryDetails(category: category)
+                            CategoryDetails().environmentObject(category)
                         } label: {
-                            CategoryCell(category: category)
+                            CategoryCell().environmentObject(category)
                         }
                     }
                 }

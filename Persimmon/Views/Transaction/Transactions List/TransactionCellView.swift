@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftData
 
 struct TransactionCellView: View {
-    let transaction: Transaction
+    @EnvironmentObject var transaction: Transaction
     
     var body: some View {
         HStack(spacing: .spacingSmall) {
@@ -53,8 +53,9 @@ struct TransactionCellView: View {
 
 #Preview {
     List {
-        TransactionCellView(transaction: DataController.createRandomTransaction())
-        TransactionCellView(transaction: DataController.createRandomTransaction())
-        TransactionCellView(transaction: DataController.createRandomTransaction())
+        TransactionCellView().environmentObject(DataController.createRandomTransaction())
+        TransactionCellView().environmentObject(DataController.createRandomTransaction())
+        TransactionCellView().environmentObject(DataController.createRandomTransaction())
+        TransactionCellView().environmentObject(DataController.createRandomTransaction())
     }
 }

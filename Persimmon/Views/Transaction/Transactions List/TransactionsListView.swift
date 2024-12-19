@@ -12,12 +12,22 @@ struct TransactionsListView: View {
         NavigationStack {
             List(transactions) { transaction in
                 NavigationLink {
-                    TransactionDetailsView(transaction: transaction)
+                    TransactionDetailsView().environmentObject(transaction)
                 } label: {
-                    TransactionCellView(transaction: transaction)
+                    TransactionCellView().environmentObject(transaction)
                         .onLongPressGesture {
                             editingTransaction = transaction
                         }
+                }
+            }
+            .overlay {
+                if transactions.isEmpty {
+                    VStack {
+                        Text("oops! No transactions yet")
+                        Button("Add transaction") {
+                            didTapAdd()
+                        }
+                    }
                 }
             }
             .toolbar {

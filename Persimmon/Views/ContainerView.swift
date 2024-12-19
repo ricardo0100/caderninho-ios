@@ -17,6 +17,10 @@ struct ContainerView: View {
                 .tabItem {
                     Label("Categories", systemImage: "briefcase")
                 }
+            ConfigurationsView()
+                .tabItem {
+                    Label("Configuration", systemImage: "gear")
+                }
         }.tint(Color.brand)
     }
 }

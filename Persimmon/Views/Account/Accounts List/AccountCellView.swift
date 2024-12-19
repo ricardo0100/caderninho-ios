@@ -2,7 +2,7 @@ import SwiftUI
 import SwiftData
 
 struct AccountCellView: View {
-    let account: Account
+    @EnvironmentObject var account: Account
     
     var body: some View {
         HStack {
@@ -22,8 +22,8 @@ struct AccountCellView: View {
 
 #Preview {
     List {
-        AccountCellView(account: DataController.createRandomAccount())
-        AccountCellView(account: DataController.createRandomAccount())
-        AccountCellView(account: DataController.createRandomAccount())
+        AccountCellView().environmentObject(DataController.createRandomAccount())
+        AccountCellView().environmentObject(DataController.createRandomAccount())
+        AccountCellView().environmentObject(DataController.createRandomAccount())
     }
 }
