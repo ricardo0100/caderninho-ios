@@ -31,10 +31,12 @@ struct EditAccountView: View {
                 }.onTapGesture {
                     isShowingColorPicker = true
                 }
-                Section {
-                    Button("Delete account") {
-                        showDeleteAlert = true
-                    }.tint(.red)
+                if account != nil {
+                    Section {
+                        Button("Delete account") {
+                            showDeleteAlert = true
+                        }.tint(.red)
+                    }
                 }
             }
             .toolbar {

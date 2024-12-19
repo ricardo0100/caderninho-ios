@@ -112,11 +112,12 @@ struct EditTransactionView: View {
                         }
                     }
                 }
-                
-                Section {
-                    Button("Delete Transaction") {
-                        showDeleteAlert = true
-                    }.tint(.red)
+                if transaction != nil {
+                    Section {
+                        Button("Delete Transaction") {
+                            showDeleteAlert = true
+                        }.tint(.red)
+                    }
                 }
             }
             .confirmationDialog("Delete?", isPresented: $showDeleteAlert, actions: {

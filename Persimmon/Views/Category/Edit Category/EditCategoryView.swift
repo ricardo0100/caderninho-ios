@@ -38,10 +38,12 @@ struct EditCategoryView: View {
                 }.onTapGesture {
                     isShowingIconPicker = true
                 }
-                Section {
-                    Button("Delete account") {
-                        showDeleteAlert = true
-                    }.tint(.red)
+                if category != nil {
+                    Section {
+                        Button("Delete account") {
+                            showDeleteAlert = true
+                        }.tint(.red)
+                    }
                 }
             }
             .sheet(isPresented: $isShowingColorPicker) {
