@@ -14,6 +14,8 @@
 		CF15B35C2BAE006600E8E050 /* TransactionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B35B2BAE006600E8E050 /* TransactionDetailsView.swift */; };
 		CF15B3612BAE5BD600E8E050 /* TransactionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B3602BAE5BD600E8E050 /* TransactionCellView.swift */; };
 		CF1624CF2A0BBC02008C441F /* BudgetPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1624CE2A0BBC02008C441F /* BudgetPanel.swift */; };
+		CF2300A02D145EAF00B52746 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF23009F2D145EAF00B52746 /* LaunchScreen.storyboard */; };
+		CF2300A32D147C6000B52746 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2300A22D147C6000B52746 /* HomeView.swift */; };
 		CF2CB0A52A06F8D600CBA434 /* PersimmonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2CB0A42A06F8D600CBA434 /* PersimmonApp.swift */; };
 		CF2CB0A92A06F8D900CBA434 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2CB0A82A06F8D900CBA434 /* Assets.xcassets */; };
 		CF2CB0AC2A06F8D900CBA434 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2CB0AB2A06F8D900CBA434 /* Preview Assets.xcassets */; };
@@ -99,6 +101,8 @@
 		CF15B35B2BAE006600E8E050 /* TransactionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsView.swift; sourceTree = "<group>"; };
 		CF15B3602BAE5BD600E8E050 /* TransactionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCellView.swift; sourceTree = "<group>"; };
 		CF1624CE2A0BBC02008C441F /* BudgetPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetPanel.swift; sourceTree = "<group>"; };
+		CF23009F2D145EAF00B52746 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CF2300A22D147C6000B52746 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CF2CB0A12A06F8D600CBA434 /* Persimmon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Persimmon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2CB0A42A06F8D600CBA434 /* PersimmonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersimmonApp.swift; sourceTree = "<group>"; };
 		CF2CB0A82A06F8D900CBA434 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -194,6 +198,14 @@
 			path = "Transaction Details";
 			sourceTree = "<group>";
 		};
+		CF2300A12D147C4600B52746 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				CF2300A22D147C6000B52746 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		CF2CB0982A06F8D600CBA434 = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +236,7 @@
 				CF2CB0B92A06FC2200CBA434 /* Extensions */,
 				CF2CB0A82A06F8D900CBA434 /* Assets.xcassets */,
 				CF2CB0AA2A06F8D900CBA434 /* Preview Content */,
+				CF23009F2D145EAF00B52746 /* LaunchScreen.storyboard */,
 			);
 			path = Persimmon;
 			sourceTree = "<group>";
@@ -392,6 +405,7 @@
 		CFBEE24D2A08449000586164 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CF2300A12D147C4600B52746 /* Home */,
 				CF2CB0BA2A06FC3E00CBA434 /* ContainerView.swift */,
 				CFB7F5782BC0AE17009956E9 /* Location */,
 				CF2CB0B52A06FBCC00CBA434 /* Transaction */,
@@ -525,6 +539,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF2300A02D145EAF00B52746 /* LaunchScreen.storyboard in Resources */,
 				CF2CB0AC2A06F8D900CBA434 /* Preview Assets.xcassets in Resources */,
 				CF2CB0A92A06F8D900CBA434 /* Assets.xcassets in Resources */,
 			);
@@ -550,6 +565,7 @@
 				CF44BE332A0FB55A0006019F /* Spacing.swift in Sources */,
 				CF72A07F2BB9FB9900E0FDB1 /* CurrencyTextField.swift in Sources */,
 				CF95BC1F2C58188600C8C1CE /* CategoryDetails.swift in Sources */,
+				CF2300A32D147C6000B52746 /* HomeView.swift in Sources */,
 				CF7A80492A0DAC580067F5A8 /* CategoriesListView.swift in Sources */,
 				CF2CB0C02A06FD9700CBA434 /* Color+Extension.swift in Sources */,
 				CF2CB0A52A06F8D600CBA434 /* PersimmonApp.swift in Sources */,
@@ -749,7 +765,8 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Use location to save where transactions happen.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
@@ -781,7 +798,8 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Use location to save where transactions happen.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;

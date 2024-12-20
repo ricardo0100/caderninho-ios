@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct ContainerView: View {
-    @State private var selectedIndex = 0
+    @State private var selectedIndex = 1
     
     var body: some View {
-        TabView {
+        TabView(selection: $selectedIndex) {
             TransactionsListView()
                 .tabItem {
                     Label("Transactions", systemImage: "arrow.up.arrow.down")
@@ -13,6 +13,10 @@ struct ContainerView: View {
                 .tabItem {
                     Label("Accounts", systemImage: "creditcard")
                 }
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "house")
+                }.tag(1)
             CategoriesListView()
                 .tabItem {
                     Label("Categories", systemImage: "briefcase")

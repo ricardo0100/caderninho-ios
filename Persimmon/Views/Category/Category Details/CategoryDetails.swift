@@ -54,7 +54,6 @@ struct CategoryDetails: View {
         .sheet(isPresented: $isShowindEdit) {
             EditCategoryView(category: category)
         }
-        
     }
 }
 
