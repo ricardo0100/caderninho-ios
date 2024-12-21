@@ -1,9 +1,6 @@
 import SwiftUI
 
-struct PizzaGraphicItem {
-    let value: Double
-    let color: Color
-}
+
 
 fileprivate struct SliceItem: Identifiable, Hashable {
     let id = UUID()
@@ -12,8 +9,8 @@ fileprivate struct SliceItem: Identifiable, Hashable {
     let color: Color
 }
 
-struct PizzaGraphicView: View {
-    let values: [PizzaGraphicItem]
+struct PizzaGraphView: View {
+    let values: [GraphItem]
     
     private var sum: Double {
         values.map { $0.value }.reduce(.zero, +)
@@ -32,14 +29,16 @@ struct PizzaGraphicView: View {
     }
     
     var body: some View {
-        ZStack {
-            ForEach(slices, id: \.self) { slice in
-                PizzaSlice(
-                    startAngle: slice.start,
-                    endAngle: slice.end
-                ).foregroundColor(slice.color)
-            }
-        }.clipped()
+        VStack {
+            ZStack {
+                ForEach(slices, id: \.self) { slice in
+                    PizzaSlice(
+                        startAngle: slice.start,
+                        endAngle: slice.end
+                    ).foregroundColor(slice.color)
+                }
+            }.clipped()
+        }
     }
 }
 
@@ -63,12 +62,10 @@ fileprivate struct PizzaSlice: Shape {
     }
 }
 
-struct GraphicView_Previews: PreviewProvider {
-    static var previews: some View {
-        PizzaGraphicView(values: [
-            .init(value: 1, color: .red),
-            .init(value: 1, color: .blue),
-            .init(value: 1, color: .yellow),
-        ])
-    }
+#Preview {
+    PizzaGraphView(values: [
+        .init(title: "Red", value: 1, color: .red),
+        .init(title: "Blue", value: 1.3, color: .blue),
+        .init(title: "Yellow", value: 1, color: .yellow),
+    ])
 }

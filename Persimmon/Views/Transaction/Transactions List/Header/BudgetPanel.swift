@@ -3,9 +3,9 @@ import SwiftUI
 struct BudgetPanel: View {
     var body: some View {
         HStack(spacing: .spacingBig) {
-            PizzaGraphicView(values: [
-                .init(value: 20, color: Color.red.opacity(0.7)),
-                .init(value: 40, color: Color.blue)
+            PizzaGraphView(values: [
+//                .init(value: 20, color: Color.red.opacity(0.7)),
+//                .init(value: 40, color: Color.blue)
             ]).frame(width: 120, height: 120)
             VStack(alignment: .leading) {
                 Text("Some interesting information and graph")
