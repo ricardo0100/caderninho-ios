@@ -1,58 +1,50 @@
 import SwiftUI
-import Combine
-import MapKit
+//import Combine
+//import MapKit
 
 struct EditTransactionView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    private let transaction: Transaction?
-    @State var showDeleteAlert = false
-    
-    @State var name: String
-    @State var nameError: String? = ""
-    @State var account: Account?
-    @State var accountError: String? = ""
-    @State var value: Double
-    @State var category: Category?
-    @State var type: Transaction.TransactionType
-    @State var date: Date
-    @State var place: Transaction.Place?
+    @ObservedObject var viewModel: ViewModel
     
     init(transaction: Transaction?) {
-        self.transaction = transaction
-        _name = State(initialValue: transaction?.name ?? "")
-        _account = State(initialValue: transaction?.account)
-        _value = State(initialValue: transaction?.value ?? .zero)
-        _category = State(initialValue: transaction?.category)
-        _type = State(initialValue: transaction?.type ?? .buyCredit)
-        _date = State(initialValue: transaction?.date ?? Date())
-        _place = State(initialValue: transaction?.place)
+        let viewModel = ViewModel(transaction: transaction)
+        _viewModel = ObservedObject(initialValue: viewModel)
     }
     
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    LabeledView(labelText: "Name", error: $nameError) {
-                        TextField("Transaction Name", text: $name)
+                    LabeledView(labelText: "Name", error: $viewModel.nameError) {
+                        TextField("Transaction Name", text: $viewModel.name)
                     }
                     
                     LabeledView(labelText: "Type") {
                         NavigationLink {
-                            SelectTransactionTypeView(selectedType: $type)
+                            SelectTransactionTypeView(selectedType: $viewModel.type)
                         } label: {
                             HStack(spacing: .spacingSmall) {
-                                Image(systemName: type.iconName)
-                                Text(type.text)
+                                Image(systemName: viewModel.type.iconName)
+                                Text(viewModel.type.text)
                             }
                         }
                     }
                     
-                    LabeledView(labelText: "Account", error: $accountError) {
+                    if viewModel.type == .buyCredit {
+                        LabeledView(labelText: "Number of shares") {
+                            HStack {
+                                Stepper("", value: $viewModel.shares, in: 1...36).labelsHidden()
+                                Text("\(viewModel.shares)").bold()
+                            }
+                        }
+                    }
+                    
+                    LabeledView(labelText: "Account", error: $viewModel.accountError) {
                         NavigationLink(destination: {
-                            SelectAccountView(selected: $account)
+                            SelectAccountView(selected: $viewModel.account)
                         }, label: {
-                            if let account = account {
+                            if let account = viewModel.account {
                                 HStack(spacing: .spacingSmall) {
                                     LettersIconView(text: account.name.firstLetters(),
                                                     color: Color(hex: account.color),
@@ -66,16 +58,22 @@ struct EditTransactionView: View {
                     }
                     
                     LabeledView(labelText: "Value") {
-                        CurrencyTextField(currency: account?.currency ?? "",
-                                          value: $value,
+                        CurrencyTextField(currency: viewModel.account?.currency ?? "",
+                                          value: $viewModel.value,
                                           font: .title2)
+                        if viewModel.type == .buyCredit {
+                            let currency = viewModel.account?.currency ?? ""
+                            let value = Double(viewModel.value / Double(viewModel.shares))
+                            Text("\(viewModel.shares) x \(value.toCurrency(with: currency))")
+                                .font(.callout)
+                        }
                     }
                     
                     LabeledView(labelText: "Category") {
                         NavigationLink {
-                            SelectCategoryView(selected: $category)
+                            SelectCategoryView(selected: $viewModel.category)
                         } label: {
-                            if let category = category {
+                            if let category = viewModel.category {
                                 CategoryCell().environmentObject(category)
                             } else {
                                 Text("Select category").foregroundColor(.secondary)
@@ -84,20 +82,20 @@ struct EditTransactionView: View {
                     }
                     
                     LabeledView(labelText: "Date and Time") {
-                        let picker = SelectDateView(date: $date)
+                        let picker = SelectDateView(date: $viewModel.date)
                         NavigationLink(destination: picker) {
                             VStack(alignment: .leading) {
-                                Text(date.formatted(date: .complete, time: .omitted))
-                                Text(date.formatted(date: .omitted, time: .shortened))
+                                Text(viewModel.date.formatted(date: .complete, time: .omitted))
+                                Text(viewModel.date.formatted(date: .omitted, time: .shortened))
                             }.font(.footnote)
                         }
                     }
                     
                     LabeledView(labelText: "Location") {
                         NavigationLink {
-                            SelectLocationView(place: $place)
+                            SelectLocationView(place: $viewModel.place)
                         } label: {
-                            if let place = place {
+                            if let place = viewModel.place {
                                 VStack(alignment: .leading) {
                                     Text(place.name ?? "")
                                         .foregroundColor(.primary)
@@ -112,91 +110,35 @@ struct EditTransactionView: View {
                         }
                     }
                 }
-                if transaction != nil {
+                if viewModel.transaction != nil {
                     Section {
                         Button("Delete Transaction") {
-                            showDeleteAlert = true
+                            viewModel.showDeleteAlert = true
                         }.tint(.red)
                     }
                 }
             }
-            .confirmationDialog("Delete?", isPresented: $showDeleteAlert, actions: {
+            .confirmationDialog("Delete?", isPresented: $viewModel.showDeleteAlert, actions: {
                 Button("Delete") {
-                    guard let transaction else { return }
+                    guard let transaction = viewModel.transaction else { return }
                     modelContext.delete(transaction)
                     try? modelContext.save()
                     dismiss()
                 }.tint(.red)
                 Button("Cancel") {
-                    showDeleteAlert = false
+                    viewModel.showDeleteAlert = false
                 }
             })
             .toolbar {
                 ToolbarItem(placement: .navigation) {
-                    Button("Cancel", action: didTapCancel)
+                    Button("Cancel", action: viewModel.didTapCancel)
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save", action: didTapSave)
+                    Button("Save", action: { viewModel.didTapSave(using: modelContext) })
                 }
             }
         }
         .tint(.brand)
-    }
-    
-    func didTapCancel() {
-        dismiss()
-    }
-    
-    func didTapSave() {
-        withAnimation {
-            clearErrors()
-            guard !name.isEmpty else {
-                nameError = "Mandatory field"
-                return
-            }
-            guard account != nil else {
-                accountError = "Select an account"
-                return
-            }
-            saveTransaction()
-        }
-    }
-    
-    func clearErrors() {
-        nameError = nil
-        accountError = nil
-    }
-    
-    func saveTransaction() {
-        guard let account = account else {
-            return
-        }
-        if let transaction = transaction {
-            transaction.name = name
-            transaction.account = account
-            transaction.category = category
-            transaction.value = value
-            transaction.date = date
-            transaction.place = place
-        } else {
-            let transaction = Transaction(
-                id: UUID(),
-                name: name,
-                value: value,
-                account: account,
-                category: category,
-                date: date,
-                type: type,
-                place: place)
-            modelContext.insert(transaction)
-        }
-        do {
-            try modelContext.save()
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        dismiss()
     }
 }
 

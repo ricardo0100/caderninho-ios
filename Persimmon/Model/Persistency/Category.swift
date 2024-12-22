@@ -7,7 +7,15 @@ import SwiftData
     var color: String
     var icon: String?
     
-    @Relationship(deleteRule: .nullify) var transactions: [Transaction] = []
+    @Relationship(deleteRule: .nullify)
+    var transactions: [Transaction] = []
+    
+    func expensesSum(for currency: String) -> Double {
+        transactions
+            .filter { $0.value > .zero && $0.account.currency == currency }
+            .map { $0.value }
+            .reduce(.zero, +)
+    }
     
     init(id: UUID, name: String, color: String, icon: String?) {
         self.id = id

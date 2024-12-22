@@ -7,10 +7,11 @@ import SwiftData
     var color: String
     var currency: String
     
-    @Relationship(deleteRule: .cascade) var transactions: [Transaction] = []
+    @Relationship(deleteRule: .cascade)
+    var transactions: [Transaction] = []
     
     @Transient var balance: Double {
-        transactions.map { $0.value }.reduce(0, +)
+        transactions.map { $0.value }.reduce(.zero, +)
     }
     
     init(id: UUID, name: String, color: String, currency: String) {

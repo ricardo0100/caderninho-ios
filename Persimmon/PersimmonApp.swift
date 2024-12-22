@@ -8,7 +8,8 @@ struct PersimmonApp: App {
             ContainerView()
                 .modelContainer(for: [Account.self,
                                       Category.self,
-                                      Transaction.self])
+                                      Transaction.self,
+                                      TransactionShare.self])
         }
     }
 }

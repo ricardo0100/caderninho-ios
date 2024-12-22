@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GraphItem: Identifiable {
     let id = UUID()
-    let title: String
+    let title: AttributedString
     let value: Double
     let color: Color
 }

@@ -4,7 +4,26 @@ import SwiftData
 @MainActor
 class DataController {
     static let accountNameExamples = ["Banco do Brasil", "Maya Trust", "Feijão Bank"]
-    static let transactionNameExamples = ["Almoço", "Jantar", "Mansão"]
+    static let transactionNameExamples = ["Almoço",
+                                          "Jantar",
+                                          "Mansão",
+                                          "Supermercado",
+                                          "Academia",
+                                          "Cinema",
+                                          "Viagem",
+                                          "Café",
+                                          "Barbearia",
+                                          "Manicure",
+                                          "Uber",
+                                          "Presente",
+                                          "Hospedagem",
+                                          "Curso Online",
+                                          "Medicamentos",
+                                          "Eletrônicos",
+                                          "Pet Shop",
+                                          "Doação",
+                                          "Roupa",
+                                          "Gasolina"]
     static let accountCurrencyExamples = ["R$", "元", "US$"]
     static let categoryNameExamples = ["Alimentação", "Transporte", "Aluguel"]
     
