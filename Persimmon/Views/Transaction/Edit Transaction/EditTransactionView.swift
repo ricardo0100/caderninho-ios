@@ -1,6 +1,4 @@
 import SwiftUI
-//import Combine
-//import MapKit
 
 struct EditTransactionView: View {
     @Environment(\.dismiss) private var dismiss
@@ -45,12 +43,7 @@ struct EditTransactionView: View {
                             SelectAccountView(selected: $viewModel.account)
                         }, label: {
                             if let account = viewModel.account {
-                                HStack(spacing: .spacingSmall) {
-                                    LettersIconView(text: account.name.firstLetters(),
-                                                    color: Color(hex: account.color),
-                                                    size: 38)
-                                    Text(account.name)
-                                }
+                                AccountCellView().environmentObject(account)
                             } else {
                                 Text("Select account").foregroundColor(.secondary)
                             }
@@ -112,21 +105,17 @@ struct EditTransactionView: View {
                 }
                 if viewModel.transaction != nil {
                     Section {
-                        Button("Delete Transaction") {
-                            viewModel.showDeleteAlert = true
-                        }.tint(.red)
+                        Button("Delete Transaction", action: viewModel.didTapDelete)
+                            .tint(.red)
                     }
                 }
             }
             .confirmationDialog("Delete?", isPresented: $viewModel.showDeleteAlert, actions: {
                 Button("Delete") {
-                    guard let transaction = viewModel.transaction else { return }
-                    modelContext.delete(transaction)
-                    try? modelContext.save()
-                    dismiss()
+                    viewModel.didConfirmDelete()
                 }.tint(.red)
                 Button("Cancel") {
-                    viewModel.showDeleteAlert = false
+                    viewModel.didTapCancelDelete()
                 }
             })
             .toolbar {
@@ -134,11 +123,14 @@ struct EditTransactionView: View {
                     Button("Cancel", action: viewModel.didTapCancel)
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save", action: { viewModel.didTapSave(using: modelContext) })
+                    Button("Save", action: viewModel.didTapSave)
                 }
             }
         }
         .tint(.brand)
+        .onChange(of: viewModel.shouldDismiss) {
+            dismiss()
+        }
     }
 }
 

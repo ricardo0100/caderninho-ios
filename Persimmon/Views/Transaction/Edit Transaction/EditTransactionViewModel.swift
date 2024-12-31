@@ -25,6 +25,7 @@ extension EditTransactionView {
         @Published var nameError: String? = ""
         @Published var accountError: String? = ""
         @Published var showDeleteAlert = false
+        @Published var shouldDismiss: Bool = false
         
         init(transaction: Transaction?) {
             self.transaction = transaction
@@ -40,10 +41,26 @@ extension EditTransactionView {
         }
         
         func didTapCancel() {
-            dismiss()
+            shouldDismiss = true
         }
         
-        func didTapSave(using modelContext: ModelContext) {
+        func didTapDelete() {
+            showDeleteAlert = true
+        }
+        
+        func didTapCancelDelete() {
+            showDeleteAlert = false
+        }
+        
+        @MainActor func didConfirmDelete() {
+            guard let transaction = transaction else { return }
+            let context = ModelContainer.shared.mainContext
+            context.delete(transaction)
+            try? context.save()
+            shouldDismiss = true
+        }
+        
+        @MainActor func didTapSave() {
             withAnimation {
                 clearErrors()
                 guard !name.isEmpty else {
@@ -54,8 +71,8 @@ extension EditTransactionView {
                     accountError = "Select an account"
                     return
                 }
-                saveTransaction(using: modelContext)
             }
+            saveTransaction()
         }
         
         private func clearErrors() {
@@ -63,7 +80,8 @@ extension EditTransactionView {
             accountError = nil
         }
         
-        private func saveTransaction(using modelContext: ModelContext) {
+        @MainActor private func saveTransaction() {
+            let context = ModelContainer.shared.mainContext
             guard let account = account else {
                 return
             }
@@ -84,19 +102,15 @@ extension EditTransactionView {
                     date: date,
                     type: type,
                     place: place)
-                modelContext.insert(transaction)
+                context.insert(transaction)
             }
             do {
-                try modelContext.save()
+                try context.save()
             } catch {
                 print(error.localizedDescription)
             }
             
-            dismiss()
-        }
-        
-        func dismiss() {
-            
+            shouldDismiss = true
         }
     }
 }

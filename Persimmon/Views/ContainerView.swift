@@ -1,10 +1,9 @@
 import SwiftUI
 
 struct ContainerView: View {
-    @State private var selectedIndex = 1
     
     var body: some View {
-        TabView(selection: $selectedIndex) {
+        TabView {
             TransactionsListView()
                 .tabItem {
                     Label("Transactions", systemImage: "arrow.up.arrow.down")
