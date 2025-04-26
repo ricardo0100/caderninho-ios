@@ -10,4 +10,16 @@ extension String {
         
         return String(words).uppercased()
     }
+    
+    var isTextOrDoubleValue: Bool {
+        let normalized = self.replacingOccurrences(of: ",", with: ".")
+        
+        // Check if it's a double
+        if Double(normalized) != nil {
+            return true
+        }
+        
+        // If it's not an integer, assume it's text
+        return Int64(self) == nil
+    }
 }

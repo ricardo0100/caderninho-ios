@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 import SwiftData
 
 @MainActor
@@ -34,20 +35,23 @@ class DataController {
                 currency: accountCurrencyExamples.randomElement()!)
     }
     
-    static func createRandomTransaction() -> Transaction {
-        Transaction(id: UUID(),
-                    name: transactionNameExamples.randomElement()!,
-                    value: Double((1...999).randomElement()!),
-                    account: createRandomAccount(),
-                    category: createRandomCategory(withIcon: true),
-                    date: Date(),
-                    type: .buyDebit,
-                    place: Transaction.Place(
-                        name: "Trem de Minas",
-                        title: "Restaurante",
-                        subtitle: "Florianópolis SC",
-                        latitude: -27.707511,
-                        longitude: -48.510450))
+    static func createRandomTransaction(using context: ModelContext? = nil) -> Transaction {
+        let account = (try? context?.fetch(FetchDescriptor<Account>()).randomElement()) ?? createRandomAccount()
+        let category = (try? context?.fetch(FetchDescriptor<Category>()).randomElement()) ?? createRandomCategory(withIcon: true)
+        
+        return Transaction(id: UUID(),
+                           name: transactionNameExamples.randomElement()!,
+                           value: Double((1...999).randomElement()!),
+                           account: account,
+                           category: category,
+                           date: Date(),
+                           type: .buyDebit,
+                           place: Transaction.Place(
+                            name: "Trem de Minas",
+                            title: "Restaurante",
+                            subtitle: "Florianópolis SC",
+                            latitude: -27.707511,
+                            longitude: -48.510450))
     }
 
     static func createRandomCategory(withIcon: Bool = false) -> Category {

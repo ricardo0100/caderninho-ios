@@ -11,11 +11,11 @@ import SwiftData
 
 struct AccountsBalancesView: View {
     @Environment(\.modelContext) private var modelContext
-    
+    @AppStorage("home-currency") private var homeCurrency = Locale.current.currency?.identifier ?? ""
     @Query var accounts: [Account]
     
     var body: some View {
-        let items = accounts.map {
+        let items = accounts.filter { $0.currency == homeCurrency }.map {
             let balance = $0.balance
             let title = try! AttributedString(markdown: "**\($0.name)** \($0.balance.toCurrency(with: $0.currency))")
             return GraphItem(title: title, value: balance, color: Color(hex: $0.color))

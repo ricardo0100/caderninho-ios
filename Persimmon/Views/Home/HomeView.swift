@@ -20,7 +20,7 @@ struct HomeView: View {
                     AccountsBalancesView().padding(.bottom)
                     Text("").bold()
                 }
-                .navigationTitle("Hello, Rica!")
+                .navigationTitle("Hello!")
                 .padding()
             }
         }

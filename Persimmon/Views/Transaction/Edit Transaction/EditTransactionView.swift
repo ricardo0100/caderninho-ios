@@ -5,8 +5,7 @@ struct EditTransactionView: View {
     @Environment(\.modelContext) private var modelContext
     @ObservedObject var viewModel: ViewModel
     
-    init(transaction: Transaction?) {
-        let viewModel = ViewModel(transaction: transaction)
+    init(viewModel: ViewModel) {
         _viewModel = ObservedObject(initialValue: viewModel)
     }
     
@@ -122,6 +121,11 @@ struct EditTransactionView: View {
                 ToolbarItem(placement: .navigation) {
                     Button("Cancel", action: viewModel.didTapCancel)
                 }
+                if viewModel.isRecognizingImage {
+                    ToolbarItem(placement: .secondaryAction) {
+                        ProgressView()
+                    }
+                }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save", action: viewModel.didTapSave)
                 }
@@ -135,6 +139,6 @@ struct EditTransactionView: View {
 }
 
 #Preview {
-    EditTransactionView(transaction: nil)
+    EditTransactionView(viewModel: .init())
         .modelContainer(DataController.previewContainer)
 }

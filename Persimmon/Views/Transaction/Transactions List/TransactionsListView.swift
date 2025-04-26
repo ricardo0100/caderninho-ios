@@ -1,12 +1,12 @@
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 struct TransactionsListView: View {
     @Query(sort: [SortDescriptor(\Transaction.date)])
     var transactions: [Transaction]
     
-    @State var isShowindEdit: Bool = false
-    @State var editingTransaction: Transaction?
+    @ObservedObject var viewModel = ViewModel()
     
     var body: some View {
         NavigationStack {
@@ -16,7 +16,7 @@ struct TransactionsListView: View {
                 } label: {
                     TransactionCellView().environmentObject(transaction)
                         .onLongPressGesture {
-                            editingTransaction = transaction
+                            viewModel.editingTransaction = transaction
                         }
                 }
             }
@@ -25,7 +25,7 @@ struct TransactionsListView: View {
                     VStack {
                         Text("oops! No transactions yet")
                         Button("Add transaction") {
-                            didTapAdd()
+                            viewModel.didTapAdd()
                         }
                     }
                 }
@@ -35,25 +35,33 @@ struct TransactionsListView: View {
                     NavigationToolbarView(imageName: "arrow.up.arrow.down",
                                           title: "Transactions")
                 }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button(action: didTapAdd) {
+                ToolbarItem(placement: .primaryAction) {
+                    if viewModel.isLoading {
+                        ProgressView()
+                    } else {
+                        PhotosPicker(selection: $viewModel.photosItem) {
+                            Image(systemName: "camera")
+                                .foregroundColor(.brand)
+                        }
+                    }
+                }
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: viewModel.didTapAdd) {
                         Image(systemName: "plus")
                             .foregroundColor(.brand)
                     }
                 }
             }
         }
-        .sheet(isPresented: $isShowindEdit) {
-            EditTransactionView(transaction: editingTransaction)
+        .sheet(isPresented: $viewModel.isShowingEdit) {
+            EditTransactionView(viewModel: .init())
         }
-        .sheet(item: $editingTransaction) {
-            EditTransactionView(transaction: $0)
+        .sheet(item: $viewModel.editingTransaction) {
+            EditTransactionView(viewModel: .init(transaction: $0))
         }
-    }
-    
-    func didTapAdd() {
-        editingTransaction = nil
-        isShowindEdit = true
+        .sheet(item: $viewModel.photosItem) {
+            EditTransactionView(viewModel: .init(item: $0))
+        }
     }
 }
 

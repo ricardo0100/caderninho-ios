@@ -10,6 +10,8 @@ import SwiftUI
 import SwiftData
 
 struct CategoryExpensesView: View {
+    @Environment(\.modelContext) private var modelContext
+    
     @Query var categories: [Category]
     
     var body: some View {

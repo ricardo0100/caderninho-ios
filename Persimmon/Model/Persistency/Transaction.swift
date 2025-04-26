@@ -11,7 +11,7 @@ import SwiftData
     @Relationship(deleteRule: .noAction, inverse: \Category.transactions)
     var category: Category?
     
-    @Relationship(deleteRule: .noAction, inverse: \TransactionShare.transaction)
+    @Relationship(deleteRule: .cascade, inverse: \TransactionShare.transaction)
     var shares: [TransactionShare] = []
     
     var name: String
