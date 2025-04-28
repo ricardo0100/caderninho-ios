@@ -1,9 +1,15 @@
 import SwiftUI
 
 struct EditTransactionView: View {
+    enum Field: Hashable {
+        case name
+        case value
+    }
+    
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @ObservedObject var viewModel: ViewModel
+    @FocusState private var focusedField: Field?
     
     init(viewModel: ViewModel) {
         _viewModel = ObservedObject(initialValue: viewModel)
@@ -15,6 +21,7 @@ struct EditTransactionView: View {
                 Section {
                     LabeledView(labelText: "Name", error: $viewModel.nameError) {
                         TextField("Transaction Name", text: $viewModel.name)
+                            .focused($focusedField, equals: .name)
                     }
                     
                     LabeledView(labelText: "Type") {
@@ -53,6 +60,7 @@ struct EditTransactionView: View {
                         CurrencyTextField(currency: viewModel.account?.currency ?? "",
                                           value: $viewModel.value,
                                           font: .title2)
+                            .focused($focusedField, equals: .value)
                         if viewModel.type == .buyCredit {
                             let currency = viewModel.account?.currency ?? ""
                             let value = Double(viewModel.value / Double(viewModel.shares))
@@ -74,7 +82,7 @@ struct EditTransactionView: View {
                     }
                     
                     LabeledView(labelText: "Date and Time") {
-                        let picker = SelectDateView(date: $viewModel.date)
+                        let picker = SelectDateView(isShowing: .constant(true), date: $viewModel.date)
                         NavigationLink(destination: picker) {
                             VStack(alignment: .leading) {
                                 Text(viewModel.date.formatted(date: .complete, time: .omitted))
@@ -109,6 +117,9 @@ struct EditTransactionView: View {
                     }
                 }
             }
+            .gesture(TapGesture().onEnded({ _ in
+                focusedField = nil
+            }), isEnabled: focusedField != nil)
             .confirmationDialog("Delete?", isPresented: $viewModel.showDeleteAlert, actions: {
                 Button("Delete") {
                     viewModel.didConfirmDelete()

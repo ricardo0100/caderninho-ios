@@ -1,6 +1,6 @@
 import SwiftUI
 
 extension Color {
-    static let brand = Color(hex: "#914600")
+    static let brand = Color("BrandColor")
     static let brandText = Color(hex: "#FDFDFD")
 }

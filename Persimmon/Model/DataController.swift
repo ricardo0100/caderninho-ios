@@ -4,29 +4,55 @@ import SwiftData
 
 @MainActor
 class DataController {
-    static let accountNameExamples = ["Banco do Brasil", "Maya Trust", "Feijão Bank"]
-    static let transactionNameExamples = ["Almoço",
-                                          "Jantar",
-                                          "Mansão",
-                                          "Supermercado",
-                                          "Academia",
-                                          "Cinema",
-                                          "Viagem",
-                                          "Café",
-                                          "Barbearia",
-                                          "Manicure",
-                                          "Uber",
-                                          "Presente",
-                                          "Hospedagem",
-                                          "Curso Online",
-                                          "Medicamentos",
-                                          "Eletrônicos",
-                                          "Pet Shop",
-                                          "Doação",
-                                          "Roupa",
-                                          "Gasolina"]
-    static let accountCurrencyExamples = ["R$", "元", "US$"]
-    static let categoryNameExamples = ["Alimentação", "Transporte", "Aluguel"]
+    static let accountNameExamples = [
+        "Banco do Brasil",
+        "Maya Trust",
+        "Feijão Bank"
+    ]
+    
+    static let transactionNameExamples = [
+        "Almoço",
+        "Jantar",
+        "Mansão",
+        "Supermercado",
+        "Academia",
+        "Cinema",
+        "Viagem",
+        "Café",
+        "Barbearia",
+        "Manicure",
+        "Presente",
+        "Hospedagem",
+        "Curso Online",
+        "Medicamentos",
+        "Eletrônicos",
+        "Pet Shop",
+        "Doação",
+        "Roupa",
+        "Gasolina"
+    ]
+    
+    static let accountCurrencyExamples = [
+        "R$",
+        "元",
+        "US$"
+    ]
+    
+    static let categoryNameExamples = [
+        "Alimentação",
+        "Transporte",
+        "Aluguel",
+        "Saúde",
+        "Educação",
+        "Lazer",
+        "Compras",
+        "Viagem",
+        "Serviços",
+        "Impostos",
+        "Investimentos",
+        "Entretenimento",
+        "Doações"
+    ]
     
     static func createRandomAccount() -> Account {
         Account(id: UUID(),
@@ -38,13 +64,13 @@ class DataController {
     static func createRandomTransaction(using context: ModelContext? = nil) -> Transaction {
         let account = (try? context?.fetch(FetchDescriptor<Account>()).randomElement()) ?? createRandomAccount()
         let category = (try? context?.fetch(FetchDescriptor<Category>()).randomElement()) ?? createRandomCategory(withIcon: true)
-        
+        let date = Date().dateAddingDays((-100..<0).randomElement() ?? 0)
         return Transaction(id: UUID(),
                            name: transactionNameExamples.randomElement()!,
                            value: Double((1...999).randomElement()!),
                            account: account,
                            category: category,
-                           date: Date(),
+                           date: date,
                            type: .buyDebit,
                            place: Transaction.Place(
                             name: "Trem de Minas",
@@ -91,8 +117,8 @@ class DataController {
                     value: Double((0...99999).randomElement()!) / 100,
                     account: accounts.randomElement()!,
                     category: categories.randomElement()!,
-                    date: Date(),
-                    type: .adjustment,
+                    date: Date().dateAddingDays((-100..<0).randomElement() ?? 0),
+                    type: .buyCredit,
                     place: nil)
                 container.mainContext.insert(transaction)
             }
