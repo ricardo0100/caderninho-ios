@@ -34,6 +34,11 @@ struct CameraView: View {
             ZStack(alignment: .bottom) {
                 cameraPreview
                     .opacity(isProcessing ? 0.5 : 1)
+                    .onTapGesture { point in
+                        Task {
+                            cameraPreview.cameraController.focus(at: point)
+                        }
+                    }
                 
                 VStack {
                     HStack {
@@ -146,6 +151,25 @@ fileprivate class CameraController: UIView {
             DispatchQueue.global(qos: .userInitiated).async {
                 session.startRunning()
             }
+        }
+    }
+    
+    func focus(at point: CGPoint) {
+        guard let videoInput = captureSession?.inputs.first as? AVCaptureDeviceInput else { return }
+        let device = videoInput.device
+        let devicePoint = previewLayer?.captureDevicePointConverted(fromLayerPoint: point) ?? .init(x: 0.5, y: 0.5)
+        
+        do {
+            print(devicePoint)
+            try device.lockForConfiguration()
+            device.isSubjectAreaChangeMonitoringEnabled = true
+            device.exposureMode = .autoExpose
+            device.focusMode = .autoFocus
+            device.focusPointOfInterest = devicePoint
+            device.exposurePointOfInterest = devicePoint
+            device.unlockForConfiguration()
+        } catch {
+            print(error.localizedDescription)
         }
     }
     
