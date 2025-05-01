@@ -5,25 +5,16 @@ import PhotosUI
 extension TransactionsListView {
     public class ViewModel: ObservableObject {
         @Published var isShowingEdit: Bool = false
-        
         @Published var isShowingCamera = false
         @Published var filterStartDate = Date()
         @Published var filterEndDate = Date()
-        
-        @Published var ticketData: TicketProcessor.TicketData?
-        @Published var isProcessingTicket: Bool = false
-        @Published var ticketImage: UIImage? {
-            didSet {
-                guard let ticketImage = ticketImage else { return }
-                startProcessingTicketImage(ticketImage)
-            }
-        }
+        @Published var ticketData: TicketData?
+        @Published var isShowingFilter = false
         @Published var filterType: FilterType = .thisMonth {
             didSet {
                 updateDates()
             }
         }
-        @Published var isShowingFilter = false
         
         init() {
             updateDates()
@@ -40,23 +31,6 @@ extension TransactionsListView {
         func didTapFilter() {
             withAnimation {
                 isShowingFilter.toggle()
-            }
-        }
-        
-        private func startProcessingTicketImage(_ image: UIImage) {
-            isProcessingTicket = true
-            Task.detached(priority: .userInitiated) {
-                let ticketProcessor = TicketProcessor()
-                ticketProcessor.process(image) { data in
-                    self.didFinishProcessingTicket(data: data)
-                }
-            }
-        }
-        
-        private func didFinishProcessingTicket(data: TicketProcessor.TicketData?) {
-            DispatchQueue.main.async {
-                self.isProcessingTicket = false
-                self.ticketData = data
             }
         }
         

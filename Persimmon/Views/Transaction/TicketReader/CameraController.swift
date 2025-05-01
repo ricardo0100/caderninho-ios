@@ -1,94 +1,14 @@
 //
-//  CameraView.swift
+//  CameraController.swift
 //  Persimmon
 //
-//  Created by Ricardo Gehrke Filho on 27/04/25.
+//  Created by Ricardo Gehrke Filho on 30/04/25.
 //
 
-import SwiftUI
+import UIKit
 import AVFoundation
 
-struct CameraView: View {
-    @Environment(\.dismiss) var dismiss
-    @State var isProcessing = false
-    @Binding var image: UIImage?
-    
-    private let cameraPreview = CameraPreview()
-    
-    func didTapClose() {
-        dismiss()
-    }
-    
-    func didTapTakePicture() {
-        withAnimation {
-            isProcessing = true
-        }
-        cameraPreview.cameraController.captureImage { image in
-            self.image = image
-            self.dismiss()
-        }
-    }
-    
-    var body: some View {
-        NavigationStack {
-            ZStack(alignment: .bottom) {
-                cameraPreview
-                    .opacity(isProcessing ? 0.5 : 1)
-                    .onTapGesture { point in
-                        Task {
-                            cameraPreview.cameraController.focus(at: point)
-                        }
-                    }
-                
-                VStack {
-                    HStack {
-                        Button(action: didTapClose) {
-                            Image(systemName: "xmark.circle")
-                                .resizable()
-                                .frame(width: 32, height: 32)
-                                .foregroundStyle(Color.white)
-                        }.padding()
-                        Spacer()
-                    }
-                    
-                    Spacer()
-                    if isProcessing {
-                        ProgressView()
-                            .frame(width: 42, height: 42)
-                    }
-                    Spacer()
-                    
-                    Button(action: didTapTakePicture){
-                        Circle()
-                            .stroke(Color.white, lineWidth: 4)
-                            .fill(Color.white.opacity(0.8))
-                            
-                    }
-                    .disabled(isProcessing)
-                    .opacity(isProcessing ? 0.3 : 1)
-                    .frame(width: 60, height: 60)
-                    .padding(.bottom)
-                }.frame(maxWidth: .infinity)
-            }
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .safeAreaPadding()
-        }
-    }
-}
-
-struct CameraPreview: UIViewRepresentable {
-    typealias UIViewType = UIView
-    
-    fileprivate let cameraController = CameraController()
-    
-    func makeUIView(context: Context) -> UIView {
-        return cameraController
-    }
-    
-    func updateUIView(_ uiView: UIView, context: Context) {}
-}
-
-fileprivate class CameraController: UIView {
+class CameraController: UIView {
     private var captureSession: AVCaptureSession?
     private var photoOutput: AVCapturePhotoOutput?
     private var previewLayer: AVCaptureVideoPreviewLayer?
@@ -97,7 +17,7 @@ fileprivate class CameraController: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         #if targetEnvironment(simulator)
-        backgroundColor = .systemTeal
+        backgroundColor = .gray
         #else
         setupCamera()
         if captureSession?.isRunning == false {
@@ -158,7 +78,6 @@ fileprivate class CameraController: UIView {
         guard let videoInput = captureSession?.inputs.first as? AVCaptureDeviceInput else { return }
         let device = videoInput.device
         let devicePoint = previewLayer?.captureDevicePointConverted(fromLayerPoint: point) ?? .init(x: 0.5, y: 0.5)
-        
         do {
             print(devicePoint)
             try device.lockForConfiguration()
@@ -207,8 +126,4 @@ extension CameraController: AVCapturePhotoCaptureDelegate {
         captureCompletion?(image)
         captureSession?.stopRunning()
     }
-}
-
-#Preview {
-    CameraView(image: .constant(nil))
 }

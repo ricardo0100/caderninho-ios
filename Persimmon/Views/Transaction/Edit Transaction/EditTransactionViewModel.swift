@@ -43,14 +43,14 @@ extension EditTransactionView {
             _shares = Published(initialValue: transaction?.shares.count ?? 1)
         }
         
-        init(ticketData: TicketProcessor.TicketData) {
+        init(ticketData: TicketData) {
             self.transaction = nil
             _name = Published(initialValue: "")
             _account = Published(initialValue: nil)
-            _value = Published(initialValue: ticketData.value)
+            _value = Published(initialValue: ticketData.value ?? 0)
             _category = Published(initialValue: nil)
-            _type = Published(initialValue: .buyCredit)
-            _date = Published(initialValue: ticketData.date)
+            _type = Published(initialValue: ticketData.type ?? .buyCredit)
+            _date = Published(initialValue: ticketData.date ?? Date())
             _place = Published(initialValue: nil)
             _shares = Published(initialValue: 1)
         }

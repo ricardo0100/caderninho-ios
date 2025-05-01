@@ -30,15 +30,14 @@ struct CurrencyTextField: View {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.currencySymbol = currency
+        formatter.minimumFractionDigits = 2
         return formatter
     }
     
     private func currencyFormattedNumber(_ stringNumber: String, currency: String) -> String {
-        let number = stringNumber.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-        var value = Double(number) ?? 0
-        value = value / Double(100)
+        let value = stringNumber.toDouble ?? 0
         let formatter = makeFormatter()
-        return formatter.string(from: NSNumber.init(floatLiteral: value)) ?? ""
+        return formatter.string(from: NSNumber(floatLiteral: value)) ?? ""
     }
     
     private func doubleValueFromCurrencyString(_ stringNumber: String) -> Double {
@@ -49,12 +48,9 @@ struct CurrencyTextField: View {
     }
 }
 
-struct CurrencyTextField_Previews: PreviewProvider {
-    @State static var value = Double(0)
-    
-    static var previews: some View {
-        Form {
-            CurrencyTextField(currency: "R$", value: .constant(2))
-        }
+#Preview {
+    @Previewable @State var value = Double(46.60)
+    Form {
+        CurrencyTextField(currency: "R$", value: $value)
     }
 }

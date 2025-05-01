@@ -11,15 +11,24 @@ extension String {
         return String(words).uppercased()
     }
     
-    var isTextOrDoubleValue: Bool {
-        let normalized = self.replacingOccurrences(of: ",", with: ".")
-        
-        // Check if it's a double
-        if Double(normalized) != nil {
-            return true
+    var removingCurrencySymbols: String {
+        return self.replacingOccurrences(
+            of: "[\\p{Sc}]",
+            with: "",
+            options: .regularExpression
+        )
+    }
+    
+    var toDouble: Double? {
+        let pattern = #"([-+]?\d*[.,]?\d+)"#
+        guard let regex = try? NSRegularExpression(pattern: pattern),
+              let match = regex.firstMatch(in: self, range: NSRange(self.startIndex..., in: self)) else {
+            return nil
         }
         
-        // If it's not an integer, assume it's text
-        return Int64(self) == nil
+        let matchedString = String(self[Range(match.range, in: self)!])
+            .replacingOccurrences(of: ",", with: ".")
+        
+        return Double(matchedString)
     }
 }

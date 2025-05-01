@@ -30,12 +30,8 @@ struct TransactionsListView: View {
                     }
                 }
                 ToolbarItem(placement: .primaryAction) {
-                    if viewModel.isProcessingTicket {
-                        ProgressView()
-                    } else {
-                        Button(action: viewModel.didTapCamera) {
-                            Image(systemName: "camera")
-                        }
+                    Button(action: viewModel.didTapCamera) {
+                        Image(systemName: "camera")
                     }
                 }
                 ToolbarItem(placement: .primaryAction) {
@@ -53,7 +49,7 @@ struct TransactionsListView: View {
             EditTransactionView(viewModel: .init(ticketData: data))
         })
         .sheet(isPresented: $viewModel.isShowingCamera) {
-            CameraView(image: $viewModel.ticketImage)
+            TicketReader(viewModel: .init(ticketData: $viewModel.ticketData))
         }
     }
 }
