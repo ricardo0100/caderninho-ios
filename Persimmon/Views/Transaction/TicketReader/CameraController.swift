@@ -38,6 +38,29 @@ class CameraController: UIView {
         photoOutput?.capturePhoto(with: settings, delegate: self)
     }
     
+    func focus(at point: CGPoint) {
+        guard let videoInput = captureSession?.inputs.first as? AVCaptureDeviceInput else { return }
+        let device = videoInput.device
+        let devicePoint = previewLayer?.captureDevicePointConverted(fromLayerPoint: point) ?? .init(x: 0.5, y: 0.5)
+        do {
+            try device.lockForConfiguration()
+            device.isSubjectAreaChangeMonitoringEnabled = true
+            device.exposureMode = .autoExpose
+            device.focusMode = .autoFocus
+            device.focusPointOfInterest = devicePoint
+            device.exposurePointOfInterest = devicePoint
+            device.unlockForConfiguration()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func stopCamera() {
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.captureSession?.stopRunning()
+        }
+    }
+    
     private func setupCamera() {
         captureSession = AVCaptureSession()
         
@@ -71,24 +94,6 @@ class CameraController: UIView {
             DispatchQueue.global(qos: .userInitiated).async {
                 session.startRunning()
             }
-        }
-    }
-    
-    func focus(at point: CGPoint) {
-        guard let videoInput = captureSession?.inputs.first as? AVCaptureDeviceInput else { return }
-        let device = videoInput.device
-        let devicePoint = previewLayer?.captureDevicePointConverted(fromLayerPoint: point) ?? .init(x: 0.5, y: 0.5)
-        do {
-            print(devicePoint)
-            try device.lockForConfiguration()
-            device.isSubjectAreaChangeMonitoringEnabled = true
-            device.exposureMode = .autoExpose
-            device.focusMode = .autoFocus
-            device.focusPointOfInterest = devicePoint
-            device.exposurePointOfInterest = devicePoint
-            device.unlockForConfiguration()
-        } catch {
-            print(error.localizedDescription)
         }
     }
     

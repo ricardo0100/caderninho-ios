@@ -26,6 +26,8 @@ struct TicketReaderView: View {
                             Task {
                                 viewModel.cameraController.focus(at: point)
                             }
+                        }.onDisappear {
+                            viewModel.cameraController.stopCamera()
                         }
                 }
                 if viewModel.image == nil {
@@ -67,6 +69,9 @@ struct TicketReaderView: View {
             }
             .onChange(of: viewModel.dismiss) {
                 dismiss()
+            }
+            .onDisappear {
+                viewModel.cameraController.stopCamera()
             }
         }
     }
