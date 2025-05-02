@@ -146,6 +146,7 @@ struct EditTransactionView: View {
         .onChange(of: viewModel.shouldDismiss) {
             dismiss()
         }
+        .onAppear(perform: viewModel.viewDidAppear)
     }
 }
 

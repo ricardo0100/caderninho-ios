@@ -55,6 +55,13 @@ extension EditTransactionView {
             _shares = Published(initialValue: 1)
         }
         
+        @MainActor func viewDidAppear() {
+            if transaction == nil, account == nil {
+                account = fetchLastUsedAccount()
+                category = fetchLastUsedCategory()
+            }
+        }
+        
         func didTapCancel() {
             shouldDismiss = true
         }
@@ -93,6 +100,16 @@ extension EditTransactionView {
         private func clearErrors() {
             nameError = nil
             accountError = nil
+        }
+        
+        @MainActor private func fetchLastUsedAccount() -> Account? {
+            try? ModelContainer.shared.mainContext.fetch(FetchDescriptor<Transaction>(
+                sortBy: [SortDescriptor(\.date, order: .reverse)])).first?.account
+        }
+        
+        @MainActor private func fetchLastUsedCategory() -> Category? {
+            try? ModelContainer.shared.mainContext.fetch(FetchDescriptor<Transaction>(
+                sortBy: [SortDescriptor(\.date, order: .reverse)])).first?.category
         }
         
         @MainActor private func saveTransaction() {
