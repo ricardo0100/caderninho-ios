@@ -9,7 +9,7 @@ import SwiftUI
 import AVFoundation
 import PhotosUI
 
-struct TicketReader: View {
+struct TicketReaderView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var viewModel: ViewModel
     
@@ -72,7 +72,7 @@ struct TicketReader: View {
     }
 }
 
-struct CameraPreview: UIViewRepresentable {
+fileprivate struct CameraPreview: UIViewRepresentable {
     typealias UIViewType = UIView
     
     fileprivate let cameraController: CameraController
@@ -85,5 +85,5 @@ struct CameraPreview: UIViewRepresentable {
 }
 
 #Preview {
-    TicketReader(viewModel: .init(ticketData: .constant(nil)))
+    TicketReaderView(viewModel: .init(ticketData: .constant(nil)))
 }

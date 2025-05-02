@@ -37,14 +37,15 @@ class TicketProcessor {
         guard let observations = request.results as? [VNRecognizedTextObservation] else {
             return
         }
-
+        
         let texts = observations.compactMap { $0.topCandidates(1).first?.string }
-
+        
         // Look for total value
         var foundValue: Double?
         var labelTriggered: Bool = false
         for text in texts {
-            if text.lowercased().contains("valor total") {
+            let text = text.lowercased()
+            if text.contains("valor total") || text.contains("valor pago")  || text.contains("a pagar") {
                 labelTriggered = true
                 continue
             }

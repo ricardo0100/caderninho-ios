@@ -71,7 +71,7 @@
 		CFBEE24A2A081B7100586164 /* LettersIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2492A081B7100586164 /* LettersIconView.swift */; };
 		CFBEE2532A08471100586164 /* PizzaGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2522A08471100586164 /* PizzaGraphView.swift */; };
 		CFD3ED3D2DBE568F0029AC2F /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED3C2DBE568A0029AC2F /* FilterView.swift */; };
-		CFD3ED4B2DBF131F0029AC2F /* TicketReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED4A2DBF131B0029AC2F /* TicketReader.swift */; };
+		CFD3ED4B2DBF131F0029AC2F /* TicketReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED4A2DBF131B0029AC2F /* TicketReaderView.swift */; };
 		CFD3ED4F2DBFAEEF0029AC2F /* TicketProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED4E2DBFAEEF0029AC2F /* TicketProcessor.swift */; };
 		CFD3ED542DC2C5E60029AC2F /* TicketReaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED532DC2C5DE0029AC2F /* TicketReaderViewModel.swift */; };
 		CFD3ED562DC2C65D0029AC2F /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED552DC2C6550029AC2F /* CameraController.swift */; };
@@ -169,7 +169,7 @@
 		CFBEE2492A081B7100586164 /* LettersIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LettersIconView.swift; sourceTree = "<group>"; };
 		CFBEE2522A08471100586164 /* PizzaGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaGraphView.swift; sourceTree = "<group>"; };
 		CFD3ED3C2DBE568A0029AC2F /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
-		CFD3ED4A2DBF131B0029AC2F /* TicketReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketReader.swift; sourceTree = "<group>"; };
+		CFD3ED4A2DBF131B0029AC2F /* TicketReaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketReaderView.swift; sourceTree = "<group>"; };
 		CFD3ED4E2DBFAEEF0029AC2F /* TicketProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketProcessor.swift; sourceTree = "<group>"; };
 		CFD3ED532DC2C5DE0029AC2F /* TicketReaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketReaderViewModel.swift; sourceTree = "<group>"; };
 		CFD3ED552DC2C6550029AC2F /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
@@ -489,7 +489,7 @@
 				CFD3ED4E2DBFAEEF0029AC2F /* TicketProcessor.swift */,
 				CFD3ED552DC2C6550029AC2F /* CameraController.swift */,
 				CFD3ED532DC2C5DE0029AC2F /* TicketReaderViewModel.swift */,
-				CFD3ED4A2DBF131B0029AC2F /* TicketReader.swift */,
+				CFD3ED4A2DBF131B0029AC2F /* TicketReaderView.swift */,
 			);
 			path = TicketReader;
 			sourceTree = "<group>";
@@ -690,7 +690,7 @@
 				CFB7F5732BC085AD009956E9 /* SelectLocationView.swift in Sources */,
 				CFE563522C34C95100F8EA72 /* DataController.swift in Sources */,
 				CF0289F42D9DAD0C008E53DC /* PhotosPickerItem+Extension.swift in Sources */,
-				CFD3ED4B2DBF131F0029AC2F /* TicketReader.swift in Sources */,
+				CFD3ED4B2DBF131F0029AC2F /* TicketReaderView.swift in Sources */,
 				CFE563592C3F4F9B00F8EA72 /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				CF15B35C2BAE006600E8E050 /* TransactionDetailsView.swift in Sources */,
 				CFE563552C3F433B00F8EA72 /* SelectLocationViewModel.swift in Sources */,

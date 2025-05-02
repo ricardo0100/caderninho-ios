@@ -7,7 +7,7 @@
 import SwiftUI
 import PhotosUI
 
-extension TicketReader {
+extension TicketReaderView {
     class ViewModel: ObservableObject {
         @Published var image: UIImage?
         @Published var isProcessing = false
