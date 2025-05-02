@@ -10,7 +10,7 @@ extension TransactionsListView {
         @Published var filterEndDate = Date()
         @Published var ticketData: TicketData?
         @Published var isShowingFilter = false
-        @Published var filterType: FilterType = .thisMonth {
+        @Published var filterType: FilterType = .last30Days {
             didSet {
                 updateDates()
             }
@@ -47,6 +47,8 @@ extension TransactionsListView {
         
         var dateRange: (start: Date, end: Date) {
             switch filterType {
+            case .last30Days:
+                return Date.getLast30DaysBounds()
             case .today:
                 return Date.getTodayBounds()
             case .yesterday:

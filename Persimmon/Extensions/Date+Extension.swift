@@ -56,6 +56,12 @@ extension Date {
         return (start: startOfLastMonth, end: endOfLastMonth)
     }
     
+    static func getLast30DaysBounds() -> (start: Date, end: Date) {
+        let end = Date()
+        let start = end.dateAddingDays(-30)
+        return (start: start, end: end)
+    }
+    
     func dateAddingDays(_ days: Int) -> Date {
         Calendar.current.date(byAdding: .day, value: days, to: self) ?? self
     }
