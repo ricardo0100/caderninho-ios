@@ -11,8 +11,19 @@ struct EditAccountView: View {
     @State var nameErrorMessage: String?
     @State var currency = ""
     @State var currencyErroMessage: String?
-    @State var niceColor: NiceColor = .gray
+    @State var niceColor: NiceColor
     @State var showDeleteAlert = false
+    
+    init(account: Account?) {
+        self.account = account
+        if let account = account {
+            _niceColor = State(initialValue: NiceColor(rawValue: account.color) ?? .gray)
+            _name = State(initialValue: account.name)
+            _currency = State(initialValue: account.currency)
+        } else {
+            _niceColor = State(initialValue: .darkGray)
+        }
+    }
     
     var body: some View {
         NavigationStack {
@@ -61,11 +72,6 @@ struct EditAccountView: View {
                     showDeleteAlert = false
                 }
             })
-        }.onAppear {
-            guard let account = account else { return }
-            name = account.name
-            currency = account.currency
-            niceColor = NiceColor(rawValue: account.color) ?? .gray
         }
     }
     

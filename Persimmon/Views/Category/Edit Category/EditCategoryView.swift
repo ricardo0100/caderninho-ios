@@ -12,6 +12,15 @@ struct EditCategoryView: View {
     @State var niceIcon: NiceIcon? = nil
     @State var showDeleteAlert = false
     
+    init(category: Category? = nil) {
+        self.category = category
+        if let category = category {
+            _name = State(initialValue: category.name)
+            _niceIcon = State(initialValue: .init(rawValue: category.icon ?? "") ?? nil)
+            _niceColor = State(initialValue: NiceColor(rawValue: category.color) ?? .darkGray)
+        }
+    }
+    
     var body: some View {
         NavigationStack {
             Form {
