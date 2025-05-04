@@ -2,15 +2,22 @@ import SwiftUI
 import Combine
 
 struct CurrencyTextField: View {
-    let currency: String
-    let font: Font
     @Binding var value: Double
     @State var text: String = ""
+    
+    private let currencyFormatter: NumberFormatter
+    private let decimalPlaces = 2
+    private let currency: String
+    private let font: Font
     
     init(currency: String, value: Binding<Double>, font: Font = .body) {
         self.currency = currency
         self._value = value
         self.font = font
+        currencyFormatter = NumberFormatter()
+        currencyFormatter.numberStyle = .currency
+        currencyFormatter.currencySymbol = currency
+        currencyFormatter.minimumFractionDigits = decimalPlaces
     }
     
     var body: some View {
@@ -26,25 +33,13 @@ struct CurrencyTextField: View {
             }
     }
     
-    private func makeFormatter() -> NumberFormatter {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.currencySymbol = currency
-        formatter.minimumFractionDigits = 2
-        return formatter
-    }
-    
-    private func currencyFormattedNumber(_ stringNumber: String, currency: String) -> String {
-        let value = stringNumber.toDouble ?? 0
-        let formatter = makeFormatter()
-        return formatter.string(from: NSNumber(floatLiteral: value)) ?? ""
+    private func currencyFormattedNumber(_ doubleString: String, currency: String) -> String {
+        let newValue = Double(doubleString.filter { $0.isNumber })! / pow(10, Double(decimalPlaces))
+        return currencyFormatter.string(from: NSNumber(floatLiteral: newValue))!
     }
     
     private func doubleValueFromCurrencyString(_ stringNumber: String) -> Double {
-        let number = stringNumber.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-        var value = Double(number) ?? 0
-        value = value / Double(100)
-        return value
+        currencyFormatter.number(from: stringNumber)!.doubleValue
     }
 }
 

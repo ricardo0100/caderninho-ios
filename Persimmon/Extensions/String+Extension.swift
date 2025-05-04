@@ -31,4 +31,8 @@ extension String {
         
         return Double(matchedString)
     }
+    
+    var onlyDigits: String {
+        return self.filter { ("0"..."9").contains($0) }
+    }
 }

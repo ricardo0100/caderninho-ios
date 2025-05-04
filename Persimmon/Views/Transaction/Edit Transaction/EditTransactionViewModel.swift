@@ -40,7 +40,7 @@ extension EditTransactionView {
             _type = Published(initialValue: transaction?.type ?? .buyCredit)
             _date = Published(initialValue: transaction?.date ?? Date())
             _place = Published(initialValue: transaction?.place)
-            _shares = Published(initialValue: transaction?.shares.count ?? 1)
+            _shares = Published(initialValue: transaction?.installments.count ?? 1)
         }
         
         init(ticketData: TicketData) {

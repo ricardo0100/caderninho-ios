@@ -24,9 +24,13 @@ struct AccountsListView: View {
                     NavigationToolbarView(imageName: "creditcard", title: "Accounts")
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(action: didTapAdd) {
-                        Image(systemName: "plus")
-                            .foregroundColor(.brand)
+                    Menu("Add") {
+                        Button(action: didTapAddAccount) {
+                            Label("Add Account", systemImage: "dollarsign.bank.building")
+                        }
+                        Button(action: didTapAddCreditCard) {
+                            Label("Add Credit Card", systemImage: "creditcard")
+                        }
                     }
                 }
             }
@@ -36,9 +40,13 @@ struct AccountsListView: View {
         }
     }
 
-    func didTapAdd() {
+    func didTapAddAccount() {
         editingAccount = nil
         isShowindEdit = true
+    }
+    
+    func didTapAddCreditCard() {
+        
     }
 }
 

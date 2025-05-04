@@ -1,30 +1,24 @@
 import SwiftUI
 
 struct SelectTransactionTypeView: View {
-    @Environment(\.dismiss) var dismiss
     @Binding var selectedType: Transaction.TransactionType
     
     var body: some View {
-        List {
+        Menu {
             ForEach(Transaction.TransactionType.allCases) { type in
-                HStack {
-                    Image(systemName: type.iconName)
-                    Text(type.text)
-                    if selectedType == type {
-                        Spacer()
-                        Image(systemName: "checkmark")
-                    }
-                }.onTapGesture {
+                Button {
                     selectedType = type
-                    dismiss()
+                } label: {
+                    Label(type.text, systemImage: type.iconName)
                 }
             }
+        } label: {
+            Label(selectedType.text, systemImage: selectedType.iconName)
         }
     }
 }
 
 #Preview {
-    NavigationStack {
-        SelectTransactionTypeView(selectedType: .constant(.buyDebit))
-    }
+    @Previewable @State var selectedType: Transaction.TransactionType = .buyDebit
+    SelectTransactionTypeView(selectedType: $selectedType)
 }

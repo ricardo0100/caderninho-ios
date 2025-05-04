@@ -24,36 +24,20 @@ struct EditTransactionView: View {
                             .focused($focusedField, equals: .name)
                     }
                     
+                    LabeledView(labelText: "Account", error: $viewModel.accountError) {
+                        SelectAccountView(selected: $viewModel.account)
+                    }
+                    
                     LabeledView(labelText: "Type") {
-                        NavigationLink {
-                            SelectTransactionTypeView(selectedType: $viewModel.type)
-                        } label: {
-                            HStack(spacing: .spacingSmall) {
-                                Image(systemName: viewModel.type.iconName)
-                                Text(viewModel.type.text)
-                            }
-                        }
+                        SelectTransactionTypeView(selectedType: $viewModel.type)
                     }
                     
                     if viewModel.type == .buyCredit {
-                        LabeledView(labelText: "Number of shares") {
-                            HStack {
-                                Stepper("", value: $viewModel.shares, in: 1...36).labelsHidden()
-                                Text("\(viewModel.shares)").bold()
-                            }
+                        LabeledView(labelText: "Number of installments") {
+                            Stepper("\(viewModel.shares)",
+                                    value: $viewModel.shares,
+                                    in: 1...36)
                         }
-                    }
-                    
-                    LabeledView(labelText: "Account", error: $viewModel.accountError) {
-                        NavigationLink(destination: {
-                            SelectAccountView(selected: $viewModel.account)
-                        }, label: {
-                            if let account = viewModel.account {
-                                AccountCellView().environmentObject(account)
-                            } else {
-                                Text("Select account").foregroundColor(.secondary)
-                            }
-                        })
                     }
                     
                     LabeledView(labelText: "Value") {
@@ -61,6 +45,7 @@ struct EditTransactionView: View {
                                           value: $viewModel.value,
                                           font: .title2)
                             .focused($focusedField, equals: .value)
+                        
                         if viewModel.type == .buyCredit {
                             let currency = viewModel.account?.currency ?? ""
                             let value = Double(viewModel.value / Double(viewModel.shares))
@@ -70,15 +55,7 @@ struct EditTransactionView: View {
                     }
                     
                     LabeledView(labelText: "Category") {
-                        NavigationLink {
-                            SelectCategoryView(selected: $viewModel.category)
-                        } label: {
-                            if let category = viewModel.category {
-                                CategoryCell().environmentObject(category)
-                            } else {
-                                Text("Select category").foregroundColor(.secondary)
-                            }
-                        }
+                        SelectCategoryView(selected: $viewModel.category)
                     }
                     
                     LabeledView(labelText: "Date and Time") {
