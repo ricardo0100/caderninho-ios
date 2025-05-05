@@ -8,7 +8,8 @@
 import SwiftData
 import Foundation
 
-@Model class Installment: ObservableObject {
+@Model
+class Installment: ObservableObject {
     @Relationship(deleteRule: .noAction)
     var transaction: Transaction
     

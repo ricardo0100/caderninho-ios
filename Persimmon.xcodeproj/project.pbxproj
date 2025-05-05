@@ -66,7 +66,7 @@
 		CFB7F56E2BC02A47009956E9 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F56D2BC02A47009956E9 /* Date+Extension.swift */; };
 		CFB7F5732BC085AD009956E9 /* SelectLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F5722BC085AD009956E9 /* SelectLocationView.swift */; };
 		CFBEE23E2A07F3A000586164 /* TransactionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE23D2A07F3A000586164 /* TransactionsListView.swift */; };
-		CFBEE2412A07F9A000586164 /* AccountsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2402A07F9A000586164 /* AccountsListView.swift */; };
+		CFBEE2412A07F9A000586164 /* AccountsAndCardsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2402A07F9A000586164 /* AccountsAndCardsListView.swift */; };
 		CFBEE2452A080AA700586164 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2442A080AA700586164 /* String+Extension.swift */; };
 		CFBEE24A2A081B7100586164 /* LettersIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2492A081B7100586164 /* LettersIconView.swift */; };
 		CFBEE2532A08471100586164 /* PizzaGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2522A08471100586164 /* PizzaGraphView.swift */; };
@@ -77,6 +77,10 @@
 		CFD3ED562DC2C65D0029AC2F /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED552DC2C6550029AC2F /* CameraController.swift */; };
 		CFD3ED5B2DC57B0F0029AC2F /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED5A2DC57B070029AC2F /* Bill.swift */; };
 		CFD3ED5D2DC5920B0029AC2F /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED5C2DC592070029AC2F /* CreditCard.swift */; };
+		CFD3ED602DC7CF440029AC2F /* EditCreditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED5F2DC7CF3E0029AC2F /* EditCreditCardView.swift */; };
+		CFD3ED622DC7CF480029AC2F /* EditCreditCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED612DC7CF470029AC2F /* EditCreditCardViewModel.swift */; };
+		CFD3ED642DC833380029AC2F /* CreditCardCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED632DC8332E0029AC2F /* CreditCardCellView.swift */; };
+		CFD3ED672DC977CC0029AC2F /* CardDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED662DC977C20029AC2F /* CardDetailsView.swift */; };
 		CFDC21972BAF094000295432 /* EditTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDC21962BAF094000295432 /* EditTransactionView.swift */; };
 		CFDC219E2BAF29AF00295432 /* SelectAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDC219D2BAF29AF00295432 /* SelectAccountView.swift */; };
 		CFE563522C34C95100F8EA72 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE563512C34C94700F8EA72 /* DataController.swift */; };
@@ -166,7 +170,7 @@
 		CFB7F56F2BC0517B009956E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CFB7F5722BC085AD009956E9 /* SelectLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationView.swift; sourceTree = "<group>"; };
 		CFBEE23D2A07F3A000586164 /* TransactionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListView.swift; sourceTree = "<group>"; };
-		CFBEE2402A07F9A000586164 /* AccountsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsListView.swift; sourceTree = "<group>"; };
+		CFBEE2402A07F9A000586164 /* AccountsAndCardsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsAndCardsListView.swift; sourceTree = "<group>"; };
 		CFBEE2442A080AA700586164 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		CFBEE2492A081B7100586164 /* LettersIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LettersIconView.swift; sourceTree = "<group>"; };
 		CFBEE2522A08471100586164 /* PizzaGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaGraphView.swift; sourceTree = "<group>"; };
@@ -177,6 +181,10 @@
 		CFD3ED552DC2C6550029AC2F /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		CFD3ED5A2DC57B070029AC2F /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 		CFD3ED5C2DC592070029AC2F /* CreditCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCard.swift; sourceTree = "<group>"; };
+		CFD3ED5F2DC7CF3E0029AC2F /* EditCreditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCreditCardView.swift; sourceTree = "<group>"; };
+		CFD3ED612DC7CF470029AC2F /* EditCreditCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCreditCardViewModel.swift; sourceTree = "<group>"; };
+		CFD3ED632DC8332E0029AC2F /* CreditCardCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardCellView.swift; sourceTree = "<group>"; };
+		CFD3ED662DC977C20029AC2F /* CardDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsView.swift; sourceTree = "<group>"; };
 		CFDC21962BAF094000295432 /* EditTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTransactionView.swift; sourceTree = "<group>"; };
 		CFDC219D2BAF29AF00295432 /* SelectAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAccountView.swift; sourceTree = "<group>"; };
 		CFE563512C34C94700F8EA72 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
@@ -442,6 +450,8 @@
 		CFBEE23F2A07F98E00586164 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				CFD3ED652DC977BA0029AC2F /* Card Details */,
+				CFD3ED5E2DC7CF340029AC2F /* EditCreditCard */,
 				CF15B33F2BAB047600E8E050 /* Account Details */,
 				CFE6D7B82BA62D0400E76AB8 /* Accounts List */,
 				CFE6D7B92BA62D0D00E76AB8 /* Edit Account */,
@@ -490,6 +500,23 @@
 			path = TicketReader;
 			sourceTree = "<group>";
 		};
+		CFD3ED5E2DC7CF340029AC2F /* EditCreditCard */ = {
+			isa = PBXGroup;
+			children = (
+				CFD3ED612DC7CF470029AC2F /* EditCreditCardViewModel.swift */,
+				CFD3ED5F2DC7CF3E0029AC2F /* EditCreditCardView.swift */,
+			);
+			path = EditCreditCard;
+			sourceTree = "<group>";
+		};
+		CFD3ED652DC977BA0029AC2F /* Card Details */ = {
+			isa = PBXGroup;
+			children = (
+				CFD3ED662DC977C20029AC2F /* CardDetailsView.swift */,
+			);
+			path = "Card Details";
+			sourceTree = "<group>";
+		};
 		CFDC21952BAF08B600295432 /* Edit Transaction */ = {
 			isa = PBXGroup;
 			children = (
@@ -513,8 +540,9 @@
 		CFE6D7B82BA62D0400E76AB8 /* Accounts List */ = {
 			isa = PBXGroup;
 			children = (
+				CFD3ED632DC8332E0029AC2F /* CreditCardCellView.swift */,
 				CF15B34E2BACE84F00E8E050 /* AccountCellView.swift */,
-				CFBEE2402A07F9A000586164 /* AccountsListView.swift */,
+				CFBEE2402A07F9A000586164 /* AccountsAndCardsListView.swift */,
 			);
 			path = "Accounts List";
 			sourceTree = "<group>";
@@ -652,14 +680,17 @@
 				CF9DA59F2D170B270061056F /* BarsGraphView.swift in Sources */,
 				CF82EC652D982D06002F875A /* TransactionsListViewModel.swift in Sources */,
 				CF9DA5AF2D17B0120061056F /* Installment.swift in Sources */,
+				CFD3ED622DC7CF480029AC2F /* EditCreditCardViewModel.swift in Sources */,
 				CF9DA5A32D1715AC0061056F /* GraphItem.swift in Sources */,
 				CF8104522C037BE4009599B8 /* ProcessInfo+Extension.swift in Sources */,
 				CF7A804F2A0DBAE20067F5A8 /* ImageIconView.swift in Sources */,
 				CFB7F5612BBEBFE6009956E9 /* SelectTransactionTypeView.swift in Sources */,
 				CF9DA5AB2D171FCE0061056F /* CategoryExpensesView.swift in Sources */,
 				CFBEE2452A080AA700586164 /* String+Extension.swift in Sources */,
+				CFD3ED642DC833380029AC2F /* CreditCardCellView.swift in Sources */,
 				CF9DA5AD2D171FD40061056F /* AccountsBalancesView.swift in Sources */,
 				CFDC21972BAF094000295432 /* EditTransactionView.swift in Sources */,
+				CFD3ED672DC977CC0029AC2F /* CardDetailsView.swift in Sources */,
 				CFD3ED562DC2C65D0029AC2F /* CameraController.swift in Sources */,
 				CFD3ED4F2DBFAEEF0029AC2F /* TicketProcessor.swift in Sources */,
 				CFB7F56B2BC0228B009956E9 /* SelectDateView.swift in Sources */,
@@ -670,11 +701,12 @@
 				CFE61F0A2CD6E887002B1AA7 /* ConfigurationsView.swift in Sources */,
 				CF95BC1C2C57C55800C8C1CE /* CategoryCellView.swift in Sources */,
 				CFF292A62A13B8FE00C1A66A /* EditCategoryView.swift in Sources */,
+				CFD3ED602DC7CF440029AC2F /* EditCreditCardView.swift in Sources */,
 				CFA1DE6D2A0C32B50055E3CD /* AccountBalanceWidget.intentdefinition in Sources */,
 				CFD3ED542DC2C5E60029AC2F /* TicketReaderViewModel.swift in Sources */,
 				CF15B34A2BAC3D1200E8E050 /* NavigationToolbarView.swift in Sources */,
 				CFD3ED5B2DC57B0F0029AC2F /* Bill.swift in Sources */,
-				CFBEE2412A07F9A000586164 /* AccountsListView.swift in Sources */,
+				CFBEE2412A07F9A000586164 /* AccountsAndCardsListView.swift in Sources */,
 				CF9D2A722A0996800003DC39 /* NiceColorPicker.swift in Sources */,
 				CF95BC162C566EED00C8C1CE /* Category.swift in Sources */,
 				CF3116F12A14438600171A4D /* Account.swift in Sources */,

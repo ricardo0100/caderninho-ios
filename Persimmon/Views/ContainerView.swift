@@ -8,7 +8,7 @@ struct ContainerView: View {
                 .tabItem {
                     Label("Transactions", systemImage: "arrow.up.arrow.down")
                 }
-            AccountsListView()
+            AccountsAndCardsListView()
                 .tabItem {
                     Label("Accounts", systemImage: "creditcard")
                 }

@@ -8,7 +8,8 @@
 import SwiftData
 import Foundation
 
-@Model class Bill: ObservableObject {
+@Model
+class Bill: ObservableObject {
     @Attribute(.unique) var id: UUID
     
     @Relationship(deleteRule: .cascade)

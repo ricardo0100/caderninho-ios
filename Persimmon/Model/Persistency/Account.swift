@@ -1,7 +1,8 @@
 import Foundation
 import SwiftData
 
-@Model class Account: ObservableObject {
+@Model
+class Account: ObservableObject {
     @Attribute(.unique) var id: UUID
     var name: String
     var color: String

@@ -61,10 +61,7 @@ struct EditTransactionView: View {
                     LabeledView(labelText: "Date and Time") {
                         let picker = SelectDateView(isShowing: .constant(true), date: $viewModel.date)
                         NavigationLink(destination: picker) {
-                            VStack(alignment: .leading) {
-                                Text(viewModel.date.formatted(date: .complete, time: .omitted))
-                                Text(viewModel.date.formatted(date: .omitted, time: .shortened))
-                            }.font(.footnote)
+                            Text(viewModel.date.formatted(date: .complete, time: .shortened)).font(.footnote)
                         }
                     }
                     

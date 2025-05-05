@@ -6,8 +6,14 @@ import SwiftData
 class DataController {
     static let accountNameExamples = [
         "Banco do Brasil",
-        "Maya Trust",
-        "Feijão Bank"
+        "Maya Bank",
+        "Feijão Trust"
+    ]
+    
+    static let cardNameExamples = [
+        "Vasa",
+        "Mustacard",
+        "Gehrke Card"
     ]
     
     static let transactionNameExamples = [
@@ -61,6 +67,15 @@ class DataController {
                 currency: accountCurrencyExamples.randomElement()!)
     }
     
+    static func createRandomCreditCard() -> CreditCard {
+        CreditCard(id: UUID(),
+                   name: cardNameExamples.randomElement()!,
+                   color: NiceColor.allCases.randomElement()!.rawValue,
+                   currency: accountCurrencyExamples.randomElement()!,
+                   closingCycleDay: 3,
+                   dueDay: 10)
+    }
+    
     static func createRandomTransaction(using context: ModelContext? = nil) -> Transaction {
         let account = (try? context?.fetch(FetchDescriptor<Account>()).randomElement()) ?? createRandomAccount()
         let category = (try? context?.fetch(FetchDescriptor<Category>()).randomElement()) ?? createRandomCategory(withIcon: true)
@@ -90,7 +105,12 @@ class DataController {
     static let previewContainer: ModelContainer = {
         do {
             let config = ModelConfiguration(isStoredInMemoryOnly: true)
-            let container = try ModelContainer(for: Account.self, configurations: config)
+            let container = try ModelContainer(for: Account.self,
+                                               Category.self,
+                                               Transaction.self,
+                                               Installment.self,
+                                               Bill.self,
+                                               CreditCard.self, configurations: config)
 
             let accounts = accountNameExamples.map {
                 Account(
@@ -109,6 +129,15 @@ class DataController {
             }
             categories.forEach { container.mainContext.insert($0) }
 
+            cardNameExamples.map {
+                CreditCard(id: UUID(),
+                           name: $0,
+                           color: NiceColor.allCases.randomElement()!.rawValue,
+                           currency: accountCurrencyExamples.randomElement()!,
+                           closingCycleDay: 3,
+                           dueDay: 10)
+            }.forEach { container.mainContext.insert($0) }
+            
             try container.mainContext.save()
             transactionNameExamples.forEach {
                 let transaction = Transaction(
