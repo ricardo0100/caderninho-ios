@@ -61,6 +61,6 @@ struct CategoryDetails: View {
     NavigationStack {
         CategoryDetails()
             .environmentObject(DataController.createRandomCategory(withIcon: true))
-            .modelContainer(DataController.previewContainer)
+            .modelContainer(.preview)
     }
 }

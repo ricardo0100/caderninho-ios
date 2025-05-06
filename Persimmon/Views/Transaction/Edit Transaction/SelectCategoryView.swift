@@ -29,5 +29,5 @@ struct SelectCategoryView: View {
 #Preview {
     @Previewable @State var category: Category?
     SelectCategoryView(selected: $category)
-        .modelContainer(DataController.previewContainer)
+        .modelContainer(.preview)
 }

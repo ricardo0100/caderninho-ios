@@ -29,6 +29,6 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
-        .modelContainer(DataController.previewContainer)
+        .modelContainer(.preview)
         .tint(.brand)
 }

@@ -126,5 +126,10 @@ struct EditTransactionView: View {
 
 #Preview {
     EditTransactionView(viewModel: .init())
-        .modelContainer(DataController.previewContainer)
+        .modelContainer(.preview)
+}
+
+#Preview {
+    EditTransactionView(viewModel: .init(transaction: DataController.createRandomTransaction()))
+        .modelContainer(.preview)
 }

@@ -58,6 +58,6 @@ struct ConfigurationsView: View {
 
 #Preview {
     ConfigurationsView()
-        .modelContainer(DataController.previewContainer)
+        .modelContainer(.preview)
         .tint(.brand)
 }

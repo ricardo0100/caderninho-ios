@@ -109,7 +109,7 @@ class DataController {
                  icon: withIcon ? NiceIcon.allCases.randomElement()!.rawValue : nil)
     }
 
-    static let previewContainer: ModelContainer = {
+    static func createPreviewContainerWithExampleData() -> ModelContainer {
         do {
             let container = try ModelContainer(
                 for: Account.self,
@@ -167,5 +167,5 @@ class DataController {
         } catch {
             fatalError("Failed to create model container for previewing: \(error.localizedDescription)")
         }
-    }()
+    }
 }

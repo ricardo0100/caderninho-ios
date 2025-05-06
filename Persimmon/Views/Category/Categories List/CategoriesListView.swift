@@ -45,6 +45,6 @@ struct CategoriesListView: View {
 #Preview {
     NavigationStack {
         CategoriesListView()
-            .modelContainer(DataController.previewContainer)
+            .modelContainer(.preview)
     }
 }

@@ -66,5 +66,5 @@ struct AccountsAndCardsListView: View {
 
 #Preview {
     AccountsAndCardsListView()
-        .modelContainer(DataController.previewContainer)
+        .modelContainer(.preview)
 }

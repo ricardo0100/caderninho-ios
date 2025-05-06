@@ -30,5 +30,5 @@ struct ContainerView: View {
 
 #Preview {
     ContainerView()
-        .modelContainer(DataController.previewContainer)
+        .modelContainer(.preview)
 }

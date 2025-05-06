@@ -36,5 +36,5 @@ struct CategoryExpensesView: View {
 
 #Preview {
     CategoryExpensesView()
-        .modelContainer(DataController.previewContainer)
+        .modelContainer(.preview)
 }

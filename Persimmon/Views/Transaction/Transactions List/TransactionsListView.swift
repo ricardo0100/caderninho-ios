@@ -103,7 +103,7 @@ struct DynamicTransactionsListView: View {
 #Preview {
     NavigationStack {
         TransactionsListView()
-            .modelContainer(DataController.previewContainer)
+            .modelContainer(.preview)
     }
 }
 

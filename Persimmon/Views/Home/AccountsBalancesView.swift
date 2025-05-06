@@ -35,5 +35,5 @@ struct AccountsBalancesView: View {
 
 #Preview {
     AccountsBalancesView()
-        .modelContainer(DataController.previewContainer)
+        .modelContainer(.preview)
 }

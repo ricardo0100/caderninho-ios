@@ -30,5 +30,5 @@ struct SelectAccountView: View {
 #Preview {
     @Previewable @State var account: Account? = nil
     SelectAccountView(selected: $account)
-        .modelContainer(DataController.previewContainer)
+        .modelContainer(.preview)
 }
