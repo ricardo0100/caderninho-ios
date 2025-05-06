@@ -94,7 +94,14 @@ class DataController {
                             latitude: -27.707511,
                             longitude: -48.510450))
     }
-
+    
+    static func createRandomInstallment() -> Installment {
+        let transaction = createRandomTransaction()
+        transaction.type = .buyCredit
+        let bill = Bill(id: UUID(), dueDate: Date().dateAddingDays(30))
+        return Installment(id: UUID(), date: Date().dateAddingDays(30), transaction: transaction, bill: bill, value: transaction.value)
+    }
+    
     static func createRandomCategory(withIcon: Bool = false) -> Category {
         Category(id: UUID(),
                  name: categoryNameExamples.randomElement()!,
@@ -104,14 +111,14 @@ class DataController {
 
     static let previewContainer: ModelContainer = {
         do {
-            let config = ModelConfiguration(isStoredInMemoryOnly: true)
-            let container = try ModelContainer(for: Account.self,
-                                               Category.self,
-                                               Transaction.self,
-                                               Installment.self,
-                                               Bill.self,
-                                               CreditCard.self, configurations: config)
-
+            let container = try ModelContainer(
+                for: Account.self,
+                Category.self,
+                Transaction.self,
+                Installment.self,
+                Bill.self,
+                CreditCard.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+            
             let accounts = accountNameExamples.map {
                 Account(
                     id: UUID(),
@@ -128,15 +135,18 @@ class DataController {
                          icon: NiceIcon.allCases.randomElement()!.rawValue)
             }
             categories.forEach { container.mainContext.insert($0) }
-
-            cardNameExamples.map {
+            
+            let cards = cardNameExamples.map {
                 CreditCard(id: UUID(),
                            name: $0,
                            color: NiceColor.allCases.randomElement()!.rawValue,
                            currency: accountCurrencyExamples.randomElement()!,
                            closingCycleDay: 3,
                            dueDay: 10)
-            }.forEach { container.mainContext.insert($0) }
+            }
+            cards.forEach { container.mainContext.insert($0) }
+            
+            
             
             try container.mainContext.save()
             transactionNameExamples.forEach {

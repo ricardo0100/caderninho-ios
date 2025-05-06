@@ -15,6 +15,7 @@ class Bill: ObservableObject {
     @Relationship(deleteRule: .cascade)
     var installments: [Installment] = []
     
+    var payed = false
     var dueDate: Date
     
     init(id: UUID, dueDate: Date) {

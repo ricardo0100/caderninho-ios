@@ -14,14 +14,14 @@ struct AccountsAndCardsListView: View {
     var body: some View {
         NavigationStack {
             List {
-                Section {
+                Section("Accounts") {
                     ForEach(accounts) { account in
                         NavigationLink(destination: AccountDetailsView().environmentObject(account)) {
                             AccountCellView().environmentObject(account)
                         }
                     }
                 }
-                Section {
+                Section("Credit Cards") {
                     ForEach(cards) { card in
                         NavigationLink(destination: CardDetailsView().environmentObject(card)) {
                             CreditCardCellView().environmentObject(card)
@@ -31,7 +31,7 @@ struct AccountsAndCardsListView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigation) {
-                    NavigationToolbarView(imageName: "creditcard", title: "Accounts")
+                    NavigationToolbarView(imageName: "creditcard", title: "Accounts and Cards")
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Menu {
