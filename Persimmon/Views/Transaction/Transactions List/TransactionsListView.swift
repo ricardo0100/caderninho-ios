@@ -43,10 +43,10 @@ struct TransactionsListView: View {
             }
         }
         .sheet(isPresented: $viewModel.isShowingEdit) {
-            EditTransactionView(viewModel: .init())
+            EditTransactionView(transaction: nil)
         }
         .sheet(item: $viewModel.ticketData, content: { data in
-            EditTransactionView(viewModel: .init(ticketData: data))
+//            EditTransactionView(viewModel: .init(ticketData: data))
         })
         .sheet(isPresented: $viewModel.isShowingCamera) {
             TicketReaderView(viewModel: .init(ticketData: $viewModel.ticketData))

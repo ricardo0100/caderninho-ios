@@ -11,7 +11,8 @@ struct EditTransactionView: View {
     @ObservedObject var viewModel: ViewModel
     @FocusState private var focusedField: Field?
     
-    init(viewModel: ViewModel) {
+    init(transaction: Transaction?) {
+        let viewModel = ViewModel(transaction: transaction, modelContainer: .main)
         _viewModel = ObservedObject(initialValue: viewModel)
     }
     
@@ -34,8 +35,8 @@ struct EditTransactionView: View {
                     
                     if viewModel.type == .buyCredit {
                         LabeledView(labelText: "Number of installments") {
-                            Stepper("\(viewModel.shares)",
-                                    value: $viewModel.shares,
+                            Stepper("\(viewModel.numberOfInstallments)",
+                                    value: $viewModel.numberOfInstallments,
                                     in: 1...36)
                         }
                     }
@@ -48,8 +49,8 @@ struct EditTransactionView: View {
                         
                         if viewModel.type == .buyCredit {
                             let currency = viewModel.account?.currency ?? ""
-                            let value = Double(viewModel.value / Double(viewModel.shares))
-                            Text("\(viewModel.shares) x \(value.toCurrency(with: currency))")
+                            let value = Double(viewModel.value / Double(viewModel.numberOfInstallments))
+                            Text("\(viewModel.numberOfInstallments) x \(value.toCurrency(with: currency))")
                                 .font(.callout)
                         }
                     }
@@ -84,7 +85,7 @@ struct EditTransactionView: View {
                         }
                     }
                 }
-                if viewModel.transaction != nil {
+                if viewModel.showDeleteButton {
                     Section {
                         Button("Delete Transaction", action: viewModel.didTapDelete)
                             .tint(.red)
@@ -125,11 +126,11 @@ struct EditTransactionView: View {
 }
 
 #Preview {
-    EditTransactionView(viewModel: .init())
+    EditTransactionView(transaction: nil)
         .modelContainer(.preview)
 }
 
 #Preview {
-    EditTransactionView(viewModel: .init(transaction: DataController.createRandomTransaction()))
+    EditTransactionView(transaction: DataController.createRandomTransaction())
         .modelContainer(.preview)
 }

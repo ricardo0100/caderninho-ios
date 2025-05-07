@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -85,6 +85,7 @@
 		CFD3ED6D2DC986CE0029AC2F /* BillCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED6C2DC986CC0029AC2F /* BillCellView.swift */; };
 		CFD3ED6F2DC986D90029AC2F /* InstallmentCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED6E2DC986D20029AC2F /* InstallmentCellView.swift */; };
 		CFD3ED802DCA3E9F0029AC2F /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED7F2DCA3E9E0029AC2F /* App.swift */; };
+		CFD3ED842DCA51490029AC2F /* EditTransactionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED812DCA51490029AC2F /* EditTransactionViewModelTests.swift */; };
 		CFDC21972BAF094000295432 /* EditTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDC21962BAF094000295432 /* EditTransactionView.swift */; };
 		CFDC219E2BAF29AF00295432 /* SelectAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDC219D2BAF29AF00295432 /* SelectAccountView.swift */; };
 		CFE563522C34C95100F8EA72 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE563512C34C94700F8EA72 /* PreviewData.swift */; };
@@ -201,6 +202,7 @@
 		CFD3ED6E2DC986D20029AC2F /* InstallmentCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentCellView.swift; sourceTree = "<group>"; };
 		CFD3ED742DCA3D2E0029AC2F /* PersimmonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PersimmonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFD3ED7F2DCA3E9E0029AC2F /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		CFD3ED812DCA51490029AC2F /* EditTransactionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTransactionViewModelTests.swift; sourceTree = "<group>"; };
 		CFDC21962BAF094000295432 /* EditTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTransactionView.swift; sourceTree = "<group>"; };
 		CFDC219D2BAF29AF00295432 /* SelectAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAccountView.swift; sourceTree = "<group>"; };
 		CFE563512C34C94700F8EA72 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
@@ -212,10 +214,6 @@
 		CFF292A52A13B8FE00C1A66A /* EditCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryView.swift; sourceTree = "<group>"; };
 		CFF292A72A13B93F00C1A66A /* EditAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		CFD3ED752DCA3D2E0029AC2F /* PersimmonTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PersimmonTests; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		CF2CB09E2A06F8D600CBA434 /* Frameworks */ = {
@@ -287,7 +285,7 @@
 				CF2CB0A32A06F8D600CBA434 /* Persimmon */,
 				CF2CB0AA2A06F8D900CBA434 /* Preview Content */,
 				CFA1DE612A0C32B20055E3CD /* BudgetWidget */,
-				CFD3ED752DCA3D2E0029AC2F /* PersimmonTests */,
+				CFD3ED832DCA51490029AC2F /* PersimmonTests */,
 				CFA1DE5C2A0C32B20055E3CD /* Frameworks */,
 				CF2CB0A22A06F8D600CBA434 /* Products */,
 			);
@@ -357,8 +355,12 @@
 		CF3116EF2A14437B00171A4D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CF9DA5A12D1715AC0061056F /* GraphItem.swift */,
-				CF9DA5A92D1717390061056F /* Persistency */,
+				CFD3ED5C2DC592070029AC2F /* CreditCard.swift */,
+				CFD3ED5A2DC57B070029AC2F /* Bill.swift */,
+				CF9DA5AE2D17B0010061056F /* Installment.swift */,
+				CF3116F02A14438600171A4D /* Account.swift */,
+				CF95BC152C566EE900C8C1CE /* Category.swift */,
+				CFE6D7BE2BA9B4C000E76AB8 /* Transaction.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -417,23 +419,11 @@
 		CF9DA59A2D170AB70061056F /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				CF9DA5A12D1715AC0061056F /* GraphItem.swift */,
 				CF9DA59E2D170B180061056F /* BarsGraphView.swift */,
 				CFBEE2522A08471100586164 /* PizzaGraphView.swift */,
 			);
 			path = Graphics;
-			sourceTree = "<group>";
-		};
-		CF9DA5A92D1717390061056F /* Persistency */ = {
-			isa = PBXGroup;
-			children = (
-				CFD3ED5C2DC592070029AC2F /* CreditCard.swift */,
-				CFD3ED5A2DC57B070029AC2F /* Bill.swift */,
-				CF9DA5AE2D17B0010061056F /* Installment.swift */,
-				CF3116F02A14438600171A4D /* Account.swift */,
-				CF95BC152C566EE900C8C1CE /* Category.swift */,
-				CFE6D7BE2BA9B4C000E76AB8 /* Transaction.swift */,
-			);
-			path = Persistency;
 			sourceTree = "<group>";
 		};
 		CFA1DE4F2A0BCA340055E3CD /* Design System */ = {
@@ -566,6 +556,14 @@
 			path = Bill;
 			sourceTree = "<group>";
 		};
+		CFD3ED832DCA51490029AC2F /* PersimmonTests */ = {
+			isa = PBXGroup;
+			children = (
+				CFD3ED812DCA51490029AC2F /* EditTransactionViewModelTests.swift */,
+			);
+			path = PersimmonTests;
+			sourceTree = "<group>";
+		};
 		CFDC21952BAF08B600295432 /* Edit Transaction */ = {
 			isa = PBXGroup;
 			children = (
@@ -655,9 +653,6 @@
 			);
 			dependencies = (
 				CFD3ED792DCA3D2E0029AC2F /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				CFD3ED752DCA3D2E0029AC2F /* PersimmonTests */,
 			);
 			name = PersimmonTests;
 			packageProductDependencies = (
@@ -837,6 +832,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFD3ED842DCA51490029AC2F /* EditTransactionViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

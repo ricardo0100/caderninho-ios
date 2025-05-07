@@ -4,6 +4,7 @@
 //
 //  Created by Ricardo Gehrke Filho on 22/12/24.
 //
+
 import SwiftUI
 import SwiftData
 import Vision
@@ -12,7 +13,8 @@ import NaturalLanguage
 
 extension EditTransactionView {
     public class ViewModel: ObservableObject {
-        let transaction: Transaction?
+        private let transaction: Transaction?
+        private let modelContainer: ModelContainer
         
         // Model vars
         @Published var name: String
@@ -22,7 +24,7 @@ extension EditTransactionView {
         @Published var type: Transaction.TransactionType
         @Published var date: Date
         @Published var place: Transaction.Place?
-        @Published var shares: Int
+        @Published var numberOfInstallments: Int
         
         // UI only vars
         @Published var nameError: String? = ""
@@ -31,8 +33,9 @@ extension EditTransactionView {
         @Published var shouldDismiss: Bool = false
         @Published var isRecognizingImage: Bool = false
         
-        init(transaction: Transaction? = nil) {
+        init(transaction: Transaction? = nil, modelContainer: ModelContainer) {
             self.transaction = transaction
+            self.modelContainer = modelContainer
             _name = Published(initialValue: transaction?.name ?? "")
             _account = Published(initialValue: transaction?.account)
             _value = Published(initialValue: transaction?.value ?? .zero)
@@ -40,11 +43,12 @@ extension EditTransactionView {
             _type = Published(initialValue: transaction?.type ?? .buyCredit)
             _date = Published(initialValue: transaction?.date ?? Date())
             _place = Published(initialValue: transaction?.place)
-            _shares = Published(initialValue: transaction?.installments.count ?? 1)
+            _numberOfInstallments = Published(initialValue: transaction?.installments.count ?? 1)
         }
         
-        init(ticketData: TicketData) {
+        init(ticketData: TicketData, modelContainer: ModelContainer) {
             self.transaction = nil
+            self.modelContainer = modelContainer
             _name = Published(initialValue: "")
             _account = Published(initialValue: nil)
             _value = Published(initialValue: ticketData.value ?? 0)
@@ -52,7 +56,11 @@ extension EditTransactionView {
             _type = Published(initialValue: ticketData.type ?? .buyCredit)
             _date = Published(initialValue: ticketData.date ?? Date())
             _place = Published(initialValue: nil)
-            _shares = Published(initialValue: 1)
+            _numberOfInstallments = Published(initialValue: 1)
+        }
+        
+        var showDeleteButton: Bool {
+            transaction != nil
         }
         
         @MainActor func viewDidAppear() {
@@ -76,7 +84,7 @@ extension EditTransactionView {
         
         @MainActor func didConfirmDelete() {
             guard let transaction = transaction else { return }
-            let context = ModelContainer.shared.mainContext
+            let context = modelContainer.mainContext
             context.delete(transaction)
             try? context.save()
             shouldDismiss = true
@@ -103,17 +111,17 @@ extension EditTransactionView {
         }
         
         @MainActor private func fetchLastUsedAccount() -> Account? {
-            try? ModelContainer.shared.mainContext.fetch(FetchDescriptor<Transaction>(
+            try? modelContainer.mainContext.fetch(FetchDescriptor<Transaction>(
                 sortBy: [SortDescriptor(\.date, order: .reverse)])).first?.account
         }
         
         @MainActor private func fetchLastUsedCategory() -> Category? {
-            try? ModelContainer.shared.mainContext.fetch(FetchDescriptor<Transaction>(
+            try? modelContainer.mainContext.fetch(FetchDescriptor<Transaction>(
                 sortBy: [SortDescriptor(\.date, order: .reverse)])).first?.category
         }
         
         @MainActor private func saveTransaction() {
-            let context = ModelContainer.shared.mainContext
+            let context = modelContainer.mainContext
             guard let account = account else {
                 return
             }

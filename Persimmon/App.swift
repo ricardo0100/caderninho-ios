@@ -11,7 +11,7 @@ struct PersimmonApp: App {
     var body: some Scene {
         WindowGroup {
             ContainerView()
-                .modelContainer(.shared)
+                .modelContainer(.main)
         }
     }
 }

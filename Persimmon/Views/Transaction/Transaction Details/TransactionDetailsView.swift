@@ -86,7 +86,7 @@ struct TransactionDetailsView: View {
             }
         }
         .sheet(item: $editingTransaction) {
-            EditTransactionView(viewModel: .init(transaction: $0))
+            EditTransactionView(transaction: $0)
         }
         .onChange(of: editingTransaction) {
             if transaction.modelContext == nil {

@@ -44,7 +44,7 @@ extension EditCreditCardView {
                 currencyError = "Choose a currency for this card"
                 return
             }
-            let context = ModelContainer.shared.mainContext
+            let context = ModelContainer.main.mainContext
             if let card = creditCard {
                 card.name = name
                 card.color = niceColor.rawValue
