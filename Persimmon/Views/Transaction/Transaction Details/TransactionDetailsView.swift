@@ -26,17 +26,17 @@ struct TransactionDetailsView: View {
                     }
                 }
                 
-                LabeledView(labelText: "Account") {
-                    HStack(spacing: .spacingMedium) {
-                        LettersIconView(text: transaction.account.name.firstLetters(),
-                                        color: Color(hex: transaction.account.color))
-                        Text(transaction.account.name).font(.title3)
-                    }
-                }
+//                LabeledView(labelText: "Account") {
+//                    HStack(spacing: .spacingMedium) {
+//                        LettersIconView(text: transaction.account.name.firstLetters(),
+//                                        color: Color(hex: transaction.account.color))
+//                        Text(transaction.account.name).font(.title3)
+//                    }
+//                }
                 
-                LabeledView(labelText: "Value") {
-                    Text(transaction.value.toCurrency(with: transaction.account.currency)).font(.title3)
-                }
+//                LabeledView(labelText: "Value") {
+//                    Text(transaction.value.toCurrency(with: transaction.account.currency)).font(.title3)
+//                }
                 
                 if let category = transaction.category {
                     LabeledView(labelText: "Category") {

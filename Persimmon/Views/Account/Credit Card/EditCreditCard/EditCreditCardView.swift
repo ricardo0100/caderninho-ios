@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct EditCreditCardView: View {
     enum Field: Hashable {
@@ -106,5 +107,7 @@ struct EditCreditCardView: View {
 }
 
 #Preview {
-    EditCreditCardView(creditCard: DataController.createRandomCreditCard())
+    @Previewable @Query var cards: [CreditCard]
+    
+    EditCreditCardView(creditCard: cards.first!)
 }

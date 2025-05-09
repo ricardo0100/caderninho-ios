@@ -7,8 +7,8 @@ class Transaction: ObservableObject {
     @Attribute(.unique) var id: UUID
     
     @Relationship(deleteRule: .noAction, inverse: \Account.transactions)
-    var account: Account
-
+    var account: Account?
+    
     @Relationship(deleteRule: .noAction, inverse: \Category.transactions)
     var category: Category?
     
@@ -39,6 +39,21 @@ class Transaction: ObservableObject {
         self.place = place
     }
     
+    init(id: UUID,
+         name: String,
+         value: Double,
+         category: Category?,
+         date: Date,
+         place: Place?) {
+        self.id = id
+        self.name = name
+        self.value = value
+        self.category = category
+        self.date = date
+        self.type = .installments
+        self.place = place
+    }
+    
     struct Place: Codable, Identifiable, Hashable {
         var id: Int {
             hashValue
@@ -55,37 +70,33 @@ class Transaction: ObservableObject {
         }
     }
     
+    var currency: String? {
+        type == .installments ? installments.first?.bill.card.currency : account?.currency
+    }
+    
     enum TransactionType: String, Codable, CaseIterable, Identifiable {
         var id: Int { hashValue }
         
-        case buyDebit
-        case buyCredit
-        case transferIn
-        case transferOut
-        case adjustment
+        case installments
+        case `in`
+        case out
         
         var text: String {
             switch self {
-            case .buyDebit: return "Buy in Debit"
-            case .buyCredit: return "Buy in Credit"
-            case .transferIn: return "Transfer In"
-            case .transferOut: return "Transfer Out"
-            case .adjustment: return "Adjustment"
+            case .installments: return "Installments"
+            case .in: return "Transfer In"
+            case .out: return "Transfer Out"
             }
         }
         
         var iconName: String {
             switch self {
-            case .buyCredit:
+            case .installments:
                 return "creditcard"
-            case .buyDebit:
-                return "banknote"
-            case .transferIn:
+            case .in:
                 return "arrow.down.to.line.circle"
-            case .transferOut:
+            case .out:
                 return "arrow.up.to.line.circle"
-            case .adjustment:
-                return "plus.forwardslash.minus"
             }
         }
     }

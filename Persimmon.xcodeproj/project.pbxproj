@@ -33,6 +33,7 @@
 		CF5746392D22C294007CC196 /* NiceColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9D2A712A09967F0003DC39 /* NiceColorPicker.swift */; };
 		CF57463A2D22C2AB007CC196 /* NiceIconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC192C5675DE00C8C1CE /* NiceIconPicker.swift */; };
 		CF57463F2D240014007CC196 /* AccountBalanceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF57463E2D240007007CC196 /* AccountBalanceProvider.swift */; };
+		CF7147162DCEC02C00ED0A25 /* AccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7147152DCEC02C00ED0A25 /* AccountTests.swift */; };
 		CF72A07F2BB9FB9900E0FDB1 /* CurrencyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF72A07E2BB9FB9900E0FDB1 /* CurrencyTextField.swift */; };
 		CF7A80462A0DA8CC0067F5A8 /* PizzaGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2522A08471100586164 /* PizzaGraphView.swift */; };
 		CF7A80492A0DAC580067F5A8 /* CategoriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A80482A0DAC580067F5A8 /* CategoriesListView.swift */; };
@@ -86,6 +87,7 @@
 		CFD3ED6F2DC986D90029AC2F /* InstallmentCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED6E2DC986D20029AC2F /* InstallmentCellView.swift */; };
 		CFD3ED802DCA3E9F0029AC2F /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED7F2DCA3E9E0029AC2F /* App.swift */; };
 		CFD3ED842DCA51490029AC2F /* EditTransactionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED812DCA51490029AC2F /* EditTransactionViewModelTests.swift */; };
+		CFD3ED872DCBF3DC0029AC2F /* SelectCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED862DCBF3D30029AC2F /* SelectCardView.swift */; };
 		CFDC21972BAF094000295432 /* EditTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDC21962BAF094000295432 /* EditTransactionView.swift */; };
 		CFDC219E2BAF29AF00295432 /* SelectAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDC219D2BAF29AF00295432 /* SelectAccountView.swift */; };
 		CFE563522C34C95100F8EA72 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE563512C34C94700F8EA72 /* PreviewData.swift */; };
@@ -152,6 +154,7 @@
 		CF5746372D22BE2C007CC196 /* AccountData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountData.swift; sourceTree = "<group>"; };
 		CF57463E2D240007007CC196 /* AccountBalanceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountBalanceProvider.swift; sourceTree = "<group>"; };
 		CF5746402D24114D007CC196 /* Persimmon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Persimmon.entitlements; sourceTree = "<group>"; };
+		CF7147152DCEC02C00ED0A25 /* AccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTests.swift; sourceTree = "<group>"; };
 		CF72A07E2BB9FB9900E0FDB1 /* CurrencyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextField.swift; sourceTree = "<group>"; };
 		CF7A80482A0DAC580067F5A8 /* CategoriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListView.swift; sourceTree = "<group>"; };
 		CF7A804E2A0DBAE20067F5A8 /* ImageIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIconView.swift; sourceTree = "<group>"; };
@@ -203,6 +206,7 @@
 		CFD3ED742DCA3D2E0029AC2F /* PersimmonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PersimmonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFD3ED7F2DCA3E9E0029AC2F /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		CFD3ED812DCA51490029AC2F /* EditTransactionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTransactionViewModelTests.swift; sourceTree = "<group>"; };
+		CFD3ED862DCBF3D30029AC2F /* SelectCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCardView.swift; sourceTree = "<group>"; };
 		CFDC21962BAF094000295432 /* EditTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTransactionView.swift; sourceTree = "<group>"; };
 		CFDC219D2BAF29AF00295432 /* SelectAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAccountView.swift; sourceTree = "<group>"; };
 		CFE563512C34C94700F8EA72 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
@@ -560,6 +564,7 @@
 			isa = PBXGroup;
 			children = (
 				CFD3ED812DCA51490029AC2F /* EditTransactionViewModelTests.swift */,
+				CF7147152DCEC02C00ED0A25 /* AccountTests.swift */,
 			);
 			path = PersimmonTests;
 			sourceTree = "<group>";
@@ -571,6 +576,7 @@
 				CF9DA5B02D1839210061056F /* EditTransactionViewModel.swift */,
 				CF95BC212C581C0C00C8C1CE /* SelectCategoryView.swift */,
 				CFDC219D2BAF29AF00295432 /* SelectAccountView.swift */,
+				CFD3ED862DCBF3D30029AC2F /* SelectCardView.swift */,
 				CFB7F5602BBEBFE6009956E9 /* SelectTransactionTypeView.swift */,
 			);
 			path = "Edit Transaction";
@@ -789,6 +795,7 @@
 				CF15B34A2BAC3D1200E8E050 /* NavigationToolbarView.swift in Sources */,
 				CFD3ED5B2DC57B0F0029AC2F /* Bill.swift in Sources */,
 				CFBEE2412A07F9A000586164 /* AccountsAndCardsListView.swift in Sources */,
+				CFD3ED872DCBF3DC0029AC2F /* SelectCardView.swift in Sources */,
 				CF9D2A722A0996800003DC39 /* NiceColorPicker.swift in Sources */,
 				CF95BC162C566EED00C8C1CE /* Category.swift in Sources */,
 				CF3116F12A14438600171A4D /* Account.swift in Sources */,
@@ -833,6 +840,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFD3ED842DCA51490029AC2F /* EditTransactionViewModelTests.swift in Sources */,
+				CF7147162DCEC02C00ED0A25 /* AccountTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -977,7 +985,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = 2T9EKFYB5P;
+				DEVELOPMENT_TEAM = AKNQLC48L4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Persimmon/Info.plist;
@@ -996,7 +1004,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.rrghkf.Persimmon;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.rrghkf.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1013,7 +1021,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = 2T9EKFYB5P;
+				DEVELOPMENT_TEAM = AKNQLC48L4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Persimmon/Info.plist;
@@ -1032,7 +1040,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.rrghkf.Persimmon;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.rrghkf.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1059,7 +1067,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.rrghkf.Persimmon.BudgetWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.rrghkf.test.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1087,7 +1095,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.rrghkf.Persimmon.BudgetWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.rrghkf.test.Widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;

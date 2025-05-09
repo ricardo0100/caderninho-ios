@@ -11,8 +11,11 @@ class Account: ObservableObject {
     @Relationship(deleteRule: .cascade)
     var transactions: [Transaction] = []
     
-    @Transient var balance: Double {
-        transactions.map { $0.value }.reduce(.zero, +)
+    @Transient
+    var balance: Double {
+        transactions.map {
+            $0.type == .out ? -$0.value : $0.value
+        }.reduce(.zero, +)
     }
     
     init(id: UUID, name: String, color: String, currency: String) {

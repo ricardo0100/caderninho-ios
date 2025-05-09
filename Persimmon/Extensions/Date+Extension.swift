@@ -65,4 +65,8 @@ extension Date {
     func dateAddingDays(_ days: Int) -> Date {
         Calendar.current.date(byAdding: .day, value: days, to: self) ?? self
     }
+    
+    func dateAddingMonths(_ months: Int) -> Date {
+        Calendar.current.date(byAdding: .month, value: months, to: self) ?? self
+    }
 }

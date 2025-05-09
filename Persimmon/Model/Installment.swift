@@ -10,7 +10,7 @@ import Foundation
 
 @Model
 class Installment: ObservableObject {
-    @Relationship(deleteRule: .noAction)
+    @Relationship()
     var transaction: Transaction
     
     @Relationship(deleteRule: .noAction, inverse: \Bill.installments)
@@ -19,13 +19,13 @@ class Installment: ObservableObject {
     @Attribute(.unique)
     var id: UUID
     
-    var date: Date
+    var number: Int
     var value: Double
     
-    init(id: UUID, date: Date, transaction: Transaction, bill: Bill, value: Double) {
+    init(id: UUID, transaction: Transaction, number: Int, bill: Bill, value: Double) {
         self.id = id
-        self.date = date
         self.transaction = transaction
+        self.number = number
         self.bill = bill
         self.value = value
     }

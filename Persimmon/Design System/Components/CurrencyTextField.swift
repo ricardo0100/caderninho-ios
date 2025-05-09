@@ -3,11 +3,12 @@ import Combine
 
 struct CurrencyTextField: View {
     @Binding var value: Double
+    let currency: String
     @State var text: String = ""
     
     private let currencyFormatter: NumberFormatter
     private let decimalPlaces = 2
-    private let currency: String
+    
     private let font: Font
     
     init(currency: String, value: Binding<Double>, font: Font = .body) {

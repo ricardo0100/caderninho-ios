@@ -19,6 +19,6 @@ struct SelectTransactionTypeView: View {
 }
 
 #Preview {
-    @Previewable @State var selectedType: Transaction.TransactionType = .buyDebit
+    @Previewable @State var selectedType: Transaction.TransactionType = .out
     SelectTransactionTypeView(selectedType: $selectedType)
 }

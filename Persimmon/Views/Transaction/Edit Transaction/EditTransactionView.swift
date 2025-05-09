@@ -24,16 +24,20 @@ struct EditTransactionView: View {
                         TextField("Transaction Name", text: $viewModel.name)
                             .focused($focusedField, equals: .name)
                     }
-                    
-                    LabeledView(labelText: "Account", error: $viewModel.accountError) {
-                        SelectAccountView(selected: $viewModel.account)
-                    }
-                    
                     LabeledView(labelText: "Type") {
                         SelectTransactionTypeView(selectedType: $viewModel.type)
                     }
                     
-                    if viewModel.type == .buyCredit {
+                    if viewModel.showAccountField {
+                        LabeledView(labelText: "Account", error: $viewModel.accountError) {
+                            SelectAccountView(selected: $viewModel.account)
+                        }
+                    }
+                    
+                    if viewModel.showCardField {
+                        LabeledView(labelText: "Card", error: $viewModel.cardError) {
+                            SelectCardView(selected: $viewModel.card)
+                        }
                         LabeledView(labelText: "Number of installments") {
                             Stepper("\(viewModel.numberOfInstallments)",
                                     value: $viewModel.numberOfInstallments,
@@ -42,16 +46,15 @@ struct EditTransactionView: View {
                     }
                     
                     LabeledView(labelText: "Value") {
-                        CurrencyTextField(currency: viewModel.account?.currency ?? "",
-                                          value: $viewModel.value,
-                                          font: .title2)
+                        if let currency = viewModel.account?.currency ?? viewModel.card?.currency {
+                            CurrencyTextField(currency: currency,
+                                              value: $viewModel.value,
+                                              font: .title2)
                             .focused($focusedField, equals: .value)
-                        
-                        if viewModel.type == .buyCredit {
-                            let currency = viewModel.account?.currency ?? ""
-                            let value = Double(viewModel.value / Double(viewModel.numberOfInstallments))
-                            Text("\(viewModel.numberOfInstallments) x \(value.toCurrency(with: currency))")
-                                .font(.callout)
+                            if viewModel.type == .installments {
+                                Text(viewModel.installmentsDescription)
+                                    .font(.callout)
+                            }
                         }
                     }
                     
@@ -95,14 +98,14 @@ struct EditTransactionView: View {
             .gesture(TapGesture().onEnded({ _ in
                 focusedField = nil
             }), isEnabled: focusedField != nil)
-            .confirmationDialog("Delete?", isPresented: $viewModel.showDeleteAlert, actions: {
+            .confirmationDialog("Delete?", isPresented: $viewModel.showDeleteAlert) {
                 Button("Delete") {
                     viewModel.didConfirmDelete()
                 }.tint(.red)
                 Button("Cancel") {
                     viewModel.didTapCancelDelete()
                 }
-            })
+            }
             .toolbar {
                 ToolbarItem(placement: .navigation) {
                     Button("Cancel", action: viewModel.didTapCancel)

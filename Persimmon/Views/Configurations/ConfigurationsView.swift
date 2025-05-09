@@ -19,6 +19,9 @@ struct ConfigurationsView: View {
                     Button("Create Example Category") {
                         createExampleCategory()
                     }
+                    Button("Create Example Card") {
+                        createExampleCard()
+                    }
                     Button("Reset Database") {
                         // TODO: Implement
                     }
@@ -52,6 +55,10 @@ struct ConfigurationsView: View {
     
     func createExampleCategory() {
         modelContext.insert(DataController.createRandomCategory())
+        try? modelContext.save()
+    }
+    func createExampleCard() {
+//        modelContext.insert(DataController.createRandomCreditCard())
         try? modelContext.save()
     }
 }

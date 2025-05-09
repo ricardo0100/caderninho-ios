@@ -9,8 +9,8 @@ struct TransactionCellView: View {
             VStack(alignment: .leading) {
                 Text(transaction.name)
                     .font(.headline)
-                Text(transaction.value.toCurrency(with: transaction.account.currency))
-                    .font(.subheadline)
+//                Text(transaction.value.toCurrency(with: transaction.account.currency))
+//                    .font(.subheadline)
                 HStack(spacing: .spacingSmall) {
                     Image(systemName: transaction.type.iconName)
                         .resizable()
@@ -23,11 +23,11 @@ struct TransactionCellView: View {
             Spacer()
             VStack(alignment: .trailing) {
                 HStack(spacing: .spacingSmall) {
-                    Text("\(transaction.account.name)")
-                        .font(.subheadline)
-                    LettersIconView(text: transaction.account.name.firstLetters(),
-                                    color: Color(hex: transaction.account.color),
-                                    size: 12)
+//                    Text("\(transaction.account.name)")
+//                        .font(.subheadline)
+//                    LettersIconView(text: transaction.account.name.firstLetters(),
+//                                    color: Color(hex: transaction.account.color),
+//                                    size: 12)
                 }
                 if let category = transaction.category {
                     HStack(spacing: .spacingSmall) {

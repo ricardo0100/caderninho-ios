@@ -32,12 +32,9 @@ struct CreditCardCellView: View {
 }
 
 #Preview {
-    List {
+    @Previewable @Query var cards: [CreditCard]
+    VStack {
         CreditCardCellView()
-            .environment(DataController.createRandomCreditCard())
-        CreditCardCellView()
-            .environment(DataController.createRandomCreditCard())
-        CreditCardCellView()
-            .environment(DataController.createRandomCreditCard())
-    }
+            .environmentObject(cards.first!)
+    }.modelContainer(.preview)
 }

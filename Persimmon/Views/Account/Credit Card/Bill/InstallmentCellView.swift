@@ -6,18 +6,33 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct InstallmentCellView: View {
     @EnvironmentObject var installment: Installment
     
     var body: some View {
-        Text(installment.transaction.name)
+        HStack {
+            VStack(alignment: .leading) {
+                Text(installment.transaction.name)
+                Text("Total: \(installment.transaction.value.toCurrency(with: installment.bill.card.currency))")
+                    .font(.footnote)
+            }
+            Spacer()
+            VStack(alignment: .trailing) {
+                Text(installment.value.toCurrency(with: installment.bill.card.currency))
+                    .bold()
+                Text("Installment \(installment.number) of \(installment.transaction.installments.count)")
+                    .font(.footnote)
+            }
+        }
     }
 }
 
 #Preview {
-    List(0 ..< 5) { item in
+    let card = try! ModelContainer.preview.mainContext.fetch(FetchDescriptor<CreditCard>()).first!
+    List(card.bills.first?.installments ?? []) { item in
         InstallmentCellView()
-            .environmentObject(DataController.createRandomInstallment())
+            .environmentObject(item)
     }
 }

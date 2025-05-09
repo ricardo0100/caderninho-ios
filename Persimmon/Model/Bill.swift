@@ -12,18 +12,25 @@ import Foundation
 class Bill: ObservableObject {
     @Attribute(.unique) var id: UUID
     
-    @Relationship(deleteRule: .cascade)
+    @Relationship(deleteRule: .cascade, inverse: \CreditCard.bills)
     var card: CreditCard
     
     @Relationship(deleteRule: .cascade)
     var installments: [Installment] = []
     
-    var payed = false
-    var dueDate: Date
+//    @Transient
+//    var total: Double {
+//        installments.
+//    }
     
-    init(id: UUID, card: CreditCard, dueDate: Date) {
+    var payed = false
+    var month: Int
+    var year: Int
+    
+    init(id: UUID, card: CreditCard, month: Int, year: Int) {
         self.id = id
         self.card = card
-        self.dueDate = dueDate
+        self.month = month
+        self.year = year
     }
 }

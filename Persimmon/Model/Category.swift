@@ -13,7 +13,7 @@ class Category: ObservableObject {
     
     func expensesSum(for currency: String) -> Double {
         transactions
-            .filter { $0.value > .zero && $0.account.currency == currency }
+            .filter { $0.value > .zero && $0.currency == currency }
             .map { $0.value }
             .reduce(.zero, +)
     }

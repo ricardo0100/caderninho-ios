@@ -12,26 +12,35 @@ import PhotosUI
 import NaturalLanguage
 
 extension EditTransactionView {
+    @MainActor
     public class ViewModel: ObservableObject {
         private let transaction: Transaction?
         private let modelContainer: ModelContainer
         
         // Model vars
         @Published var name: String
+        @Published var type: Transaction.TransactionType {
+            didSet {
+                updateVisibleFields()
+            }
+        }
         @Published var account: Account?
+        @Published var card: CreditCard?
         @Published var value: Double
         @Published var category: Category?
-        @Published var type: Transaction.TransactionType
         @Published var date: Date
         @Published var place: Transaction.Place?
         @Published var numberOfInstallments: Int
         
-        // UI only vars
+        // UI state vars
         @Published var nameError: String? = ""
         @Published var accountError: String? = ""
+        @Published var cardError: String? = ""
         @Published var showDeleteAlert = false
         @Published var shouldDismiss: Bool = false
         @Published var isRecognizingImage: Bool = false
+        @Published var showAccountField: Bool = false
+        @Published var showCardField: Bool = false
         
         init(transaction: Transaction? = nil, modelContainer: ModelContainer) {
             self.transaction = transaction
@@ -40,10 +49,11 @@ extension EditTransactionView {
             _account = Published(initialValue: transaction?.account)
             _value = Published(initialValue: transaction?.value ?? .zero)
             _category = Published(initialValue: transaction?.category)
-            _type = Published(initialValue: transaction?.type ?? .buyCredit)
+            _type = Published(initialValue: transaction?.type ?? .installments)
             _date = Published(initialValue: transaction?.date ?? Date())
             _place = Published(initialValue: transaction?.place)
             _numberOfInstallments = Published(initialValue: transaction?.installments.count ?? 1)
+            updateVisibleFields()
         }
         
         init(ticketData: TicketData, modelContainer: ModelContainer) {
@@ -53,21 +63,36 @@ extension EditTransactionView {
             _account = Published(initialValue: nil)
             _value = Published(initialValue: ticketData.value ?? 0)
             _category = Published(initialValue: nil)
-            _type = Published(initialValue: ticketData.type ?? .buyCredit)
+            _type = Published(initialValue: ticketData.type ?? .installments)
             _date = Published(initialValue: ticketData.date ?? Date())
             _place = Published(initialValue: nil)
             _numberOfInstallments = Published(initialValue: 1)
+            updateVisibleFields()
         }
         
         var showDeleteButton: Bool {
             transaction != nil
         }
         
-        @MainActor func viewDidAppear() {
+        private var currency: String {
+            (type == .installments ? card?.currency : account?.currency) ?? ""
+        }
+        
+        var installmentsDescription: String {
+            "\(numberOfInstallments) x \(value.toCurrency(with: currency))"
+        }
+        
+        @MainActor
+        func viewDidAppear() {
             if transaction == nil, account == nil {
                 account = fetchLastUsedAccount()
                 category = fetchLastUsedCategory()
             }
+        }
+        
+        private func updateVisibleFields() {
+            showCardField = type == .installments
+            showAccountField = type != .installments
         }
         
         func didTapCancel() {
@@ -82,7 +107,7 @@ extension EditTransactionView {
             showDeleteAlert = false
         }
         
-        @MainActor func didConfirmDelete() {
+        func didConfirmDelete() {
             guard let transaction = transaction else { return }
             let context = modelContainer.mainContext
             context.delete(transaction)
@@ -90,67 +115,90 @@ extension EditTransactionView {
             shouldDismiss = true
         }
         
-        @MainActor func didTapSave() {
-            withAnimation {
-                clearErrors()
-                guard !name.isEmpty else {
-                    nameError = "Mandatory field"
-                    return
-                }
-                guard account != nil else {
-                    accountError = "Select an account"
-                    return
-                }
+        func didTapSave() {
+            clearErrors()
+            if name.isEmpty {
+                nameError = "Mandatory field"
+                return
             }
+            if type != .installments, account == nil {
+                accountError = "Select an account"
+                return
+            }
+            if type == .installments, card == nil {
+                cardError = "Select a card"
+                return
+            }
+            
             saveTransaction()
         }
         
         private func clearErrors() {
             nameError = nil
             accountError = nil
+            cardError = nil
         }
         
-        @MainActor private func fetchLastUsedAccount() -> Account? {
+        private func fetchLastUsedAccount() -> Account? {
             try? modelContainer.mainContext.fetch(FetchDescriptor<Transaction>(
                 sortBy: [SortDescriptor(\.date, order: .reverse)])).first?.account
         }
         
-        @MainActor private func fetchLastUsedCategory() -> Category? {
+        private func fetchLastUsedCategory() -> Category? {
             try? modelContainer.mainContext.fetch(FetchDescriptor<Transaction>(
                 sortBy: [SortDescriptor(\.date, order: .reverse)])).first?.category
         }
         
-        @MainActor private func saveTransaction() {
-            let context = modelContainer.mainContext
-            guard let account = account else {
-                return
-            }
+        private func saveTransaction() {
             if let transaction = transaction {
+                updateExistingTransaction(transaction)
+            } else {
+                createNewTransaction()
+            }
+            do {
+                try modelContainer.mainContext.save()
+                shouldDismiss = true
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        func updateExistingTransaction(_ transaction: Transaction) {
+            if type == .installments {
+                
+            } else {
                 transaction.name = name
                 transaction.account = account
                 transaction.category = category
                 transaction.value = value
                 transaction.date = date
                 transaction.place = place
-            } else {
-                let transaction = Transaction(
+                transaction.installments.removeAll()
+            }
+        }
+        
+        func createNewTransaction() {
+            let transaction: Transaction
+            if type == .installments {
+                transaction = Transaction(
                     id: UUID(),
                     name: name,
                     value: value,
-                    account: account,
+                    category: category,
+                    date: date,
+                    place: place)
+            } else {
+                transaction = Transaction(
+                    id: UUID(),
+                    name: name,
+                    value: value,
+                    account: account!,
                     category: category,
                     date: date,
                     type: type,
                     place: place)
-                context.insert(transaction)
             }
-            do {
-                try context.save()
-            } catch {
-                print(error.localizedDescription)
-            }
-            
-            shouldDismiss = true
+            modelContainer.mainContext.insert(transaction)
         }
     }
 }

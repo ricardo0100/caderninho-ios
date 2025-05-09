@@ -57,6 +57,6 @@ class TicketProcessor {
             }
         }
         
-        completion?(TicketData(establishmentName: "Hiper", value: foundValue, date: Date(), type: .buyCredit))
+        completion?(TicketData(establishmentName: "Hiper", value: foundValue, date: Date(), type: .installments))
     }
 }

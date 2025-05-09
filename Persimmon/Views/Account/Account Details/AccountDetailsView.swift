@@ -50,8 +50,11 @@ struct AccountDetailsView: View {
 }
 
 #Preview {
+    let account = try! ModelContainer.preview.mainContext
+        .fetch(FetchDescriptor<Account>())[0]
+    
     NavigationStack {
         AccountDetailsView()
-            .environmentObject(DataController.createRandomAccount())
+            .environmentObject(account)
     }
 }

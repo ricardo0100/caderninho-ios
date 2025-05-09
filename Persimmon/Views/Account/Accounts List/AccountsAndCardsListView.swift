@@ -10,7 +10,7 @@ struct AccountsAndCardsListView: View {
     
     @State var isShowindEditAccount: Bool = false
     @State var isShowindEditCreditCard: Bool = false
-    
+     
     var body: some View {
         NavigationStack {
             List {
