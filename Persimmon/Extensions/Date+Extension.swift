@@ -1,6 +1,18 @@
 import Foundation
 
 extension Date {
+    var day: Int {
+        Calendar.current.dateComponents([.day], from: self).day ?? 0
+    }
+    
+    var month: Int {
+        Calendar.current.dateComponents([.month], from: self).month ?? 0
+    }
+    
+    var year: Int {
+        Calendar.current.dateComponents([.year], from: self).year ?? 0
+    }
+    
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -63,10 +75,16 @@ extension Date {
     }
     
     func dateAddingDays(_ days: Int) -> Date {
-        Calendar.current.date(byAdding: .day, value: days, to: self) ?? self
+        Calendar.current.date(byAdding: .day, value: days, to: self)!
     }
     
     func dateAddingMonths(_ months: Int) -> Date {
-        Calendar.current.date(byAdding: .month, value: months, to: self) ?? self
+        Calendar.current.date(byAdding: .month, value: months, to: self)!
+    }
+    
+    static func shortMonthName(from monthNumber: Int) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US")
+        return formatter.shortMonthSymbols[monthNumber - 1]
     }
 }

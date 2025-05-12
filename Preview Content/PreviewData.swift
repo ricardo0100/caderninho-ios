@@ -152,7 +152,7 @@ class DataController {
             context.insert(card)
             createCreditCardWithInstallments(in: context, card: card, name: "Carro", value: 129000, numberOfInstallments: 10)
             createCreditCardWithInstallments(in: context, card: card, name: "Xícara Caríssima", value: 1000, numberOfInstallments: 5)
-            
+            card.bills.sorted().prefix(4).forEach { $0.payedDate = Date() }
             transactionNameExamples.forEach {
                 let transaction = Transaction(
                     id: .init(),

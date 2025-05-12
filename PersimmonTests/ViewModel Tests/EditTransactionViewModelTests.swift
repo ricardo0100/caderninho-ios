@@ -162,6 +162,7 @@ struct EditTransactionViewModelTests {
         sut.didTapSave()
         
         #expect(getTransactions.first!.name == "Test")
-//        #expect(getTransactions.first!.installments.count == numberOfInstallments)
+        #expect(getTransactions.first!.installments.count == numberOfInstallments)
+        #expect(getTransactions.first!.installments.first!.value == 100 / Double(numberOfInstallments))
     }
 }

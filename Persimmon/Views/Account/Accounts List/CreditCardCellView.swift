@@ -19,22 +19,40 @@ struct CreditCardCellView: View {
                 size: 32)
             VStack(alignment: .leading) {
                 Text(card.name)
-                    .font(.headline)
+                    .font(.subheadline)
                 Text("Due: 10/05")
                     .font(.caption)
                 Text("Closing: 03/05")
                     .font(.caption)
             }
             Spacer()
-            Text(3184.17.toCurrency(with: card.currency)).bold()
+            if let bill = card.currentBill {
+                VStack(alignment: .leading) {
+                    Text("Current bill:")
+                        .font(.caption2)
+                    Text(bill.total.toCurrency(with: card.currency))
+                        .font(.caption)
+                        .bold()
+                    if bill.isDelayed {
+                        Text("Delayed!")
+                            .foregroundStyle(Color.red)
+                    }
+                    Text("Total card debits")
+                        .font(.caption2)
+                    Text(card.totalDebit.toCurrency(with: card.currency))
+                        .font(.caption)
+                        .bold()
+                }
+            }
         }
     }
 }
 
 #Preview {
-    @Previewable @Query var cards: [CreditCard]
-    VStack {
+    let card = try! ModelContainer.preview.mainContext
+        .fetch(FetchDescriptor<CreditCard>())[0]
+    List {
         CreditCardCellView()
-            .environmentObject(cards.first!)
-    }.modelContainer(.preview)
+            .environmentObject(card)
+    }
 }

@@ -79,7 +79,7 @@ extension EditTransactionView {
         }
         
         var installmentsDescription: String {
-            "\(numberOfInstallments) x \(value.toCurrency(with: currency))"
+            "\(numberOfInstallments) x \((value / Double(numberOfInstallments)).toCurrency(with: currency))"
         }
         
         @MainActor
@@ -164,16 +164,35 @@ extension EditTransactionView {
         }
         
         func updateExistingTransaction(_ transaction: Transaction) {
-            if type == .installments {
-                
-            } else {
-                transaction.name = name
+            transaction.name = name
+            transaction.category = category
+            transaction.value = value
+            transaction.date = date
+            transaction.place = place
+            
+            if type == .installments, let card = card {
+                transaction.account = nil
+                transaction.installments = createInstallments(in: card,
+                                                              transaction: transaction,
+                                                              numberOfInstallments: numberOfInstallments)
+            } else if let account = account {
                 transaction.account = account
-                transaction.category = category
-                transaction.value = value
-                transaction.date = date
-                transaction.place = place
                 transaction.installments.removeAll()
+            }
+        }
+        
+        private func createInstallments(in card: CreditCard, transaction: Transaction, numberOfInstallments: Int) -> [Installment] {
+            let today = Date()
+            return (1...numberOfInstallments).map { i in
+                let month = Calendar.current.component(.month, from: today.dateAddingMonths(i))
+                let year = Calendar.current.component(.year, from: today.dateAddingMonths(i))
+                let bill = card.bills.first { $0.year == year && $0.month == month } ??
+                    .init(id: UUID(), card: card, month: month, year: year)
+                return Installment(id: UUID(),
+                                   transaction: transaction,
+                                   number: i,
+                                   bill: bill,
+                                   value: transaction.value / Double(numberOfInstallments))
             }
         }
         
@@ -187,6 +206,9 @@ extension EditTransactionView {
                     category: category,
                     date: date,
                     place: place)
+                transaction.installments = createInstallments(in: card!,
+                                                              transaction: transaction,
+                                                              numberOfInstallments: numberOfInstallments)
             } else {
                 transaction = Transaction(
                     id: UUID(),

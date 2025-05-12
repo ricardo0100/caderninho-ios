@@ -20,6 +20,7 @@ class Installment: ObservableObject {
     var id: UUID
     
     var number: Int
+    
     var value: Double
     
     init(id: UUID, transaction: Transaction, number: Int, bill: Bill, value: Double) {

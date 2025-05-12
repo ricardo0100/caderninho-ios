@@ -46,7 +46,7 @@ struct EditCreditCardView: View {
                 
                 LabeledView(labelText: "Closing cycle") {
                     Menu {
-                        ForEach(1..<31) { day in
+                        ForEach(1..<28) { day in
                             Button {
                                 viewModel.closingCycleDay = day
                             } label: {
