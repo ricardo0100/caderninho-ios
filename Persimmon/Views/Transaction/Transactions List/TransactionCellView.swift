@@ -9,8 +9,8 @@ struct TransactionCellView: View {
             VStack(alignment: .leading) {
                 Text(transaction.name)
                     .font(.headline)
-//                Text(transaction.value.toCurrency(with: transaction.account.currency))
-//                    .font(.subheadline)
+                Text(transaction.value.toCurrency(with: transaction.currency ?? "$"))
+                    .font(.subheadline)
                 HStack(spacing: .spacingSmall) {
                     Image(systemName: transaction.type.iconName)
                         .resizable()

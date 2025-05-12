@@ -30,7 +30,7 @@ struct CurrencyTextField: View {
                 self.value = doubleValueFromCurrencyString(self.text)
             }
             .onAppear {
-                text = currencyFormattedNumber(String(value), currency: currency)
+                text = currencyFormattedNumber(currencyFormatter.string(from: NSNumber(floatLiteral: value))!, currency: currency)
             }
     }
     
@@ -45,7 +45,7 @@ struct CurrencyTextField: View {
 }
 
 #Preview {
-    @Previewable @State var value = Double(46.60)
+    @Previewable @State var value = Double(460.20)
     Form {
         CurrencyTextField(currency: "R$", value: $value)
     }

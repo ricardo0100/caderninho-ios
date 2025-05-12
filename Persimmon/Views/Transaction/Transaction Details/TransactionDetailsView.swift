@@ -25,18 +25,20 @@ struct TransactionDetailsView: View {
                         Text(transaction.type.text)
                     }
                 }
+                if let account = transaction.account {
+                    LabeledView(labelText: "Account") {
+                        HStack(spacing: .spacingMedium) {
+                            LettersIconView(text: account.name.firstLetters(),
+                                            color: Color(hex: account.color))
+                            Text(account.name).font(.title3)
+                        }
+                    }
+                }
                 
-//                LabeledView(labelText: "Account") {
-//                    HStack(spacing: .spacingMedium) {
-//                        LettersIconView(text: transaction.account.name.firstLetters(),
-//                                        color: Color(hex: transaction.account.color))
-//                        Text(transaction.account.name).font(.title3)
-//                    }
-//                }
-                
-//                LabeledView(labelText: "Value") {
-//                    Text(transaction.value.toCurrency(with: transaction.account.currency)).font(.title3)
-//                }
+                LabeledView(labelText: "Value") {
+                    Text(transaction.value.toCurrency(with: transaction.currency ?? "$"))
+                        .font(.title3)
+                }
                 
                 if let category = transaction.category {
                     LabeledView(labelText: "Category") {
