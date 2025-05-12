@@ -37,8 +37,8 @@ struct BillSelectorView: View {
             ScrollView(.horizontal) {
                 HStack(spacing: .spacingMedium) {
                     ForEach(bills) { bill in
-                        let year = String(format: "%i", bill.year)
-                        let month = Date.shortMonthName(from: bill.month)
+                        let year = String(format: "%i", bill.dueYear)
+                        let month = Date.shortMonthName(from: bill.dueMonth)
                         VStack(spacing: .spacingNano) {
                             Text("\(month) \(year)")
                                 .padding([.leading, .trailing], .spacingMedium)

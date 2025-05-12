@@ -36,12 +36,16 @@ struct EditTransactionViewModelTests {
         try! container.mainContext.fetch(FetchDescriptor<Persimmon.Category>())
     }
     
-    var getCards: [CreditCard] {
-        try! container.mainContext.fetch(FetchDescriptor<Persimmon.CreditCard>())
+    var getCard: CreditCard {
+        try! container.mainContext.fetch(FetchDescriptor<CreditCard>())[0]
     }
     
     var getBills: [Bill] {
-        try! container.mainContext.fetch(FetchDescriptor<Persimmon.Bill>())
+        try! container.mainContext.fetch(FetchDescriptor<Bill>())
+    }
+    
+    var getInstalments: [Installment] {
+        try! container.mainContext.fetch(FetchDescriptor<Installment>())
     }
     
     func createTransactionInContext() throws -> Transaction {
@@ -129,7 +133,7 @@ struct EditTransactionViewModelTests {
         sut.type = .installments
         sut.didTapSave()
         #expect(sut.cardError == "Select a card")
-        sut.card = getCards.first!
+        sut.card = getCard
         sut.didTapSave()
         #expect(sut.cardError == nil)
     }
@@ -155,14 +159,73 @@ struct EditTransactionViewModelTests {
     func createInstallments(_ numberOfInstallments: Int) async throws {
         let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
         sut.name = "Test"
-        sut.card = getCards.first!
+        sut.card = getCard
         sut.type = .installments
         sut.value = 100
         sut.numberOfInstallments = numberOfInstallments
         sut.didTapSave()
-        
+        #expect(getInstalments.count == numberOfInstallments)
         #expect(getTransactions.first!.name == "Test")
         #expect(getTransactions.first!.installments.count == numberOfInstallments)
         #expect(getTransactions.first!.installments.first!.value == 100 / Double(numberOfInstallments))
+    }
+    
+    @Test("Create installments based on transaction date")
+    func createInstallmentsBasedOnTransactionDate() async throws {
+        let transactionDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1, day: 12))!
+        
+        let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
+        sut.name = "Test"
+        sut.card = getCard
+        sut.type = .installments
+        sut.value = 120
+        sut.numberOfInstallments = 3
+        sut.date = transactionDate
+        sut.didTapSave()
+        #expect(getInstalments.count == 3)
+        #expect(getInstalments.sorted()[0].bill.dueMonth == 2)
+        #expect(getInstalments.sorted()[1].bill.dueMonth == 3)
+        #expect(getInstalments.sorted()[2].bill.dueMonth == 4)
+    }
+    
+    @Test("Recreate installments after date transaction change")
+    func recreateInstallmentsAfterDateTransactionChange() async throws {
+        let transactionDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1, day: 12))!
+        var sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
+        sut.name = "Test"
+        sut.card = getCard
+        sut.type = .installments
+        sut.value = 120
+        sut.numberOfInstallments = 3
+        sut.date = transactionDate
+        sut.didTapSave()
+        
+        sut = EditTransactionView.ViewModel(transaction: getTransactions[0], modelContainer: container)
+        
+        let newDate = Calendar.current.date(from: DateComponents(year: 2000, month: 2, day: 12))!
+        sut.date = newDate
+        sut.didTapSave()
+        #expect(getInstalments.count == 3)
+        #expect(getInstalments.sorted()[0].bill.dueMonth == 3)
+        #expect(getInstalments.sorted()[1].bill.dueMonth == 4)
+        #expect(getInstalments.sorted()[2].bill.dueMonth == 5)
+    }
+    
+    @Test("Create installments in current month if before closing date")
+    func createInstallmentsInCurrentMonthIfBeforeClosingDate() async throws {
+        let transactionDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1, day: 1))!
+        let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
+        sut.name = "Test"
+        sut.card = getCard
+        sut.type = .installments
+        sut.value = 120
+        sut.numberOfInstallments = 3
+        sut.date = transactionDate
+        sut.didTapSave()
+        
+        #expect(getInstalments.count == 3)
+        #expect(getInstalments.sorted()[0].bill.dueMonth == 1)
+        #expect(getInstalments.sorted()[1].bill.dueMonth == 2)
+        #expect(getInstalments.sorted()[2].bill.dueMonth == 3)
     }
 }

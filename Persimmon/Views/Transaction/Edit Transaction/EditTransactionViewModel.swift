@@ -47,6 +47,7 @@ extension EditTransactionView {
             self.modelContainer = modelContainer
             _name = Published(initialValue: transaction?.name ?? "")
             _account = Published(initialValue: transaction?.account)
+            _card = Published(initialValue: transaction?.installments.first?.bill.card)
             _value = Published(initialValue: transaction?.value ?? .zero)
             _category = Published(initialValue: transaction?.category)
             _type = Published(initialValue: transaction?.type ?? .installments)
@@ -172,6 +173,9 @@ extension EditTransactionView {
             
             if type == .installments, let card = card {
                 transaction.account = nil
+                transaction.installments.forEach {
+                    modelContainer.mainContext.delete($0)
+                }
                 transaction.installments = createInstallments(in: card,
                                                               transaction: transaction,
                                                               numberOfInstallments: numberOfInstallments)
@@ -182,12 +186,18 @@ extension EditTransactionView {
         }
         
         private func createInstallments(in card: CreditCard, transaction: Transaction, numberOfInstallments: Int) -> [Installment] {
-            let today = Date()
-            return (1...numberOfInstallments).map { i in
-                let month = Calendar.current.component(.month, from: today.dateAddingMonths(i))
-                let year = Calendar.current.component(.year, from: today.dateAddingMonths(i))
-                let bill = card.bills.first { $0.year == year && $0.month == month } ??
+            let date = transaction.date
+            var monthsRange = (1...numberOfInstallments)
+            if transaction.date.day < card.dueDay {
+                monthsRange = (0...numberOfInstallments - 1)
+            }
+            return monthsRange.map { i in
+                let month = Calendar.current.component(.month, from: date.dateAddingMonths(i))
+                let year = Calendar.current.component(.year, from: date.dateAddingMonths(i))
+                
+                let bill = card.bills.first { $0.dueYear == year && $0.dueMonth == month } ??
                     .init(id: UUID(), card: card, month: month, year: year)
+                
                 return Installment(id: UUID(),
                                    transaction: transaction,
                                    number: i,

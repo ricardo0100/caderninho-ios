@@ -12,7 +12,7 @@ class Transaction: ObservableObject {
     @Relationship(deleteRule: .noAction, inverse: \Category.transactions)
     var category: Category?
     
-    @Relationship(deleteRule: .cascade, inverse: \Installment.transaction)
+    @Relationship(deleteRule: .cascade)
     var installments: [Installment] = []
     
     var name: String
@@ -74,7 +74,7 @@ class Transaction: ObservableObject {
         type == .installments ? installments.first?.bill.card.currency : account?.currency
     }
     
-    enum TransactionType: String, Codable, CaseIterable, Identifiable {
+    enum TransactionType: Codable, CaseIterable, Identifiable {
         var id: Int { hashValue }
         
         case installments

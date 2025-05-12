@@ -88,8 +88,8 @@ class DataController {
         let id = card.id
         let predicate = #Predicate<Bill> { bill in
             bill.card.id == id &&
-            bill.month == month &&
-            bill.year == year
+            bill.dueMonth == month &&
+            bill.dueYear == year
         }
         return try! context.fetch(FetchDescriptor(predicate: predicate)).first
     }

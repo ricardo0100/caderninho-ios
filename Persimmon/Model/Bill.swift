@@ -25,14 +25,14 @@ class Bill: ObservableObject {
     }
     
     var payedDate: Date?
-    var month: Int
-    var year: Int
+    var dueMonth: Int
+    var dueYear: Int
     
     var isDelayed: Bool {
         guard payedDate == nil else { return false }
         var dueDateComponents = DateComponents()
-        dueDateComponents.year = year
-        dueDateComponents.month = month
+        dueDateComponents.year = dueYear
+        dueDateComponents.month = dueMonth
         dueDateComponents.day = card.dueDay
 
         guard let dueDate = Calendar.current.date(from: dueDateComponents) else {
@@ -53,29 +53,29 @@ class Bill: ObservableObject {
     }
     
     var closingCycleDate: Date {
-        let components = DateComponents(year: year, month: month, day: card.closingCycleDay)
+        let components = DateComponents(year: dueYear, month: dueMonth, day: card.closingCycleDay)
         return Calendar.current.date(from: components) ?? Date()
     }
     
     var dueDate: Date {
-        let components = DateComponents(year: year, month: month, day: card.dueDay)
+        let components = DateComponents(year: dueYear, month: dueMonth, day: card.dueDay)
         return Calendar.current.date(from: components) ?? Date()
     }
     
     init(id: UUID, card: CreditCard, month: Int, year: Int) {
         self.id = id
         self.card = card
-        self.month = month
-        self.year = year
+        self.dueMonth = month
+        self.dueYear = year
     }
 }
 
 extension Bill: Comparable {
     static func < (lhs: Bill, rhs: Bill) -> Bool {
-        if lhs.year != rhs.year {
-            return lhs.year < rhs.year
+        if lhs.dueYear != rhs.dueYear {
+            return lhs.dueYear < rhs.dueYear
         } else {
-            return lhs.month < rhs.month
+            return lhs.dueMonth < rhs.dueMonth
         }
     }
 }

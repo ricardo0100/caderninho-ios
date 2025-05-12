@@ -10,7 +10,7 @@ import Foundation
 
 @Model
 class Installment: ObservableObject {
-    @Relationship()
+    @Relationship
     var transaction: Transaction
     
     @Relationship(deleteRule: .noAction, inverse: \Bill.installments)
@@ -29,5 +29,11 @@ class Installment: ObservableObject {
         self.number = number
         self.bill = bill
         self.value = value
+    }
+}
+
+extension Installment: Comparable {
+    static func < (lhs: Installment, rhs: Installment) -> Bool {
+        lhs.number < rhs.number
     }
 }

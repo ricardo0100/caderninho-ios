@@ -33,7 +33,7 @@ class CreditCard: ObservableObject {
         let nextMonthDate = Date().dateAddingMonths(1)
         let month = nextMonthDate.month
         let year = nextMonthDate.year
-        return bills.first { $0.year == year && $0.month == month } ?? bills.sorted().last { $0.payedDate == nil }
+        return bills.first { $0.dueYear == year && $0.dueMonth == month } ?? bills.sorted().last { $0.payedDate == nil }
     }
     
     @Transient var totalDebit: Double {
