@@ -200,7 +200,7 @@ extension EditTransactionView {
                 
                 return Installment(id: UUID(),
                                    transaction: transaction,
-                                   number: i,
+                                   number: transaction.date.day < card.dueDay ? i + 1 : i,
                                    bill: bill,
                                    value: transaction.value / Double(numberOfInstallments))
             }
