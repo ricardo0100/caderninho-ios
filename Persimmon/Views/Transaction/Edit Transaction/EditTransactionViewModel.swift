@@ -85,9 +85,13 @@ extension EditTransactionView {
         
         @MainActor
         func viewDidAppear() {
-            if transaction == nil, account == nil {
-                account = fetchLastUsedAccount()
+            if transaction == nil {
                 category = fetchLastUsedCategory()
+                if type == .installments {
+                    card = fetchLastUsedCard()
+                } else {
+                    account = fetchLastUsedAccount()
+                }
             }
         }
         
@@ -142,7 +146,14 @@ extension EditTransactionView {
         
         private func fetchLastUsedAccount() -> Account? {
             try? modelContainer.mainContext.fetch(FetchDescriptor<Transaction>(
-                sortBy: [SortDescriptor(\.date, order: .reverse)])).first?.account
+                sortBy: [SortDescriptor(\.date, order: .reverse)]))
+            .filter { $0.type != .installments }.first?.account
+        }
+        
+        private func fetchLastUsedCard() -> CreditCard? {
+            try? modelContainer.mainContext.fetch(FetchDescriptor<Transaction>(
+                sortBy: [SortDescriptor(\.date, order: .reverse)]))
+            .filter { $0.type == .installments }.first?.installments.first?.bill.card
         }
         
         private func fetchLastUsedCategory() -> Category? {
