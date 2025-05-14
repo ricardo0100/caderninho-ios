@@ -6,24 +6,22 @@ struct ContainerView: View {
         TabView {
             TransactionsListView()
                 .tabItem {
-                    Label("Transactions", systemImage: "arrow.up.arrow.down")
+                    Label("Transactions", systemImage: "book.pages")
                 }
             AccountsAndCardsListView()
                 .tabItem {
-                    Label("Accounts", systemImage: "creditcard")
+                    Label("Accounts and Cards", systemImage: "creditcard")
                 }
-            HomeView()
-                .tabItem {
-                    Label("Home", systemImage: "house")
-                }.tag(1)
             CategoriesListView()
                 .tabItem {
                     Label("Categories", systemImage: "briefcase")
                 }
+            #if DEBUG
             ConfigurationsView()
                 .tabItem {
                     Label("Configuration", systemImage: "gear")
                 }
+            #endif
         }.tint(Color.brand)
     }
 }

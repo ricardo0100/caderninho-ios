@@ -20,27 +20,25 @@ struct TransactionsListView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigation) {
-                    NavigationToolbarView(imageName: "arrow.up.arrow.down",
+                    NavigationToolbarView(imageName: "book.pages",
                                           title: "Transactions")
                 }
-                ToolbarItem(placement: .primaryAction) {
-                    Button(action: viewModel.didTapFilter) {
-                        Image(systemName: "line.3.horizontal.decrease")
-                            .foregroundColor(.brand)
-                    }
-                }
-                ToolbarItem(placement: .primaryAction) {
-                    Button(action: viewModel.didTapCamera) {
-                        Image(systemName: "camera")
-                    }
-                }
+//                ToolbarItem(placement: .primaryAction) {
+//                    Button(action: viewModel.didTapFilter) {
+//                        Image(systemName: "line.3.horizontal.decrease")
+//                    }
+//                }
+//                ToolbarItem(placement: .primaryAction) {
+//                    Button(action: viewModel.didTapCamera) {
+//                        Image(systemName: "camera")
+//                    }
+//                }
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: viewModel.didTapAdd) {
                         Image(systemName: "plus")
-                            .foregroundColor(.brand)
                     }
                 }
-            }
+            }.foregroundColor(.brand)
         }
         .sheet(isPresented: $viewModel.isShowingEdit) {
             EditTransactionView(transaction: nil)

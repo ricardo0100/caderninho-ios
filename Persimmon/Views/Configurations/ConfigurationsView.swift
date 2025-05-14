@@ -44,8 +44,7 @@ struct ConfigurationsView: View {
     }
     
     func createExampleTransaction() {
-        modelContext.insert(DataController.createRandomTransaction(using: modelContext))
-        try? modelContext.save()
+        
     }
     
     func createExampleAccount() {

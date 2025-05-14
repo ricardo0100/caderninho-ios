@@ -10,7 +10,7 @@ extension TransactionsListView {
         @Published var filterEndDate = Date()
         @Published var ticketData: TicketData?
         @Published var isShowingFilter = false
-        @Published var filterType: FilterType = .last30Days {
+        @Published var filterType: FilterType = .all {
             didSet {
                 updateDates()
             }

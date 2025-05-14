@@ -54,8 +54,6 @@ struct CardDetailsView: View {
                                         bill.payedDate = Date()
                                     }
                                     .font(.footnote)
-                                    .buttonStyle(BorderedProminentButtonStyle())
-                                    .buttonBorderShape(.capsule)
                                 }
                                 if bill.isDelayed {
                                     Text("Delayed!")

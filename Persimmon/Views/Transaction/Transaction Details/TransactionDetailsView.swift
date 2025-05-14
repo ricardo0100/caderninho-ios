@@ -11,10 +11,6 @@ struct TransactionDetailsView: View {
     var body: some View {
         List {
             Section {
-                LabeledView(labelText: "Name") {
-                    Text(transaction.name)
-                }
-                
                 LabeledView(labelText: "Type") {
                     HStack(spacing: .spacingMedium) {
                         Image(systemName: transaction.type.iconName)
@@ -25,19 +21,24 @@ struct TransactionDetailsView: View {
                         Text(transaction.type.text)
                     }
                 }
-                if let account = transaction.account {
-                    LabeledView(labelText: "Account") {
-                        HStack(spacing: .spacingMedium) {
-                            LettersIconView(text: account.name.firstLetters(),
-                                            color: Color(hex: account.color))
-                            Text(account.name).font(.title3)
-                        }
+                let name = transaction.account?.name ?? transaction.installments[0].bill.card.name
+                let color = transaction.account?.color ?? transaction.installments[0].bill.card.color
+                LabeledView(labelText: transaction.type == .installments ? "Credit Card":  "Account") {
+                    HStack(spacing: .spacingMedium) {
+                        LettersIconView(text: name.firstLetters(),
+                                        color: Color(hex: color))
+                        Text(name).font(.title3)
                     }
                 }
                 
                 LabeledView(labelText: "Value") {
                     Text(transaction.value.toCurrency(with: transaction.currency ?? "$"))
-                        .font(.title3)
+                        .font(.title3).bold()
+                    if transaction.type == .installments {
+                        let installmentValue = transaction
+                            .installments[0].value.toCurrency(with: transaction.currency ?? "$")
+                        Text("\(transaction.installments.count) x \(installmentValue)")
+                    }
                 }
                 
                 if let category = transaction.category {
@@ -81,7 +82,32 @@ struct TransactionDetailsView: View {
                         .cornerRadius(12)
                     }
                 }
+            if transaction.type == .installments {
+                Section("Installments") {
+                    ForEach(transaction.installments.sorted()) { installment in
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(installment.value.toCurrency(with: transaction.currency ?? "$"))
+                                Text("\(installment.number) of \(transaction.installments.count)")
+                            }
+                            Spacer()
+                            VStack(alignment: .trailing) {
+                                Text("Due Date")
+                                    .font(.caption2)
+                                Text(installment.bill.dueDate.formatted(date: .abbreviated, time: .omitted))
+                                    .font(.caption)
+                                if installment.bill.payedDate != nil {
+                                    Text("Payed")
+                                        .font(.caption2)
+                                        .foregroundStyle(.green)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
+        .navigationTitle(transaction.name)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Edit", action: didTapEdit)
@@ -103,8 +129,14 @@ struct TransactionDetailsView: View {
 }
 
 #Preview {
+    let transaction = {
+        let transaction = try! ModelContainer.preview.mainContext.fetch(FetchDescriptor<Transaction>())[0]
+        transaction.installments.sorted()[0].bill.payedDate = Date()
+        return transaction
+    }()
+    
     NavigationStack {
         TransactionDetailsView()
-            .environmentObject(DataController.createRandomTransaction())
+            .environmentObject(transaction)
     }
 }

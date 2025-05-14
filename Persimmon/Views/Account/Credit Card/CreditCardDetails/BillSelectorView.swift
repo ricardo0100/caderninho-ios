@@ -41,13 +41,13 @@ struct BillSelectorView: View {
                         let month = Date.shortMonthName(from: bill.dueMonth)
                         VStack(spacing: .spacingNano) {
                             Text("\(month) \(year)")
+                                .frame(height: 32)
                                 .padding([.leading, .trailing], .spacingMedium)
                                 .foregroundStyle(Color.primary)
                             Rectangle()
                                 .foregroundStyle(bottomColor(for: bill))
                                 .frame(height: 1.5)
                         }
-                        
                         .padding(.top, .spacingSmall)
                         .background(bill == selected ? Color.gray.opacity(0.7) : .gray.opacity(0.2))
                         .cornerRadius(.spacingSmall)
@@ -58,7 +58,6 @@ struct BillSelectorView: View {
                             }
                         }
                         .id(bill.id)
-                        
                     }
                 }
                 .padding(.bottom, .spacingMedium)

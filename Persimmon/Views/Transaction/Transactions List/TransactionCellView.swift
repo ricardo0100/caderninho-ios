@@ -23,11 +23,13 @@ struct TransactionCellView: View {
             Spacer()
             VStack(alignment: .trailing) {
                 HStack(spacing: .spacingSmall) {
-//                    Text("\(transaction.account.name)")
-//                        .font(.subheadline)
-//                    LettersIconView(text: transaction.account.name.firstLetters(),
-//                                    color: Color(hex: transaction.account.color),
-//                                    size: 12)
+                    let name = transaction.account?.name ?? transaction.installments[0].bill.card.name
+                    let color = transaction.account?.color ?? transaction.installments[0].bill.card.color
+                    Text("\(name)")
+                        .font(.subheadline)
+                    LettersIconView(text: name.firstLetters(),
+                                    color: Color(hex: color),
+                                    size: 12)
                 }
                 if let category = transaction.category {
                     HStack(spacing: .spacingSmall) {
@@ -52,10 +54,12 @@ struct TransactionCellView: View {
 }
 
 #Preview {
-    List {
-        TransactionCellView().environmentObject(DataController.createRandomTransaction())
-        TransactionCellView().environmentObject(DataController.createRandomTransaction())
-        TransactionCellView().environmentObject(DataController.createRandomTransaction())
-        TransactionCellView().environmentObject(DataController.createRandomTransaction())
-    }
+    let transactions = try! ModelContainer.preview.mainContext
+        .fetch(FetchDescriptor<Transaction>())
+    List(transactions, id: \.id) {
+        TransactionCellView().environmentObject($0)
+        TransactionCellView().environmentObject($0)
+        TransactionCellView().environmentObject($0)
+        TransactionCellView().environmentObject($0)
+    }.modelContainer(.preview)
 }

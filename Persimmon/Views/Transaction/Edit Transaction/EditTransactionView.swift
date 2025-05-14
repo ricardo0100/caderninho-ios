@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 struct EditTransactionView: View {
     enum Field: Hashable {
@@ -134,6 +135,8 @@ struct EditTransactionView: View {
 }
 
 #Preview {
-    EditTransactionView(transaction: DataController.createRandomTransaction())
+    let transaction = try! ModelContainer.preview.mainContext
+        .fetch(FetchDescriptor<Transaction>())[0]
+    EditTransactionView(transaction: transaction)
         .modelContainer(.preview)
 }
