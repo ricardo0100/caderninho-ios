@@ -13,7 +13,7 @@ class Bill: ObservableObject {
     @Attribute(.unique)
     var id: UUID
     
-    @Relationship(deleteRule: .cascade, inverse: \CreditCard.bills)
+    @Relationship(deleteRule: .cascade)
     var card: CreditCard
     
     @Relationship(deleteRule: .cascade)

@@ -23,7 +23,9 @@ struct CardDetailsView: View {
                 }
             } header: {
                 VStack(alignment: .leading) {
-                    BillSelectorView(selected: $selectedBill, bills: card.bills, card: card)
+                    BillSelectorView(selected: $selectedBill,
+                                     bills: card.bills.filter { !$0.installments.isEmpty },
+                                     card: card)
                     if let bill = selectedBill {
                         HStack {
                             VStack(alignment: .leading) {

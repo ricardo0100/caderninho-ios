@@ -10,14 +10,14 @@ import Foundation
 
 @Model
 class Installment: ObservableObject {
+    @Attribute(.unique)
+    var id: UUID
+    
     @Relationship
     var transaction: Transaction
     
     @Relationship(deleteRule: .noAction, inverse: \Bill.installments)
     var bill: Bill
-    
-    @Attribute(.unique)
-    var id: UUID
     
     var number: Int
     

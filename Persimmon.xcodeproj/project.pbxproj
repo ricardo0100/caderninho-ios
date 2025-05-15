@@ -477,7 +477,7 @@
 			path = Location;
 			sourceTree = "<group>";
 		};
-		CFBEE23F2A07F98E00586164 /* Account */ = {
+		CFBEE23F2A07F98E00586164 /* Account and CreditCard */ = {
 			isa = PBXGroup;
 			children = (
 				CFD3ED682DC986860029AC2F /* Credit Card */,
@@ -485,7 +485,7 @@
 				CFE6D7B82BA62D0400E76AB8 /* Accounts List */,
 				CFE6D7B92BA62D0D00E76AB8 /* Edit Account */,
 			);
-			path = Account;
+			path = "Account and CreditCard";
 			sourceTree = "<group>";
 		};
 		CFBEE24B2A081DFC00586164 /* Components */ = {
@@ -510,7 +510,7 @@
 				CF2CB0BA2A06FC3E00CBA434 /* ContainerView.swift */,
 				CFB7F5782BC0AE17009956E9 /* Location */,
 				CF2CB0B52A06FBCC00CBA434 /* Transaction */,
-				CFBEE23F2A07F98E00586164 /* Account */,
+				CFBEE23F2A07F98E00586164 /* Account and CreditCard */,
 				CFE61F082CD6E872002B1AA7 /* Configurations */,
 				CF7A80472A0DAC480067F5A8 /* Category */,
 			);
