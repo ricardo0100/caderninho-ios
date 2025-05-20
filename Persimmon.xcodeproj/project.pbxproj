@@ -28,7 +28,7 @@
 		CF44BE352A0FB6330006019F /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2CB0BF2A06FD9700CBA434 /* Color+Extension.swift */; };
 		CF44BE362A0FB6330006019F /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2442A080AA700586164 /* String+Extension.swift */; };
 		CF5746352D22BDED007CC196 /* LettersIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2492A081B7100586164 /* LettersIconView.swift */; };
-		CF5746382D22BE30007CC196 /* AccountData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5746372D22BE2C007CC196 /* AccountData.swift */; };
+		CF5746382D22BE30007CC196 /* SelectAccountEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5746372D22BE2C007CC196 /* SelectAccountEntity.swift */; };
 		CF5746392D22C294007CC196 /* NiceColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9D2A712A09967F0003DC39 /* NiceColorPicker.swift */; };
 		CF57463A2D22C2AB007CC196 /* NiceIconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC192C5675DE00C8C1CE /* NiceIconPicker.swift */; };
 		CF57463F2D240014007CC196 /* AccountBalanceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF57463E2D240007007CC196 /* AccountBalanceProvider.swift */; };
@@ -59,8 +59,6 @@
 		CFA1DE602A0C32B20055E3CD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFA1DE5F2A0C32B20055E3CD /* SwiftUI.framework */; };
 		CFA1DE672A0C32B20055E3CD /* AccountBalanceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA1DE662A0C32B20055E3CD /* AccountBalanceWidget.swift */; };
 		CFA1DE6A2A0C32B50055E3CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFA1DE692A0C32B50055E3CD /* Assets.xcassets */; };
-		CFA1DE6C2A0C32B50055E3CD /* AccountBalanceWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = CFA1DE682A0C32B20055E3CD /* AccountBalanceWidget.intentdefinition */; };
-		CFA1DE6D2A0C32B50055E3CD /* AccountBalanceWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = CFA1DE682A0C32B20055E3CD /* AccountBalanceWidget.intentdefinition */; };
 		CFA1DE702A0C32B50055E3CD /* BudgetWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CFA1DE5B2A0C32B20055E3CD /* BudgetWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CFB7F5612BBEBFE6009956E9 /* SelectTransactionTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F5602BBEBFE6009956E9 /* SelectTransactionTypeView.swift */; };
 		CFB7F56B2BC0228B009956E9 /* SelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F56A2BC0228B009956E9 /* SelectDateView.swift */; };
@@ -98,6 +96,20 @@
 		CFE6D7C02BA9CAE800E76AB8 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF44BE322A0FB55A0006019F /* Spacing.swift */; };
 		CFF292A62A13B8FE00C1A66A /* EditCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF292A52A13B8FE00C1A66A /* EditCategoryView.swift */; };
 		CFF292A82A13B93F00C1A66A /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF292A72A13B93F00C1A66A /* EditAccountView.swift */; };
+		CFFA12372DD8D738008EE5B1 /* NewTransactionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFA12362DD8D735008EE5B1 /* NewTransactionIntent.swift */; };
+		CFFA123A2DDB7F77008EE5B1 /* NewTransactionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFA12362DD8D735008EE5B1 /* NewTransactionIntent.swift */; };
+		CFFA123B2DDB8030008EE5B1 /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED5C2DC592070029AC2F /* CreditCard.swift */; };
+		CFFA123C2DDB8030008EE5B1 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED5A2DC57B070029AC2F /* Bill.swift */; };
+		CFFA123D2DDB8030008EE5B1 /* Installment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9DA5AE2D17B0010061056F /* Installment.swift */; };
+		CFFA123E2DDB8030008EE5B1 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3116F02A14438600171A4D /* Account.swift */; };
+		CFFA123F2DDB8030008EE5B1 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE6D7BE2BA9B4C000E76AB8 /* Transaction.swift */; };
+		CFFA12402DDB8030008EE5B1 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC152C566EE900C8C1CE /* Category.swift */; };
+		CFFA12412DDB8045008EE5B1 /* ModelContainer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2CB0A42A06F8D600CBA434 /* ModelContainer+Extension.swift */; };
+		CFFA12422DDB804C008EE5B1 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE563512C34C94700F8EA72 /* PreviewData.swift */; };
+		CFFA12432DDB8057008EE5B1 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F56D2BC02A47009956E9 /* Date+Extension.swift */; };
+		CFFA12452DDCA620008EE5B1 /* SelectAccountConfigIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFA12442DDCA5FD008EE5B1 /* SelectAccountConfigIntent.swift */; };
+		CFFA12472DDCA7D2008EE5B1 /* AccountQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFA12462DDCA7CE008EE5B1 /* AccountQuery.swift */; };
+		CFFA124A2DDCEEC4008EE5B1 /* AccountBalanceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFA12492DDCEEBE008EE5B1 /* AccountBalanceData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,7 +161,7 @@
 		CF3116F02A14438600171A4D /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		CF44BE302A0FB5000006019F /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CF44BE322A0FB55A0006019F /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
-		CF5746372D22BE2C007CC196 /* AccountData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountData.swift; sourceTree = "<group>"; };
+		CF5746372D22BE2C007CC196 /* SelectAccountEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAccountEntity.swift; sourceTree = "<group>"; };
 		CF57463E2D240007007CC196 /* AccountBalanceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountBalanceProvider.swift; sourceTree = "<group>"; };
 		CF5746402D24114D007CC196 /* Persimmon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Persimmon.entitlements; sourceTree = "<group>"; };
 		CF7147152DCEC02C00ED0A25 /* AccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTests.swift; sourceTree = "<group>"; };
@@ -175,7 +187,6 @@
 		CFA1DE5D2A0C32B20055E3CD /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		CFA1DE5F2A0C32B20055E3CD /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		CFA1DE662A0C32B20055E3CD /* AccountBalanceWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountBalanceWidget.swift; sourceTree = "<group>"; };
-		CFA1DE682A0C32B20055E3CD /* AccountBalanceWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = AccountBalanceWidget.intentdefinition; sourceTree = "<group>"; };
 		CFA1DE692A0C32B50055E3CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFA1DE6B2A0C32B50055E3CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CFB7F5602BBEBFE6009956E9 /* SelectTransactionTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTransactionTypeView.swift; sourceTree = "<group>"; };
@@ -215,6 +226,11 @@
 		CFE6D7BE2BA9B4C000E76AB8 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		CFF292A52A13B8FE00C1A66A /* EditCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryView.swift; sourceTree = "<group>"; };
 		CFF292A72A13B93F00C1A66A /* EditAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountView.swift; sourceTree = "<group>"; };
+		CFFA12362DD8D735008EE5B1 /* NewTransactionIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTransactionIntent.swift; sourceTree = "<group>"; };
+		CFFA12442DDCA5FD008EE5B1 /* SelectAccountConfigIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAccountConfigIntent.swift; sourceTree = "<group>"; };
+		CFFA12462DDCA7CE008EE5B1 /* AccountQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountQuery.swift; sourceTree = "<group>"; };
+		CFFA12482DDCEE53008EE5B1 /* BudgetWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BudgetWidgetExtension.entitlements; sourceTree = "<group>"; };
+		CFFA12492DDCEEBE008EE5B1 /* AccountBalanceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountBalanceData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,6 +290,7 @@
 		CF2CB0982A06F8D600CBA434 = {
 			isa = PBXGroup;
 			children = (
+				CFFA12482DDCEE53008EE5B1 /* BudgetWidgetExtension.entitlements */,
 				CF2CB0A32A06F8D600CBA434 /* Persimmon */,
 				CF2CB0AA2A06F8D900CBA434 /* Preview Content */,
 				CFA1DE612A0C32B20055E3CD /* BudgetWidget */,
@@ -296,6 +313,7 @@
 		CF2CB0A32A06F8D600CBA434 /* Persimmon */ = {
 			isa = PBXGroup;
 			children = (
+				CFFA12382DD8D830008EE5B1 /* Intents */,
 				CFD3ED7F2DCA3E9E0029AC2F /* App.swift */,
 				CF5746402D24114D007CC196 /* Persimmon.entitlements */,
 				CF2CB0A82A06F8D900CBA434 /* Assets.xcassets */,
@@ -355,22 +373,6 @@
 				CFE6D7BE2BA9B4C000E76AB8 /* Transaction.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		CF5746362D22BE25007CC196 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				CF5746372D22BE2C007CC196 /* AccountData.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		CF57463D2D23FF71007CC196 /* Providers */ = {
-			isa = PBXGroup;
-			children = (
-				CF57463E2D240007007CC196 /* AccountBalanceProvider.swift */,
-			);
-			path = Providers;
 			sourceTree = "<group>";
 		};
 		CF71471F2DD1130900ED0A25 /* Model Tests */ = {
@@ -458,10 +460,12 @@
 		CFA1DE612A0C32B20055E3CD /* BudgetWidget */ = {
 			isa = PBXGroup;
 			children = (
-				CF57463D2D23FF71007CC196 /* Providers */,
-				CF5746362D22BE25007CC196 /* Model */,
+				CFFA12492DDCEEBE008EE5B1 /* AccountBalanceData.swift */,
+				CFFA12462DDCA7CE008EE5B1 /* AccountQuery.swift */,
+				CFFA12442DDCA5FD008EE5B1 /* SelectAccountConfigIntent.swift */,
+				CF5746372D22BE2C007CC196 /* SelectAccountEntity.swift */,
+				CF57463E2D240007007CC196 /* AccountBalanceProvider.swift */,
 				CFA1DE662A0C32B20055E3CD /* AccountBalanceWidget.swift */,
-				CFA1DE682A0C32B20055E3CD /* AccountBalanceWidget.intentdefinition */,
 				CFA1DE692A0C32B50055E3CD /* Assets.xcassets */,
 				CFA1DE6B2A0C32B50055E3CD /* Info.plist */,
 			);
@@ -611,6 +615,14 @@
 				CFF292A72A13B93F00C1A66A /* EditAccountView.swift */,
 			);
 			path = "Edit Account";
+			sourceTree = "<group>";
+		};
+		CFFA12382DD8D830008EE5B1 /* Intents */ = {
+			isa = PBXGroup;
+			children = (
+				CFFA12362DD8D735008EE5B1 /* NewTransactionIntent.swift */,
+			);
+			path = Intents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -791,7 +803,6 @@
 				CF95BC1C2C57C55800C8C1CE /* CategoryCellView.swift in Sources */,
 				CFF292A62A13B8FE00C1A66A /* EditCategoryView.swift in Sources */,
 				CFD3ED602DC7CF440029AC2F /* EditCreditCardView.swift in Sources */,
-				CFA1DE6D2A0C32B50055E3CD /* AccountBalanceWidget.intentdefinition in Sources */,
 				CFD3ED542DC2C5E60029AC2F /* TicketReaderViewModel.swift in Sources */,
 				CF15B34A2BAC3D1200E8E050 /* NavigationToolbarView.swift in Sources */,
 				CFD3ED5B2DC57B0F0029AC2F /* Bill.swift in Sources */,
@@ -799,6 +810,7 @@
 				CFD3ED872DCBF3DC0029AC2F /* SelectCardView.swift in Sources */,
 				CF9D2A722A0996800003DC39 /* NiceColorPicker.swift in Sources */,
 				CF95BC162C566EED00C8C1CE /* Category.swift in Sources */,
+				CFFA12372DD8D738008EE5B1 /* NewTransactionIntent.swift in Sources */,
 				CF3116F12A14438600171A4D /* Account.swift in Sources */,
 				CF9DA5B12D1839280061056F /* EditTransactionViewModel.swift in Sources */,
 				CFD3ED802DCA3E9F0029AC2F /* App.swift in Sources */,
@@ -818,22 +830,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFFA12422DDB804C008EE5B1 /* PreviewData.swift in Sources */,
 				CF9DA5A22D1715AC0061056F /* GraphItem.swift in Sources */,
 				CF57463A2D22C2AB007CC196 /* NiceIconPicker.swift in Sources */,
 				CF44BE362A0FB6330006019F /* String+Extension.swift in Sources */,
 				CFE6D7C02BA9CAE800E76AB8 /* Spacing.swift in Sources */,
 				CF9DA5A02D170B270061056F /* BarsGraphView.swift in Sources */,
-				CFA1DE6C2A0C32B50055E3CD /* AccountBalanceWidget.intentdefinition in Sources */,
-				CF5746382D22BE30007CC196 /* AccountData.swift in Sources */,
+				CF5746382D22BE30007CC196 /* SelectAccountEntity.swift in Sources */,
 				CF5746392D22C294007CC196 /* NiceColorPicker.swift in Sources */,
 				CF44BE342A0FB6220006019F /* Color.swift in Sources */,
+				CFFA123A2DDB7F77008EE5B1 /* NewTransactionIntent.swift in Sources */,
 				CF0289F32D9DAD0C008E53DC /* PhotosPickerItem+Extension.swift in Sources */,
 				CF57463F2D240014007CC196 /* AccountBalanceProvider.swift in Sources */,
 				CFA1DE672A0C32B20055E3CD /* AccountBalanceWidget.swift in Sources */,
+				CFFA123B2DDB8030008EE5B1 /* CreditCard.swift in Sources */,
+				CFFA12432DDB8057008EE5B1 /* Date+Extension.swift in Sources */,
+				CFFA123C2DDB8030008EE5B1 /* Bill.swift in Sources */,
+				CFFA124A2DDCEEC4008EE5B1 /* AccountBalanceData.swift in Sources */,
+				CFFA123D2DDB8030008EE5B1 /* Installment.swift in Sources */,
+				CFFA123E2DDB8030008EE5B1 /* Account.swift in Sources */,
+				CFFA123F2DDB8030008EE5B1 /* Transaction.swift in Sources */,
+				CFFA12402DDB8030008EE5B1 /* Category.swift in Sources */,
 				CF7A80462A0DA8CC0067F5A8 /* PizzaGraphView.swift in Sources */,
 				CF8CF26D2D20CE840008A0F3 /* Double+Extension.swift in Sources */,
+				CFFA12412DDB8045008EE5B1 /* ModelContainer+Extension.swift in Sources */,
 				CF44BE352A0FB6330006019F /* Color+Extension.swift in Sources */,
 				CF5746352D22BDED007CC196 /* LettersIconView.swift in Sources */,
+				CFFA12452DDCA620008EE5B1 /* SelectAccountConfigIntent.swift in Sources */,
+				CFFA12472DDCA7D2008EE5B1 /* AccountQuery.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1057,6 +1081,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = BudgetWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AKNQLC48L4;
@@ -1085,6 +1110,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = BudgetWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = AKNQLC48L4;

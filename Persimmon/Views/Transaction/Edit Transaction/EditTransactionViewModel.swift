@@ -144,19 +144,19 @@ extension EditTransactionView {
             cardError = nil
         }
         
-        private func fetchLastUsedAccount() -> Account? {
+        func fetchLastUsedAccount() -> Account? {
             try? modelContainer.mainContext.fetch(FetchDescriptor<Transaction>(
                 sortBy: [SortDescriptor(\.date, order: .reverse)]))
             .filter { $0.type != .installments }.first?.account
         }
         
-        private func fetchLastUsedCard() -> CreditCard? {
+        func fetchLastUsedCard() -> CreditCard? {
             try? modelContainer.mainContext.fetch(FetchDescriptor<Transaction>(
                 sortBy: [SortDescriptor(\.date, order: .reverse)]))
             .filter { $0.type == .installments }.first?.installments.first?.bill.card
         }
         
-        private func fetchLastUsedCategory() -> Category? {
+        func fetchLastUsedCategory() -> Category? {
             try? modelContainer.mainContext.fetch(FetchDescriptor<Transaction>(
                 sortBy: [SortDescriptor(\.date, order: .reverse)])).first?.category
         }

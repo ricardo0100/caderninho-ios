@@ -21,8 +21,8 @@ struct TransactionDetailsView: View {
                         Text(transaction.type.text)
                     }
                 }
-                let name = transaction.account?.name ?? transaction.installments[0].bill.card.name
-                let color = transaction.account?.color ?? transaction.installments[0].bill.card.color
+                let name = transaction.accountOrCardName ?? ""
+                let color = transaction.accountOrCardColor ?? ""
                 LabeledView(labelText: transaction.type == .installments ? "Credit Card":  "Account") {
                     HStack(spacing: .spacingMedium) {
                         LettersIconView(text: name.firstLetters(),
@@ -35,8 +35,7 @@ struct TransactionDetailsView: View {
                     Text(transaction.value.toCurrency(with: transaction.currency ?? "$"))
                         .font(.title3).bold()
                     if transaction.type == .installments {
-                        let installmentValue = transaction
-                            .installments[0].value.toCurrency(with: transaction.currency ?? "$")
+                        let installmentValue = transaction.installments.first?.currencyValue ?? ""
                         Text("\(transaction.installments.count) x \(installmentValue)")
                     }
                 }

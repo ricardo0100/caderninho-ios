@@ -72,21 +72,21 @@ class DataController {
         let category = (try? context.fetch(FetchDescriptor<Category>()).randomElement()) ?? createRandomCategory(withIcon: true)
         let date = Date().dateAddingDays((-100..<0).randomElement() ?? 0)
         
-        let vm = EditTransactionView.ViewModel(modelContainer: container)
-        vm.name = transactionNameExamples.randomElement()!
-        vm.value = Double.random(in: 1...1000)
-        vm.date = date
-        vm.type = type
-        vm.category = category
-        if type == .installments {
-            let card = (try? context.fetch(FetchDescriptor<CreditCard>()).randomElement()) ?? createRandomCard()
-            vm.card = card
-            vm.numberOfInstallments = Int.random(in: 1...12)
-        } else {
-            let account = (try? context.fetch(FetchDescriptor<Account>()).randomElement()) ?? createRandomAccount()
-            vm.account = account
-        }
-        vm.didTapSave()
+//        let vm = EditTransactionView.ViewModel(modelContainer: container)
+//        vm.name = transactionNameExamples.randomElement()!
+//        vm.value = Double.random(in: 1...1000)
+//        vm.date = date
+//        vm.type = type
+//        vm.category = category
+//        if type == .installments {
+//            let card = (try? context.fetch(FetchDescriptor<CreditCard>()).randomElement()) ?? createRandomCard()
+//            vm.card = card
+//            vm.numberOfInstallments = Int.random(in: 1...12)
+//        } else {
+//            let account = (try? context.fetch(FetchDescriptor<Account>()).randomElement()) ?? createRandomAccount()
+//            vm.account = account
+//        }
+//        vm.didTapSave()
     }
     
     static func createRandomCategory(withIcon: Bool = false) -> Category {

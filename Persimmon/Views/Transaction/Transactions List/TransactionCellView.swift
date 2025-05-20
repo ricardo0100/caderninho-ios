@@ -23,8 +23,8 @@ struct TransactionCellView: View {
             Spacer()
             VStack(alignment: .trailing) {
                 HStack(spacing: .spacingSmall) {
-                    let name = transaction.account?.name ?? transaction.installments[0].bill.card.name
-                    let color = transaction.account?.color ?? transaction.installments[0].bill.card.color
+                    let name = transaction.accountOrCardName ?? ""
+                    let color = transaction.accountOrCardColor ?? ""
                     Text("\(name)")
                         .font(.subheadline)
                     LettersIconView(text: name.firstLetters(),

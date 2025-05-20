@@ -30,6 +30,10 @@ class Installment: ObservableObject {
         self.bill = bill
         self.value = value
     }
+    
+    var currencyValue: String {
+        value.toCurrency(with: bill.card.currency)
+    }
 }
 
 extension Installment: Comparable {

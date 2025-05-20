@@ -74,6 +74,14 @@ class Transaction: ObservableObject {
         type == .installments ? installments.first?.bill.card.currency : account?.currency
     }
     
+    var accountOrCardName: String? {
+        account?.name ?? installments.first?.bill.card.name
+    }
+    
+    var accountOrCardColor: String? {
+        account?.color ?? installments.first?.bill.card.color
+    }
+
     enum TransactionType: Codable, CaseIterable, Identifiable {
         var id: Int { hashValue }
         
