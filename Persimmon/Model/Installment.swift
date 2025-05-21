@@ -13,7 +13,7 @@ class Installment: ObservableObject {
     @Attribute(.unique)
     var id: UUID
     
-    @Relationship
+    @Relationship(deleteRule: .noAction, inverse: \Transaction.installments)
     var transaction: Transaction
     
     @Relationship(deleteRule: .noAction, inverse: \Bill.installments)

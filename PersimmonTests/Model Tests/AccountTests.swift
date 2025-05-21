@@ -12,14 +12,13 @@ import SwiftData
 
 @MainActor
 struct AccountTests {
-    typealias TestInfo = (type: Transaction.TransactionType, value: Double)
-    
     var container: ModelContainer
     
     init() throws {
         container = .createTestContainer()
         let context = container.mainContext
         context.insert(Account(id: UUID(), name: "Bank of Maya", color: "#F00FFF", currency: "R$"))
+        context.insert(CreditCard(id: UUID(), name: "FeijãoCard", color: "#F0FF1F", currency: "R$", closingCycleDay: 3, dueDay: 10))
         try context.save()
     }
     
@@ -27,16 +26,14 @@ struct AccountTests {
         try! container.mainContext.fetch(FetchDescriptor<Account>()).first!
     }
     
-    func createTransaction(with infos: [TestInfo]) throws {
-        infos.forEach { (type: Transaction.TransactionType, value: Double) in
+    func createTransactions(with values: [Double]) throws {
+        values.forEach { value in
             container.mainContext.insert(Transaction(
-                id: UUID(),
                 name: "Test",
-                value: value,
-                account: getAccount,
-                category: nil,
                 date: Date(),
-                type: type,
+                value: value,
+                editOperation: .transferOut(account: getAccount),
+                category: nil,
                 place: nil
             ))
         }
@@ -45,19 +42,13 @@ struct AccountTests {
     
     @Test("Test Account balance")
     func testAccountBalance() async throws {
-        try createTransaction(with: [
-            TestInfo(.in, 100.0),
-            TestInfo(.in, 100.0),
-        ])
+        try createTransactions(with: [100, 100])
         #expect(getAccount.balance == 200.0)
     }
     
     @Test("Test Account balance with transfer out")
     func testAccountBalanceWithTransferOut() async throws {
-        try createTransaction(with: [
-            TestInfo(.in, 100.0),
-            TestInfo(.out, 100.0),
-        ])
+        try createTransactions(with: [100, -100])
         #expect(getAccount.balance == 0)
     }
 }

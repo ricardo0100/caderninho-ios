@@ -12,11 +12,11 @@ struct TransactionCellView: View {
                 Text(transaction.value.toCurrency(with: transaction.currency ?? "$"))
                     .font(.subheadline)
                 HStack(spacing: .spacingSmall) {
-                    Image(systemName: transaction.type.iconName)
+                    Image(systemName: transaction.operation.iconName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 12, height: 12)
-                    Text(transaction.type.text)
+                    Text(transaction.operation.text)
                         .font(.caption2)
                 }
             }

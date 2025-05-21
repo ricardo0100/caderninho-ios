@@ -18,40 +18,194 @@ class Transaction: ObservableObject {
     var name: String
     var value: Double
     var date: Date
-    var type: TransactionType
+    var operation: Operation
     var place: Place?
     
-    init(id: UUID,
-         name: String,
-         value: Double,
-         account: Account,
-         category: Category?,
+    init(name: String,
          date: Date,
-         type: TransactionType,
+         value: Double,
+         editOperation: EditOperation,
+         category: Category?,
          place: Place?) {
-        self.id = id
+        self.id = UUID()
         self.name = name
-        self.value = value
-        self.account = account
-        self.category = category
         self.date = date
-        self.type = type
+        self.category = category
         self.place = place
+        self.value = value
+        self.operation = editOperation.operation
+        
+        switch editOperation {
+        case .transferIn(let account), .transferOut(account: let account):
+            self.account = account
+        case .installments(let card, let numberOfInstallments):
+            self.installments.forEach { modelContext?.delete($0) }
+            self.installments = Self.createInstallments(
+                card: card,
+                transaction: self,
+                numberOfInstallments: numberOfInstallments,
+                date: date,
+                value: value)
+        case .refund(_):
+            fatalError()
+        }
     }
     
-    init(id: UUID,
-         name: String,
-         value: Double,
-         category: Category?,
-         date: Date,
-         place: Place?) {
-        self.id = id
-        self.name = name
-        self.value = value
-        self.category = category
-        self.date = date
-        self.type = .installments
-        self.place = place
+    func update(
+        name: String,
+        date: Date,
+        value: Double,
+        editOperation: EditOperation,
+        category: Category?,
+        place: Place?) {
+            self.id = UUID()
+            self.name = name
+            self.date = date
+            self.category = category
+            self.place = place
+            self.operation = editOperation.operation
+            self.value = value
+            
+            switch editOperation {
+            case .transferIn(let account):
+                self.account = account
+            case .transferOut(account: let account):
+                self.account = account
+            case .installments(let card, let numberOfInstallments):
+                self.installments.forEach { modelContext?.delete($0) }
+                self.installments = Self.createInstallments(
+                    card: card,
+                    transaction: self,
+                    numberOfInstallments: numberOfInstallments,
+                    date: date,
+                    value: value)
+            case .refund(_):
+                break
+            }
+        }
+    
+    static private func createInstallments(
+        card: CreditCard,
+        transaction: Transaction,
+        numberOfInstallments: Int,
+        date: Date,
+        value: Double) -> [Installment] {
+            let date = date
+            var monthsRange = (1...numberOfInstallments)
+            if date.day < card.dueDay {
+                monthsRange = (0...numberOfInstallments - 1)
+            }
+            return monthsRange.map { i in
+                let month = Calendar.current.component(.month, from: date.dateAddingMonths(i))
+                let year = Calendar.current.component(.year, from: date.dateAddingMonths(i))
+                
+                let bill = card.bills.first { $0.dueYear == year && $0.dueMonth == month } ??
+                    .init(id: UUID(), card: card, month: month, year: year)
+                
+                return Installment(id: UUID(),
+                                   transaction: transaction,
+                                   number: date.day < card.dueDay ? i + 1 : i,
+                                   bill: bill,
+                                   value: value / Double(numberOfInstallments))
+            }
+        }
+    
+    var currency: String? {
+        installments.first?.bill.card.currency ?? account?.currency
+    }
+    
+    var accountOrCardName: String? {
+        account?.name ?? installments.first?.bill.card.name
+    }
+    
+    var accountOrCardColor: String? {
+        account?.color ?? installments.first?.bill.card.color
+    }
+    
+    var operationDetails: OperationDetails {
+        switch operation {
+        case .transferIn:
+            guard let account = account else { fatalError() }
+            return .transferIn(account: account, value: value.toCurrency(with: account.currency))
+        case .transferOut:
+            guard let account = account else { fatalError() }
+            return .transferOut(account: account, value: value.toCurrency(with: account.currency))
+        case .installments:
+            return .installments(installments: installments)
+        case .refund:
+            fatalError()
+        }
+    }
+    
+    enum Operation: Codable, CaseIterable, Identifiable {
+        case transferIn
+        case transferOut
+        case installments
+        case refund
+        
+        var id: Int { hashValue }
+        
+        var text: String {
+            switch self {
+            case .transferOut:
+                return "Transfer Out"
+            case .transferIn:
+                return "Transfer In"
+            case .installments:
+                return "Installments"
+            case .refund:
+                return "Refund"
+            }
+        }
+        
+        var iconName: String {
+            switch self {
+            case .transferIn:
+                return "arrowshape.down.circle"
+            case .transferOut:
+                return "banknote"
+            case .installments:
+                return "creditcard"
+            case .refund:
+                return "creditcard.trianglebadge.exclamationmark"
+            }
+        }
+    }
+    
+    enum OperationDetails {
+        case transferIn(account: Account, value: String)
+        case transferOut(account: Account, value: String)
+        case installments(installments: [Installment])
+        case refund(bill: Bill, value: String)
+    }
+    
+    enum EditOperation: Identifiable {
+        case transferIn(account: Account)
+        case transferOut(account: Account)
+        case installments(card: CreditCard, numberOfInstallments: Int)
+        case refund(bill: Bill)
+        
+        var id: Int {
+            switch self {
+            case .transferIn: return 0
+            case .transferOut: return 1
+            case .installments: return 2
+            case .refund: return 3
+            }
+        }
+        
+        var operation: Operation {
+            switch self {
+            case .transferIn:
+                return .transferIn
+            case .transferOut:
+                return .transferOut
+            case .installments:
+                return .installments
+            case .refund:
+                return .refund
+            }
+        }
     }
     
     struct Place: Codable, Identifiable, Hashable {
@@ -67,45 +221,6 @@ class Transaction: ObservableObject {
         var location: CLLocation? {
             guard let latitude = latitude, let longitude = longitude else { return nil }
             return CLLocation(latitude: latitude, longitude: longitude)
-        }
-    }
-    
-    var currency: String? {
-        type == .installments ? installments.first?.bill.card.currency : account?.currency
-    }
-    
-    var accountOrCardName: String? {
-        account?.name ?? installments.first?.bill.card.name
-    }
-    
-    var accountOrCardColor: String? {
-        account?.color ?? installments.first?.bill.card.color
-    }
-
-    enum TransactionType: Codable, CaseIterable, Identifiable {
-        var id: Int { hashValue }
-        
-        case installments
-        case `in`
-        case out
-        
-        var text: String {
-            switch self {
-            case .installments: return "Installments"
-            case .in: return "Transfer In"
-            case .out: return "Transfer Out"
-            }
-        }
-        
-        var iconName: String {
-            switch self {
-            case .installments:
-                return "creditcard"
-            case .in:
-                return "arrow.down.to.line.circle"
-            case .out:
-                return "arrow.up.to.line.circle"
-            }
         }
     }
 }

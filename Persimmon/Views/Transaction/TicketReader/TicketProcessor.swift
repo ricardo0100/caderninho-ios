@@ -13,7 +13,7 @@ struct TicketData: Identifiable {
     let establishmentName: String?
     let value: Double?
     let date: Date?
-    let type: Transaction.TransactionType?
+    let type: Transaction.Operation?
 }
 
 class TicketProcessor {

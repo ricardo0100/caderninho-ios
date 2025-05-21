@@ -26,7 +26,7 @@ struct EditTransactionView: View {
                             .focused($focusedField, equals: .name)
                     }
                     LabeledView(labelText: "Type") {
-                        SelectTransactionTypeView(selectedType: $viewModel.type)
+                        SelectOperationView(selectedType: $viewModel.type)
                     }
                     
                     if viewModel.showAccountField {

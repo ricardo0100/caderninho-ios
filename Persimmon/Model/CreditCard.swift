@@ -10,14 +10,17 @@ import SwiftData
 
 @Model
 class CreditCard: ObservableObject {
-    @Attribute(.unique) var id: UUID
+    
+    @Attribute(.unique)
+    var id: UUID
+    
     var name: String
     var color: String
     var currency: String
     var dueDay: Int
     var closingCycleDay: Int
     
-    @Relationship(deleteRule: .cascade)
+    @Relationship(deleteRule: .cascade, inverse: \Bill.card)
     var bills: [Bill] = []
     
     init(id: UUID, name: String, color: String, currency: String, closingCycleDay: Int, dueDay: Int,) {

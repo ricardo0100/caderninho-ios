@@ -50,14 +50,13 @@ struct EditTransactionViewModelTests {
     
     func createTransactionInContext() throws -> Transaction {
         let place = Transaction.Place(name: "Market")
-        let transaction = Transaction(id: UUID(),
-                                      name: "Test Name",
-                                      value: 123,
-                                      account: getAccounts.first!,
-                                      category: getCategories.first!,
-                                      date: Date(timeIntervalSince1970: 10),
-                                      type: .out,
-                                      place: place)
+        let transaction = Transaction(
+            name: "Test Name",
+            date: Date(timeIntervalSince1970: 10),
+            value: 123,
+            editOperation: .transferOut(account: getAccounts[0]),
+            category: getCategories.first!,
+            place: place)
         container.mainContext.insert(transaction)
         try container.mainContext.save()
         return transaction
@@ -71,7 +70,7 @@ struct EditTransactionViewModelTests {
         #expect(sut.value == 123)
         #expect(sut.account?.name == "Bank of Maya")
         #expect(sut.category?.name == "Food")
-        #expect(sut.type == .out)
+        #expect(sut.type == .transferOut)
         #expect(sut.date == Date(timeIntervalSince1970: 10))
         #expect(sut.place?.name == "Market")
     }
@@ -81,7 +80,7 @@ struct EditTransactionViewModelTests {
         let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
         sut.name = "Test Name"
         sut.account = getAccounts.first!
-        sut.type = .out
+        sut.type = .transferIn
         sut.value = 1.99
         sut.didTapSave()
         #expect(getTransactions.first!.name == "Test Name")
@@ -91,11 +90,11 @@ struct EditTransactionViewModelTests {
     func updateTransaction() async throws {
         let sut = EditTransactionView.ViewModel(transaction: try createTransactionInContext(), modelContainer: container)
         sut.name = "Changed Name"
-        sut.type = .out
+        sut.type = .transferIn
         sut.didTapSave()
         
         #expect(getTransactions.first!.name == "Changed Name")
-        #expect(sut.type == .out)
+        #expect(sut.type == .transferIn)
     }
     
     @Test("Show Name Error Message")
@@ -110,7 +109,7 @@ struct EditTransactionViewModelTests {
     func showAccountErrorMessage() async throws {
         let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
         sut.name = "Test"
-        sut.type = .out
+        sut.type = .transferIn
         sut.didTapSave()
         #expect(sut.accountError == "Select an account")
         #expect(getTransactions.isEmpty)
@@ -141,7 +140,7 @@ struct EditTransactionViewModelTests {
     @Test("Show Account Field")
     func showAccountField() async throws {
         let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
-        sut.type = .out
+        sut.type = .transferIn
         #expect(sut.showAccountField)
         #expect(!sut.showCardField)
     }

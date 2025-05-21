@@ -19,7 +19,7 @@ extension EditTransactionView {
         
         // Model vars
         @Published var name: String
-        @Published var type: Transaction.TransactionType {
+        @Published var type: Transaction.Operation {
             didSet {
                 updateVisibleFields()
             }
@@ -50,7 +50,8 @@ extension EditTransactionView {
             _card = Published(initialValue: transaction?.installments.first?.bill.card)
             _value = Published(initialValue: transaction?.value ?? .zero)
             _category = Published(initialValue: transaction?.category)
-            _type = Published(initialValue: transaction?.type ?? .installments)
+            
+            _type = Published(initialValue: transaction?.operation ?? .installments)
             _date = Published(initialValue: transaction?.date ?? Date())
             _place = Published(initialValue: transaction?.place)
             _numberOfInstallments = Published(initialValue: transaction?.installments.count ?? 1)
@@ -147,13 +148,13 @@ extension EditTransactionView {
         func fetchLastUsedAccount() -> Account? {
             try? modelContainer.mainContext.fetch(FetchDescriptor<Transaction>(
                 sortBy: [SortDescriptor(\.date, order: .reverse)]))
-            .filter { $0.type != .installments }.first?.account
+            .filter { $0.account != nil }.first?.account
         }
         
         func fetchLastUsedCard() -> CreditCard? {
             try? modelContainer.mainContext.fetch(FetchDescriptor<Transaction>(
                 sortBy: [SortDescriptor(\.date, order: .reverse)]))
-            .filter { $0.type == .installments }.first?.installments.first?.bill.card
+            .filter { $0.account == nil }.first?.installments.first?.bill.card
         }
         
         func fetchLastUsedCategory() -> Category? {
@@ -162,86 +163,43 @@ extension EditTransactionView {
         }
         
         private func saveTransaction() {
-            if let transaction = transaction {
-                updateExistingTransaction(transaction)
+            if let transaction = self.transaction {
+                transaction.update(
+                    name: name,
+                    date: date,
+                    value: value,
+                    editOperation: editOperation(),
+                    category: category,
+                    place: place)
             } else {
-                createNewTransaction()
+                let transaction = Transaction(
+                    name: name,
+                    date: date,
+                    value: value,
+                    editOperation: editOperation(),
+                    category: category,
+                    place: place)
+                modelContainer.mainContext.insert(transaction)
             }
             do {
                 try modelContainer.mainContext.save()
-                shouldDismiss = true
+                shouldDismiss.toggle()
             } catch {
                 print(error.localizedDescription)
             }
         }
         
-        func updateExistingTransaction(_ transaction: Transaction) {
-            transaction.name = name
-            transaction.category = category
-            transaction.value = value
-            transaction.date = date
-            transaction.place = place
-            
-            if type == .installments, let card = card {
-                transaction.account = nil
-                transaction.installments.forEach {
-                    modelContainer.mainContext.delete($0)
-                }
-                transaction.installments = createInstallments(in: card,
-                                                              transaction: transaction,
-                                                              numberOfInstallments: numberOfInstallments)
-            } else if let account = account {
-                transaction.account = account
-                transaction.installments.removeAll()
+        private func editOperation() -> Transaction.EditOperation {
+            switch type {
+            case .transferOut:
+                return .transferOut(account: account!)
+            case .transferIn:
+                return .transferIn(account: account!)
+            case .installments:
+                return .installments(card: card!, numberOfInstallments: numberOfInstallments)
+            case .refund:
+                fatalError()
             }
-        }
-        
-        private func createInstallments(in card: CreditCard, transaction: Transaction, numberOfInstallments: Int) -> [Installment] {
-            let date = transaction.date
-            var monthsRange = (1...numberOfInstallments)
-            if transaction.date.day < card.dueDay {
-                monthsRange = (0...numberOfInstallments - 1)
-            }
-            return monthsRange.map { i in
-                let month = Calendar.current.component(.month, from: date.dateAddingMonths(i))
-                let year = Calendar.current.component(.year, from: date.dateAddingMonths(i))
-                
-                let bill = card.bills.first { $0.dueYear == year && $0.dueMonth == month } ??
-                    .init(id: UUID(), card: card, month: month, year: year)
-                
-                return Installment(id: UUID(),
-                                   transaction: transaction,
-                                   number: transaction.date.day < card.dueDay ? i + 1 : i,
-                                   bill: bill,
-                                   value: transaction.value / Double(numberOfInstallments))
-            }
-        }
-        
-        func createNewTransaction() {
-            let transaction: Transaction
-            if type == .installments {
-                transaction = Transaction(
-                    id: UUID(),
-                    name: name,
-                    value: value,
-                    category: category,
-                    date: date,
-                    place: place)
-                transaction.installments = createInstallments(in: card!,
-                                                              transaction: transaction,
-                                                              numberOfInstallments: numberOfInstallments)
-            } else {
-                transaction = Transaction(
-                    id: UUID(),
-                    name: name,
-                    value: value,
-                    account: account!,
-                    category: category,
-                    date: date,
-                    type: type,
-                    place: place)
-            }
-            modelContainer.mainContext.insert(transaction)
         }
     }
 }

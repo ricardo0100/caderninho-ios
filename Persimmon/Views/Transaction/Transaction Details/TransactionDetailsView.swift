@@ -13,17 +13,17 @@ struct TransactionDetailsView: View {
             Section {
                 LabeledView(labelText: "Type") {
                     HStack(spacing: .spacingMedium) {
-                        Image(systemName: transaction.type.iconName)
+                        Image(systemName: transaction.operation.iconName)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 22, height: 22)
                             .foregroundColor(Color.secondary)
-                        Text(transaction.type.text)
+                        Text(transaction.operation.text)
                     }
                 }
                 let name = transaction.accountOrCardName ?? ""
                 let color = transaction.accountOrCardColor ?? ""
-                LabeledView(labelText: transaction.type == .installments ? "Credit Card":  "Account") {
+                LabeledView(labelText: transaction.operation == .installments ? "Credit Card" : "Account") {
                     HStack(spacing: .spacingMedium) {
                         LettersIconView(text: name.firstLetters(),
                                         color: Color(hex: color))
@@ -34,7 +34,7 @@ struct TransactionDetailsView: View {
                 LabeledView(labelText: "Value") {
                     Text(transaction.value.toCurrency(with: transaction.currency ?? "$"))
                         .font(.title3).bold()
-                    if transaction.type == .installments {
+                    if transaction.operation == .installments {
                         let installmentValue = transaction.installments.first?.currencyValue ?? ""
                         Text("\(transaction.installments.count) x \(installmentValue)")
                     }
@@ -81,7 +81,7 @@ struct TransactionDetailsView: View {
                         .cornerRadius(12)
                     }
                 }
-            if transaction.type == .installments {
+            if transaction.operation == .installments {
                 Section("Installments") {
                     ForEach(transaction.installments.sorted()) { installment in
                         HStack {

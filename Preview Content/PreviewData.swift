@@ -67,26 +67,19 @@ class DataController {
                 currency: accountCurrencyExamples.randomElement()!)
     }
     
-    private static func createRandomTransaction(using container: ModelContainer, type: Transaction.TransactionType) {
-        let context = container.mainContext
-        let category = (try? context.fetch(FetchDescriptor<Category>()).randomElement()) ?? createRandomCategory(withIcon: true)
-        let date = Date().dateAddingDays((-100..<0).randomElement() ?? 0)
-        
-//        let vm = EditTransactionView.ViewModel(modelContainer: container)
-//        vm.name = transactionNameExamples.randomElement()!
-//        vm.value = Double.random(in: 1...1000)
-//        vm.date = date
-//        vm.type = type
-//        vm.category = category
-//        if type == .installments {
-//            let card = (try? context.fetch(FetchDescriptor<CreditCard>()).randomElement()) ?? createRandomCard()
-//            vm.card = card
-//            vm.numberOfInstallments = Int.random(in: 1...12)
-//        } else {
-//            let account = (try? context.fetch(FetchDescriptor<Account>()).randomElement()) ?? createRandomAccount()
-//            vm.account = account
-//        }
-//        vm.didTapSave()
+    private static func createRandomTransaction(using container: ModelContainer, operation: Transaction.EditOperation) {
+        let name = transactionNameExamples.randomElement()!
+        let category = try! container.mainContext.fetch(FetchDescriptor<Category>()).randomElement()!
+        let value = Double((1...100000).randomElement()!) / 100.0
+        let transaction = Transaction(
+            name: name,
+            date: Date(),
+            value: value,
+            editOperation: operation,
+            category: category,
+            place: nil)
+        container.mainContext.insert(transaction)
+        try! container.mainContext.save()
     }
     
     static func createRandomCategory(withIcon: Bool = false) -> Category {
@@ -136,9 +129,9 @@ class DataController {
                 dueDay: 10)
             context.insert(card)
             
-            createRandomTransaction(using: container, type: .installments)
-            createRandomTransaction(using: container, type: .out)
-            createRandomTransaction(using: container, type: .out)
+//            createRandomTransaction(using: container, operation: .installments)
+//            createRandomTransaction(using: container, operation: .transferIn)
+//            createRandomTransaction(using: container, operation: .transferOut)
             
             return container
         } catch {

@@ -1,11 +1,11 @@
 import SwiftUI
 
-struct SelectTransactionTypeView: View {
-    @Binding var selectedType: Transaction.TransactionType
+struct SelectOperationView: View {
+    @Binding var selectedType: Transaction.Operation
     
     var body: some View {
         Menu {
-            ForEach(Transaction.TransactionType.allCases) { type in
+            ForEach(Transaction.Operation.allCases) { type in
                 Button {
                     selectedType = type
                 } label: {
@@ -19,6 +19,6 @@ struct SelectTransactionTypeView: View {
 }
 
 #Preview {
-    @Previewable @State var selectedType: Transaction.TransactionType = .out
-    SelectTransactionTypeView(selectedType: $selectedType)
+    @Previewable @State var selectedType: Transaction.Operation = .installments
+    SelectOperationView(selectedType: $selectedType)
 }

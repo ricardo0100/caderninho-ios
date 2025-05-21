@@ -20,15 +20,14 @@ struct NewTransactionIntent: AppIntent {
     
     @MainActor
     func perform() async throws -> some IntentResult & ProvidesDialog {
-        
-        let transaction = Transaction(
-            id: UUID(),
-            name: name,
-            value: value,
-            category: nil,
-            date: Date(),
-            place: nil)
-        ModelContainer.main.mainContext.insert(transaction)
+//        let transaction = Transaction(
+//            name: name,
+//            value: value,
+//            category: nil,
+//            account: <#Account#>,
+//            date: Date(),
+//            place: nil)
+//        ModelContainer.main.mainContext.insert(transaction)
         try ModelContainer.main.mainContext.save()
         return .result(dialog: IntentDialog("Transação criada com sucesso!"))
     }

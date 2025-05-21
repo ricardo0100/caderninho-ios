@@ -60,7 +60,7 @@
 		CFA1DE672A0C32B20055E3CD /* AccountBalanceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA1DE662A0C32B20055E3CD /* AccountBalanceWidget.swift */; };
 		CFA1DE6A2A0C32B50055E3CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFA1DE692A0C32B50055E3CD /* Assets.xcassets */; };
 		CFA1DE702A0C32B50055E3CD /* BudgetWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CFA1DE5B2A0C32B20055E3CD /* BudgetWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		CFB7F5612BBEBFE6009956E9 /* SelectTransactionTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F5602BBEBFE6009956E9 /* SelectTransactionTypeView.swift */; };
+		CFB7F5612BBEBFE6009956E9 /* SelectOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F5602BBEBFE6009956E9 /* SelectOperationView.swift */; };
 		CFB7F56B2BC0228B009956E9 /* SelectDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F56A2BC0228B009956E9 /* SelectDateView.swift */; };
 		CFB7F56E2BC02A47009956E9 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F56D2BC02A47009956E9 /* Date+Extension.swift */; };
 		CFB7F5732BC085AD009956E9 /* SelectLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F5722BC085AD009956E9 /* SelectLocationView.swift */; };
@@ -189,7 +189,7 @@
 		CFA1DE662A0C32B20055E3CD /* AccountBalanceWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountBalanceWidget.swift; sourceTree = "<group>"; };
 		CFA1DE692A0C32B50055E3CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFA1DE6B2A0C32B50055E3CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CFB7F5602BBEBFE6009956E9 /* SelectTransactionTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTransactionTypeView.swift; sourceTree = "<group>"; };
+		CFB7F5602BBEBFE6009956E9 /* SelectOperationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOperationView.swift; sourceTree = "<group>"; };
 		CFB7F56A2BC0228B009956E9 /* SelectDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDateView.swift; sourceTree = "<group>"; };
 		CFB7F56D2BC02A47009956E9 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		CFB7F56F2BC0517B009956E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -586,7 +586,7 @@
 				CF95BC212C581C0C00C8C1CE /* SelectCategoryView.swift */,
 				CFDC219D2BAF29AF00295432 /* SelectAccountView.swift */,
 				CFD3ED862DCBF3D30029AC2F /* SelectCardView.swift */,
-				CFB7F5602BBEBFE6009956E9 /* SelectTransactionTypeView.swift */,
+				CFB7F5602BBEBFE6009956E9 /* SelectOperationView.swift */,
 			);
 			path = "Edit Transaction";
 			sourceTree = "<group>";
@@ -787,7 +787,7 @@
 				CF8104522C037BE4009599B8 /* ProcessInfo+Extension.swift in Sources */,
 				CFD3ED6B2DC986A30029AC2F /* BillView.swift in Sources */,
 				CF7A804F2A0DBAE20067F5A8 /* ImageIconView.swift in Sources */,
-				CFB7F5612BBEBFE6009956E9 /* SelectTransactionTypeView.swift in Sources */,
+				CFB7F5612BBEBFE6009956E9 /* SelectOperationView.swift in Sources */,
 				CFBEE2452A080AA700586164 /* String+Extension.swift in Sources */,
 				CFD3ED642DC833380029AC2F /* CreditCardCellView.swift in Sources */,
 				CFDC21972BAF094000295432 /* EditTransactionView.swift in Sources */,

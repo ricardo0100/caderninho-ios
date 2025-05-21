@@ -13,9 +13,7 @@ class Account: ObservableObject {
     
     @Transient
     var balance: Double {
-        transactions.map {
-            $0.type == .out ? -$0.value : $0.value
-        }.reduce(.zero, +)
+        transactions.map { $0.value }.reduce(.zero, +)
     }
     
     init(id: UUID, name: String, color: String, currency: String) {

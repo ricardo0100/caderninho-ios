@@ -19,6 +19,7 @@ struct CreditCardTests {
     init() throws {
         container = .createTestContainer()
         card = createCardWith(closing: 3, dueDay: 10)
+        container.mainContext.insert(card)
     }
     
     @Test("Current Bill With Clear Database Should Be Nil")
