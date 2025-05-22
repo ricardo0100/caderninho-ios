@@ -16,10 +16,11 @@ extension EditTransactionView {
     public class ViewModel: ObservableObject {
         private let transaction: Transaction?
         private let modelContainer: ModelContainer
+        private let modelManager: ModelManager
         
         // Model vars
         @Published var name: String
-        @Published var type: Transaction.Operation {
+        @Published var operation: Transaction.Operation {
             didSet {
                 updateVisibleFields()
             }
@@ -45,13 +46,13 @@ extension EditTransactionView {
         init(transaction: Transaction? = nil, modelContainer: ModelContainer) {
             self.transaction = transaction
             self.modelContainer = modelContainer
+            self.modelManager = ModelManager(context: modelContainer.mainContext)
             _name = Published(initialValue: transaction?.name ?? "")
             _account = Published(initialValue: transaction?.account)
             _card = Published(initialValue: transaction?.installments.first?.bill.card)
             _value = Published(initialValue: transaction?.value ?? .zero)
             _category = Published(initialValue: transaction?.category)
-            
-            _type = Published(initialValue: transaction?.operation ?? .installments)
+            _operation = Published(initialValue: transaction?.operation ?? .installments)
             _date = Published(initialValue: transaction?.date ?? Date())
             _place = Published(initialValue: transaction?.place)
             _numberOfInstallments = Published(initialValue: transaction?.installments.count ?? 1)
@@ -61,11 +62,12 @@ extension EditTransactionView {
         init(ticketData: TicketData, modelContainer: ModelContainer) {
             self.transaction = nil
             self.modelContainer = modelContainer
+            self.modelManager = ModelManager(context: modelContainer.mainContext)
             _name = Published(initialValue: "")
             _account = Published(initialValue: nil)
             _value = Published(initialValue: ticketData.value ?? 0)
             _category = Published(initialValue: nil)
-            _type = Published(initialValue: ticketData.type ?? .installments)
+            _operation = Published(initialValue: ticketData.type ?? .installments)
             _date = Published(initialValue: ticketData.date ?? Date())
             _place = Published(initialValue: nil)
             _numberOfInstallments = Published(initialValue: 1)
@@ -77,7 +79,7 @@ extension EditTransactionView {
         }
         
         private var currency: String {
-            (type == .installments ? card?.currency : account?.currency) ?? ""
+            (operation == .installments ? card?.currency : account?.currency) ?? ""
         }
         
         var installmentsDescription: String {
@@ -88,7 +90,7 @@ extension EditTransactionView {
         func viewDidAppear() {
             if transaction == nil {
                 category = fetchLastUsedCategory()
-                if type == .installments {
+                if operation == .installments {
                     card = fetchLastUsedCard()
                 } else {
                     account = fetchLastUsedAccount()
@@ -97,8 +99,8 @@ extension EditTransactionView {
         }
         
         private func updateVisibleFields() {
-            showCardField = type == .installments
-            showAccountField = type != .installments
+            showCardField = operation == .installments
+            showAccountField = operation != .installments
         }
         
         func didTapCancel() {
@@ -127,11 +129,11 @@ extension EditTransactionView {
                 nameError = "Mandatory field"
                 return
             }
-            if type != .installments, account == nil {
+            if operation != .installments, account == nil {
                 accountError = "Select an account"
                 return
             }
-            if type == .installments, card == nil {
+            if operation == .installments, card == nil {
                 cardError = "Select a card"
                 return
             }
@@ -164,33 +166,30 @@ extension EditTransactionView {
         
         private func saveTransaction() {
             if let transaction = self.transaction {
-                transaction.update(
+                try! modelManager.updateTransaction(
+                    transaction: transaction,
                     name: name,
                     date: date,
                     value: value,
                     editOperation: editOperation(),
                     category: category,
-                    place: place)
+                    place: place
+                )
             } else {
-                let transaction = Transaction(
+                try! modelManager.createTransaction(
                     name: name,
                     date: date,
                     value: value,
                     editOperation: editOperation(),
                     category: category,
-                    place: place)
-                modelContainer.mainContext.insert(transaction)
+                    place: place
+                )
             }
-            do {
-                try modelContainer.mainContext.save()
-                shouldDismiss.toggle()
-            } catch {
-                print(error.localizedDescription)
-            }
+            shouldDismiss.toggle()
         }
         
         private func editOperation() -> Transaction.EditOperation {
-            switch type {
+            switch operation {
             case .transferOut:
                 return .transferOut(account: account!)
             case .transferIn:

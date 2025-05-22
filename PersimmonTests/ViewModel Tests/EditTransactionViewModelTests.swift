@@ -70,7 +70,7 @@ struct EditTransactionViewModelTests {
         #expect(sut.value == 123)
         #expect(sut.account?.name == "Bank of Maya")
         #expect(sut.category?.name == "Food")
-        #expect(sut.type == .transferOut)
+        #expect(sut.operation == .transferOut)
         #expect(sut.date == Date(timeIntervalSince1970: 10))
         #expect(sut.place?.name == "Market")
     }
@@ -80,7 +80,7 @@ struct EditTransactionViewModelTests {
         let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
         sut.name = "Test Name"
         sut.account = getAccounts.first!
-        sut.type = .transferIn
+        sut.operation = .transferIn
         sut.value = 1.99
         sut.didTapSave()
         #expect(getTransactions.first!.name == "Test Name")
@@ -90,11 +90,11 @@ struct EditTransactionViewModelTests {
     func updateTransaction() async throws {
         let sut = EditTransactionView.ViewModel(transaction: try createTransactionInContext(), modelContainer: container)
         sut.name = "Changed Name"
-        sut.type = .transferIn
+        sut.operation = .transferIn
         sut.didTapSave()
         
         #expect(getTransactions.first!.name == "Changed Name")
-        #expect(sut.type == .transferIn)
+        #expect(sut.operation == .transferIn)
     }
     
     @Test("Show Name Error Message")
@@ -109,7 +109,7 @@ struct EditTransactionViewModelTests {
     func showAccountErrorMessage() async throws {
         let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
         sut.name = "Test"
-        sut.type = .transferIn
+        sut.operation = .transferIn
         sut.didTapSave()
         #expect(sut.accountError == "Select an account")
         #expect(getTransactions.isEmpty)
@@ -119,7 +119,7 @@ struct EditTransactionViewModelTests {
     func showCardErrorMessage() async throws {
         let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
         sut.name = "Test"
-        sut.type = .installments
+        sut.operation = .installments
         sut.didTapSave()
         #expect(sut.cardError == "Select a card")
         #expect(getTransactions.isEmpty)
@@ -129,7 +129,7 @@ struct EditTransactionViewModelTests {
     func clearCardErrorMessage() async throws {
         let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
         sut.name = "Test"
-        sut.type = .installments
+        sut.operation = .installments
         sut.didTapSave()
         #expect(sut.cardError == "Select a card")
         sut.card = getCard
@@ -140,7 +140,7 @@ struct EditTransactionViewModelTests {
     @Test("Show Account Field")
     func showAccountField() async throws {
         let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
-        sut.type = .transferIn
+        sut.operation = .transferIn
         #expect(sut.showAccountField)
         #expect(!sut.showCardField)
     }
@@ -148,7 +148,7 @@ struct EditTransactionViewModelTests {
     @Test("Show Card Field")
     func showCardField() async throws {
         let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
-        sut.type = .installments
+        sut.operation = .installments
         #expect(!sut.showAccountField)
         #expect(sut.showCardField)
     }
@@ -159,7 +159,7 @@ struct EditTransactionViewModelTests {
         let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
         sut.name = "Test"
         sut.card = getCard
-        sut.type = .installments
+        sut.operation = .installments
         sut.value = 100
         sut.numberOfInstallments = numberOfInstallments
         sut.didTapSave()
@@ -176,7 +176,7 @@ struct EditTransactionViewModelTests {
         let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
         sut.name = "Test"
         sut.card = getCard
-        sut.type = .installments
+        sut.operation = .installments
         sut.value = 120
         sut.numberOfInstallments = 3
         sut.date = transactionDate
@@ -193,7 +193,7 @@ struct EditTransactionViewModelTests {
         var sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
         sut.name = "Test"
         sut.card = getCard
-        sut.type = .installments
+        sut.operation = .installments
         sut.value = 120
         sut.numberOfInstallments = 3
         sut.date = transactionDate
@@ -216,7 +216,7 @@ struct EditTransactionViewModelTests {
         let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
         sut.name = "Test"
         sut.card = getCard
-        sut.type = .installments
+        sut.operation = .installments
         sut.value = 120
         sut.numberOfInstallments = 3
         sut.date = transactionDate

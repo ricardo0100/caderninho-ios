@@ -7,25 +7,34 @@
 import AppIntents
 
 struct AccountQuery: EntityQuery {
-    static let userDefaults = UserDefaults(suiteName: "group.br.com.rrghkf.test.group")
-    
     func entities(for identifiers: [SelectAccountEntity.ID]) async throws -> [SelectAccountEntity] {
-        [
-            SelectAccountEntity(id: UUID(), name: "Test 1"),
-            SelectAccountEntity(id: UUID(), name: "Test 2"),
-            SelectAccountEntity(id: UUID(), name: "Test 3")
-        ]
+        getSelectAccountEntities()
     }
     
     func suggestedEntities() async throws -> [SelectAccountEntity] {
-        [
-            SelectAccountEntity(id: UUID(), name: "Test 1"),
-            SelectAccountEntity(id: UUID(), name: "Test 2"),
-            SelectAccountEntity(id: UUID(), name: "Test 3")
-        ]
+        getSelectAccountEntities()
     }
 
     func defaultResult() async -> SelectAccountEntity? {
         try? await suggestedEntities().first
+    }
+    
+    private func getSelectAccountEntities() -> [SelectAccountEntity] {
+        retrieveAccounts().map {
+            SelectAccountEntity(id: $0.id, name: $0.name)
+        }
+    }
+    
+    private func retrieveAccounts() -> [AccountWidgetData] {
+        let userDefaults: UserDefaults = .widgetsUserDefaults
+        guard let data = userDefaults.data(forKey: "widgetData") else {
+            return []
+        }
+        do {
+            return try JSONDecoder().decode([AccountWidgetData].self, from: data)
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
     }
 }

@@ -1,7 +1,7 @@
 import AppIntents
 
 struct SelectAccountEntity: AppEntity {
-    var id: UUID
+    var id: String
     let name: String
     
     static var defaultQuery = AccountQuery()

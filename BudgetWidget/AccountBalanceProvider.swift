@@ -9,12 +9,10 @@ import WidgetKit
 
 struct AccountDataEntry: TimelineEntry {
     let date: Date
-    let accountData: AccountBalanceData?
+    let accountData: AccountWidgetData?
 }
 
 struct AccountDataProvider: AppIntentTimelineProvider {
-    static let userDefaults = UserDefaults(suiteName: "group.br.com.rrghkf.test.group")
-    
     func placeholder(in context: Context) -> AccountDataEntry {
         AccountDataEntry(date: Date(), accountData: nil)
     }
@@ -27,12 +25,15 @@ struct AccountDataProvider: AppIntentTimelineProvider {
     }
     
     func timeline(for configuration: SelectAccountConfigIntent, in context: Context) async -> Timeline<AccountDataEntry> {
-        var entries: [AccountDataEntry] = []
-//        entries.append(AccountDataEntry(
-//            date: Date(),
-//            accountData: configuration.account))
+        let userDefaults = UserDefaults.widgetsUserDefaults
+        guard let data = userDefaults.data(forKey: "widgetData") else {
+            return Timeline(entries: [], policy: .atEnd)
+        }
+        let entries = try? JSONDecoder().decode([AccountWidgetData].self, from: data).map { account in
+            AccountDataEntry(date: Date(), accountData: account)
+        }
         
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+        let timeline = Timeline(entries: entries ?? [], policy: .atEnd)
         return timeline
     }
 }

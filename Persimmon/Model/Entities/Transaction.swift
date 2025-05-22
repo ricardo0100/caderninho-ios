@@ -21,35 +21,36 @@ class Transaction: ObservableObject {
     var operation: Operation
     var place: Place?
     
-    init(name: String,
-         date: Date,
-         value: Double,
-         editOperation: EditOperation,
-         category: Category?,
-         place: Place?) {
-        self.id = UUID()
-        self.name = name
-        self.date = date
-        self.category = category
-        self.place = place
-        self.value = value
-        self.operation = editOperation.operation
-        
-        switch editOperation {
-        case .transferIn(let account), .transferOut(account: let account):
-            self.account = account
-        case .installments(let card, let numberOfInstallments):
-            self.installments.forEach { modelContext?.delete($0) }
-            self.installments = Self.createInstallments(
-                card: card,
-                transaction: self,
-                numberOfInstallments: numberOfInstallments,
-                date: date,
-                value: value)
-        case .refund(_):
-            fatalError()
+    init(
+        name: String,
+        date: Date,
+        value: Double,
+        editOperation: EditOperation,
+        category: Category?,
+        place: Place?) {
+            self.id = UUID()
+            self.name = name
+            self.date = date
+            self.category = category
+            self.place = place
+            self.value = value
+            self.operation = editOperation.operation
+            
+            switch editOperation {
+            case .transferIn(let account), .transferOut(account: let account):
+                self.account = account
+            case .installments(let card, let numberOfInstallments):
+                self.installments.forEach { modelContext?.delete($0) }
+                self.installments = Self.createInstallments(
+                    card: card,
+                    transaction: self,
+                    numberOfInstallments: numberOfInstallments,
+                    date: date,
+                    value: value)
+            case .refund(_):
+                fatalError()
+            }
         }
-    }
     
     func update(
         name: String,
@@ -65,7 +66,6 @@ class Transaction: ObservableObject {
             self.place = place
             self.operation = editOperation.operation
             self.value = value
-            
             switch editOperation {
             case .transferIn(let account):
                 self.account = account
@@ -80,7 +80,7 @@ class Transaction: ObservableObject {
                     date: date,
                     value: value)
             case .refund(_):
-                break
+                fatalError()
             }
         }
     
@@ -98,10 +98,8 @@ class Transaction: ObservableObject {
             return monthsRange.map { i in
                 let month = Calendar.current.component(.month, from: date.dateAddingMonths(i))
                 let year = Calendar.current.component(.year, from: date.dateAddingMonths(i))
-                
                 let bill = card.bills.first { $0.dueYear == year && $0.dueMonth == month } ??
                     .init(id: UUID(), card: card, month: month, year: year)
-                
                 return Installment(id: UUID(),
                                    transaction: transaction,
                                    number: date.day < card.dueDay ? i + 1 : i,

@@ -32,7 +32,7 @@ fileprivate struct AccountBalancePlaceholderView: View {
 }
 
 fileprivate struct AccountBalanceView: View {
-    let account: AccountBalanceData
+    let account: AccountWidgetData
     
     var body: some View {
         VStack {
@@ -59,7 +59,8 @@ fileprivate struct AccountBalanceView: View {
     AccountDataEntry(date: Date(), accountData: nil)
     AccountDataEntry(
         date: Date(),
-        accountData: AccountBalanceData(
+        accountData: AccountWidgetData(
+            id: "",
             name: "Test Bank",
             balance: "R$ 1.234,56",
             color: "#0089FF"))

@@ -26,7 +26,7 @@ struct EditTransactionView: View {
                             .focused($focusedField, equals: .name)
                     }
                     LabeledView(labelText: "Type") {
-                        SelectOperationView(selectedType: $viewModel.type)
+                        SelectOperationView(selectedType: $viewModel.operation)
                     }
                     
                     if viewModel.showAccountField {
@@ -52,7 +52,7 @@ struct EditTransactionView: View {
                                               value: $viewModel.value,
                                               font: .title2)
                             .focused($focusedField, equals: .value)
-                            if viewModel.type == .installments {
+                            if viewModel.operation == .installments {
                                 Text(viewModel.installmentsDescription)
                                     .font(.callout)
                             }

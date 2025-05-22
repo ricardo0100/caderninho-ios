@@ -26,29 +26,34 @@ struct AccountTests {
         try! container.mainContext.fetch(FetchDescriptor<Account>()).first!
     }
     
-    func createTransactions(with values: [Double]) throws {
-        values.forEach { value in
+    func createTransactions(with operations: [(operation: Transaction.EditOperation, value: Double)]) throws {
+        operations.forEach {
             container.mainContext.insert(Transaction(
                 name: "Test",
                 date: Date(),
-                value: value,
-                editOperation: .transferOut(account: getAccount),
+                value: $0.value,
+                editOperation: $0.operation,
                 category: nil,
-                place: nil
-            ))
+                place: nil))
         }
         try container.mainContext.save()
     }
     
     @Test("Test Account balance")
     func testAccountBalance() async throws {
-        try createTransactions(with: [100, 100])
+        try createTransactions(with: [
+            (.transferIn(account: getAccount), 100),
+            (.transferIn(account: getAccount), 100)
+        ])
         #expect(getAccount.balance == 200.0)
     }
     
     @Test("Test Account balance with transfer out")
     func testAccountBalanceWithTransferOut() async throws {
-        try createTransactions(with: [100, -100])
+        try createTransactions(with: [
+            (.transferIn(account: getAccount), 100),
+            (.transferOut(account: getAccount), 100)
+        ])
         #expect(getAccount.balance == 0)
     }
 }

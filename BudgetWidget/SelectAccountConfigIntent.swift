@@ -11,9 +11,8 @@ struct SelectAccountConfigIntent: WidgetConfigurationIntent {
     static var title: LocalizedStringResource = "Select Account"
     static var description = IntentDescription("Selects an account to show in the widget!")
     
-    @Parameter(title: "Account",
-               default: SelectAccountEntity(id: UUID(), name: "Example Acount"))
-    var account: SelectAccountEntity
+    @Parameter(title: "Account")
+    var account: SelectAccountEntity?
     
     init(account: SelectAccountEntity) {
         self.account = account
