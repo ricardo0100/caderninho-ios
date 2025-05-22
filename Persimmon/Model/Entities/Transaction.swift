@@ -4,7 +4,8 @@ import SwiftData
 
 @Model
 class Transaction: ObservableObject {
-    @Attribute(.unique) var id: UUID
+    @Attribute(.unique)
+    var id: UUID
     
     @Relationship(deleteRule: .noAction, inverse: \Account.transactions)
     var account: Account?

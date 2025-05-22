@@ -40,6 +40,6 @@ class CreditCard: ObservableObject {
     }
     
     @Transient var totalDebit: Double {
-        bills.filter { $0.payedDate == nil }.reduce(0) { $0 + $1.total }
+        bills.filter { $0.payedDate == nil }.map{ $0.total }.reduce(0, +)
     }
 }

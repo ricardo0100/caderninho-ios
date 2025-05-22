@@ -31,7 +31,7 @@ struct AccountDataProvider: AppIntentTimelineProvider {
         }
         let entries = try? JSONDecoder().decode([AccountWidgetData].self, from: data).map { account in
             AccountDataEntry(date: Date(), accountData: account)
-        }
+        }.filter { $0.accountData?.id == configuration.account?.id }
         
         let timeline = Timeline(entries: entries ?? [], policy: .atEnd)
         return timeline
