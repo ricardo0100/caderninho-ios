@@ -33,7 +33,7 @@ fileprivate struct AccountBalanceView: View {
     
     var body: some View {
         let color = Color(hex: account.color)
-        VStack(alignment: .leading, spacing: .spacingNano) {
+        VStack(alignment: .leading, spacing: .spacingZero) {
             HStack(spacing: .spacingSmall) {
                 LettersIconView(text: account.name, color: color, size: 16)
                     .shadow(color: .white.opacity(0.5), radius: 0, x: 0.5, y: 0.5)
@@ -45,20 +45,21 @@ fileprivate struct AccountBalanceView: View {
                 .bold()
 
             if let transaction = account.lastTransaction {
-                Spacer().frame(height: .spacingSmall)
+                Spacer().frame(height: .spacingMedium)
+                Text("Last transaction")
+                    .font(.system(size: 9))
+                Spacer().frame(height: .spacingNano)
                 HStack {
                     VStack(alignment: .leading, spacing: .spacingNano) {
-                        HStack(spacing: .spacingSmall) {
+                        HStack(alignment: .center, spacing: .spacingSmall) {
                             Image(systemName: transaction.operationIcon)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 8)
-                            Text("Last transaction")
-                                .font(.caption2)
-                                .padding(.bottom, .spacingNano)
+                                .frame(width: 6)
+                            Text(transaction.name)
+                                .font(.system(size: 10))
                         }
-                        Text(transaction.name)
-                            .font(.system(size: 10))
+                        
                         HStack(spacing: .spacingSmall) {
                             if let icon = transaction.category?.icon {
                                 Image(systemName: icon)
@@ -72,17 +73,13 @@ fileprivate struct AccountBalanceView: View {
                     Spacer()
                 }
                 .frame(maxWidth: .infinity)
-                .padding(.leading, .spacingSmall)
-                .padding(.vertical, .spacingSmall)
-                .clipShape(RoundedRectangle(cornerRadius: 15))
+                .padding(.spacingSmall)
                 .background(
                     Color(.systemBackground)
                         .clipShape(RoundedRectangle(cornerRadius: 5))
                         .shadow(color: Color(.systemBackground), radius: 5, x: 4, y: 4)
                         .opacity(0.25)
                 )
-                
-                
             }
         }
         .containerBackground(for: .widget) {
