@@ -60,10 +60,11 @@ class DataController {
         "Doações"
     ]
     
-    static func createRandomAccount() -> Account {
+    static func createRandomAccount(withIcon: Bool = true) -> Account {
         Account(id: UUID(),
                 name: accountNameExamples.randomElement()!,
                 color: NiceColor.allCases.randomElement()!.rawValue,
+                icon: withIcon ? BankIcon.allCases.randomElement()!.rawValue : nil,
                 currency: accountCurrencyExamples.randomElement()!)
     }
     
@@ -92,6 +93,7 @@ class DataController {
         CreditCard(id: UUID(),
                    name: categoryNameExamples.randomElement()!,
                    color: NiceColor.allCases.randomElement()!.rawValue,
+                   icon: BankIcon.caixa.rawValue,
                    currency: "R$",
                    closingCycleDay: 3,
                    dueDay: 10)
@@ -108,10 +110,11 @@ class DataController {
                     id: UUID(),
                     name: $0,
                     color: NiceColor.allCases.randomElement()!.rawValue,
+                    icon: BankIcon.caixa.rawValue,
                     currency: accountCurrencyExamples.randomElement()!)
             }
             accounts.forEach { context.insert($0) }
-//            
+            
             let categories = categoryNameExamples.map {
                 Category(id: UUID(),
                          name: $0,
@@ -123,6 +126,7 @@ class DataController {
                 id: UUID(),
                 name: cardNameExamples.randomElement()!,
                 color: NiceColor.allCases.randomElement()!.rawValue,
+                icon: BankIcon.caixa.rawValue,
                 currency: accountCurrencyExamples.randomElement()!,
                 closingCycleDay: 3,
                 dueDay: 10)

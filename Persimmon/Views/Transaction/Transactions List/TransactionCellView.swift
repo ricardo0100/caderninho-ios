@@ -24,12 +24,19 @@ struct TransactionCellView: View {
             VStack(alignment: .trailing) {
                 HStack(spacing: .spacingSmall) {
                     let name = transaction.accountOrCardName ?? ""
-                    let color = transaction.accountOrCardColor ?? ""
                     Text("\(name)")
                         .font(.subheadline)
-                    LettersIconView(text: name.firstLetters(),
-                                    color: Color(hex: color),
-                                    size: 12)
+                    if let icon = transaction.accountOrCardIcon {
+                        Image(icon)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 12)
+                    } else {
+                        let color = transaction.accountOrCardColor ?? ""
+                        LettersIconView(text: name.firstLetters(),
+                                        color: Color(hex: color),
+                                        size: 12)
+                    }
                 }
                 if let category = transaction.category {
                     HStack(spacing: .spacingSmall) {

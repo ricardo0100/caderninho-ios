@@ -35,6 +35,10 @@
 		CF2DA2002DDFCFE600C91228 /* CategoryIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA1FF2DDFCFE200C91228 /* CategoryIcon.swift */; };
 		CF2DA2012DDFD04F00C91228 /* CategoryIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA1FF2DDFCFE200C91228 /* CategoryIcon.swift */; };
 		CF2DA2022DDFD0B300C91228 /* ImageIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A804E2A0DBAE20067F5A8 /* ImageIconView.swift */; };
+		CF2DA2052DE0BA3400C91228 /* BankIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2DA2042DE0BA3400C91228 /* BankIcons.xcassets */; };
+		CF2DA2062DE0BA3400C91228 /* BankIcons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF2DA2042DE0BA3400C91228 /* BankIcons.xcassets */; };
+		CF2DA2092DE0F5EC00C91228 /* BankIconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA2082DE0F5E700C91228 /* BankIconPicker.swift */; };
+		CF2DA20A2DE0F5EC00C91228 /* BankIconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA2082DE0F5E700C91228 /* BankIconPicker.swift */; };
 		CF3116F12A14438600171A4D /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3116F02A14438600171A4D /* Account.swift */; };
 		CF44BE312A0FB5000006019F /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF44BE302A0FB5000006019F /* Color.swift */; };
 		CF44BE332A0FB55A0006019F /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF44BE322A0FB55A0006019F /* Spacing.swift */; };
@@ -176,6 +180,8 @@
 		CF2DA1F52DDF3A5900C91228 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		CF2DA1FA2DDF5EE900C91228 /* Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shortcuts.swift; sourceTree = "<group>"; };
 		CF2DA1FF2DDFCFE200C91228 /* CategoryIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIcon.swift; sourceTree = "<group>"; };
+		CF2DA2042DE0BA3400C91228 /* BankIcons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = BankIcons.xcassets; sourceTree = "<group>"; };
+		CF2DA2082DE0F5E700C91228 /* BankIconPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankIconPicker.swift; sourceTree = "<group>"; };
 		CF3116F02A14438600171A4D /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		CF44BE302A0FB5000006019F /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CF44BE322A0FB55A0006019F /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
@@ -310,6 +316,7 @@
 			children = (
 				CFFA12482DDCEE53008EE5B1 /* BudgetWidgetExtension.entitlements */,
 				CF2CB0A32A06F8D600CBA434 /* Persimmon */,
+				CF2DA2032DE0B9D700C91228 /* Shared */,
 				CF2CB0AA2A06F8D900CBA434 /* Preview Content */,
 				CFA1DE612A0C32B20055E3CD /* BudgetWidget */,
 				CFD3ED832DCA51490029AC2F /* PersimmonTests */,
@@ -400,6 +407,34 @@
 				CF23009F2D145EAF00B52746 /* LaunchScreen.storyboard */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		CF2DA2032DE0B9D700C91228 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				CF2DA20B2DE1070700C91228 /* Model */,
+				CF2DA2072DE0BA7500C91228 /* Components */,
+				CF2DA2042DE0BA3400C91228 /* BankIcons.xcassets */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		CF2DA2072DE0BA7500C91228 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				CF2DA2082DE0F5E700C91228 /* BankIconPicker.swift */,
+				CF9D2A712A09967F0003DC39 /* NiceColorPicker.swift */,
+				CF95BC192C5675DE00C8C1CE /* NiceIconPicker.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		CF2DA20B2DE1070700C91228 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CFFA12492DDCEEBE008EE5B1 /* AccountOrCardData.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		CF3116EF2A14437B00171A4D /* Model */ = {
@@ -497,7 +532,6 @@
 		CFA1DE612A0C32B20055E3CD /* BudgetWidget */ = {
 			isa = PBXGroup;
 			children = (
-				CFFA12492DDCEEBE008EE5B1 /* AccountOrCardData.swift */,
 				CFFA12462DDCA7CE008EE5B1 /* AccountQuery.swift */,
 				CFFA12442DDCA5FD008EE5B1 /* SelectAccountConfigIntent.swift */,
 				CF5746372D22BE2C007CC196 /* SelectAccountEntity.swift */,
@@ -536,12 +570,10 @@
 				CF2DA1FF2DDFCFE200C91228 /* CategoryIcon.swift */,
 				CFB7F56A2BC0228B009956E9 /* SelectDateView.swift */,
 				CFBEE2492A081B7100586164 /* LettersIconView.swift */,
-				CF9D2A712A09967F0003DC39 /* NiceColorPicker.swift */,
 				CF7A804E2A0DBAE20067F5A8 /* ImageIconView.swift */,
 				CFE6D7BC2BA9277500E76AB8 /* LabeledView.swift */,
 				CF15B3492BAC3D1200E8E050 /* NavigationToolbarView.swift */,
 				CF72A07E2BB9FB9900E0FDB1 /* CurrencyTextField.swift */,
-				CF95BC192C5675DE00C8C1CE /* NiceIconPicker.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -772,6 +804,7 @@
 			files = (
 				CF2300A02D145EAF00B52746 /* LaunchScreen.storyboard in Resources */,
 				CF2CB0AC2A06F8D900CBA434 /* Preview Assets.xcassets in Resources */,
+				CF2DA2052DE0BA3400C91228 /* BankIcons.xcassets in Resources */,
 				CF2CB0A92A06F8D900CBA434 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -780,6 +813,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF2DA2062DE0BA3400C91228 /* BankIcons.xcassets in Resources */,
 				CFA1DE6A2A0C32B50055E3CD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -856,6 +890,7 @@
 				CF95BC162C566EED00C8C1CE /* Category.swift in Sources */,
 				CFFA12372DD8D738008EE5B1 /* NewTransactionIntent.swift in Sources */,
 				CF3116F12A14438600171A4D /* Account.swift in Sources */,
+				CF2DA2092DE0F5EC00C91228 /* BankIconPicker.swift in Sources */,
 				CF9DA5B12D1839280061056F /* EditTransactionViewModel.swift in Sources */,
 				CFD3ED802DCA3E9F0029AC2F /* App.swift in Sources */,
 				CF2DA1FC2DDF5EED00C91228 /* Shortcuts.swift in Sources */,
@@ -876,6 +911,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF2DA20A2DE0F5EC00C91228 /* BankIconPicker.swift in Sources */,
 				CFFA12422DDB804C008EE5B1 /* PreviewData.swift in Sources */,
 				CF2DA1F92DDF5A9600C91228 /* NewTransactionIntent.swift in Sources */,
 				CF9DA5A22D1715AC0061056F /* GraphItem.swift in Sources */,

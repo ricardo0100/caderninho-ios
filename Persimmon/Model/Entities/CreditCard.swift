@@ -16,6 +16,7 @@ class CreditCard: ObservableObject {
     
     var name: String
     var color: String
+    var icon: String?
     var currency: String
     var dueDay: Int
     var closingCycleDay: Int
@@ -23,10 +24,11 @@ class CreditCard: ObservableObject {
     @Relationship(deleteRule: .cascade, inverse: \Bill.card)
     var bills: [Bill] = []
     
-    init(id: UUID, name: String, color: String, currency: String, closingCycleDay: Int, dueDay: Int,) {
+    init(id: UUID, name: String, color: String, icon: String?, currency: String, closingCycleDay: Int, dueDay: Int,) {
         self.id = id
         self.name = name
         self.color = color
+        self.icon = icon
         self.currency = currency
         self.dueDay = dueDay
         self.closingCycleDay = closingCycleDay

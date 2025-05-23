@@ -6,6 +6,7 @@ class Account: ObservableObject {
     @Attribute(.unique) var id: UUID
     var name: String
     var color: String
+    var icon: String?
     var currency: String
     
     @Relationship(deleteRule: .cascade)
@@ -20,10 +21,11 @@ class Account: ObservableObject {
         transactions.sorted(by: { $0.date > $1.date }).first
     }
     
-    init(id: UUID, name: String, color: String, currency: String) {
+    init(id: UUID, name: String, color: String, icon: String?, currency: String) {
         self.id = id
         self.name = name
         self.color = color
+        self.icon = icon
         self.currency = currency
     }
 }

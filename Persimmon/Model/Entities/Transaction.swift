@@ -121,6 +121,10 @@ class Transaction: ObservableObject {
         account?.color ?? installments.first?.bill.card.color
     }
     
+    var accountOrCardIcon: String? {
+        account?.icon ?? installments.first?.bill.card.icon
+    }
+    
     var operationDetails: OperationDetails {
         switch operation {
         case .transferIn:

@@ -26,5 +26,6 @@ struct AccountOrCardData: Codable {
     let currency: String
     let balance: Double
     let color: String
+    let icon: String?
     let lastTransaction: TransactionData?
 }

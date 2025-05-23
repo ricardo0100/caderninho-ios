@@ -73,8 +73,15 @@ struct CardDetailsView: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 HStack {
-                    LettersIconView(text: card.name.firstLetters(),
-                                    color: Color(hex: card.color))
+                    if let icon = card.icon {
+                        Image(icon)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24)
+                    } else {
+                        LettersIconView(text: card.name.firstLetters(),
+                                        color: Color(hex: card.color))
+                    }
                     Text(card.name)
                         .font(.headline)
                 }

@@ -89,6 +89,7 @@ struct ModelManager {
                     currency: account.currency,
                     balance: account.balance,
                     color: account.color,
+                    icon: account.icon,
                     lastTransaction: transactionData)
             }
             let cardWidgetDataList = try fetchCards().map { card in
@@ -102,6 +103,7 @@ struct ModelManager {
                     currency: card.currency,
                     balance: card.currentBill?.total ?? .zero,
                     color: card.color,
+                    icon: card.icon,
                     lastTransaction: transactionData)
             }
             let data = try JSONEncoder().encode(accountWidgetDataList + cardWidgetDataList)

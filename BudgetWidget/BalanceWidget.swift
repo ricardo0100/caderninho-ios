@@ -32,20 +32,27 @@ fileprivate struct AccountBalanceView: View {
     let account: AccountOrCardData
     
     var body: some View {
-        let color = Color(hex: account.color)
         VStack(alignment: .leading, spacing: .spacingZero) {
             HStack(spacing: .spacingSmall) {
-                LettersIconView(text: account.name, color: color, size: 16)
-                    .shadow(color: .white.opacity(0.5), radius: 0, x: 0.5, y: 0.5)
+                if let icon = account.icon {
+                    Image(icon)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 16)
+                } else {
+                    LettersIconView(text: account.name.firstLetters(),
+                                    color: Color(hex: account.color))
+                }
                 Text(account.name)
-                    .font(.subheadline)
-                    .shadow(color: .white.opacity(0.5), radius: 0, x: 0.5, y: 0.5)
+                    .font(.caption)
+                    .shadow(color: .white.opacity(0.2), radius: 0, x: 0.5, y: 0.5)
             }
+            .padding(.top)
             Text(account.balance.toCurrency(with: account.currency))
                 .bold()
 
             if let transaction = account.lastTransaction {
-                Spacer().frame(height: .spacingMedium)
+                Spacer()
                 Text("Last transaction")
                     .font(.system(size: 9))
                 Spacer().frame(height: .spacingNano)
@@ -77,15 +84,18 @@ fileprivate struct AccountBalanceView: View {
                 .background(
                     Color(.systemBackground)
                         .clipShape(RoundedRectangle(cornerRadius: 5))
-                        .shadow(color: Color(.systemBackground), radius: 5, x: 4, y: 4)
-                        .opacity(0.25)
+                        .shadow(color: Color(.systemBackground), radius: 0, x: 1, y: 1)
+                        .opacity(0.15)
                 )
             }
         }
         .containerBackground(for: .widget) {
             LinearGradient(
-                gradient: Gradient(colors: [Color(.systemBackground),
-                                            Color(hex: account.color).opacity(0.75)]),
+                gradient: Gradient(colors: [
+                    Color(hex: account.color).opacity(0.6),
+                    Color(hex: account.color).opacity(0.8),
+                    Color(hex: account.color)
+                ]),
                 startPoint: .topLeading,
                 endPoint: .bottomLeading
             )
@@ -105,6 +115,7 @@ fileprivate struct AccountBalanceView: View {
             currency: "R$",
             balance: 12345.67,
             color: "#0089FF",
+            icon: "bb",
             lastTransaction:
                 TransactionData(
                     name: "Buy in Supermarket",
@@ -128,6 +139,7 @@ fileprivate struct AccountBalanceView: View {
             currency: "R$",
             balance: 12345.67,
             color: "#F089FF",
+            icon: "bb",
             lastTransaction:
                 TransactionData(
                     name: "Buy in Supermarket",
@@ -151,6 +163,7 @@ fileprivate struct AccountBalanceView: View {
             currency: "R$",
             balance: 12345.67,
             color: "#00F9FF",
+            icon: "bb",
             lastTransaction:
                 TransactionData(
                     name: "Buy in Supermarket",
@@ -168,6 +181,7 @@ fileprivate struct AccountBalanceView: View {
             currency: "R$",
             balance: 12345.67,
             color: "#0089FF",
+            icon: "bb",
             lastTransaction: nil)
         )
 }

@@ -12,6 +12,7 @@ struct EditAccountView: View {
     @State var currency = ""
     @State var currencyErroMessage: String?
     @State var niceColor: NiceColor
+    @State var bankIcon: BankIcon?
     @State var showDeleteAlert = false
     
     init(account: Account?) {
@@ -20,6 +21,7 @@ struct EditAccountView: View {
             _niceColor = State(initialValue: NiceColor(rawValue: account.color) ?? .gray)
             _name = State(initialValue: account.name)
             _currency = State(initialValue: account.currency)
+            _bankIcon = State(initialValue: BankIcon(rawValue: account.icon ?? ""))
         } else {
             _niceColor = State(initialValue: .darkGray)
         }
@@ -33,6 +35,22 @@ struct EditAccountView: View {
                 }
                 LabeledView(labelText: "Currency", error: $currencyErroMessage) {
                     TextField("$", text: $currency)
+                }
+                LabeledView(labelText: "Icon") {
+                    NavigationLink {
+                        BankIconPicker(selectedIcon: $bankIcon)
+                    } label: {
+                        if let icon = bankIcon?.rawValue {
+                            Image(icon)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 16, height: 16)
+                        } else {
+                            Text("Select")
+                                .foregroundStyle(Color.secondary)
+                        }
+                        
+                    }
                 }
                 LabeledView(labelText: "Color") {
                     Circle()
@@ -87,10 +105,12 @@ struct EditAccountView: View {
             account.name = name
             account.currency = currency
             account.color = niceColor.rawValue
+            account.icon = bankIcon?.rawValue
         } else {
             let account = Account(id: UUID(),
                                   name: name,
                                   color: niceColor.rawValue,
+                                  icon: bankIcon?.rawValue,
                                   currency: currency)
             modelContext.insert(account)
         }

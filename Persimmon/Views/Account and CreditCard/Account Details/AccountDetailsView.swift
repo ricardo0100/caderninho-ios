@@ -27,8 +27,15 @@ struct AccountDetailsView: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 HStack {
-                    LettersIconView(text: account.name.firstLetters(),
-                                    color: Color(hex: account.color))
+                    if let icon = account.icon {
+                        Image(icon)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24)
+                    } else {
+                        LettersIconView(text: account.name.firstLetters(),
+                                        color: Color(hex: account.color))
+                    }
                     Text(account.name)
                         .font(.headline)
                 }

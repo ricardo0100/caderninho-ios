@@ -13,10 +13,18 @@ struct CreditCardCellView: View {
     
     var body: some View {
         HStack {
-            LettersIconView(
-                text: card.name.firstLetters(),
-                color: Color(hex: card.color),
-                size: 32)
+            if let icon = card.icon {
+                Image(icon)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 24)
+            } else {
+                LettersIconView(
+                    text: card.name.firstLetters(),
+                    color: Color(hex: card.color),
+                    size: 32)
+            }
+            
             VStack(alignment: .leading) {
                 Text(card.name)
                     .font(.subheadline)

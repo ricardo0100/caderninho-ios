@@ -44,6 +44,23 @@ struct EditCreditCardView: View {
                     viewModel.isShowingColorPicker = true
                 }
                 
+                LabeledView(labelText: "Icon") {
+                    NavigationLink {
+                        BankIconPicker(selectedIcon: $viewModel.bankIcon)
+                    } label: {
+                        if let icon = viewModel.bankIcon?.rawValue {
+                            Image(icon)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 16, height: 16)
+                        } else {
+                            Text("Select")
+                                .foregroundStyle(Color.secondary)
+                        }
+                        
+                    }
+                }
+                
                 LabeledView(labelText: "Closing cycle") {
                     Menu {
                         ForEach(1..<28) { day in
