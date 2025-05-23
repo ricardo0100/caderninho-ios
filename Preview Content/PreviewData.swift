@@ -71,15 +71,14 @@ class DataController {
         let name = transactionNameExamples.randomElement()!
         let category = try! container.mainContext.fetch(FetchDescriptor<Category>()).randomElement()!
         let value = Double((1...100000).randomElement()!) / 100.0
-        let transaction = Transaction(
-            name: name,
-            date: Date(),
-            value: value,
-            editOperation: operation,
-            category: category,
-            place: nil)
-        container.mainContext.insert(transaction)
-        try! container.mainContext.save()
+        try! ModelManager(context: container.mainContext)
+            .createTransaction(
+                name: name,
+                date: Date(),
+                value: value,
+                editOperation: operation,
+                category: category,
+                place: nil)
     }
     
     static func createRandomCategory(withIcon: Bool = false) -> Category {
@@ -112,7 +111,7 @@ class DataController {
                     currency: accountCurrencyExamples.randomElement()!)
             }
             accounts.forEach { context.insert($0) }
-            
+//            
             let categories = categoryNameExamples.map {
                 Category(id: UUID(),
                          name: $0,
@@ -129,9 +128,9 @@ class DataController {
                 dueDay: 10)
             context.insert(card)
             
-//            createRandomTransaction(using: container, operation: .installments)
-//            createRandomTransaction(using: container, operation: .transferIn)
-//            createRandomTransaction(using: container, operation: .transferOut)
+            createRandomTransaction(using: container, operation: .installments(card: card, numberOfInstallments: 7))
+            createRandomTransaction(using: container, operation: .transferIn(account: accounts.randomElement()!))
+            createRandomTransaction(using: container, operation: .transferOut(account: accounts.randomElement()!))
             
             return container
         } catch {

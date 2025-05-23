@@ -28,7 +28,13 @@
 		CF2DA1F32DDDE20600C91228 /* ModelManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA1F22DDDE20100C91228 /* ModelManagerTests.swift */; };
 		CF2DA1F62DDF3A6100C91228 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA1F52DDF3A5900C91228 /* UserDefaults+Extension.swift */; };
 		CF2DA1F72DDF3A6100C91228 /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA1F52DDF3A5900C91228 /* UserDefaults+Extension.swift */; };
-		CF2DA1F82DDF3BDD00C91228 /* AccountWidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFA12492DDCEEBE008EE5B1 /* AccountWidgetData.swift */; };
+		CF2DA1F82DDF3BDD00C91228 /* AccountOrCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFA12492DDCEEBE008EE5B1 /* AccountOrCardData.swift */; };
+		CF2DA1F92DDF5A9600C91228 /* NewTransactionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFA12362DD8D735008EE5B1 /* NewTransactionIntent.swift */; };
+		CF2DA1FB2DDF5EED00C91228 /* Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA1FA2DDF5EE900C91228 /* Shortcuts.swift */; };
+		CF2DA1FC2DDF5EED00C91228 /* Shortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA1FA2DDF5EE900C91228 /* Shortcuts.swift */; };
+		CF2DA2002DDFCFE600C91228 /* CategoryIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA1FF2DDFCFE200C91228 /* CategoryIcon.swift */; };
+		CF2DA2012DDFD04F00C91228 /* CategoryIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA1FF2DDFCFE200C91228 /* CategoryIcon.swift */; };
+		CF2DA2022DDFD0B300C91228 /* ImageIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A804E2A0DBAE20067F5A8 /* ImageIconView.swift */; };
 		CF3116F12A14438600171A4D /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3116F02A14438600171A4D /* Account.swift */; };
 		CF44BE312A0FB5000006019F /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF44BE302A0FB5000006019F /* Color.swift */; };
 		CF44BE332A0FB55A0006019F /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF44BE322A0FB55A0006019F /* Spacing.swift */; };
@@ -65,7 +71,7 @@
 		CF9DA5B12D1839280061056F /* EditTransactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9DA5B02D1839210061056F /* EditTransactionViewModel.swift */; };
 		CFA1DE5E2A0C32B20055E3CD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFA1DE5D2A0C32B20055E3CD /* WidgetKit.framework */; };
 		CFA1DE602A0C32B20055E3CD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CFA1DE5F2A0C32B20055E3CD /* SwiftUI.framework */; };
-		CFA1DE672A0C32B20055E3CD /* AccountBalanceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA1DE662A0C32B20055E3CD /* AccountBalanceWidget.swift */; };
+		CFA1DE672A0C32B20055E3CD /* BalanceWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA1DE662A0C32B20055E3CD /* BalanceWidget.swift */; };
 		CFA1DE6A2A0C32B50055E3CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFA1DE692A0C32B50055E3CD /* Assets.xcassets */; };
 		CFA1DE702A0C32B50055E3CD /* BudgetWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CFA1DE5B2A0C32B20055E3CD /* BudgetWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CFB7F5612BBEBFE6009956E9 /* SelectOperationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F5602BBEBFE6009956E9 /* SelectOperationView.swift */; };
@@ -105,7 +111,6 @@
 		CFF292A62A13B8FE00C1A66A /* EditCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF292A52A13B8FE00C1A66A /* EditCategoryView.swift */; };
 		CFF292A82A13B93F00C1A66A /* EditAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF292A72A13B93F00C1A66A /* EditAccountView.swift */; };
 		CFFA12372DD8D738008EE5B1 /* NewTransactionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFA12362DD8D735008EE5B1 /* NewTransactionIntent.swift */; };
-		CFFA123A2DDB7F77008EE5B1 /* NewTransactionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFA12362DD8D735008EE5B1 /* NewTransactionIntent.swift */; };
 		CFFA123B2DDB8030008EE5B1 /* CreditCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED5C2DC592070029AC2F /* CreditCard.swift */; };
 		CFFA123C2DDB8030008EE5B1 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED5A2DC57B070029AC2F /* Bill.swift */; };
 		CFFA123D2DDB8030008EE5B1 /* Installment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9DA5AE2D17B0010061056F /* Installment.swift */; };
@@ -117,7 +122,7 @@
 		CFFA12432DDB8057008EE5B1 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB7F56D2BC02A47009956E9 /* Date+Extension.swift */; };
 		CFFA12452DDCA620008EE5B1 /* SelectAccountConfigIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFA12442DDCA5FD008EE5B1 /* SelectAccountConfigIntent.swift */; };
 		CFFA12472DDCA7D2008EE5B1 /* AccountQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFA12462DDCA7CE008EE5B1 /* AccountQuery.swift */; };
-		CFFA124A2DDCEEC4008EE5B1 /* AccountWidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFA12492DDCEEBE008EE5B1 /* AccountWidgetData.swift */; };
+		CFFA124A2DDCEEC4008EE5B1 /* AccountOrCardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFA12492DDCEEBE008EE5B1 /* AccountOrCardData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +174,8 @@
 		CF2DA1EE2DDDE1E800C91228 /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		CF2DA1F22DDDE20100C91228 /* ModelManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManagerTests.swift; sourceTree = "<group>"; };
 		CF2DA1F52DDF3A5900C91228 /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
+		CF2DA1FA2DDF5EE900C91228 /* Shortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shortcuts.swift; sourceTree = "<group>"; };
+		CF2DA1FF2DDFCFE200C91228 /* CategoryIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIcon.swift; sourceTree = "<group>"; };
 		CF3116F02A14438600171A4D /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		CF44BE302A0FB5000006019F /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CF44BE322A0FB55A0006019F /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
@@ -197,7 +204,7 @@
 		CFA1DE5B2A0C32B20055E3CD /* BudgetWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BudgetWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFA1DE5D2A0C32B20055E3CD /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		CFA1DE5F2A0C32B20055E3CD /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		CFA1DE662A0C32B20055E3CD /* AccountBalanceWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountBalanceWidget.swift; sourceTree = "<group>"; };
+		CFA1DE662A0C32B20055E3CD /* BalanceWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceWidget.swift; sourceTree = "<group>"; };
 		CFA1DE692A0C32B50055E3CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFA1DE6B2A0C32B50055E3CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CFB7F5602BBEBFE6009956E9 /* SelectOperationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectOperationView.swift; sourceTree = "<group>"; };
@@ -241,7 +248,7 @@
 		CFFA12442DDCA5FD008EE5B1 /* SelectAccountConfigIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAccountConfigIntent.swift; sourceTree = "<group>"; };
 		CFFA12462DDCA7CE008EE5B1 /* AccountQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountQuery.swift; sourceTree = "<group>"; };
 		CFFA12482DDCEE53008EE5B1 /* BudgetWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BudgetWidgetExtension.entitlements; sourceTree = "<group>"; };
-		CFFA12492DDCEEBE008EE5B1 /* AccountWidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountWidgetData.swift; sourceTree = "<group>"; };
+		CFFA12492DDCEEBE008EE5B1 /* AccountOrCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOrCardData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -490,12 +497,12 @@
 		CFA1DE612A0C32B20055E3CD /* BudgetWidget */ = {
 			isa = PBXGroup;
 			children = (
-				CFFA12492DDCEEBE008EE5B1 /* AccountWidgetData.swift */,
+				CFFA12492DDCEEBE008EE5B1 /* AccountOrCardData.swift */,
 				CFFA12462DDCA7CE008EE5B1 /* AccountQuery.swift */,
 				CFFA12442DDCA5FD008EE5B1 /* SelectAccountConfigIntent.swift */,
 				CF5746372D22BE2C007CC196 /* SelectAccountEntity.swift */,
 				CF57463E2D240007007CC196 /* AccountBalanceProvider.swift */,
-				CFA1DE662A0C32B20055E3CD /* AccountBalanceWidget.swift */,
+				CFA1DE662A0C32B20055E3CD /* BalanceWidget.swift */,
 				CFA1DE692A0C32B50055E3CD /* Assets.xcassets */,
 				CFA1DE6B2A0C32B50055E3CD /* Info.plist */,
 			);
@@ -526,6 +533,7 @@
 			isa = PBXGroup;
 			children = (
 				CF9DA59A2D170AB70061056F /* Graphics */,
+				CF2DA1FF2DDFCFE200C91228 /* CategoryIcon.swift */,
 				CFB7F56A2BC0228B009956E9 /* SelectDateView.swift */,
 				CFBEE2492A081B7100586164 /* LettersIconView.swift */,
 				CF9D2A712A09967F0003DC39 /* NiceColorPicker.swift */,
@@ -650,6 +658,7 @@
 		CFFA12382DD8D830008EE5B1 /* Intents */ = {
 			isa = PBXGroup;
 			children = (
+				CF2DA1FA2DDF5EE900C91228 /* Shortcuts.swift */,
 				CFFA12362DD8D735008EE5B1 /* NewTransactionIntent.swift */,
 			);
 			path = Intents;
@@ -792,7 +801,7 @@
 				CFD3ED3D2DBE568F0029AC2F /* FilterView.swift in Sources */,
 				CFBEE24A2A081B7100586164 /* LettersIconView.swift in Sources */,
 				CF2CB0BB2A06FC3E00CBA434 /* ContainerView.swift in Sources */,
-				CF2DA1F82DDF3BDD00C91228 /* AccountWidgetData.swift in Sources */,
+				CF2DA1F82DDF3BDD00C91228 /* AccountOrCardData.swift in Sources */,
 				CF44BE332A0FB55A0006019F /* Spacing.swift in Sources */,
 				CFD3ED5D2DC5920B0029AC2F /* CreditCard.swift in Sources */,
 				CF72A07F2BB9FB9900E0FDB1 /* CurrencyTextField.swift in Sources */,
@@ -800,6 +809,7 @@
 				CF7A80492A0DAC580067F5A8 /* CategoriesListView.swift in Sources */,
 				CF2CB0C02A06FD9700CBA434 /* Color+Extension.swift in Sources */,
 				CF2CB0A52A06F8D600CBA434 /* ModelContainer+Extension.swift in Sources */,
+				CF2DA2002DDFCFE600C91228 /* CategoryIcon.swift in Sources */,
 				CF44BE312A0FB5000006019F /* Color.swift in Sources */,
 				CFBEE2532A08471100586164 /* PizzaGraphView.swift in Sources */,
 				CFE6D7BF2BA9B4C000E76AB8 /* Transaction.swift in Sources */,
@@ -848,6 +858,7 @@
 				CF3116F12A14438600171A4D /* Account.swift in Sources */,
 				CF9DA5B12D1839280061056F /* EditTransactionViewModel.swift in Sources */,
 				CFD3ED802DCA3E9F0029AC2F /* App.swift in Sources */,
+				CF2DA1FC2DDF5EED00C91228 /* Shortcuts.swift in Sources */,
 				CFB7F5732BC085AD009956E9 /* SelectLocationView.swift in Sources */,
 				CFE563522C34C95100F8EA72 /* PreviewData.swift in Sources */,
 				CF0289F42D9DAD0C008E53DC /* PhotosPickerItem+Extension.swift in Sources */,
@@ -866,24 +877,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFFA12422DDB804C008EE5B1 /* PreviewData.swift in Sources */,
+				CF2DA1F92DDF5A9600C91228 /* NewTransactionIntent.swift in Sources */,
 				CF9DA5A22D1715AC0061056F /* GraphItem.swift in Sources */,
 				CF57463A2D22C2AB007CC196 /* NiceIconPicker.swift in Sources */,
 				CF44BE362A0FB6330006019F /* String+Extension.swift in Sources */,
+				CF2DA2022DDFD0B300C91228 /* ImageIconView.swift in Sources */,
 				CFE6D7C02BA9CAE800E76AB8 /* Spacing.swift in Sources */,
 				CF2DA1EF2DDDE1EE00C91228 /* ModelManager.swift in Sources */,
 				CF9DA5A02D170B270061056F /* BarsGraphView.swift in Sources */,
 				CF5746382D22BE30007CC196 /* SelectAccountEntity.swift in Sources */,
 				CF5746392D22C294007CC196 /* NiceColorPicker.swift in Sources */,
 				CF44BE342A0FB6220006019F /* Color.swift in Sources */,
-				CFFA123A2DDB7F77008EE5B1 /* NewTransactionIntent.swift in Sources */,
 				CF0289F32D9DAD0C008E53DC /* PhotosPickerItem+Extension.swift in Sources */,
 				CF57463F2D240014007CC196 /* AccountBalanceProvider.swift in Sources */,
-				CFA1DE672A0C32B20055E3CD /* AccountBalanceWidget.swift in Sources */,
+				CFA1DE672A0C32B20055E3CD /* BalanceWidget.swift in Sources */,
 				CFFA123B2DDB8030008EE5B1 /* CreditCard.swift in Sources */,
 				CFFA12432DDB8057008EE5B1 /* Date+Extension.swift in Sources */,
+				CF2DA1FB2DDF5EED00C91228 /* Shortcuts.swift in Sources */,
 				CFFA123C2DDB8030008EE5B1 /* Bill.swift in Sources */,
-				CFFA124A2DDCEEC4008EE5B1 /* AccountWidgetData.swift in Sources */,
+				CFFA124A2DDCEEC4008EE5B1 /* AccountOrCardData.swift in Sources */,
 				CFFA123D2DDB8030008EE5B1 /* Installment.swift in Sources */,
+				CF2DA2012DDFD04F00C91228 /* CategoryIcon.swift in Sources */,
 				CFFA123E2DDB8030008EE5B1 /* Account.swift in Sources */,
 				CFFA123F2DDB8030008EE5B1 /* Transaction.swift in Sources */,
 				CFFA12402DDB8030008EE5B1 /* Category.swift in Sources */,

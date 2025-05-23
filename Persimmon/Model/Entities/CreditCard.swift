@@ -42,4 +42,8 @@ class CreditCard: ObservableObject {
     @Transient var totalDebit: Double {
         bills.filter { $0.payedDate == nil }.map{ $0.total }.reduce(0, +)
     }
+    
+    var lastTransaction: Transaction? {
+        currentBill?.installments.sorted().last?.transaction
+    }
 }

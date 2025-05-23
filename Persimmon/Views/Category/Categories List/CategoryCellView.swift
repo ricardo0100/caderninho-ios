@@ -5,15 +5,10 @@ struct CategoryCell: View {
     
     var body: some View {
         HStack {
-            if let icon = category.icon {
-                ImageIconView(image: Image(systemName: icon),
-                              color: Color(hex: category.color),
-                              size: 32)
-            } else {
-                LettersIconView(text: category.name,
-                                color: Color(hex: category.color),
-                                size: 32)
-            }
+            CategoryIcon(name: category.name,
+                         color: category.color,
+                         icon: category.icon,
+                         size: 32)
             VStack(alignment: .leading) {
                 Text(category.name)
                     .font(.headline)
@@ -21,6 +16,8 @@ struct CategoryCell: View {
         }
     }
 }
+
+
 
 #Preview {
     List {

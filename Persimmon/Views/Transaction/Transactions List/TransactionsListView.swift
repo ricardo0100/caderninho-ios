@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import PhotosUI
+import AppIntents
 
 struct TransactionsListView: View {
     @ObservedObject var viewModel = ViewModel()

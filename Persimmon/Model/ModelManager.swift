@@ -56,17 +56,55 @@ struct ModelManager {
         return try context.fetch(FetchDescriptor<Account>())
     }
     
+    func fetchCards() throws -> [CreditCard] {
+        return try context.fetch(FetchDescriptor<CreditCard>())
+    }
+    
+    fileprivate func transactionData(_ transaction: Transaction, currency: String) -> TransactionData {
+        var categoryData: CategoryData?
+        if let category = transaction.category {
+            categoryData = CategoryData(name: category.name, color: category.color, icon: category.icon)
+        }
+        let value = transaction.value.toCurrency(with: currency)
+        return TransactionData(
+            name: transaction.name,
+            date: transaction.date,
+            value: value,
+            category: categoryData,
+            operationIcon: transaction.operationDetails.icon
+        )
+    }
+    
     func updateWidgetInfo() {
         do {
-            let accounts = try fetchAccounts()
-            let accountWidgetDataList = accounts.map {
-                AccountWidgetData(
-                    id: $0.id.uuidString,
-                    name: $0.name,
-                    balance: $0.balance.toCurrency(with: $0.currency),
-                    color: $0.color)
+            let accountWidgetDataList = try fetchAccounts().map { account in
+                var transactionData: TransactionData?
+                if let transaction = account.lastTransaction {
+                    transactionData = self.transactionData(transaction, currency: account.currency)
+                }
+                
+                return AccountOrCardData(
+                    id: account.id.uuidString,
+                    name: account.name,
+                    currency: account.currency,
+                    balance: account.balance,
+                    color: account.color,
+                    lastTransaction: transactionData)
             }
-            let data = try JSONEncoder().encode(accountWidgetDataList)
+            let cardWidgetDataList = try fetchCards().map { card in
+                var transactionData: TransactionData?
+                if let transaction = card.lastTransaction {
+                    transactionData = self.transactionData(transaction, currency: card.currency)
+                }
+                return AccountOrCardData(
+                    id: card.id.uuidString,
+                    name: card.name,
+                    currency: card.currency,
+                    balance: card.currentBill?.total ?? .zero,
+                    color: card.color,
+                    lastTransaction: transactionData)
+            }
+            let data = try JSONEncoder().encode(accountWidgetDataList + cardWidgetDataList)
             userDefaults.set(data, forKey: "widgetData")
             WidgetCenter.shared.reloadAllTimelines()
         } catch {

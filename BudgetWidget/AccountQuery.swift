@@ -20,21 +20,21 @@ struct AccountQuery: EntityQuery {
     }
     
     private func getSelectAccountEntities() -> [SelectAccountEntity] {
-        retrieveAccounts().map {
+        retrieveAccounts()?.map {
             SelectAccountEntity(id: $0.id, name: $0.name)
-        }
+        } ?? [SelectAccountEntity(id: "", name: "No accounts found")]
     }
     
-    private func retrieveAccounts() -> [AccountWidgetData] {
+    private func retrieveAccounts() -> [AccountOrCardData]? {
         let userDefaults: UserDefaults = .widgetsUserDefaults
         guard let data = userDefaults.data(forKey: "widgetData") else {
-            return []
+            return nil
         }
         do {
-            return try JSONDecoder().decode([AccountWidgetData].self, from: data)
+            return try JSONDecoder().decode([AccountOrCardData].self, from: data)
         } catch {
             print(error.localizedDescription)
-            return []
+            return nil
         }
     }
 }

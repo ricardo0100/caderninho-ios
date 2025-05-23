@@ -176,6 +176,19 @@ class Transaction: ObservableObject {
         case transferOut(account: Account, value: String)
         case installments(installments: [Installment])
         case refund(bill: Bill, value: String)
+        
+        var icon: String {
+            switch self {
+            case .transferIn:
+                return "arrowshape.down.circle"
+            case .transferOut:
+                return "banknote"
+            case .installments:
+                return "creditcard"
+            case .refund:
+                return "creditcard.trianglebadge.exclamationmark"
+            }
+        }
     }
     
     enum EditOperation: Identifiable {
