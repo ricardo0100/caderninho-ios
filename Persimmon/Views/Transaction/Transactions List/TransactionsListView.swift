@@ -8,96 +8,74 @@ struct TransactionsListView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                if viewModel.isShowingFilter {
-                    Section {
-                        FilterView(selectedFilter: $viewModel.filterType,
-                                   startDate: $viewModel.filterStartDate,
-                                   endDate: $viewModel.filterEndDate)
+            VStack {
+                HStack {
+                    Menu {
+                        ForEach(FilterType.allCases, id: \.self) { filterType in
+                            Button {
+                                withAnimation {
+                                    viewModel.filterType = filterType
+                                }
+                            } label: {
+                                HStack {
+                                    Text(filterType.title)
+                                    if filterType == viewModel.filterType {
+                                        Image(systemName: "checkmark")
+                                    }
+                                }
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "calendar.circle")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24, height: 24)
+                            .foregroundStyle(Color(.systemBlue))
+                    }
+                    switch viewModel.filterType {
+                    case .custom:
+                        HStack {
+                            DatePicker("Start Date",
+                                       selection: $viewModel.filterStartDate,
+                                       displayedComponents: .date).labelsHidden()
+                            DatePicker("End Date",
+                                       selection: $viewModel.filterEndDate,
+                                       displayedComponents: .date).labelsHidden()
+                        }.frame(height: 32)
+                    case .all:
+                        Text("Showing all transactions")
+                    default:
+                        Text("\(viewModel.filterStartDate.numericDate) - \(viewModel.filterEndDate.numericDate)")
                     }
                 }
-                DynamicTransactionsListView(startDate: viewModel.filterStartDate,
-                                            endDate: viewModel.filterEndDate)
+                List {
+                    FilteredTransactionsListView(
+                        startDate: viewModel.filterStartDate,
+                        endDate: viewModel.filterEndDate,
+                        searchText: viewModel.debouncedSearchText
+                    )
+                }
+                .searchable(text: $viewModel.searchText)
             }
             .toolbar {
                 ToolbarItem(placement: .navigation) {
                     NavigationToolbarView(imageName: "book.pages",
                                           title: "Transactions")
                 }
-//                ToolbarItem(placement: .primaryAction) {
-//                    Button(action: viewModel.didTapFilter) {
-//                        Image(systemName: "line.3.horizontal.decrease")
-//                    }
-//                }
-//                ToolbarItem(placement: .primaryAction) {
-//                    Button(action: viewModel.didTapCamera) {
-//                        Image(systemName: "camera")
-//                    }
-//                }
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: viewModel.didTapAdd) {
                         Image(systemName: "plus")
                     }
                 }
-            }.foregroundColor(.brand)
+            }
         }
+        .onAppear(perform: viewModel.didAppear)
         .sheet(isPresented: $viewModel.isShowingEdit) {
             EditTransactionView(transaction: nil)
         }
-        .sheet(item: $viewModel.ticketData, content: { data in
-//            EditTransactionView(viewModel: .init(ticketData: data))
-        })
-        .sheet(isPresented: $viewModel.isShowingCamera) {
-            TicketReaderView(viewModel: .init(ticketData: $viewModel.ticketData))
-        }
+        .foregroundColor(.brand)
     }
 }
-
-struct DynamicTransactionsListView: View {
-    @Query var transactions: [Transaction]
-    
-    init(startDate: Date, endDate: Date) {
-        _transactions = Query(filter: #Predicate<Transaction> { transaction in
-            transaction.date <= endDate &&
-            transaction.date >= startDate
-        }, sort: \Transaction.date)
-    }
-    
-    private var groupedItems: [Date: [Transaction]] {
-        Dictionary(grouping: transactions) {
-            Calendar.current.startOfDay(for: $0.date)
-        }
-    }
-    
-    // Sorted section dates (newest first)
-    private var sectionDates: [Date] {
-        groupedItems.keys.sorted(by: >)
-    }
-    
-    private func sectionHeader(for date: Date) -> some View {
-        Text(date.formatted(date: .abbreviated, time: .omitted))
-    }
-    
-    var body: some View {
-        if transactions.isEmpty {
-            Text("Oops! No transactions yet")
-        }
-        ForEach(sectionDates, id: \.self) { date in
-            Section(header: sectionHeader(for: date)) {
-                ForEach(groupedItems[date] ?? []) { transaction in
-                    NavigationLink {
-                        TransactionDetailsView()
-                            .environmentObject(transaction)
-                    } label: {
-                        TransactionCellView()
-                            .environmentObject(transaction)
-                    }
-                }
-            }
-        }
-    }
-}
-
 
 #Preview {
     NavigationStack {

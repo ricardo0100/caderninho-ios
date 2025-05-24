@@ -75,7 +75,7 @@ class DataController {
         try! ModelManager(context: container.mainContext)
             .createTransaction(
                 name: name,
-                date: Date(),
+                date: Date().dateAddingDays((-40 ... 0).randomElement()!),
                 value: value,
                 editOperation: operation,
                 category: category,
@@ -110,7 +110,7 @@ class DataController {
                     id: UUID(),
                     name: $0,
                     color: NiceColor.allCases.randomElement()!.rawValue,
-                    icon: BankIcon.caixa.rawValue,
+                    icon: BankIcon.allCases.randomElement()!.rawValue,
                     currency: accountCurrencyExamples.randomElement()!)
             }
             accounts.forEach { context.insert($0) }
@@ -133,6 +133,10 @@ class DataController {
             context.insert(card)
             
             createRandomTransaction(using: container, operation: .installments(card: card, numberOfInstallments: 7))
+            createRandomTransaction(using: container, operation: .transferIn(account: accounts.randomElement()!))
+            createRandomTransaction(using: container, operation: .installments(card: card, numberOfInstallments: 2))
+            createRandomTransaction(using: container, operation: .transferIn(account: accounts.randomElement()!))
+            createRandomTransaction(using: container, operation: .installments(card: card, numberOfInstallments: 1))
             createRandomTransaction(using: container, operation: .transferIn(account: accounts.randomElement()!))
             createRandomTransaction(using: container, operation: .transferOut(account: accounts.randomElement()!))
             

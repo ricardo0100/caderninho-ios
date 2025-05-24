@@ -1,23 +1,34 @@
 import SwiftUI
 import SwiftData
 import PhotosUI
+import Combine
 
 extension TransactionsListView {
     public class ViewModel: ObservableObject {
         @Published var isShowingEdit: Bool = false
         @Published var isShowingCamera = false
+        
         @Published var filterStartDate = Date()
         @Published var filterEndDate = Date()
-        @Published var ticketData: TicketData?
-        @Published var isShowingFilter = false
-        @Published var filterType: FilterType = .all {
+        @Published var searchText: String = ""
+        @Published var debouncedSearchText: String = ""
+        @Published var filterType: FilterType = .last30Days {
             didSet {
                 updateDates()
             }
         }
+        @Published var ticketData: TicketData?
+        
+        private var cancellables = Set<AnyCancellable>()
         
         init() {
             updateDates()
+            $searchText
+                .debounce(for: .milliseconds(250), scheduler: RunLoop.main)
+                .sink {
+                    self.debouncedSearchText = $0
+                }
+                .store(in: &cancellables)
         }
         
         func didTapAdd() {
@@ -28,27 +39,22 @@ extension TransactionsListView {
             isShowingCamera = true
         }
         
-        func didTapFilter() {
-            withAnimation {
-                isShowingFilter.toggle()
-            }
+        func didAppear() {
+            updateDates()
         }
         
         private func updateDates() {
-            if filterType == .custom {
-                filterStartDate = Date.getTodayBounds().start
-                filterEndDate = Date()
-            } else {
-                let range = dateRange
-                filterStartDate = range.start
-                filterEndDate = range.end
-            }
+            let range = dateRange
+            filterStartDate = range.start
+            filterEndDate = range.end
         }
         
         var dateRange: (start: Date, end: Date) {
             switch filterType {
             case .last30Days:
                 return Date.getLast30DaysBounds()
+            case .lastWeek:
+                return Date.getLast7DaysBounds()
             case .today:
                 return Date.getTodayBounds()
             case .yesterday:
@@ -57,8 +63,10 @@ extension TransactionsListView {
                 return Date.getThisMonthBounds()
             case .lastMonth:
                 return Date.getLastMonthBounds()
-            case .all, .custom:
+            case .all:
                 return (Date.distantPast, Date.distantFuture)
+            case .custom:
+                return (filterStartDate, filterEndDate)
             }
         }
     }

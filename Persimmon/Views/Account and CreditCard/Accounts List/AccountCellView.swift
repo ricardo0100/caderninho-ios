@@ -22,15 +22,16 @@ struct AccountCellView: View {
                     .font(.headline)
                 Text(account.balance.toCurrency(with: account.currency))
                     .font(.subheadline)
+                    .foregroundStyle(account.balance < .zero ? Color(.systemRed) : .primary)
             }
         }
     }
 }
 
 #Preview {
-    List {
-        AccountCellView().environmentObject(DataController.createRandomAccount())
-        AccountCellView().environmentObject(DataController.createRandomAccount(withIcon: false))
-        AccountCellView().environmentObject(DataController.createRandomAccount())
-    }
+    let accounts = try? ModelContainer.preview.mainContext.fetch(FetchDescriptor<Account>())
+    
+    List(accounts ?? [], id: \.self) {
+        AccountCellView().environmentObject($0)
+    }.modelContainer(.preview)
 }

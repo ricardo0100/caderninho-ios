@@ -74,6 +74,12 @@ extension Date {
         return (start: start, end: end)
     }
     
+    static func getLast7DaysBounds() -> (start: Date, end: Date) {
+        let end = Date()
+        let start = end.dateAddingDays(-7)
+        return (start: start, end: end)
+    }
+    
     func dateAddingDays(_ days: Int) -> Date {
         Calendar.current.date(byAdding: .day, value: days, to: self)!
     }
@@ -86,5 +92,9 @@ extension Date {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US")
         return formatter.shortMonthSymbols[monthNumber - 1]
+    }
+    
+    var numericDate: String {
+        formatted(date: .numeric, time: .omitted)
     }
 }

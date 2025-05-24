@@ -15,8 +15,13 @@ struct TransactionCellView: View {
                     Image(systemName: transaction.operation.iconName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 12, height: 12)
+                        .frame(width: 12)
                     Text(transaction.operation.text)
+                        .font(.caption2)
+                }
+                if transaction.operation == .installments {
+                    let val = transaction.installments.first?.value ?? 0
+                    Text("\(transaction.installments.count) x \(val.toCurrency(with: transaction.currency ?? "$"))")
                         .font(.caption2)
                 }
             }
@@ -30,12 +35,12 @@ struct TransactionCellView: View {
                         Image(icon)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 12)
+                            .frame(width: 16)
                     } else {
                         let color = transaction.accountOrCardColor ?? ""
                         LettersIconView(text: name.firstLetters(),
                                         color: Color(hex: color),
-                                        size: 12)
+                                        size: 16)
                     }
                 }
                 if let category = transaction.category {
@@ -45,7 +50,7 @@ struct TransactionCellView: View {
                         if let icon = transaction.category?.icon {
                             ImageIconView(image: Image(systemName: icon),
                                           color: Color(hex: category.color),
-                                          size: 14)
+                                          size: 16)
                         } else {
                             LettersIconView(text: category.name.firstLetters(),
                                             color: Color(hex: category.color),
@@ -63,10 +68,8 @@ struct TransactionCellView: View {
 #Preview {
     let transactions = try! ModelContainer.preview.mainContext
         .fetch(FetchDescriptor<Transaction>())
-    List(transactions, id: \.id) {
-        TransactionCellView().environmentObject($0)
-        TransactionCellView().environmentObject($0)
-        TransactionCellView().environmentObject($0)
-        TransactionCellView().environmentObject($0)
+    List(transactions, id: \.self) {
+        TransactionCellView()
+            .environmentObject($0)
     }.modelContainer(.preview)
 }

@@ -70,7 +70,9 @@ fileprivate struct AccountBalanceView: View {
                         HStack(spacing: .spacingSmall) {
                             if let icon = transaction.category?.icon {
                                 Image(systemName: icon)
+                                    .symbolRenderingMode(.multicolor)
                                     .resizable()
+                                    .aspectRatio(contentMode: .fit)
                                     .frame(width: 10, height: 10)
                             }
                             Text(transaction.value)
