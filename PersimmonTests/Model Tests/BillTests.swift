@@ -54,6 +54,6 @@ struct BillTests {
     }
     
     private func createCardWith(dueDay: Int) -> CreditCard {
-        CreditCard(id: UUID(), name: "Test Card", color: "#000000", currency: "$", closingCycleDay: 3, dueDay: dueDay)
+        CreditCard(id: UUID(), name: "Test Card", color: "#000000", icon: nil, currency: "$", closingCycleDay: 3, dueDay: dueDay)
     }
 }

@@ -125,7 +125,7 @@ fileprivate struct AccountBalanceView: View {
             currency: "R$",
             balance: 12345.67,
             color: "#0089FF",
-            icon: "stone",
+            icon: "itau",
             lastTransaction:
                 TransactionData(
                     name: "Buy in Supermarket",

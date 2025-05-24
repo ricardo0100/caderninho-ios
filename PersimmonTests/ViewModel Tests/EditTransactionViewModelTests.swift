@@ -18,8 +18,8 @@ struct EditTransactionViewModelTests {
     init() throws {
         container = .createTestContainer()
         let context = container.mainContext
-        context.insert(Account(id: UUID(), name: "Bank of Maya", color: "#F00FFF", currency: "R$"))
-        context.insert(CreditCard(id: UUID(), name: "Bank of Maya", color: "#F00FFF", currency: "R$", closingCycleDay: 3, dueDay: 10))
+        context.insert(Account(id: UUID(), name: "Bank of Maya", color: "#F00FFF", icon: nil, currency: "R$"))
+        context.insert(CreditCard(id: UUID(), name: "Bank of Maya", color: "#F00FFF", icon: nil, currency: "R$", closingCycleDay: 3, dueDay: 10))
         context.insert(Category(id: UUID(), name: "Food", color: "#F7F8F9", icon: "carrot"))
         try context.save()
     }

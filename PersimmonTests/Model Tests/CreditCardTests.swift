@@ -50,6 +50,7 @@ struct CreditCardTests {
         CreditCard(id: UUID(),
                    name: "Test Card",
                    color: "#000000",
+                   icon: nil,
                    currency: "$",
                    closingCycleDay: closing,
                    dueDay: dueDay)

@@ -18,7 +18,7 @@ class Account: ObservableObject {
     }
     
     var lastTransaction: Transaction? {
-        transactions.sorted(by: { $0.date > $1.date }).first
+        transactions.sorted { $0.date < $1.date }.last
     }
     
     init(id: UUID, name: String, color: String, icon: String?, currency: String) {

@@ -73,6 +73,7 @@ class Transaction: ObservableObject {
             case .transferOut(account: let account):
                 self.account = account
             case .installments(let card, let numberOfInstallments):
+                self.account = nil
                 self.installments.forEach { modelContext?.delete($0) }
                 self.installments = Self.createInstallments(
                     card: card,
