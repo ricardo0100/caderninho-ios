@@ -42,7 +42,7 @@ struct EditTransactionView: View {
                         LabeledView(labelText: "Number of installments") {
                             Stepper("\(viewModel.numberOfInstallments)",
                                     value: $viewModel.numberOfInstallments,
-                                    in: 1...36)
+                                    in: 1...12*100)
                         }
                     }
                     
