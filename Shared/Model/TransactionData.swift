@@ -4,7 +4,6 @@
 //
 //  Created by Ricardo Gehrke Filho on 20/05/25.
 //
-
 import Foundation
 
 struct TransactionData: Codable {

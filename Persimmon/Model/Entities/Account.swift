@@ -28,4 +28,15 @@ class Account: ObservableObject {
         self.icon = icon
         self.currency = currency
     }
+    
+    func toAccountOrCardData() -> AccountOrCardData {
+        AccountOrCardData(
+            id: self.id.uuidString,
+            name: self.name,
+            currency: self.currency,
+            balance: self.balance,
+            color: self.color,
+            icon: self.icon,
+            lastTransaction: nil)
+    }
 }

@@ -46,6 +46,8 @@
 		CF2DA2162DE238D700C91228 /* FilteredTransactionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA2152DE238C900C91228 /* FilteredTransactionsListView.swift */; };
 		CF2DA2182DE26D8400C91228 /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA2172DE26D7E00C91228 /* Image+Extension.swift */; };
 		CF2DA2192DE26D8400C91228 /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA2172DE26D7E00C91228 /* Image+Extension.swift */; };
+		CF2DA21B2DE3386A00C91228 /* PeriodFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA21A2DE3385C00C91228 /* PeriodFilterView.swift */; };
+		CF2DA21D2DE33A5600C91228 /* AccountCardHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA21C2DE33A3500C91228 /* AccountCardHeader.swift */; };
 		CF3116F12A14438600171A4D /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3116F02A14438600171A4D /* Account.swift */; };
 		CF44BE312A0FB5000006019F /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF44BE302A0FB5000006019F /* Color.swift */; };
 		CF44BE332A0FB55A0006019F /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF44BE322A0FB55A0006019F /* Spacing.swift */; };
@@ -193,6 +195,8 @@
 		CF2DA20F2DE1238300C91228 /* AccountOrCardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountOrCardData.swift; sourceTree = "<group>"; };
 		CF2DA2152DE238C900C91228 /* FilteredTransactionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredTransactionsListView.swift; sourceTree = "<group>"; };
 		CF2DA2172DE26D7E00C91228 /* Image+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extension.swift"; sourceTree = "<group>"; };
+		CF2DA21A2DE3385C00C91228 /* PeriodFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodFilterView.swift; sourceTree = "<group>"; };
+		CF2DA21C2DE33A3500C91228 /* AccountCardHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardHeader.swift; sourceTree = "<group>"; };
 		CF3116F02A14438600171A4D /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		CF44BE302A0FB5000006019F /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CF44BE322A0FB55A0006019F /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
@@ -306,6 +310,8 @@
 		CF15B3572BAE004500E8E050 /* Transactions List */ = {
 			isa = PBXGroup;
 			children = (
+				CF2DA21C2DE33A3500C91228 /* AccountCardHeader.swift */,
+				CF2DA21A2DE3385C00C91228 /* PeriodFilterView.swift */,
 				CF2DA2152DE238C900C91228 /* FilteredTransactionsListView.swift */,
 				CFD3ED3C2DBE568A0029AC2F /* FilterType.swift */,
 				CF82EC642D982D01002F875A /* TransactionsListViewModel.swift */,
@@ -886,6 +892,7 @@
 				CFD3ED642DC833380029AC2F /* CreditCardCellView.swift in Sources */,
 				CFDC21972BAF094000295432 /* EditTransactionView.swift in Sources */,
 				CFD3ED672DC977CC0029AC2F /* CardDetailsView.swift in Sources */,
+				CF2DA21B2DE3386A00C91228 /* PeriodFilterView.swift in Sources */,
 				CFD3ED562DC2C65D0029AC2F /* CameraController.swift in Sources */,
 				CFD3ED4F2DBFAEEF0029AC2F /* TicketProcessor.swift in Sources */,
 				CFB7F56B2BC0228B009956E9 /* SelectDateView.swift in Sources */,
@@ -904,6 +911,7 @@
 				CF15B34A2BAC3D1200E8E050 /* NavigationToolbarView.swift in Sources */,
 				CFD3ED5B2DC57B0F0029AC2F /* Bill.swift in Sources */,
 				CFBEE2412A07F9A000586164 /* AccountsAndCardsListView.swift in Sources */,
+				CF2DA21D2DE33A5600C91228 /* AccountCardHeader.swift in Sources */,
 				CFD3ED872DCBF3DC0029AC2F /* SelectCardView.swift in Sources */,
 				CF9D2A722A0996800003DC39 /* NiceColorPicker.swift in Sources */,
 				CF95BC162C566EED00C8C1CE /* Category.swift in Sources */,
