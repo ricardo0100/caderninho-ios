@@ -5,14 +5,13 @@ struct CategoryCell: View {
     
     var body: some View {
         HStack {
+            Text(category.name)
+                .font(.headline)
+            Spacer()
             CategoryIcon(name: category.name,
                          color: category.color,
                          icon: category.icon,
                          size: 32)
-            VStack(alignment: .leading) {
-                Text(category.name)
-                    .font(.headline)
-            }
         }
     }
 }

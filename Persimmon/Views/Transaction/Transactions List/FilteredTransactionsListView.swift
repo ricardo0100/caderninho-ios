@@ -16,7 +16,7 @@ struct FilteredTransactionsListView: View {
             transaction.date <= endDate &&
             transaction.date >= startDate &&
             (searchText.isEmpty || transaction.name.localizedStandardContains(searchText))
-        }, sort: \Transaction.date)
+        }, sort: \.date, order: .reverse)
     }
     
     private var groupedItems: [Date: [Transaction]] {

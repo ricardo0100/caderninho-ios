@@ -48,6 +48,10 @@
 		CF2DA2192DE26D8400C91228 /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA2172DE26D7E00C91228 /* Image+Extension.swift */; };
 		CF2DA21B2DE3386A00C91228 /* PeriodFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA21A2DE3385C00C91228 /* PeriodFilterView.swift */; };
 		CF2DA21D2DE33A5600C91228 /* AccountCardHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA21C2DE33A3500C91228 /* AccountCardHeader.swift */; };
+		CF2DA21F2DE364DA00C91228 /* NewTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA21E2DE364CF00C91228 /* NewTransactionView.swift */; };
+		CF2DA2212DE6186400C91228 /* NewTransactionValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA2202DE6186400C91228 /* NewTransactionValueView.swift */; };
+		CF2DA2242DE6187D00C91228 /* NewTransactionSelectAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA2232DE6187D00C91228 /* NewTransactionSelectAccountView.swift */; };
+		CF2DA2262DE6188600C91228 /* NewTransactionNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA2252DE6188600C91228 /* NewTransactionNameView.swift */; };
 		CF3116F12A14438600171A4D /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3116F02A14438600171A4D /* Account.swift */; };
 		CF44BE312A0FB5000006019F /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF44BE302A0FB5000006019F /* Color.swift */; };
 		CF44BE332A0FB55A0006019F /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF44BE322A0FB55A0006019F /* Spacing.swift */; };
@@ -197,6 +201,10 @@
 		CF2DA2172DE26D7E00C91228 /* Image+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extension.swift"; sourceTree = "<group>"; };
 		CF2DA21A2DE3385C00C91228 /* PeriodFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodFilterView.swift; sourceTree = "<group>"; };
 		CF2DA21C2DE33A3500C91228 /* AccountCardHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardHeader.swift; sourceTree = "<group>"; };
+		CF2DA21E2DE364CF00C91228 /* NewTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTransactionView.swift; sourceTree = "<group>"; };
+		CF2DA2202DE6186400C91228 /* NewTransactionValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTransactionValueView.swift; sourceTree = "<group>"; };
+		CF2DA2232DE6187D00C91228 /* NewTransactionSelectAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTransactionSelectAccountView.swift; sourceTree = "<group>"; };
+		CF2DA2252DE6188600C91228 /* NewTransactionNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTransactionNameView.swift; sourceTree = "<group>"; };
 		CF3116F02A14438600171A4D /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		CF44BE302A0FB5000006019F /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CF44BE322A0FB55A0006019F /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
@@ -458,6 +466,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		CF2DA2222DE6187000C91228 /* New Transaction */ = {
+			isa = PBXGroup;
+			children = (
+				CF2DA21E2DE364CF00C91228 /* NewTransactionView.swift */,
+				CF2DA2252DE6188600C91228 /* NewTransactionNameView.swift */,
+				CF2DA2232DE6187D00C91228 /* NewTransactionSelectAccountView.swift */,
+				CF2DA2202DE6186400C91228 /* NewTransactionValueView.swift */,
+			);
+			path = "New Transaction";
+			sourceTree = "<group>";
+		};
 		CF3116EF2A14437B00171A4D /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -672,6 +691,7 @@
 		CFDC21952BAF08B600295432 /* Edit Transaction */ = {
 			isa = PBXGroup;
 			children = (
+				CF2DA2222DE6187000C91228 /* New Transaction */,
 				CFDC21962BAF094000295432 /* EditTransactionView.swift */,
 				CF9DA5B02D1839210061056F /* EditTransactionViewModel.swift */,
 				CF95BC212C581C0C00C8C1CE /* SelectCategoryView.swift */,
@@ -856,6 +876,7 @@
 				CFD3ED3D2DBE568F0029AC2F /* FilterType.swift in Sources */,
 				CFBEE24A2A081B7100586164 /* LettersIconView.swift in Sources */,
 				CF2CB0BB2A06FC3E00CBA434 /* ContainerView.swift in Sources */,
+				CF2DA2242DE6187D00C91228 /* NewTransactionSelectAccountView.swift in Sources */,
 				CF2DA1F82DDF3BDD00C91228 /* TransactionData.swift in Sources */,
 				CF44BE332A0FB55A0006019F /* Spacing.swift in Sources */,
 				CFD3ED5D2DC5920B0029AC2F /* CreditCard.swift in Sources */,
@@ -879,6 +900,7 @@
 				CFD3ED6F2DC986D90029AC2F /* InstallmentCellView.swift in Sources */,
 				CF95BC222C581C1200C8C1CE /* SelectCategoryView.swift in Sources */,
 				CF9DA59F2D170B270061056F /* BarsGraphView.swift in Sources */,
+				CF2DA21F2DE364DA00C91228 /* NewTransactionView.swift in Sources */,
 				CF82EC652D982D06002F875A /* TransactionsListViewModel.swift in Sources */,
 				CF9DA5AF2D17B0120061056F /* Installment.swift in Sources */,
 				CFD3ED622DC7CF480029AC2F /* EditCreditCardViewModel.swift in Sources */,
@@ -889,6 +911,7 @@
 				CFB7F5612BBEBFE6009956E9 /* SelectOperationView.swift in Sources */,
 				CF2DA2102DE1238E00C91228 /* AccountOrCardData.swift in Sources */,
 				CFBEE2452A080AA700586164 /* String+Extension.swift in Sources */,
+				CF2DA2262DE6188600C91228 /* NewTransactionNameView.swift in Sources */,
 				CFD3ED642DC833380029AC2F /* CreditCardCellView.swift in Sources */,
 				CFDC21972BAF094000295432 /* EditTransactionView.swift in Sources */,
 				CFD3ED672DC977CC0029AC2F /* CardDetailsView.swift in Sources */,
@@ -916,6 +939,7 @@
 				CF9D2A722A0996800003DC39 /* NiceColorPicker.swift in Sources */,
 				CF95BC162C566EED00C8C1CE /* Category.swift in Sources */,
 				CFFA12372DD8D738008EE5B1 /* NewTransactionIntent.swift in Sources */,
+				CF2DA2212DE6186400C91228 /* NewTransactionValueView.swift in Sources */,
 				CF3116F12A14438600171A4D /* Account.swift in Sources */,
 				CF2DA2092DE0F5EC00C91228 /* BankIconPicker.swift in Sources */,
 				CF9DA5B12D1839280061056F /* EditTransactionViewModel.swift in Sources */,

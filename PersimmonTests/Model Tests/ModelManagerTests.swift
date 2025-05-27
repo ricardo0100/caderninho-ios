@@ -43,8 +43,7 @@ struct ModelManagerTests {
         try modelManager.createTransaction(
             name: "Test",
             date: Date(),
-            value: 123,
-            editOperation: .transferOut(account: getAccounts[0]),
+            editOperation: .transferOut(account: getAccounts[0], value: 123),
             category: nil,
             place: nil)
         #expect(getTransactions.count == 1)
@@ -56,15 +55,13 @@ struct ModelManagerTests {
         let transaction = try modelManager.createTransaction(
             name: "Test",
             date: Date(),
-            value: 123,
-            editOperation: .transferOut(account: getAccounts[0]),
+            editOperation: .transferOut(account: getAccounts[0], value: 123),
             category: nil,
             place: nil)
         transaction.update(
             name: "Test Up",
             date: Date(),
-            value: 123,
-            editOperation: .transferOut(account: getAccounts[0]),
+            editOperation: .transferOut(account: getAccounts[0], value: 123),
             category: nil,
             place: nil)
         #expect(getTransactions.count == 1)
@@ -76,16 +73,14 @@ struct ModelManagerTests {
         let transaction = try modelManager.createTransaction(
             name: "Test",
             date: Date(),
-            value: 123,
-            editOperation: .transferOut(account: getAccounts[0]),
+            editOperation: .transferOut(account: getAccounts[0], value: 123),
             category: nil,
             place: nil)
         #expect(getTransactions[0].account != nil)
         transaction.update(
             name: "Test Up",
             date: Date(),
-            value: 123,
-            editOperation: .installments(card: getCards[0], numberOfInstallments: 3),
+            editOperation: .installments(card: getCards[0], numberOfInstallments: 3, value: 123),
             category: nil,
             place: nil)
         #expect(getTransactions[0].account == nil)

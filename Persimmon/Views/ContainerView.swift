@@ -22,7 +22,7 @@ struct ContainerView: View {
                     Label("Configuration", systemImage: "gear")
                 }
             #endif
-        }.tint(Color.brand)
+        }
     }
 }
 

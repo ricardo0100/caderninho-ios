@@ -16,14 +16,12 @@ struct ModelManager {
     @discardableResult func createTransaction(
         name: String,
         date: Date,
-        value: Double,
         editOperation: Transaction.EditOperation,
         category: Category?,
         place: Transaction.Place?) throws -> Transaction {
             let transaction = Transaction(
                 name: name,
                 date: date,
-                value: value,
                 editOperation: editOperation,
                 category: category,
                 place: place)
@@ -37,14 +35,12 @@ struct ModelManager {
         transaction: Transaction,
         name: String,
         date: Date,
-        value: Double,
         editOperation: Transaction.EditOperation,
         category: Category?,
         place: Transaction.Place?) throws {
             transaction.update(
                 name: name,
                 date: date,
-                value: value,
                 editOperation: editOperation,
                 category: category,
                 place: place)

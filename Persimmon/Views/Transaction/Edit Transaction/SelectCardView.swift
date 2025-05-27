@@ -18,14 +18,29 @@ struct SelectCardView: View {
                 Button {
                     selected = card
                 } label: {
-                    Text(card.name)
+                    if let icon = card.icon {
+                        Image(icon)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24)
+                    } else {
+                        LettersIconView(text: card.name, color: Color(hex: card.color))
+                    }
+                    Text(card.name).foregroundStyle(Color.brand)
                 }
             }
         } label: {
             HStack {
                 if let card = selected {
-                    LettersIconView(text: card.name, color: Color(hex: card.color))
                     Text(card.name).foregroundStyle(Color.brand)
+                    if let icon = card.icon {
+                        Image(icon)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24)
+                    } else {
+                        LettersIconView(text: card.name, color: Color(hex: card.color))
+                    }
                 } else {
                     Text("Select a card")
                 }

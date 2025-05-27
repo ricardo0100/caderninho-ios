@@ -170,7 +170,6 @@ extension EditTransactionView {
                     transaction: transaction,
                     name: name,
                     date: date,
-                    value: value,
                     editOperation: editOperation(),
                     category: category,
                     place: place
@@ -179,7 +178,6 @@ extension EditTransactionView {
                 try! modelManager.createTransaction(
                     name: name,
                     date: date,
-                    value: value,
                     editOperation: editOperation(),
                     category: category,
                     place: place
@@ -191,11 +189,11 @@ extension EditTransactionView {
         private func editOperation() -> Transaction.EditOperation {
             switch operation {
             case .transferOut:
-                return .transferOut(account: account!)
+                return .transferOut(account: account!, value: value)
             case .transferIn:
-                return .transferIn(account: account!)
+                return .transferIn(account: account!, value: value)
             case .installments:
-                return .installments(card: card!, numberOfInstallments: numberOfInstallments)
+                return .installments(card: card!, numberOfInstallments: numberOfInstallments, value: value)
             case .refund:
                 fatalError()
             }

@@ -71,12 +71,10 @@ class DataController {
     private static func createRandomTransaction(using container: ModelContainer, operation: Transaction.EditOperation) {
         let name = transactionNameExamples.randomElement()!
         let category = try! container.mainContext.fetch(FetchDescriptor<Category>()).randomElement()!
-        let value = Double((1...100000).randomElement()!) / 100.0
         try! ModelManager(context: container.mainContext)
             .createTransaction(
                 name: name,
                 date: Date().dateAddingDays((-40 ... 0).randomElement()!),
-                value: value,
                 editOperation: operation,
                 category: category,
                 place: nil)
@@ -132,13 +130,13 @@ class DataController {
                 dueDay: 10)
             context.insert(card)
             
-            createRandomTransaction(using: container, operation: .installments(card: card, numberOfInstallments: 7))
-            createRandomTransaction(using: container, operation: .transferIn(account: accounts.randomElement()!))
-            createRandomTransaction(using: container, operation: .installments(card: card, numberOfInstallments: 2))
-            createRandomTransaction(using: container, operation: .transferIn(account: accounts.randomElement()!))
-            createRandomTransaction(using: container, operation: .installments(card: card, numberOfInstallments: 1))
-            createRandomTransaction(using: container, operation: .transferIn(account: accounts.randomElement()!))
-            createRandomTransaction(using: container, operation: .transferOut(account: accounts.randomElement()!))
+            createRandomTransaction(using: container, operation: .installments(card: card, numberOfInstallments: 7, value: 1999))
+            createRandomTransaction(using: container, operation: .transferIn(account: accounts.randomElement()!, value: 1999))
+            createRandomTransaction(using: container, operation: .installments(card: card, numberOfInstallments: 2, value: 1999))
+            createRandomTransaction(using: container, operation: .transferIn(account: accounts.randomElement()!, value: 1999))
+            createRandomTransaction(using: container, operation: .installments(card: card, numberOfInstallments: 1, value: 1999))
+            createRandomTransaction(using: container, operation: .transferIn(account: accounts.randomElement()!, value: 1999))
+            createRandomTransaction(using: container, operation: .transferOut(account: accounts.randomElement()!, value: 1999))
             
             return container
         } catch {

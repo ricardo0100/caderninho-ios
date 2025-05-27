@@ -53,8 +53,7 @@ struct EditTransactionViewModelTests {
         let transaction = Transaction(
             name: "Test Name",
             date: Date(timeIntervalSince1970: 10),
-            value: 123,
-            editOperation: .transferOut(account: getAccounts[0]),
+            editOperation: .transferOut(account: getAccounts[0], value: 123),
             category: getCategories.first!,
             place: place)
         container.mainContext.insert(transaction)

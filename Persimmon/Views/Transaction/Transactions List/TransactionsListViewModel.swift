@@ -5,7 +5,7 @@ import Combine
 
 extension TransactionsListView {
     public class ViewModel: ObservableObject {
-        @Published var isShowingEdit: Bool = false
+        @Published var isShowingNewTransaction: Bool = false
         @Published var isShowingCamera = false
         
         @Published var filterStartDate = Date()
@@ -32,7 +32,7 @@ extension TransactionsListView {
         }
         
         func didTapAdd() {
-            isShowingEdit = true
+            isShowingNewTransaction = true
         }
         
         func didTapCamera() {

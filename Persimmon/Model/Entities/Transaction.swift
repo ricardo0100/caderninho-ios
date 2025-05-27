@@ -25,7 +25,6 @@ class Transaction: ObservableObject {
     init(
         name: String,
         date: Date,
-        value: Double,
         editOperation: EditOperation,
         category: Category?,
         place: Place?) {
@@ -34,13 +33,14 @@ class Transaction: ObservableObject {
             self.date = date
             self.category = category
             self.place = place
-            self.value = value
             self.operation = editOperation.operation
             
             switch editOperation {
-            case .transferIn(let account), .transferOut(account: let account):
+            case .transferIn(let account, let value), .transferOut(account: let account, let value):
                 self.account = account
-            case .installments(let card, let numberOfInstallments):
+                self.value = value
+            case .installments(let card, let numberOfInstallments, let value):
+                self.value = value
                 self.installments.forEach { modelContext?.delete($0) }
                 self.installments = Self.createInstallments(
                     card: card,
@@ -48,7 +48,7 @@ class Transaction: ObservableObject {
                     numberOfInstallments: numberOfInstallments,
                     date: date,
                     value: value)
-            case .refund(_):
+            case .refund(_, _):
                 fatalError()
             }
         }
@@ -56,7 +56,6 @@ class Transaction: ObservableObject {
     func update(
         name: String,
         date: Date,
-        value: Double,
         editOperation: EditOperation,
         category: Category?,
         place: Place?) {
@@ -66,14 +65,17 @@ class Transaction: ObservableObject {
             self.category = category
             self.place = place
             self.operation = editOperation.operation
-            self.value = value
+
             switch editOperation {
-            case .transferIn(let account):
+            case .transferIn(let account, let value):
                 self.account = account
-            case .transferOut(account: let account):
+                self.value = value
+            case .transferOut(account: let account, let value):
                 self.account = account
-            case .installments(let card, let numberOfInstallments):
+                self.value = value
+            case .installments(let card, let numberOfInstallments, let value):
                 self.account = nil
+                self.value = value
                 self.installments.forEach { modelContext?.delete($0) }
                 self.installments = Self.createInstallments(
                     card: card,
@@ -81,7 +83,7 @@ class Transaction: ObservableObject {
                     numberOfInstallments: numberOfInstallments,
                     date: date,
                     value: value)
-            case .refund(_):
+            case .refund(_, _):
                 fatalError()
             }
         }
@@ -197,10 +199,10 @@ class Transaction: ObservableObject {
     }
     
     enum EditOperation: Identifiable {
-        case transferIn(account: Account)
-        case transferOut(account: Account)
-        case installments(card: CreditCard, numberOfInstallments: Int)
-        case refund(bill: Bill)
+        case transferIn(account: Account, value: Double)
+        case transferOut(account: Account, value: Double)
+        case installments(card: CreditCard, numberOfInstallments: Int, value: Double)
+        case refund(bill: Bill, value: Double)
         
         var id: Int {
             switch self {
@@ -221,6 +223,15 @@ class Transaction: ObservableObject {
                 return .installments
             case .refund:
                 return .refund
+            }
+        }
+        
+        var value: Double {
+            switch self {
+            case .transferIn(_, let value): return value
+            case .transferOut(_, let value): return value
+            case .installments(_, _, let value): return value
+            case .refund(_, let value): return value
             }
         }
     }

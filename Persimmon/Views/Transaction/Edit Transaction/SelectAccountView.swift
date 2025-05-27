@@ -11,14 +11,31 @@ struct SelectAccountView: View {
                 Button {
                     selected = account
                 } label: {
-                    Text(account.name)
+                    HStack {
+                        Text(account.name)
+                        if let icon = account.icon {
+                            Image(icon)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 24)
+                        } else {
+                            LettersIconView(text: account.name, color: Color(hex: account.color))
+                        }
+                    }
                 }
             }
         } label: {
             HStack {
                 if let account = selected {
-                    LettersIconView(text: account.name, color: Color(hex: account.color))
                     Text(account.name).foregroundStyle(Color.brand)
+                    if let icon = account.icon {
+                        Image(icon)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24)
+                    } else {
+                        LettersIconView(text: account.name, color: Color(hex: account.color))
+                    }
                 } else {
                     Text("Select an acocunt")
                 }

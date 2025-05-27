@@ -11,7 +11,13 @@ struct SelectCategoryView: View {
                 Button {
                     selected = category
                 } label: {
-                    Label(category.name, systemImage: category.icon ?? "")
+                    HStack {
+                        Image(systemName: category.icon ?? "")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 24)
+                        Text(category.name)
+                    }
                 }
             }
         } label: {

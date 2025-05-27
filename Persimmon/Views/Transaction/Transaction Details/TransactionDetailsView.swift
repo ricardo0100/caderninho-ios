@@ -25,8 +25,15 @@ struct TransactionDetailsView: View {
                 let color = transaction.accountOrCardColor ?? ""
                 LabeledView(labelText: transaction.operation == .installments ? "Credit Card" : "Account") {
                     HStack(spacing: .spacingMedium) {
-                        LettersIconView(text: name.firstLetters(),
-                                        color: Color(hex: color))
+                        if let icon = transaction.accountOrCardIcon {
+                            Image(icon)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 24, height: 24)
+                        } else {
+                            LettersIconView(text: name.firstLetters(),
+                                            color: Color(hex: color))
+                        }
                         Text(name).font(.title3)
                     }
                 }

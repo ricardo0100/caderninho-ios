@@ -37,12 +37,19 @@ struct TransactionsListView: View {
                     }
                 }
             }
+            .overlay(alignment: .bottomTrailing) {
+                Button(action: viewModel.didTapAdd) {
+                    Image(systemName: "plus")
+                        .padding(.spacingSmall)
+                }
+                .buttonStyle(.borderedProminent)
+                .padding()
+            }
         }
         .onAppear(perform: viewModel.didAppear)
-        .sheet(isPresented: $viewModel.isShowingEdit) {
-            EditTransactionView(transaction: nil)
+        .fullScreenCover(isPresented: $viewModel.isShowingNewTransaction) {
+            NewTransactionView(isPresented: $viewModel.isShowingNewTransaction)
         }
-        .foregroundColor(.brand)
     }
 }
 
