@@ -23,14 +23,14 @@ extension Date {
         var dayComponent = DateComponents()
         dayComponent.day = -1
         let calendar = Calendar.current
-        return calendar.date(byAdding: dayComponent, to: Date())!
+        return calendar.date(byAdding: dayComponent, to: Date())!.lastSecondOfDay()
     }
 
     static func getTodayBounds() -> (start: Date, end: Date) {
         let calendar = Calendar.current
         let now = Date()
         let startOfToday = calendar.startOfDay(for: now)
-        return (start: startOfToday, end: now)
+        return (start: startOfToday, end: now.lastSecondOfDay())
     }
     
     static func getYesterdayBounds() -> (start: Date, end: Date) {
@@ -56,7 +56,7 @@ extension Date {
         components.month = 1
         components.second = -1
         let endOfMonth = calendar.date(byAdding: components, to: startOfMonth)!
-        return (start: startOfMonth, end: endOfMonth)
+        return (start: startOfMonth, end: endOfMonth.lastSecondOfDay())
     }
     
     static func getLastMonthBounds() -> (start: Date, end: Date) {
@@ -65,19 +65,19 @@ extension Date {
         let startOfThisMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: now))!
         let endOfLastMonth = calendar.date(byAdding: .second, value: -1, to: startOfThisMonth)!
         let startOfLastMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: endOfLastMonth))!
-        return (start: startOfLastMonth, end: endOfLastMonth)
+        return (start: startOfLastMonth, end: endOfLastMonth.lastSecondOfDay())
     }
     
     static func getLast30DaysBounds() -> (start: Date, end: Date) {
         let end = Date()
         let start = end.dateAddingDays(-30)
-        return (start: start, end: end)
+        return (start: start, end: end.lastSecondOfDay())
     }
     
     static func getLast7DaysBounds() -> (start: Date, end: Date) {
         let end = Date()
         let start = end.dateAddingDays(-7)
-        return (start: start, end: end)
+        return (start: start, end: end.lastSecondOfDay())
     }
     
     func dateAddingDays(_ days: Int) -> Date {
@@ -96,5 +96,12 @@ extension Date {
     
     var numericDate: String {
         formatted(date: .numeric, time: .omitted)
+    }
+    
+    func lastSecondOfDay(using calendar: Calendar = .current) -> Date {
+        let startOfDay = calendar.startOfDay(for: self)
+        let startOfNextDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
+        let lastSecond = startOfNextDay.addingTimeInterval(-1)
+        return lastSecond
     }
 }

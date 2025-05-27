@@ -18,7 +18,6 @@ struct TransactionsListView: View {
                         filterType: $viewModel.filterType
                     ).padding(.top)
                 }
-                
                 FilteredTransactionsListView(
                     startDate: viewModel.filterStartDate,
                     endDate: viewModel.filterEndDate,
@@ -30,11 +29,6 @@ struct TransactionsListView: View {
                 ToolbarItem(placement: .navigation) {
                     NavigationToolbarView(imageName: "book.pages",
                                           title: "Transactions")
-                }
-                ToolbarItem(placement: .primaryAction) {
-                    Button(action: viewModel.didTapAdd) {
-                        Image(systemName: "plus")
-                    }
                 }
             }
             .overlay(alignment: .bottomTrailing) {
