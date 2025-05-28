@@ -10,12 +10,19 @@ import SwiftData
 
 struct FilteredTransactionsListView: View {
     @Query var transactions: [Transaction]
-    
-    init(startDate: Date, endDate: Date, searchText: String) {
+
+    init(startDate: Date, endDate: Date, searchText: String, selectedAccountOrCardId: UUID?) {
+        let installmentsWithCardId = #Expression<[Installment], UUID, Int> { installments, id in
+            installments.filter { $0.bill.card.id == id }.count
+        }
+        
         _transactions = Query(filter: #Predicate<Transaction> { transaction in
             transaction.date <= endDate &&
             transaction.date >= startDate &&
-            (searchText.isEmpty || transaction.name.localizedStandardContains(searchText))
+            (searchText.isEmpty || transaction.name.localizedStandardContains(searchText)) &&
+            (selectedAccountOrCardId == nil ||
+             transaction.account?.id == selectedAccountOrCardId ||
+             installmentsWithCardId.evaluate(transaction.installments, selectedAccountOrCardId!) > 0)
         }, sort: \.date, order: .reverse)
     }
     
@@ -36,7 +43,7 @@ struct FilteredTransactionsListView: View {
     
     var body: some View {
         if transactions.isEmpty {
-            Text("No transactions for this period!")
+            Text("No transactions!")
         }
         ForEach(sectionDates, id: \.self) { date in
             Section(header: sectionHeader(for: date)) {
@@ -59,7 +66,8 @@ struct FilteredTransactionsListView: View {
         FilteredTransactionsListView(
             startDate: .distantPast,
             endDate: .distantFuture,
-            searchText: "")
+            searchText: "",
+            selectedAccountOrCardId: nil)
     }
     .modelContainer(.preview)
 }

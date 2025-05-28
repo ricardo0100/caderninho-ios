@@ -8,6 +8,7 @@ extension TransactionsListView {
         @Published var isShowingNewTransaction: Bool = false
         @Published var isShowingCamera = false
         
+        @Published var selectedId: UUID?
         @Published var filterStartDate = Date()
         @Published var filterEndDate = Date()
         @Published var searchText: String = ""

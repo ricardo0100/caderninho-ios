@@ -12,17 +12,18 @@ import UIKit
 struct AccountCardHeader: View {
     @Query var accounts: [Account]
     @Query var cards: [CreditCard]
+    @Binding var selectedId: UUID?
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
+            HStack(spacing: .spacingBig) {
                 ForEach(makeArray(accounts: accounts, cards: cards), id: \.self) { item in
                     HStack {
                         if let icon = item.icon {
                             Image(icon)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 24)
+                                .frame(width: 32)
                         } else {
                             
                         }
@@ -35,7 +36,17 @@ struct AccountCardHeader: View {
                         }
                     }
                     .padding(.spacingMedium)
-//                    .background(color)
+                    .background(selectedId == item.id ? Color.gray.opacity(0.3) : .clear)
+                    .clipShape(RoundedRectangle(cornerRadius: .spacingSmall))
+                    .onTapGesture {
+                        withAnimation {
+                            if selectedId == item.id {
+                                selectedId = nil
+                            } else {
+                                selectedId = item.id
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -43,33 +54,40 @@ struct AccountCardHeader: View {
     
     private func makeArray(accounts: [Account], cards: [CreditCard]) -> [HeaderItem] {
         (cards.map { HeaderItem(
-            id: $0.id.uuidString,
+            id: $0.id,
             name: $0.name,
             icon: $0.icon,
             lastUsed: $0.lastTransaction?.date,
             value: $0.currentBill?.total ?? .zero,
-            currency: $0.currency)
+            currency: $0.currency,
+            account: nil,
+            card: $0)
         } + accounts.map {
             HeaderItem(
-                id: $0.id.uuidString,
+                id: $0.id,
                 name: $0.name,
                 icon: $0.icon,
                 lastUsed: $0.lastTransaction?.date,
                 value: $0.balance,
-                currency: $0.currency)
+                currency: $0.currency,
+                account: $0,
+                card: nil)
         }).sorted { $0.lastUsed ?? Date.distantPast > $1.lastUsed ?? Date.distantPast }
     }
     
     struct HeaderItem: Hashable {
-        let id: String
+        let id: UUID
         let name: String
         let icon: String?
         let lastUsed: Date?
         let value: Double
         let currency: String
+        let account: Account?
+        let card: CreditCard?
     }
 }
 
 #Preview {
-    AccountCardHeader()
+    @Previewable @State var selectedId: UUID?
+    AccountCardHeader(selectedId: $selectedId)
 }

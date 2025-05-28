@@ -10,7 +10,7 @@ struct TransactionsListView: View {
         NavigationStack {
             List {
                 Section {
-                    AccountCardHeader()
+                    AccountCardHeader(selectedId: $viewModel.selectedId)
                 } footer: {
                     PeriodFilterView(
                         startDate: $viewModel.filterStartDate,
@@ -21,7 +21,8 @@ struct TransactionsListView: View {
                 FilteredTransactionsListView(
                     startDate: viewModel.filterStartDate,
                     endDate: viewModel.filterEndDate,
-                    searchText: viewModel.debouncedSearchText
+                    searchText: viewModel.debouncedSearchText,
+                    selectedAccountOrCardId: viewModel.selectedId
                 )
             }
             .searchable(text: $viewModel.searchText)
@@ -34,9 +35,12 @@ struct TransactionsListView: View {
             .overlay(alignment: .bottomTrailing) {
                 Button(action: viewModel.didTapAdd) {
                     Image(systemName: "plus")
-                        .padding(.spacingSmall)
+                        .padding(10)
                 }
+                .tint(.accentColor.opacity(0.95))
                 .buttonStyle(.borderedProminent)
+                .buttonBorderShape(.circle)
+                .shadow(radius: .spacingNano, x: 1, y: 1)
                 .padding()
             }
         }
