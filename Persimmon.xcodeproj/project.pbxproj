@@ -58,6 +58,8 @@
 		CF44BE342A0FB6220006019F /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF44BE302A0FB5000006019F /* Color.swift */; };
 		CF44BE352A0FB6330006019F /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2CB0BF2A06FD9700CBA434 /* Color+Extension.swift */; };
 		CF44BE362A0FB6330006019F /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2442A080AA700586164 /* String+Extension.swift */; };
+		CF5155AA2DE7C3F3008BE241 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CF5155A92DE7C3F3008BE241 /* Localizable.xcstrings */; };
+		CF5155AB2DE7C3F3008BE241 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CF5155A92DE7C3F3008BE241 /* Localizable.xcstrings */; };
 		CF5746352D22BDED007CC196 /* LettersIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2492A081B7100586164 /* LettersIconView.swift */; };
 		CF5746382D22BE30007CC196 /* SelectAccountEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5746372D22BE2C007CC196 /* SelectAccountEntity.swift */; };
 		CF5746392D22C294007CC196 /* NiceColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9D2A712A09967F0003DC39 /* NiceColorPicker.swift */; };
@@ -111,7 +113,6 @@
 		CFD3ED622DC7CF480029AC2F /* EditCreditCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED612DC7CF470029AC2F /* EditCreditCardViewModel.swift */; };
 		CFD3ED642DC833380029AC2F /* CreditCardCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED632DC8332E0029AC2F /* CreditCardCellView.swift */; };
 		CFD3ED672DC977CC0029AC2F /* CardDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED662DC977C20029AC2F /* CardDetailsView.swift */; };
-		CFD3ED6B2DC986A30029AC2F /* BillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED6A2DC9869F0029AC2F /* BillView.swift */; };
 		CFD3ED6F2DC986D90029AC2F /* InstallmentCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED6E2DC986D20029AC2F /* InstallmentCellView.swift */; };
 		CFD3ED802DCA3E9F0029AC2F /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED7F2DCA3E9E0029AC2F /* App.swift */; };
 		CFD3ED842DCA51490029AC2F /* EditTransactionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD3ED812DCA51490029AC2F /* EditTransactionViewModelTests.swift */; };
@@ -208,6 +209,7 @@
 		CF3116F02A14438600171A4D /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		CF44BE302A0FB5000006019F /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CF44BE322A0FB55A0006019F /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
+		CF5155A92DE7C3F3008BE241 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		CF5746372D22BE2C007CC196 /* SelectAccountEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAccountEntity.swift; sourceTree = "<group>"; };
 		CF57463E2D240007007CC196 /* AccountBalanceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountBalanceProvider.swift; sourceTree = "<group>"; };
 		CF5746402D24114D007CC196 /* Persimmon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Persimmon.entitlements; sourceTree = "<group>"; };
@@ -257,7 +259,6 @@
 		CFD3ED612DC7CF470029AC2F /* EditCreditCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCreditCardViewModel.swift; sourceTree = "<group>"; };
 		CFD3ED632DC8332E0029AC2F /* CreditCardCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardCellView.swift; sourceTree = "<group>"; };
 		CFD3ED662DC977C20029AC2F /* CardDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsView.swift; sourceTree = "<group>"; };
-		CFD3ED6A2DC9869F0029AC2F /* BillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillView.swift; sourceTree = "<group>"; };
 		CFD3ED6E2DC986D20029AC2F /* InstallmentCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallmentCellView.swift; sourceTree = "<group>"; };
 		CFD3ED742DCA3D2E0029AC2F /* PersimmonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PersimmonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFD3ED7F2DCA3E9E0029AC2F /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -442,6 +443,7 @@
 				CF2DA20B2DE1070700C91228 /* Model */,
 				CF2DA2072DE0BA7500C91228 /* Components */,
 				CF2DA2042DE0BA3400C91228 /* BankIcons.xcassets */,
+				CF5155A92DE7C3F3008BE241 /* Localizable.xcstrings */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -674,7 +676,6 @@
 			isa = PBXGroup;
 			children = (
 				CFD3ED6E2DC986D20029AC2F /* InstallmentCellView.swift */,
-				CFD3ED6A2DC9869F0029AC2F /* BillView.swift */,
 			);
 			path = Bill;
 			sourceTree = "<group>";
@@ -825,6 +826,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = CF2CB0982A06F8D600CBA434;
 			productRefGroup = CF2CB0A22A06F8D600CBA434 /* Products */;
@@ -844,6 +846,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF2300A02D145EAF00B52746 /* LaunchScreen.storyboard in Resources */,
+				CF5155AA2DE7C3F3008BE241 /* Localizable.xcstrings in Resources */,
 				CF2CB0AC2A06F8D900CBA434 /* Preview Assets.xcassets in Resources */,
 				CF2DA2052DE0BA3400C91228 /* BankIcons.xcassets in Resources */,
 				CF2CB0A92A06F8D900CBA434 /* Assets.xcassets in Resources */,
@@ -856,6 +859,7 @@
 			files = (
 				CF2DA2062DE0BA3400C91228 /* BankIcons.xcassets in Resources */,
 				CFA1DE6A2A0C32B50055E3CD /* Assets.xcassets in Resources */,
+				CF5155AB2DE7C3F3008BE241 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -906,7 +910,6 @@
 				CFD3ED622DC7CF480029AC2F /* EditCreditCardViewModel.swift in Sources */,
 				CF9DA5A32D1715AC0061056F /* GraphItem.swift in Sources */,
 				CF8104522C037BE4009599B8 /* ProcessInfo+Extension.swift in Sources */,
-				CFD3ED6B2DC986A30029AC2F /* BillView.swift in Sources */,
 				CF7A804F2A0DBAE20067F5A8 /* ImageIconView.swift in Sources */,
 				CFB7F5612BBEBFE6009956E9 /* SelectOperationView.swift in Sources */,
 				CF2DA2102DE1238E00C91228 /* AccountOrCardData.swift in Sources */,
@@ -1087,6 +1090,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1141,6 +1145,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};

@@ -17,7 +17,7 @@ enum FilterType: CaseIterable {
     case all
     case custom
     
-    var title: String {
+    var title: LocalizedStringKey {
         switch self {
         case .last30Days:
             return "Last 30 days"

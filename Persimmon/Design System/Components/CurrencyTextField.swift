@@ -22,7 +22,7 @@ struct CurrencyTextField: View {
     }
     
     var body: some View {
-        TextField("Hey", text: $text)
+        TextField("", text: $text)
             .font(font)
             .keyboardType(.decimalPad)
             .onChange(of: text) {

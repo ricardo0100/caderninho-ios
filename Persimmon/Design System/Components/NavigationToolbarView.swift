@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NavigationToolbarView: View {
     let imageName: String
-    let title: String
+    let title: LocalizedStringKey
     
     var body: some View {
         HStack {
@@ -23,16 +23,14 @@ struct NavigationToolbarView: View {
     }
 }
 
-struct NavigationToolbarView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            List {
-                Text("👽")
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigation) {
-                    NavigationToolbarView(imageName: "creditcard", title: "Teste")
-                }
+#Preview {
+    NavigationStack {
+        List {
+            Text("👽")
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigation) {
+                NavigationToolbarView(imageName: "creditcard", title: "Teste")
             }
         }
     }

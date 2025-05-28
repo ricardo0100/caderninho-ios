@@ -98,7 +98,7 @@ struct TransactionDetailsView: View {
                             }
                             Spacer()
                             VStack(alignment: .trailing) {
-                                Text("Due Date")
+                                Text("Due date")
                                     .font(.caption2)
                                 Text(installment.bill.dueDate.formatted(date: .abbreviated, time: .omitted))
                                     .font(.caption)

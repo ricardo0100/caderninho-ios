@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct LabeledView<Content: View>: View {
-    let labelText: String
+    let labelText: LocalizedStringKey
     let alignRight: Bool
     @Binding var error: String?
     @ViewBuilder var content: () -> Content
     
-    init(labelText: String, alignRight: Bool = false, error: Binding<String?>? = nil, @ViewBuilder content: @escaping () -> Content) {
+    init(labelText: LocalizedStringKey, alignRight: Bool = false, error: Binding<String?>? = nil, @ViewBuilder content: @escaping () -> Content) {
         self.labelText = labelText
         self.alignRight = alignRight
         self._error = error ?? .constant(nil)

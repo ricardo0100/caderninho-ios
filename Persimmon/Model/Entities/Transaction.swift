@@ -1,6 +1,7 @@
 import Foundation
 import CoreLocation
 import SwiftData
+import SwiftUI
 
 @Model
 class Transaction: ObservableObject {
@@ -151,14 +152,14 @@ class Transaction: ObservableObject {
         
         var id: Int { hashValue }
         
-        var text: String {
+        var text: LocalizedStringKey {
             switch self {
             case .transferOut:
                 return "Transfer Out"
             case .transferIn:
                 return "Transfer In"
             case .installments:
-                return "Installments"
+                return "Pay in installments"
             case .refund:
                 return "Refund"
             }
@@ -169,7 +170,7 @@ class Transaction: ObservableObject {
             case .transferIn:
                 return "arrowshape.down.circle"
             case .transferOut:
-                return "banknote"
+                return "arrowshape.up.circle"
             case .installments:
                 return "creditcard"
             case .refund:
