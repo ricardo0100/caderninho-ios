@@ -3,27 +3,23 @@ import SwiftData
 
 struct AccountDetailsView: View {
     @EnvironmentObject var account: Account
-    @State var isShowingEdit: Bool = false
+    @ObservedObject var viewModel: ViewModel = ViewModel()
     
     var body: some View {
         List {
             Section {
-                if account.transactions.count > 0 {
-                    ForEach(account.transactions) { transaction in
-                        NavigationLink(destination: {
-                            TransactionDetailsView().environmentObject(transaction)
-                        }) {
-                            TransactionCellView().environmentObject(transaction)
-                        }
-                    }
-                } else {
-                    Text("No transactions yet!").foregroundColor(.gray)
-                }
-            } header: {
-                Text("Total: \(account.balance.toCurrency(with: account.currency))")
-                    .font(.subheadline)
+                PeriodFilterView(
+                    startDate: $viewModel.startDate,
+                    endDate: $viewModel.endDate,
+                    filterType: $viewModel.filterType)
             }
+            FilteredTransactionsListView(startDate: viewModel.startDate,
+                                         endDate: viewModel.endDate,
+                                         searchText: viewModel.debouncedSearchText,
+                                         selectedAccountOrCardId: account.id)
         }
+        .searchable(text: $viewModel.searchText)
+        .onAppear(perform: viewModel.didAppear)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 HStack {
@@ -44,7 +40,7 @@ struct AccountDetailsView: View {
                 Button("Edit", action: didTapEdit)
             }
         }
-        .sheet(isPresented: $isShowingEdit) {
+        .sheet(isPresented: $viewModel.isShowingEdit) {
             NavigationStack {
                 EditAccountView(account: account)
             }
@@ -52,7 +48,7 @@ struct AccountDetailsView: View {
     }
     
     func didTapEdit() {
-        isShowingEdit = true
+        viewModel.isShowingEdit = true
     }
 }
 

@@ -45,30 +45,12 @@ extension TransactionsListView {
         }
         
         private func updateDates() {
-            let range = dateRange
+            guard filterType != .custom else {
+                return
+            }
+            let range = filterType.dateRange
             filterStartDate = range.start
             filterEndDate = range.end
-        }
-        
-        var dateRange: (start: Date, end: Date) {
-            switch filterType {
-            case .last30Days:
-                return Date.getLast30DaysBounds()
-            case .lastWeek:
-                return Date.getLast7DaysBounds()
-            case .today:
-                return Date.getTodayBounds()
-            case .yesterday:
-                return Date.getYesterdayBounds()
-            case .thisMonth:
-                return Date.getThisMonthBounds()
-            case .lastMonth:
-                return Date.getLastMonthBounds()
-            case .all:
-                return (Date.distantPast, Date.distantFuture)
-            case .custom:
-                return (filterStartDate, filterEndDate)
-            }
         }
     }
 }

@@ -37,4 +37,25 @@ enum FilterType: CaseIterable {
             return "Custom period"
         }
     }
+    
+    var dateRange: (start: Date, end: Date) {
+        switch self {
+        case .last30Days:
+            return Date.getLast30DaysBounds()
+        case .lastWeek:
+            return Date.getLast7DaysBounds()
+        case .today:
+            return Date.getTodayBounds()
+        case .yesterday:
+            return Date.getYesterdayBounds()
+        case .thisMonth:
+            return Date.getThisMonthBounds()
+        case .lastMonth:
+            return Date.getLastMonthBounds()
+        case .all:
+            return (Date.distantPast, Date.distantFuture)
+        case .custom:
+            return (Date.distantPast, Date.distantFuture)
+        }
+    }
 }
