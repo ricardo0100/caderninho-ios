@@ -15,13 +15,28 @@ struct InstallmentCellView: View {
         HStack {
             VStack(alignment: .leading) {
                 Text(installment.transaction.name)
-                Text("Total: \(installment.transaction.value.toCurrency(with: installment.bill.card.currency))")
+                Text(installment.transaction.value.toCurrency(with: installment.bill.card.currency))
+                    .font(.footnote)
+                    .bold()
+                Text(installment.transaction.date.formatted(date: .numeric, time: .omitted))
                     .font(.footnote)
             }
             Spacer()
             VStack(alignment: .trailing) {
                 Text(installment.value.toCurrency(with: installment.bill.card.currency))
                     .bold()
+                let transaction = installment.transaction
+                if let category = transaction.category {
+                    HStack(spacing: .spacingSmall) {
+                        Text(category.name)
+                            .font(.caption2)
+                        if let icon = transaction.category?.icon {
+                            ImageIconView(image: Image(systemName: icon),
+                                          color: Color(hex: category.color),
+                                          size: 16)
+                        }
+                    }
+                }
                 Text("Installment \(installment.number) of \(installment.transaction.installments.count)")
                     .font(.footnote)
             }

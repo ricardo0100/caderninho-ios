@@ -10,58 +10,44 @@ import SwiftData
 
 struct CardDetailsView: View {
     @EnvironmentObject var card: CreditCard
-    @State var showEditing = false
-    @State var selectedBill: Bill?
-    @State var isPayed = false
+    @ObservedObject var viewModel = ViewModel()
     
     var body: some View {
         List {
             Section {
-                ForEach(selectedBill?.installments ?? [], id: \.self) { installment in
+                ForEach(viewModel.installments.sorted {
+                    $0.transaction.date > $1.transaction.date
+                }, id: \.self) { installment in
                     InstallmentCellView()
                         .environmentObject(installment)
                 }
             } header: {
                 VStack(alignment: .leading) {
-                    BillSelectorView(selected: $selectedBill,
-                                     bills: card.bills.filter { !$0.installments.isEmpty },
-                                     card: card)
-                    if let bill = selectedBill {
-                        HStack {
-                            VStack(alignment: .leading) {
-                                HStack {
-                                    Text("Bill value:")
-                                    Text(bill.total.toCurrency(with: card.currency)).bold()
-                                }
-                                .foregroundStyle(Color.primary)
-                                .font(.subheadline)
-                                Spacer()
-                                HStack {
-                                    Text("Closing date:")
-                                    Text(bill.closingCycleDate.formatted(date: .abbreviated, time: .omitted)).bold()
-                                }
-                                HStack {
-                                    Text("Due date")
-                                    Text(bill.dueDate.formatted(date: .abbreviated, time: .omitted)).bold()
-                                }
-                            }.font(.caption)
-                            Spacer()
-                            VStack {
-                                if let payedDate = bill.payedDate {
-                                    Button("Payed in \(payedDate.formatted(date: .abbreviated, time: .omitted))") {
-                                        bill.payedDate = nil
-                                    }.font(.caption)
-                                } else {
-                                    Button("Set Payed") {
-                                        bill.payedDate = Date()
-                                    }
-                                    .font(.footnote)
-                                }
-                                if bill.isDelayed {
-                                    Text("Delayed!")
-                                        .foregroundStyle(Color.red)
-                                }
+                    BillSelectorView(selected: $viewModel.selectedBill, card: card)
+                    
+                    HStack {
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Text("Closing:")
+                                Text(viewModel.selectedBill?.closingCycleDate.formatted(date: .abbreviated, time: .omitted) ?? "")
+                                    .foregroundStyle(Color.primary)
                             }
+                            HStack {
+                                Text("Due:")
+                                Text(viewModel.selectedBill?.dueDate.formatted(date: .abbreviated, time: .omitted) ?? "")
+                                    .foregroundStyle(viewModel.selectedBill?.isDelayed == true ? Color.red : .primary)
+                            }
+                        }
+                        Spacer()
+                        if let date = viewModel.selectedBill?.payedDate {
+                            Text("Paid in \(date.formatted(date: .abbreviated, time: .omitted))")
+                                .font(.footnote)
+                                .onTapGesture(count: 2) {
+                                    viewModel.didTapPayedDate()
+                                }
+                        } else {
+                            Button("Set payed", action: viewModel.didTapSetPaid)
+                                .buttonStyle(.bordered)
                         }
                     }
                 }
@@ -88,22 +74,24 @@ struct CardDetailsView: View {
             }
             ToolbarItem(placement: .automatic) {
                 Button("Edit") {
-                    showEditing = true
+                    viewModel.isShowingEdit = true
                 }
             }
         }
-        .sheet(isPresented: $showEditing) {
+        .sheet(isPresented: $viewModel.isShowingEdit) {
             EditCreditCardView(creditCard: card)
         }
         .onAppear {
-            selectedBill = card.currentBill
+            // TODO: Move card to ViewModel
+            viewModel.selectedBill = card.currentBill
         }
     }
 }
 
 #Preview {
-    let card = try! ModelContainer.preview.mainContext
-        .fetch( FetchDescriptor<CreditCard>())[0]
+    @Previewable @State var selected: Bill?
+    let card = try! ModelContainer.preview.mainContext.fetch(FetchDescriptor<CreditCard>()).first!
+    
     NavigationStack {
         CardDetailsView()
             .environmentObject(card)

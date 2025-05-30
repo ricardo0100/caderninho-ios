@@ -61,6 +61,7 @@
 		CF5155AA2DE7C3F3008BE241 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CF5155A92DE7C3F3008BE241 /* Localizable.xcstrings */; };
 		CF5155AB2DE7C3F3008BE241 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CF5155A92DE7C3F3008BE241 /* Localizable.xcstrings */; };
 		CF5155AD2DE883F4008BE241 /* AccountDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5155AC2DE883EE008BE241 /* AccountDetailsViewModel.swift */; };
+		CF5155AF2DE88723008BE241 /* CardDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5155AE2DE8871D008BE241 /* CardDetailsViewModel.swift */; };
 		CF5746352D22BDED007CC196 /* LettersIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2492A081B7100586164 /* LettersIconView.swift */; };
 		CF5746382D22BE30007CC196 /* SelectAccountEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5746372D22BE2C007CC196 /* SelectAccountEntity.swift */; };
 		CF5746392D22C294007CC196 /* NiceColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9D2A712A09967F0003DC39 /* NiceColorPicker.swift */; };
@@ -212,6 +213,7 @@
 		CF44BE322A0FB55A0006019F /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		CF5155A92DE7C3F3008BE241 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		CF5155AC2DE883EE008BE241 /* AccountDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewModel.swift; sourceTree = "<group>"; };
+		CF5155AE2DE8871D008BE241 /* CardDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsViewModel.swift; sourceTree = "<group>"; };
 		CF5746372D22BE2C007CC196 /* SelectAccountEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAccountEntity.swift; sourceTree = "<group>"; };
 		CF57463E2D240007007CC196 /* AccountBalanceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountBalanceProvider.swift; sourceTree = "<group>"; };
 		CF5746402D24114D007CC196 /* Persimmon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Persimmon.entitlements; sourceTree = "<group>"; };
@@ -660,6 +662,7 @@
 			isa = PBXGroup;
 			children = (
 				CF7147192DCF8FFB00ED0A25 /* BillSelectorView.swift */,
+				CF5155AE2DE8871D008BE241 /* CardDetailsViewModel.swift */,
 				CFD3ED662DC977C20029AC2F /* CardDetailsView.swift */,
 			);
 			path = CreditCardDetails;
@@ -926,6 +929,7 @@
 				CFD3ED562DC2C65D0029AC2F /* CameraController.swift in Sources */,
 				CFD3ED4F2DBFAEEF0029AC2F /* TicketProcessor.swift in Sources */,
 				CFB7F56B2BC0228B009956E9 /* SelectDateView.swift in Sources */,
+				CF5155AF2DE88723008BE241 /* CardDetailsViewModel.swift in Sources */,
 				CF15B34F2BACE84F00E8E050 /* AccountCellView.swift in Sources */,
 				CF2DA1F62DDF3A6100C91228 /* UserDefaults+Extension.swift in Sources */,
 				CFF292A82A13B93F00C1A66A /* EditAccountView.swift in Sources */,

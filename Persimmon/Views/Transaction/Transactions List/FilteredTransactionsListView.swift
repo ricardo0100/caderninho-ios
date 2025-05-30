@@ -10,10 +10,14 @@ import SwiftData
 
 struct FilteredTransactionsListView: View {
     @Query var transactions: [Transaction]
-
-    init(startDate: Date, endDate: Date, searchText: String, selectedAccountOrCardId: UUID?) {
-        let installmentsWithCardId = #Expression<[Installment], UUID, Int> { installments, id in
-            installments.filter { $0.bill.card.id == id }.count
+    
+    init(startDate: Date, endDate: Date, searchText: String, selectedAccountOrCardId: UUID?, billId: UUID? = nil) {
+        let containsInstallmentsWithCardId = #Expression<Transaction, UUID, Bool> { transaction, id in
+            !transaction.installments.filter { $0.bill.card.id == id }.isEmpty
+        }
+        
+        let containsInstallmentsInBill = #Expression<Transaction, UUID, Bool> { transaction, id in
+            !transaction.installments.filter { $0.bill.id == id }.isEmpty
         }
         
         _transactions = Query(filter: #Predicate<Transaction> { transaction in
@@ -22,7 +26,8 @@ struct FilteredTransactionsListView: View {
             (searchText.isEmpty || transaction.name.localizedStandardContains(searchText)) &&
             (selectedAccountOrCardId == nil ||
              transaction.account?.id == selectedAccountOrCardId ||
-             installmentsWithCardId.evaluate(transaction.installments, selectedAccountOrCardId!) > 0)
+             containsInstallmentsWithCardId.evaluate(transaction, selectedAccountOrCardId!)) &&
+            (billId == nil || containsInstallmentsInBill.evaluate(transaction, billId!))
         }, sort: \.date, order: .reverse)
     }
     

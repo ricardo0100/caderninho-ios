@@ -9,13 +9,11 @@ import SwiftData
 
 struct BillSelectorView: View {
     @Binding var selected: Bill?
-    let bills: [Bill]
     let card: CreditCard
 
-    init(selected: Binding<Bill?>, bills: [Bill], card: CreditCard) {
+    init(selected: Binding<Bill?>, card: CreditCard) {
         self._selected = selected
         self.card = card
-        self.bills = bills.sorted()
     }
     
     func bottomColor(for bill: Bill) -> Color {
@@ -36,24 +34,29 @@ struct BillSelectorView: View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal) {
                 HStack(spacing: .spacingMedium) {
-                    ForEach(bills) { bill in
+                    ForEach(card.bills.filter { !$0.installments.isEmpty }.sorted()) { bill in
                         let year = String(format: "%i", bill.dueYear)
                         let month = Date.shortMonthName(from: bill.dueMonth)
+                        let value = bill.total.toCurrency(with: card.currency)
                         VStack(spacing: .spacingNano) {
-                            Text("\(month) \(year)")
-                                .frame(height: 32)
-                                .padding([.leading, .trailing], .spacingMedium)
-                                .foregroundStyle(Color.primary)
+                            VStack {
+                                Text("\(month) \(year)")
+                                Text(value)
+                                    .font(.caption)
+                            }
+                            .padding(.spacingSmall)
                             Rectangle()
                                 .foregroundStyle(bottomColor(for: bill))
                                 .frame(height: 1.5)
                         }
+                        .foregroundStyle(Color.primary)
                         .padding(.top, .spacingSmall)
                         .background(bill == selected ? Color.gray.opacity(0.7) : .gray.opacity(0.2))
-                        .cornerRadius(.spacingSmall)
+                        .cornerRadius(.spacingNano)
+                        .frame(minWidth: 90)
                         .onTapGesture {
-                            selected = bill
                             withAnimation {
+                                selected = bill
                                 proxy.scrollTo(bill.id, anchor: .center)
                             }
                         }
@@ -77,15 +80,14 @@ struct BillSelectorView: View {
 
 
 #Preview {
-    @Previewable @State var selected: Bill? = try!
-        ModelContainer.preview.mainContext.fetch(FetchDescriptor<CreditCard>()).first!.currentBill
-    let bills = try! ModelContainer.preview.mainContext.fetch(FetchDescriptor<Bill>())
-
+    @Previewable @State var selected: Bill?
+    let card = try! ModelContainer.preview.mainContext.fetch(FetchDescriptor<CreditCard>()).first!
+    
     List {
         Section {
             
         } header: {
-            BillSelectorView(selected: $selected, bills: bills, card: bills.first!.card)
+            BillSelectorView(selected: $selected, card: card)
                 .listRowInsets(EdgeInsets())
                 .padding(.bottom, .spacingMedium)
         }

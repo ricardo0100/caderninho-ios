@@ -87,20 +87,11 @@ class DataController {
                  icon: withIcon ? NiceIcon.allCases.randomElement()!.rawValue : nil)
     }
     
-    static func createRandomCard() -> CreditCard {
-        CreditCard(id: UUID(),
-                   name: categoryNameExamples.randomElement()!,
-                   color: NiceColor.allCases.randomElement()!.rawValue,
-                   icon: BankIcon.caixa.rawValue,
-                   currency: "R$",
-                   closingCycleDay: 3,
-                   dueDay: 10)
-    }
-    
     static func createPreviewContainerWithExampleData() -> ModelContainer {
         do {
-            let container = try ModelContainer(for: ModelContainer.schema,
-                                               configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+            let container = try ModelContainer(
+                for: ModelContainer.schema,
+                configurations: ModelConfiguration(isStoredInMemoryOnly: true))
             
             let context = container.mainContext
             let accounts = accountNameExamples.map {
@@ -129,14 +120,31 @@ class DataController {
                 closingCycleDay: 3,
                 dueDay: 10)
             context.insert(card)
+            try! container.mainContext.save()
             
-            createRandomTransaction(using: container, operation: .installments(card: card, numberOfInstallments: 7, value: 1999))
-            createRandomTransaction(using: container, operation: .transferIn(account: accounts.randomElement()!, value: 1999))
-            createRandomTransaction(using: container, operation: .installments(card: card, numberOfInstallments: 2, value: 1999))
-            createRandomTransaction(using: container, operation: .transferIn(account: accounts.randomElement()!, value: 1999))
-            createRandomTransaction(using: container, operation: .installments(card: card, numberOfInstallments: 1, value: 1999))
-            createRandomTransaction(using: container, operation: .transferIn(account: accounts.randomElement()!, value: 1999))
-            createRandomTransaction(using: container, operation: .transferOut(account: accounts.randomElement()!, value: 1999))
+            createRandomTransaction(
+                using: container,
+                operation: .installments(card: card, numberOfInstallments: 7,value: 199.9))
+            createRandomTransaction(
+                using: container,
+                operation: .transferIn(account: accounts.randomElement()!,value: 19.99))
+            createRandomTransaction(
+                using: container,
+                operation: .installments(card: card, numberOfInstallments: 2,value: 1.999))
+            createRandomTransaction(
+                using: container,
+                operation: .transferIn(account: accounts.randomElement()!,value: 1999))
+            createRandomTransaction(
+                using: container,
+                operation: .installments(card: card, numberOfInstallments: 1,value: 1999))
+            createRandomTransaction(
+                using: container,
+                operation: .transferIn(account: accounts.randomElement()!,value: 19.99))
+            createRandomTransaction(
+                using: container,
+                operation: .transferOut(account: accounts.randomElement()!,value: 1999))
+            
+            try container.mainContext.save()
             
             return container
         } catch {
