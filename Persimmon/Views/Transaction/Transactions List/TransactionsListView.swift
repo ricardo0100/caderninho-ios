@@ -17,6 +17,8 @@ struct TransactionsListView: View {
                         endDate: $viewModel.filterEndDate)
                     .padding(.top)
                 }
+                .listRowInsets(EdgeInsets())
+                
                 FilteredTransactionsListView(
                     startDate: viewModel.filterStartDate,
                     endDate: viewModel.filterEndDate,

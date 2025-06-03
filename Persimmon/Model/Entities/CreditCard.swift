@@ -35,10 +35,14 @@ class CreditCard: ObservableObject {
     }
     
     var currentBill: Bill? {
-        let nextMonthDate = Date().dateAddingMonths(1)
-        let month = nextMonthDate.month
-        let year = nextMonthDate.year
-        return bills.first { $0.dueYear == year && $0.dueMonth == month } ?? bills.sorted().last { $0.payedDate == nil }
+        let today = Date().lastSecondOfDay()
+        
+        let billDate = closingCycleDay <= today.day ? today : Date().dateAddingMonths(1)
+        let month = billDate.month
+        let year = billDate.year
+        
+        return bills.first { $0.dueYear == year && $0.dueMonth == month } ??
+            bills.sorted().last { $0.payedDate == nil }
     }
     
     @Transient var totalDebit: Double {

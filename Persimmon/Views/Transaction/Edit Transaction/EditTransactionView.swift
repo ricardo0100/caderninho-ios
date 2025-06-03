@@ -100,7 +100,7 @@ struct EditTransactionView: View {
                 focusedField = nil
             }), isEnabled: focusedField != nil)
             .confirmationDialog("Delete?", isPresented: $viewModel.showDeleteAlert) {
-                Button("Delete") {
+                Button("Delete", role: .destructive) {
                     viewModel.didConfirmDelete()
                 }.tint(.red)
                 Button("Cancel") {

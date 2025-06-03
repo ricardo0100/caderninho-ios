@@ -8,13 +8,13 @@ struct ContainerView: View {
                 .tabItem {
                     Label("Transactions", systemImage: "book.pages")
                 }
+            CategoriesListView()
+                .tabItem {
+                    Label("Categories", systemImage: "chart.pie")
+                }
             AccountsAndCardsListView()
                 .tabItem {
                     Label("Accounts and Cards", systemImage: "creditcard")
-                }
-            CategoriesListView()
-                .tabItem {
-                    Label("Categories", systemImage: "briefcase")
                 }
         }
     }

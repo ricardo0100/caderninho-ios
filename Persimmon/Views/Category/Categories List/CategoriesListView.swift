@@ -59,7 +59,7 @@ struct CategoriesListView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigation) {
-                    NavigationToolbarView(imageName: "briefcase", title: "Categories")
+                    NavigationToolbarView(imageName: "chart.pie", title: "Categories")
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button(action: viewModel.didTapAdd) {

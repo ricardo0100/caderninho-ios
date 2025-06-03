@@ -80,7 +80,7 @@ struct EditAccountView: View {
                 NiceColorPicker(selected: $niceColor).padding()
             }
             .confirmationDialog("Delete?", isPresented: $showDeleteAlert, actions: {
-                Button("Delete") {
+                Button("Delete", role: .destructive) {
                     guard let account else { return }
                     modelContext.delete(account)
                     try? modelContext.save()

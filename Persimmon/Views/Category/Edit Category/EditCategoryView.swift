@@ -38,7 +38,6 @@ struct EditCategoryView: View {
                 LabeledView(labelText: "Icon") {
                     if let icon = niceIcon {
                         Image(systemName: icon.rawValue)
-                            .symbolRenderingMode(.multicolor)
                             .foregroundStyle(niceColor.color)
                     } else {
                         Text("Select Icon")
@@ -74,7 +73,7 @@ struct EditCategoryView: View {
                 }
             }
             .confirmationDialog("Delete?", isPresented: $showDeleteAlert, actions: {
-                Button("Delete") {
+                Button("Delete", role: .destructive) {
                     guard let category else { return }
                     modelContext.delete(category)
                     try? modelContext.save()

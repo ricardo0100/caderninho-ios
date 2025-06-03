@@ -116,11 +116,14 @@ extension EditTransactionView {
         }
         
         func didConfirmDelete() {
+            shouldDismiss = true
             guard let transaction = transaction else { return }
             let context = modelContainer.mainContext
+            let installments = transaction.installments
+            transaction.installments = []
+            installments.forEach { context.delete($0) }
             context.delete(transaction)
-            try? context.save()
-            shouldDismiss = true
+            try! context.save()
         }
         
         func didTapSave() {
