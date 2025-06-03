@@ -44,8 +44,7 @@ struct CategoriesListView: View {
                 Section {
                     ForEach(viewModel.items.sorted { $0.total > $1.total }) { item in
                         NavigationLink {
-                            CategoryDetails()
-                                .environmentObject(item.category)
+                            CategoryDetailsView(category: item.category)
                         } label: {
                             CategoryCell(category: item.category,
                                          total: item.total.toCurrency(with: viewModel.currency))

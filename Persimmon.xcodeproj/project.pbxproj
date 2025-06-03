@@ -76,13 +76,14 @@
 		CF7A80492A0DAC580067F5A8 /* CategoriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A80482A0DAC580067F5A8 /* CategoriesListView.swift */; };
 		CF7A804F2A0DBAE20067F5A8 /* ImageIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A804E2A0DBAE20067F5A8 /* ImageIconView.swift */; };
 		CF7AF7662DEC9EAA00A0A7EC /* CategoriesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7AF7652DEC9EA300A0A7EC /* CategoriesListViewModel.swift */; };
+		CF7AF76A2DEF1E5A00A0A7EC /* CategoryDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7AF7692DEF1E5400A0A7EC /* CategoryDetailsViewModel.swift */; };
 		CF8104522C037BE4009599B8 /* ProcessInfo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8104512C037BE4009599B8 /* ProcessInfo+Extension.swift */; };
 		CF82EC652D982D06002F875A /* TransactionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF82EC642D982D01002F875A /* TransactionsListViewModel.swift */; };
 		CF8CF26D2D20CE840008A0F3 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B3522BACEBC500E8E050 /* Double+Extension.swift */; };
 		CF95BC162C566EED00C8C1CE /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC152C566EE900C8C1CE /* Category.swift */; };
 		CF95BC1A2C5675DE00C8C1CE /* NiceIconPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC192C5675DE00C8C1CE /* NiceIconPicker.swift */; };
 		CF95BC1C2C57C55800C8C1CE /* CategoryCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC1B2C57C54D00C8C1CE /* CategoryCellView.swift */; };
-		CF95BC1F2C58188600C8C1CE /* CategoryDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC1E2C58188600C8C1CE /* CategoryDetails.swift */; };
+		CF95BC1F2C58188600C8C1CE /* CategoryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC1E2C58188600C8C1CE /* CategoryDetailsView.swift */; };
 		CF95BC222C581C1200C8C1CE /* SelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF95BC212C581C0C00C8C1CE /* SelectCategoryView.swift */; };
 		CF9D2A722A0996800003DC39 /* NiceColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9D2A712A09967F0003DC39 /* NiceColorPicker.swift */; };
 		CF9DA59F2D170B270061056F /* BarsGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9DA59E2D170B180061056F /* BarsGraphView.swift */; };
@@ -225,12 +226,13 @@
 		CF7A80482A0DAC580067F5A8 /* CategoriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListView.swift; sourceTree = "<group>"; };
 		CF7A804E2A0DBAE20067F5A8 /* ImageIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIconView.swift; sourceTree = "<group>"; };
 		CF7AF7652DEC9EA300A0A7EC /* CategoriesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListViewModel.swift; sourceTree = "<group>"; };
+		CF7AF7692DEF1E5400A0A7EC /* CategoryDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailsViewModel.swift; sourceTree = "<group>"; };
 		CF8104512C037BE4009599B8 /* ProcessInfo+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+Extension.swift"; sourceTree = "<group>"; };
 		CF82EC642D982D01002F875A /* TransactionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListViewModel.swift; sourceTree = "<group>"; };
 		CF95BC152C566EE900C8C1CE /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		CF95BC192C5675DE00C8C1CE /* NiceIconPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiceIconPicker.swift; sourceTree = "<group>"; };
 		CF95BC1B2C57C54D00C8C1CE /* CategoryCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellView.swift; sourceTree = "<group>"; };
-		CF95BC1E2C58188600C8C1CE /* CategoryDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetails.swift; sourceTree = "<group>"; };
+		CF95BC1E2C58188600C8C1CE /* CategoryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailsView.swift; sourceTree = "<group>"; };
 		CF95BC212C581C0C00C8C1CE /* SelectCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryView.swift; sourceTree = "<group>"; };
 		CF9D2A712A09967F0003DC39 /* NiceColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiceColorPicker.swift; sourceTree = "<group>"; };
 		CF9DA59E2D170B180061056F /* BarsGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarsGraphView.swift; sourceTree = "<group>"; };
@@ -550,7 +552,8 @@
 		CF95BC1D2C58187100C8C1CE /* Category Details */ = {
 			isa = PBXGroup;
 			children = (
-				CF95BC1E2C58188600C8C1CE /* CategoryDetails.swift */,
+				CF7AF7692DEF1E5400A0A7EC /* CategoryDetailsViewModel.swift */,
+				CF95BC1E2C58188600C8C1CE /* CategoryDetailsView.swift */,
 			);
 			path = "Category Details";
 			sourceTree = "<group>";
@@ -893,7 +896,7 @@
 				CF44BE332A0FB55A0006019F /* Spacing.swift in Sources */,
 				CFD3ED5D2DC5920B0029AC2F /* CreditCard.swift in Sources */,
 				CF72A07F2BB9FB9900E0FDB1 /* CurrencyTextField.swift in Sources */,
-				CF95BC1F2C58188600C8C1CE /* CategoryDetails.swift in Sources */,
+				CF95BC1F2C58188600C8C1CE /* CategoryDetailsView.swift in Sources */,
 				CF7A80492A0DAC580067F5A8 /* CategoriesListView.swift in Sources */,
 				CF2CB0C02A06FD9700CBA434 /* Color+Extension.swift in Sources */,
 				CF2CB0A52A06F8D600CBA434 /* ModelContainer+Extension.swift in Sources */,
@@ -912,6 +915,7 @@
 				CFD3ED6F2DC986D90029AC2F /* InstallmentCellView.swift in Sources */,
 				CF95BC222C581C1200C8C1CE /* SelectCategoryView.swift in Sources */,
 				CF9DA59F2D170B270061056F /* BarsGraphView.swift in Sources */,
+				CF7AF76A2DEF1E5A00A0A7EC /* CategoryDetailsViewModel.swift in Sources */,
 				CF2DA21F2DE364DA00C91228 /* NewTransactionView.swift in Sources */,
 				CF82EC652D982D06002F875A /* TransactionsListViewModel.swift in Sources */,
 				CF9DA5AF2D17B0120061056F /* Installment.swift in Sources */,

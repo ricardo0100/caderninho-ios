@@ -549,6 +549,9 @@
         }
       }
     },
+    "Last 7 days" : {
+
+    },
     "Last 30 days" : {
       "localizations" : {
         "pt-BR" : {
@@ -580,6 +583,7 @@
       }
     },
     "Last week" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
@@ -630,6 +634,7 @@
       }
     },
     "No transactions yet!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {

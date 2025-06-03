@@ -9,7 +9,7 @@ import SwiftUI
 
 enum FilterType: CaseIterable {
     case last30Days
-    case lastWeek
+    case last7Days
     case today
     case yesterday
     case thisMonth
@@ -21,8 +21,8 @@ enum FilterType: CaseIterable {
         switch self {
         case .last30Days:
             return "Last 30 days"
-        case .lastWeek:
-            return "Last week"
+        case .last7Days:
+            return "Last 7 days"
         case .today:
             return "Today"
         case .yesterday:
@@ -42,7 +42,7 @@ enum FilterType: CaseIterable {
         switch self {
         case .last30Days:
             return Date.getLast30DaysBounds()
-        case .lastWeek:
+        case .last7Days:
             return Date.getLast7DaysBounds()
         case .today:
             return Date.getTodayBounds()
