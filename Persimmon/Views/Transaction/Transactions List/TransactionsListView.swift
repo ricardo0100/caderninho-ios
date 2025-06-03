@@ -14,16 +14,14 @@ struct TransactionsListView: View {
                 } footer: {
                     PeriodFilterView(
                         startDate: $viewModel.filterStartDate,
-                        endDate: $viewModel.filterEndDate,
-                        filterType: $viewModel.filterType
-                    ).padding(.top)
+                        endDate: $viewModel.filterEndDate)
+                    .padding(.top)
                 }
                 FilteredTransactionsListView(
                     startDate: viewModel.filterStartDate,
                     endDate: viewModel.filterEndDate,
                     searchText: viewModel.debouncedSearchText,
-                    selectedAccountOrCardId: viewModel.selectedId
-                )
+                    selectedAccountOrCardId: viewModel.selectedId)
             }
             .searchable(text: $viewModel.searchText)
             .toolbar {

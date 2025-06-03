@@ -22,8 +22,7 @@ struct SelectCategoryView: View {
             }
         } label: {
             if let category = selected {
-                CategoryCell()
-                    .environmentObject(category)
+                CategoryCell(category: category, total: nil)
                     .tint(.brand)
             } else {
                 Text("Select a category")

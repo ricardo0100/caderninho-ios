@@ -10,8 +10,7 @@ struct AccountDetailsView: View {
             Section {
                 PeriodFilterView(
                     startDate: $viewModel.startDate,
-                    endDate: $viewModel.endDate,
-                    filterType: $viewModel.filterType)
+                    endDate: $viewModel.endDate)
             }
             FilteredTransactionsListView(startDate: viewModel.startDate,
                                          endDate: viewModel.endDate,

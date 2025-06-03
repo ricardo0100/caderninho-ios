@@ -2,25 +2,60 @@ import SwiftUI
 import SwiftData
 
 struct CategoriesListView: View {
-    @Query(sort: [SortDescriptor(\Category.name)])
-    var categories: [Category]
+    @Environment(\.modelContext) var modelContext
     
-    @State var isShowindEdit: Bool = false
+    @ObservedObject var viewModel = ViewModel()
     
     var body: some View {
         NavigationStack {
             List {
                 Section {
-                    ForEach(categories) { category in
-                        NavigationLink {
-                            CategoryDetails().environmentObject(category)
+                    if !viewModel.graphItems.isEmpty {
+                        PizzaGraphView(values: viewModel.graphItems)
+                            .padding(.spacingMedium)
+                            .frame(height: 150)
+                    } else {
+                        Text("Nothing for this period")
+                            .foregroundStyle(.secondary)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 150)
+                    }
+                } header: {
+                    HStack {
+                        PeriodFilterView(
+                            startDate: $viewModel.startDate,
+                            endDate: $viewModel.endDate)
+                        Spacer()
+                        Menu {
+                            ForEach(viewModel.currencyOptions, id: \.self) { currency in
+                                Button(currency) {
+                                    viewModel.currency = currency
+                                }
+                            }
                         } label: {
-                            CategoryCell().environmentObject(category)
+                            Text(viewModel.currency)
+                        }
+
+                    }.padding(.vertical)
+                }
+                .listRowInsets(EdgeInsets())
+                .textCase(.none)
+                
+                Section {
+                    ForEach(viewModel.items.sorted { $0.total > $1.total }) { item in
+                        NavigationLink {
+                            CategoryDetails()
+                                .environmentObject(item.category)
+                        } label: {
+                            CategoryCell(category: item.category,
+                                         total: item.total.toCurrency(with: viewModel.currency))
                         }
                     }
+                } header: {
+                    Text("Expenses for the selected period")
                 }
             }
-            .sheet(isPresented: $isShowindEdit) {
+            .sheet(isPresented: $viewModel.isShowindEdit) {
                 EditCategoryView()
             }
             .toolbar {
@@ -28,17 +63,20 @@ struct CategoriesListView: View {
                     NavigationToolbarView(imageName: "briefcase", title: "Categories")
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(action: didTapAdd) {
+                    Button(action: viewModel.didTapAdd) {
                         Image(systemName: "plus")
                             .foregroundColor(.brand)
                     }
                 }
             }
         }
-    }
-    
-    func didTapAdd() {
-        isShowindEdit = true
+        .onChange(of: [viewModel.startDate, viewModel.endDate]) {
+            viewModel.didChangeDateRange(with: modelContext)
+        }
+        .onChange(of: viewModel.currency) {
+            viewModel.didChangeCurrency(with: modelContext)
+        }
+        .onAppear { viewModel.didAppear(with: modelContext) }
     }
 }
 

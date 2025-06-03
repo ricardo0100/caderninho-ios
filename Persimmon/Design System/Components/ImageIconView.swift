@@ -15,7 +15,6 @@ struct ImageIconView: View {
     var body: some View {
         image
             .resizable()
-            .symbolRenderingMode(.multicolor)
             .foregroundStyle(color)
             .aspectRatio(contentMode: .fit)
             .frame(width: size, height: size)

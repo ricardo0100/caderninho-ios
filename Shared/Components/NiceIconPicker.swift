@@ -82,7 +82,6 @@ struct NiceIconPicker: View {
                         }
                         Image(systemName: icon.rawValue)
                             .resizable()
-                            .renderingMode(.original)
                             .aspectRatio(contentMode: .fit)
                             .padding()
                     }

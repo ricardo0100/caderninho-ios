@@ -10,7 +10,13 @@ import SwiftUI
 struct PeriodFilterView: View {
     @Binding var startDate: Date
     @Binding var endDate: Date
-    @Binding var filterType: FilterType
+    @State var filterType: FilterType = .last30Days
+    
+    func updateDateRange() {
+        let range = filterType.dateRange
+        startDate = range.start
+        endDate = range.end
+    }
     
     var body: some View {
         HStack {
@@ -19,6 +25,9 @@ struct PeriodFilterView: View {
                     Button {
                         withAnimation {
                             self.filterType = filterType
+                            if filterType != .custom {
+                                updateDateRange()
+                            }
                         }
                     } label: {
                         HStack {
@@ -33,7 +42,7 @@ struct PeriodFilterView: View {
                 Image(systemName: "calendar.circle")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 24, height: 24)
+                    .frame(width: 28, height: 28)
                     .foregroundStyle(Color(.systemBlue))
             }
             switch filterType {
@@ -46,11 +55,13 @@ struct PeriodFilterView: View {
                                selection: $endDate,
                                displayedComponents: .date).labelsHidden()
                 }.frame(height: 32)
-            case .all:
-                Text("Showing all transactions")
             default:
-                Text("\(startDate.numericDate) - \(endDate.numericDate)")
+                Text(filterType.title)
+                    .font(.headline)
             }
+        }
+        .onAppear {
+            updateDateRange()
         }
     }
 }
@@ -58,7 +69,6 @@ struct PeriodFilterView: View {
 #Preview {
     @Previewable @State var startDate: Date = Date()
     @Previewable @State var endDate: Date = Date()
-    @Previewable @State var filterType: FilterType = .all
     
-    PeriodFilterView(startDate: $startDate, endDate: $endDate, filterType: $filterType)
+    PeriodFilterView(startDate: $startDate, endDate: $endDate)
 }

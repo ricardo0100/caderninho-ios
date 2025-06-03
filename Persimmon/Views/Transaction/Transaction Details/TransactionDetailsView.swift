@@ -49,8 +49,8 @@ struct TransactionDetailsView: View {
                 
                 if let category = transaction.category {
                     LabeledView(labelText: "Category") {
-                        CategoryCell()
-                            .environmentObject(category)
+                        //TODO: Do not use cell
+                        CategoryCell(category: category, total: nil)
                     }
                 }
                 

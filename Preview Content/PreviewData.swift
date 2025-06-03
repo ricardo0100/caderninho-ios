@@ -143,6 +143,15 @@ class DataController {
             createRandomTransaction(
                 using: container,
                 operation: .transferOut(account: accounts.randomElement()!,value: 1999))
+            createRandomTransaction(
+                using: container,
+                operation: .transferOut(account: accounts.randomElement()!,value: 2999))
+            createRandomTransaction(
+                using: container,
+                operation: .transferOut(account: accounts.randomElement()!,value: 199.39))
+            createRandomTransaction(
+                using: container,
+                operation: .transferOut(account: accounts.randomElement()!,value: 59.99))
             
             try container.mainContext.save()
             

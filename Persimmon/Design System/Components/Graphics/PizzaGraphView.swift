@@ -29,7 +29,7 @@ struct PizzaGraphView: View {
     }
     
     var body: some View {
-        VStack {
+        HStack {
             ZStack {
                 ForEach(slices, id: \.self) { slice in
                     PizzaSlice(
@@ -38,6 +38,20 @@ struct PizzaGraphView: View {
                     ).foregroundColor(slice.color)
                 }
             }.clipped()
+            ScrollView {
+                VStack {
+                    ForEach(values.sorted(by: { $0.value > $1.value })) { value in
+                        HStack {
+                            Circle()
+                                .fill(value.color)
+                                .frame(width: 8, height: 8)
+                            Text(value.title)
+                                .font(.caption)
+                            Spacer()
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -64,8 +78,8 @@ fileprivate struct PizzaSlice: Shape {
 
 #Preview {
     PizzaGraphView(values: [
-        .init(title: "Red", value: 1, color: .red),
-        .init(title: "Blue", value: 1.3, color: .blue),
-        .init(title: "Yellow", value: 1, color: .yellow),
+        .init(title: "red", value: 1, color: .red),
+        .init(title: "blue", value: 1.3, color: .blue),
+        .init(title: "yellow", value: 1, color: .yellow),
     ])
 }

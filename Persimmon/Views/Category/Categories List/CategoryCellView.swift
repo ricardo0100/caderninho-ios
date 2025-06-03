@@ -1,26 +1,29 @@
 import SwiftUI
 
 struct CategoryCell: View {
-    @EnvironmentObject var category: Category
+    let category: Category
+    let total: String?
     
     var body: some View {
         HStack {
             Text(category.name)
                 .font(.headline)
             Spacer()
+            if let total = total {
+                Text(total)
+                    .font(.caption)
+            }
             CategoryIcon(name: category.name,
                          color: category.color,
                          icon: category.icon,
-                         size: 32)
+                         size: 24)
         }
     }
 }
 
-
-
 #Preview {
     List {
-        CategoryCell().environmentObject(DataController.createRandomCategory())
-        CategoryCell().environmentObject(DataController.createRandomCategory(withIcon: true))
+        CategoryCell(category: DataController.createRandomCategory(), total: "R$ 123,45")
+        CategoryCell(category: DataController.createRandomCategory(withIcon: true), total: "R$ 313,55")
     }
 }

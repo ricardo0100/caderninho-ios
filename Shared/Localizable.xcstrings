@@ -7,17 +7,6 @@
     "%@" : {
       "shouldTranslate" : false
     },
-    "%@ - %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ - %2$@"
-          }
-        }
-      },
-      "shouldTranslate" : false
-    },
     "%@ %@" : {
       "localizations" : {
         "en" : {
@@ -154,6 +143,7 @@
       }
     },
     "Bill value:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
@@ -244,6 +234,7 @@
       }
     },
     "Closing date:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
@@ -252,6 +243,9 @@
           }
         }
       }
+    },
+    "Closing:" : {
+
     },
     "Closing: 03/05" : {
       "shouldTranslate" : false
@@ -267,6 +261,7 @@
       }
     },
     "Configuration" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
@@ -277,6 +272,7 @@
       }
     },
     "Configurations" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
@@ -285,18 +281,6 @@
           }
         }
       }
-    },
-    "Create Example Account" : {
-      "shouldTranslate" : false
-    },
-    "Create Example Card" : {
-      "shouldTranslate" : false
-    },
-    "Create Example Category" : {
-      "shouldTranslate" : false
-    },
-    "Create Example Transaction" : {
-      "shouldTranslate" : false
     },
     "Credit Card" : {
       "localizations" : {
@@ -378,10 +362,8 @@
         }
       }
     },
-    "Debug" : {
-      "shouldTranslate" : false
-    },
     "Default currency" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
@@ -471,6 +453,9 @@
         }
       }
     },
+    "Due:" : {
+
+    },
     "Due: 10/05" : {
       "shouldTranslate" : false
     },
@@ -504,7 +489,11 @@
         }
       }
     },
+    "Expenses for the selected period" : {
+
+    },
     "Home configuration" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
@@ -660,6 +649,9 @@
         }
       }
     },
+    "Nothing for this period" : {
+
+    },
     "Number of installments" : {
       "localizations" : {
         "pt-BR" : {
@@ -669,6 +661,9 @@
           }
         }
       }
+    },
+    "Paid in %@" : {
+
     },
     "Pay in installments" : {
       "localizations" : {
@@ -691,6 +686,7 @@
       }
     },
     "Payed in %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
@@ -709,9 +705,6 @@
           }
         }
       }
-    },
-    "Reset Database" : {
-      "shouldTranslate" : false
     },
     "Save" : {
       "localizations" : {
@@ -823,7 +816,11 @@
         }
       }
     },
+    "Set payed" : {
+
+    },
     "Set Payed" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
@@ -834,6 +831,7 @@
       }
     },
     "Showing all transactions" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
@@ -884,6 +882,7 @@
       }
     },
     "Total: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {

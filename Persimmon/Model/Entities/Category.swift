@@ -11,13 +11,6 @@ class Category: ObservableObject {
     @Relationship(deleteRule: .nullify)
     var transactions: [Transaction] = []
     
-    func expensesSum(for currency: String) -> Double {
-        transactions
-            .filter { $0.value > .zero && $0.currency == currency }
-            .map { $0.value }
-            .reduce(.zero, +)
-    }
-    
     init(id: UUID, name: String, color: String, icon: String?) {
         self.id = id
         self.name = name

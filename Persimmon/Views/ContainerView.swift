@@ -16,12 +16,6 @@ struct ContainerView: View {
                 .tabItem {
                     Label("Categories", systemImage: "briefcase")
                 }
-            #if DEBUG
-            ConfigurationsView()
-                .tabItem {
-                    Label("Configuration", systemImage: "gear")
-                }
-            #endif
         }
     }
 }

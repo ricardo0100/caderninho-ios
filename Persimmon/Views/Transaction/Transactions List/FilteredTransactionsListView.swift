@@ -11,13 +11,9 @@ import SwiftData
 struct FilteredTransactionsListView: View {
     @Query var transactions: [Transaction]
     
-    init(startDate: Date, endDate: Date, searchText: String, selectedAccountOrCardId: UUID?, billId: UUID? = nil) {
+    init(startDate: Date, endDate: Date, searchText: String, selectedAccountOrCardId: UUID?) {
         let containsInstallmentsWithCardId = #Expression<Transaction, UUID, Bool> { transaction, id in
             !transaction.installments.filter { $0.bill.card.id == id }.isEmpty
-        }
-        
-        let containsInstallmentsInBill = #Expression<Transaction, UUID, Bool> { transaction, id in
-            !transaction.installments.filter { $0.bill.id == id }.isEmpty
         }
         
         _transactions = Query(filter: #Predicate<Transaction> { transaction in
@@ -26,8 +22,7 @@ struct FilteredTransactionsListView: View {
             (searchText.isEmpty || transaction.name.localizedStandardContains(searchText)) &&
             (selectedAccountOrCardId == nil ||
              transaction.account?.id == selectedAccountOrCardId ||
-             containsInstallmentsWithCardId.evaluate(transaction, selectedAccountOrCardId!)) &&
-            (billId == nil || containsInstallmentsInBill.evaluate(transaction, billId!))
+             containsInstallmentsWithCardId.evaluate(transaction, selectedAccountOrCardId!))
         }, sort: \.date, order: .reverse)
     }
     
@@ -37,7 +32,6 @@ struct FilteredTransactionsListView: View {
         }
     }
     
-    // Sorted section dates (newest first)
     private var sectionDates: [Date] {
         groupedItems.keys.sorted(by: >)
     }

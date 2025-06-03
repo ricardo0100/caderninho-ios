@@ -75,6 +75,7 @@
 		CF7A80462A0DA8CC0067F5A8 /* PizzaGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2522A08471100586164 /* PizzaGraphView.swift */; };
 		CF7A80492A0DAC580067F5A8 /* CategoriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A80482A0DAC580067F5A8 /* CategoriesListView.swift */; };
 		CF7A804F2A0DBAE20067F5A8 /* ImageIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A804E2A0DBAE20067F5A8 /* ImageIconView.swift */; };
+		CF7AF7662DEC9EAA00A0A7EC /* CategoriesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7AF7652DEC9EA300A0A7EC /* CategoriesListViewModel.swift */; };
 		CF8104522C037BE4009599B8 /* ProcessInfo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8104512C037BE4009599B8 /* ProcessInfo+Extension.swift */; };
 		CF82EC652D982D06002F875A /* TransactionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF82EC642D982D01002F875A /* TransactionsListViewModel.swift */; };
 		CF8CF26D2D20CE840008A0F3 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B3522BACEBC500E8E050 /* Double+Extension.swift */; };
@@ -124,7 +125,6 @@
 		CFE563522C34C95100F8EA72 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE563512C34C94700F8EA72 /* PreviewData.swift */; };
 		CFE563552C3F433B00F8EA72 /* SelectLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE563542C3F433400F8EA72 /* SelectLocationViewModel.swift */; };
 		CFE563592C3F4F9B00F8EA72 /* CLLocationCoordinate2D+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE563582C3F4F9500F8EA72 /* CLLocationCoordinate2D+Extension.swift */; };
-		CFE61F0A2CD6E887002B1AA7 /* ConfigurationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE61F092CD6E87D002B1AA7 /* ConfigurationsView.swift */; };
 		CFE6D7BD2BA9277500E76AB8 /* LabeledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE6D7BC2BA9277500E76AB8 /* LabeledView.swift */; };
 		CFE6D7BF2BA9B4C000E76AB8 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE6D7BE2BA9B4C000E76AB8 /* Transaction.swift */; };
 		CFE6D7C02BA9CAE800E76AB8 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF44BE322A0FB55A0006019F /* Spacing.swift */; };
@@ -224,6 +224,7 @@
 		CF72A07E2BB9FB9900E0FDB1 /* CurrencyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextField.swift; sourceTree = "<group>"; };
 		CF7A80482A0DAC580067F5A8 /* CategoriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListView.swift; sourceTree = "<group>"; };
 		CF7A804E2A0DBAE20067F5A8 /* ImageIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIconView.swift; sourceTree = "<group>"; };
+		CF7AF7652DEC9EA300A0A7EC /* CategoriesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListViewModel.swift; sourceTree = "<group>"; };
 		CF8104512C037BE4009599B8 /* ProcessInfo+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+Extension.swift"; sourceTree = "<group>"; };
 		CF82EC642D982D01002F875A /* TransactionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListViewModel.swift; sourceTree = "<group>"; };
 		CF95BC152C566EE900C8C1CE /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -273,7 +274,6 @@
 		CFE563512C34C94700F8EA72 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		CFE563542C3F433400F8EA72 /* SelectLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewModel.swift; sourceTree = "<group>"; };
 		CFE563582C3F4F9500F8EA72 /* CLLocationCoordinate2D+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extension.swift"; sourceTree = "<group>"; };
-		CFE61F092CD6E87D002B1AA7 /* ConfigurationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationsView.swift; sourceTree = "<group>"; };
 		CFE6D7BC2BA9277500E76AB8 /* LabeledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledView.swift; sourceTree = "<group>"; };
 		CFE6D7BE2BA9B4C000E76AB8 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		CFF292A52A13B8FE00C1A66A /* EditCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCategoryView.swift; sourceTree = "<group>"; };
@@ -325,12 +325,10 @@
 			isa = PBXGroup;
 			children = (
 				CF2DA21C2DE33A3500C91228 /* AccountCardHeader.swift */,
-				CF2DA21A2DE3385C00C91228 /* PeriodFilterView.swift */,
-				CF2DA2152DE238C900C91228 /* FilteredTransactionsListView.swift */,
-				CFD3ED3C2DBE568A0029AC2F /* FilterType.swift */,
-				CF82EC642D982D01002F875A /* TransactionsListViewModel.swift */,
 				CF15B3602BAE5BD600E8E050 /* TransactionCellView.swift */,
+				CF82EC642D982D01002F875A /* TransactionsListViewModel.swift */,
 				CFBEE23D2A07F3A000586164 /* TransactionsListView.swift */,
+				CF2DA2152DE238C900C91228 /* FilteredTransactionsListView.swift */,
 			);
 			path = "Transactions List";
 			sourceTree = "<group>";
@@ -522,11 +520,21 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
+		CF7AF7642DEC9C1200A0A7EC /* PeriodFilter */ = {
+			isa = PBXGroup;
+			children = (
+				CF2DA21A2DE3385C00C91228 /* PeriodFilterView.swift */,
+				CFD3ED3C2DBE568A0029AC2F /* FilterType.swift */,
+			);
+			path = PeriodFilter;
+			sourceTree = "<group>";
+		};
 		CF95BC172C56705A00C8C1CE /* Categories List */ = {
 			isa = PBXGroup;
 			children = (
-				CF95BC1B2C57C54D00C8C1CE /* CategoryCellView.swift */,
+				CF7AF7652DEC9EA300A0A7EC /* CategoriesListViewModel.swift */,
 				CF7A80482A0DAC580067F5A8 /* CategoriesListView.swift */,
+				CF95BC1B2C57C54D00C8C1CE /* CategoryCellView.swift */,
 			);
 			path = "Categories List";
 			sourceTree = "<group>";
@@ -613,6 +621,7 @@
 		CFBEE24B2A081DFC00586164 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				CF7AF7642DEC9C1200A0A7EC /* PeriodFilter */,
 				CF9DA59A2D170AB70061056F /* Graphics */,
 				CF2DA1FF2DDFCFE200C91228 /* CategoryIcon.swift */,
 				CFB7F56A2BC0228B009956E9 /* SelectDateView.swift */,
@@ -632,7 +641,6 @@
 				CFB7F5782BC0AE17009956E9 /* Location */,
 				CF2CB0B52A06FBCC00CBA434 /* Transaction */,
 				CFBEE23F2A07F98E00586164 /* Account and CreditCard */,
-				CFE61F082CD6E872002B1AA7 /* Configurations */,
 				CF7A80472A0DAC480067F5A8 /* Category */,
 			);
 			path = Views;
@@ -707,14 +715,6 @@
 				CFB7F5602BBEBFE6009956E9 /* SelectOperationView.swift */,
 			);
 			path = "Edit Transaction";
-			sourceTree = "<group>";
-		};
-		CFE61F082CD6E872002B1AA7 /* Configurations */ = {
-			isa = PBXGroup;
-			children = (
-				CFE61F092CD6E87D002B1AA7 /* ConfigurationsView.swift */,
-			);
-			path = Configurations;
 			sourceTree = "<group>";
 		};
 		CFE6D7B82BA62D0400E76AB8 /* Accounts List */ = {
@@ -885,6 +885,7 @@
 			files = (
 				CFD3ED3D2DBE568F0029AC2F /* FilterType.swift in Sources */,
 				CFBEE24A2A081B7100586164 /* LettersIconView.swift in Sources */,
+				CF7AF7662DEC9EAA00A0A7EC /* CategoriesListViewModel.swift in Sources */,
 				CF2CB0BB2A06FC3E00CBA434 /* ContainerView.swift in Sources */,
 				CF2DA2242DE6187D00C91228 /* NewTransactionSelectAccountView.swift in Sources */,
 				CF2DA1F82DDF3BDD00C91228 /* TransactionData.swift in Sources */,
@@ -936,7 +937,6 @@
 				CFB7F56E2BC02A47009956E9 /* Date+Extension.swift in Sources */,
 				CFDC219E2BAF29AF00295432 /* SelectAccountView.swift in Sources */,
 				CF2DA20D2DE1237900C91228 /* CategoryData.swift in Sources */,
-				CFE61F0A2CD6E887002B1AA7 /* ConfigurationsView.swift in Sources */,
 				CF95BC1C2C57C55800C8C1CE /* CategoryCellView.swift in Sources */,
 				CFF292A62A13B8FE00C1A66A /* EditCategoryView.swift in Sources */,
 				CFD3ED602DC7CF440029AC2F /* EditCreditCardView.swift in Sources */,

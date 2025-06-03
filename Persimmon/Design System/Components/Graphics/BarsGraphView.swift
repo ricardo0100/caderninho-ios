@@ -45,9 +45,9 @@ struct BarsGraphView: View {
 
 #Preview {
     BarsGraphView(values: [
-        .init(title: "Red", value: 2.2, color: .red),
-        .init(title: "Blue", value: 1.3, color: .blue),
-        .init(title: "Yellow", value: 1.4, color: .yellow),
-        .init(title: "Purple", value: 3, color: .purple),
+        .init(title: "red", value: 2.2, color: .red),
+        .init(title: "blue", value: 1.3, color: .blue),
+        .init(title: "yellow", value: 1.4, color: .yellow),
+        .init(title: "purple", value: 3, color: .purple),
     ]).padding()
 }

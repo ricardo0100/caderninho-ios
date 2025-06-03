@@ -13,17 +13,11 @@ extension TransactionsListView {
         @Published var filterEndDate = Date()
         @Published var searchText: String = ""
         @Published var debouncedSearchText: String = ""
-        @Published var filterType: FilterType = .last30Days {
-            didSet {
-                updateDates()
-            }
-        }
         @Published var ticketData: TicketData?
         
         private var cancellables = Set<AnyCancellable>()
         
         init() {
-            updateDates()
             $searchText
                 .debounce(for: .milliseconds(250), scheduler: RunLoop.main)
                 .sink {
@@ -41,16 +35,6 @@ extension TransactionsListView {
         }
         
         func didAppear() {
-            updateDates()
-        }
-        
-        private func updateDates() {
-            guard filterType != .custom else {
-                return
-            }
-            let range = filterType.dateRange
-            filterStartDate = range.start
-            filterEndDate = range.end
         }
     }
 }
