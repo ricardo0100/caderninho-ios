@@ -15,9 +15,9 @@ extension EditTransactionView {
     @MainActor
     public class ViewModel: ObservableObject {
         private let transaction: Transaction?
-        private let modelContainer: ModelContainer
         private let modelManager: ModelManager
-        
+        private let navigation: Navigation
+        private let context: ModelContext
         // Model vars
         @Published var name: String
         @Published var operation: Transaction.Operation {
@@ -38,15 +38,15 @@ extension EditTransactionView {
         @Published var accountError: String? = ""
         @Published var cardError: String? = ""
         @Published var showDeleteAlert = false
-        @Published var shouldDismiss: Bool = false
         @Published var isRecognizingImage: Bool = false
         @Published var showAccountField: Bool = false
         @Published var showCardField: Bool = false
         
-        init(transaction: Transaction? = nil, modelContainer: ModelContainer) {
+        init(transaction: Transaction? = nil, context: ModelContext, navigation: Navigation) {
             self.transaction = transaction
-            self.modelContainer = modelContainer
-            self.modelManager = ModelManager(context: modelContainer.mainContext)
+            self.context = context
+            self.navigation = navigation
+            self.modelManager = ModelManager(context: context)
             _name = Published(initialValue: transaction?.name ?? "")
             _account = Published(initialValue: transaction?.account)
             _card = Published(initialValue: transaction?.installments.first?.bill.card)
@@ -59,10 +59,11 @@ extension EditTransactionView {
             updateVisibleFields()
         }
         
-        init(ticketData: TicketData, modelContainer: ModelContainer) {
+        init(ticketData: TicketData, context: ModelContext) {
             self.transaction = nil
-            self.modelContainer = modelContainer
-            self.modelManager = ModelManager(context: modelContainer.mainContext)
+            self.navigation = Navigation()
+            self.context = context
+            self.modelManager = ModelManager(context: context)
             _name = Published(initialValue: "")
             _account = Published(initialValue: nil)
             _value = Published(initialValue: ticketData.value ?? 0)
@@ -104,7 +105,7 @@ extension EditTransactionView {
         }
         
         func didTapCancel() {
-            shouldDismiss = true
+            navigation.editingTransaction = nil
         }
         
         func didTapDelete() {
@@ -116,14 +117,10 @@ extension EditTransactionView {
         }
         
         func didConfirmDelete() {
-            shouldDismiss = true
             guard let transaction = transaction else { return }
-            let context = modelContainer.mainContext
-            let installments = transaction.installments
-            transaction.installments = []
-            installments.forEach { context.delete($0) }
-            context.delete(transaction)
-            try! context.save()
+            modelManager.deleteTransaction(transaction: transaction)
+            navigation.editingTransaction = nil
+            navigation.path.removeLast()
         }
         
         func didTapSave() {
@@ -151,19 +148,19 @@ extension EditTransactionView {
         }
         
         func fetchLastUsedAccount() -> Account? {
-            try? modelContainer.mainContext.fetch(FetchDescriptor<Transaction>(
+            try? context.fetch(FetchDescriptor<Transaction>(
                 sortBy: [SortDescriptor(\.date, order: .reverse)]))
             .filter { $0.account != nil }.first?.account
         }
         
         func fetchLastUsedCard() -> CreditCard? {
-            try? modelContainer.mainContext.fetch(FetchDescriptor<Transaction>(
+            try? context.fetch(FetchDescriptor<Transaction>(
                 sortBy: [SortDescriptor(\.date, order: .reverse)]))
             .filter { $0.account == nil }.first?.installments.first?.bill.card
         }
         
         func fetchLastUsedCategory() -> Category? {
-            try? modelContainer.mainContext.fetch(FetchDescriptor<Transaction>(
+            try? context.fetch(FetchDescriptor<Transaction>(
                 sortBy: [SortDescriptor(\.date, order: .reverse)])).first?.category
         }
         
@@ -186,7 +183,6 @@ extension EditTransactionView {
                     place: place
                 )
             }
-            shouldDismiss.toggle()
         }
         
         private func editOperation() -> Transaction.EditOperation {

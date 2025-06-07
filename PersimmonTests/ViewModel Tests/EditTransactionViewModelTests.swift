@@ -14,10 +14,11 @@ import SwiftData
 @Suite("Test Edit Transaction ViewModel")
 struct EditTransactionViewModelTests {
     var container: ModelContainer
+    var context: ModelContext
     
     init() throws {
         container = .createTestContainer()
-        let context = container.mainContext
+        context = container.mainContext
         context.insert(Account(id: UUID(), name: "Bank of Maya", color: "#F00FFF", icon: nil, currency: "R$"))
         context.insert(CreditCard(id: UUID(), name: "Bank of Maya", color: "#F00FFF", icon: nil, currency: "R$", closingCycleDay: 3, dueDay: 10))
         context.insert(Category(id: UUID(), name: "Food", color: "#F7F8F9", icon: "carrot"))
@@ -64,7 +65,7 @@ struct EditTransactionViewModelTests {
     @Test("Load fields from existing transaction")
     func loadTransactionFields() throws {
         let transaction = try createTransactionInContext()
-        let sut = EditTransactionView.ViewModel(transaction: transaction, modelContainer: container)
+        let sut = EditTransactionView.ViewModel(transaction: transaction, context: context)
         #expect(sut.name == "Test Name")
         #expect(sut.value == 123)
         #expect(sut.account?.name == "Bank of Maya")
@@ -76,7 +77,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Save new transaction")
     func saveNewTransaction() async throws {
-        let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
         sut.name = "Test Name"
         sut.account = getAccounts.first!
         sut.operation = .transferIn
@@ -87,7 +88,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Update existing transaction")
     func updateTransaction() async throws {
-        let sut = EditTransactionView.ViewModel(transaction: try createTransactionInContext(), modelContainer: container)
+        let sut = EditTransactionView.ViewModel(transaction: try createTransactionInContext(), context: context)
         sut.name = "Changed Name"
         sut.operation = .transferIn
         sut.didTapSave()
@@ -98,7 +99,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Show Name Error Message")
     func showNameErrorMessage() async throws {
-        let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
         sut.didTapSave()
         #expect(sut.nameError == "Mandatory field")
         #expect(getTransactions.isEmpty)
@@ -106,7 +107,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Show Account Error Message")
     func showAccountErrorMessage() async throws {
-        let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
         sut.name = "Test"
         sut.operation = .transferIn
         sut.didTapSave()
@@ -116,7 +117,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Show Card Error Message")
     func showCardErrorMessage() async throws {
-        let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
         sut.name = "Test"
         sut.operation = .installments
         sut.didTapSave()
@@ -126,7 +127,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Clear Card Error Message")
     func clearCardErrorMessage() async throws {
-        let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
         sut.name = "Test"
         sut.operation = .installments
         sut.didTapSave()
@@ -138,7 +139,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Show Account Field")
     func showAccountField() async throws {
-        let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
         sut.operation = .transferIn
         #expect(sut.showAccountField)
         #expect(!sut.showCardField)
@@ -146,7 +147,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Show Card Field")
     func showCardField() async throws {
-        let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
         sut.operation = .installments
         #expect(!sut.showAccountField)
         #expect(sut.showCardField)
@@ -155,7 +156,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Create Installments", arguments: 1...12)
     func createInstallments(_ numberOfInstallments: Int) async throws {
-        let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
         sut.name = "Test"
         sut.card = getCard
         sut.operation = .installments
@@ -172,7 +173,7 @@ struct EditTransactionViewModelTests {
     func createInstallmentsBasedOnTransactionDate() async throws {
         let transactionDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1, day: 12))!
         
-        let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
         sut.name = "Test"
         sut.card = getCard
         sut.operation = .installments
@@ -189,7 +190,7 @@ struct EditTransactionViewModelTests {
     @Test("Recreate installments after date transaction change")
     func recreateInstallmentsAfterDateTransactionChange() async throws {
         let transactionDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1, day: 12))!
-        var sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
+        var sut = EditTransactionView.ViewModel(transaction: nil, context: context)
         sut.name = "Test"
         sut.card = getCard
         sut.operation = .installments
@@ -198,7 +199,7 @@ struct EditTransactionViewModelTests {
         sut.date = transactionDate
         sut.didTapSave()
         
-        sut = EditTransactionView.ViewModel(transaction: getTransactions[0], modelContainer: container)
+        sut = EditTransactionView.ViewModel(transaction: getTransactions[0], context: context)
         
         let newDate = Calendar.current.date(from: DateComponents(year: 2000, month: 2, day: 12))!
         sut.date = newDate
@@ -212,7 +213,7 @@ struct EditTransactionViewModelTests {
     @Test("Create installments in current month if before closing date")
     func createInstallmentsInCurrentMonthIfBeforeClosingDate() async throws {
         let transactionDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1, day: 1))!
-        let sut = EditTransactionView.ViewModel(transaction: nil, modelContainer: container)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
         sut.name = "Test"
         sut.card = getCard
         sut.operation = .installments

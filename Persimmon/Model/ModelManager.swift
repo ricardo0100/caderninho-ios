@@ -48,6 +48,14 @@ struct ModelManager {
             updateWidgetInfo()
         }
     
+    func deleteTransaction(transaction: Transaction) {
+        let installments = transaction.installments
+        transaction.installments = []
+        installments.forEach { context.delete($0) }
+        context.delete(transaction)
+        try! context.save()
+    }
+    
     func fetchAccounts() throws -> [Account] {
         return try context.fetch(FetchDescriptor<Account>())
     }

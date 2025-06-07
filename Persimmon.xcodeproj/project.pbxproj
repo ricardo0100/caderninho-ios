@@ -77,6 +77,9 @@
 		CF7A804F2A0DBAE20067F5A8 /* ImageIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A804E2A0DBAE20067F5A8 /* ImageIconView.swift */; };
 		CF7AF7662DEC9EAA00A0A7EC /* CategoriesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7AF7652DEC9EA300A0A7EC /* CategoriesListViewModel.swift */; };
 		CF7AF76A2DEF1E5A00A0A7EC /* CategoryDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7AF7692DEF1E5400A0A7EC /* CategoryDetailsViewModel.swift */; };
+		CF7AF7702DF4619C00A0A7EC /* ModelContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7AF76F2DF4619500A0A7EC /* ModelContext+Extension.swift */; };
+		CF7AF7712DF4619C00A0A7EC /* ModelContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7AF76F2DF4619500A0A7EC /* ModelContext+Extension.swift */; };
+		CF7AF7732DF46CC000A0A7EC /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7AF7722DF46CBC00A0A7EC /* Navigation.swift */; };
 		CF8104522C037BE4009599B8 /* ProcessInfo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8104512C037BE4009599B8 /* ProcessInfo+Extension.swift */; };
 		CF82EC652D982D06002F875A /* TransactionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF82EC642D982D01002F875A /* TransactionsListViewModel.swift */; };
 		CF8CF26D2D20CE840008A0F3 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B3522BACEBC500E8E050 /* Double+Extension.swift */; };
@@ -227,6 +230,8 @@
 		CF7A804E2A0DBAE20067F5A8 /* ImageIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIconView.swift; sourceTree = "<group>"; };
 		CF7AF7652DEC9EA300A0A7EC /* CategoriesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListViewModel.swift; sourceTree = "<group>"; };
 		CF7AF7692DEF1E5400A0A7EC /* CategoryDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailsViewModel.swift; sourceTree = "<group>"; };
+		CF7AF76F2DF4619500A0A7EC /* ModelContext+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelContext+Extension.swift"; sourceTree = "<group>"; };
+		CF7AF7722DF46CBC00A0A7EC /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		CF8104512C037BE4009599B8 /* ProcessInfo+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+Extension.swift"; sourceTree = "<group>"; };
 		CF82EC642D982D01002F875A /* TransactionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListViewModel.swift; sourceTree = "<group>"; };
 		CF95BC152C566EE900C8C1CE /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -405,6 +410,7 @@
 		CF2CB0B92A06FC2200CBA434 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CF7AF76F2DF4619500A0A7EC /* ModelContext+Extension.swift */,
 				CF2DA2172DE26D7E00C91228 /* Image+Extension.swift */,
 				CF2DA1F52DDF3A5900C91228 /* UserDefaults+Extension.swift */,
 				CF2CB0A42A06F8D600CBA434 /* ModelContainer+Extension.swift */,
@@ -487,6 +493,7 @@
 		CF3116EF2A14437B00171A4D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CF7AF7722DF46CBC00A0A7EC /* Navigation.swift */,
 				CF2DA1EE2DDDE1E800C91228 /* ModelManager.swift */,
 				CF2DA1F12DDDE1F300C91228 /* Entities */,
 			);
@@ -914,6 +921,7 @@
 				CFE6D7BD2BA9277500E76AB8 /* LabeledView.swift in Sources */,
 				CFD3ED6F2DC986D90029AC2F /* InstallmentCellView.swift in Sources */,
 				CF95BC222C581C1200C8C1CE /* SelectCategoryView.swift in Sources */,
+				CF7AF7702DF4619C00A0A7EC /* ModelContext+Extension.swift in Sources */,
 				CF9DA59F2D170B270061056F /* BarsGraphView.swift in Sources */,
 				CF7AF76A2DEF1E5A00A0A7EC /* CategoryDetailsViewModel.swift in Sources */,
 				CF2DA21F2DE364DA00C91228 /* NewTransactionView.swift in Sources */,
@@ -950,6 +958,7 @@
 				CFD3ED5B2DC57B0F0029AC2F /* Bill.swift in Sources */,
 				CFBEE2412A07F9A000586164 /* AccountsAndCardsListView.swift in Sources */,
 				CF2DA21D2DE33A5600C91228 /* AccountCardHeader.swift in Sources */,
+				CF7AF7732DF46CC000A0A7EC /* Navigation.swift in Sources */,
 				CFD3ED872DCBF3DC0029AC2F /* SelectCardView.swift in Sources */,
 				CF9D2A722A0996800003DC39 /* NiceColorPicker.swift in Sources */,
 				CF95BC162C566EED00C8C1CE /* Category.swift in Sources */,
@@ -978,6 +987,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF2DA20A2DE0F5EC00C91228 /* BankIconPicker.swift in Sources */,
+				CF7AF7712DF4619C00A0A7EC /* ModelContext+Extension.swift in Sources */,
 				CF2DA20E2DE1237900C91228 /* CategoryData.swift in Sources */,
 				CFFA12422DDB804C008EE5B1 /* PreviewData.swift in Sources */,
 				CF2DA1F92DDF5A9600C91228 /* NewTransactionIntent.swift in Sources */,

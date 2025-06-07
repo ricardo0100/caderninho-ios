@@ -7,13 +7,11 @@ struct EditTransactionView: View {
         case value
     }
     
-    @Environment(\.dismiss) private var dismiss
-    @Environment(\.modelContext) private var modelContext
     @ObservedObject var viewModel: ViewModel
     @FocusState private var focusedField: Field?
     
-    init(transaction: Transaction?) {
-        let viewModel = ViewModel(transaction: transaction, modelContainer: .main)
+    init(transaction: Transaction?, navigation: Navigation) {
+        let viewModel = ViewModel(transaction: transaction, context: .main, navigation: navigation)
         _viewModel = ObservedObject(initialValue: viewModel)
     }
     
@@ -122,21 +120,16 @@ struct EditTransactionView: View {
             }
         }
         .tint(.brand)
-        .onChange(of: viewModel.shouldDismiss) {
-            dismiss()
-        }
         .onAppear(perform: viewModel.viewDidAppear)
     }
 }
 
 #Preview {
-    EditTransactionView(transaction: nil)
+    EditTransactionView(transaction: nil, navigation: Navigation())
         .modelContainer(.preview)
 }
 
 #Preview {
-    let transaction = try! ModelContainer.preview.mainContext
-        .fetch(FetchDescriptor<Transaction>())[0]
-    EditTransactionView(transaction: transaction)
-        .modelContainer(.preview)
+    let transaction = try! ModelContext.preview.fetch(FetchDescriptor<Transaction>())[0]
+    EditTransactionView(transaction: transaction, navigation: Navigation())
 }

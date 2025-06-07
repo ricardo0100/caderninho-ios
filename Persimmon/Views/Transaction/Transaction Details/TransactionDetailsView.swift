@@ -6,6 +6,7 @@ struct TransactionDetailsView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var transaction: Transaction
+    @EnvironmentObject var navigation: Navigation
     @State var editingTransaction: Transaction?
     
     var body: some View {
@@ -119,18 +120,10 @@ struct TransactionDetailsView: View {
                 Button("Edit", action: didTapEdit)
             }
         }
-        .sheet(item: $editingTransaction) {
-            EditTransactionView(transaction: $0)
-        }
-        .onChange(of: editingTransaction) {
-            if transaction.modelContext == nil {
-                dismiss()
-            }
-        }
     }
     
     func didTapEdit() {
-        editingTransaction = transaction
+        navigation.editingTransaction = transaction
     }
 }
 

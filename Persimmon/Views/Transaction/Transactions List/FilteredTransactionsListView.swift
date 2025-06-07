@@ -54,10 +54,7 @@ struct FilteredTransactionsListView: View {
         ForEach(sectionDates, id: \.self) { date in
             Section(header: sectionHeader(for: date)) {
                 ForEach(groupedItems[date] ?? []) { transaction in
-                    NavigationLink {
-                        TransactionDetailsView()
-                            .environmentObject(transaction)
-                    } label: {
+                    NavigationLink(value: transaction) {
                         TransactionCellView()
                             .environmentObject(transaction)
                     }
