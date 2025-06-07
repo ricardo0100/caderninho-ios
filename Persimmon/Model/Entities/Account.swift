@@ -14,7 +14,7 @@ class Account: ObservableObject {
     
     @Transient
     var balance: Double {
-        transactions.map { $0.operation == .transferOut ? -$0.value : $0.value }.reduce(.zero, +)
+        transactions.map { $0.operation == Transaction.Operation.transferOut.rawValue ? -$0.value : $0.value }.reduce(.zero, +)
     }
     
     var lastTransaction: Transaction? {

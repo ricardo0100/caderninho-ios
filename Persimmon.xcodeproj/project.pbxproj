@@ -80,6 +80,11 @@
 		CF7AF7702DF4619C00A0A7EC /* ModelContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7AF76F2DF4619500A0A7EC /* ModelContext+Extension.swift */; };
 		CF7AF7712DF4619C00A0A7EC /* ModelContext+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7AF76F2DF4619500A0A7EC /* ModelContext+Extension.swift */; };
 		CF7AF7732DF46CC000A0A7EC /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7AF7722DF46CBC00A0A7EC /* Navigation.swift */; };
+		CF7AF7752DF4D34F00A0A7EC /* FilteredCategoriesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7AF7742DF4D33E00A0A7EC /* FilteredCategoriesList.swift */; };
+		CF7AF7772DF4D80000A0A7EC /* CategoriesPizzaGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7AF7762DF4D7F500A0A7EC /* CategoriesPizzaGraphView.swift */; };
+		CF7AF7792DF4DB5500A0A7EC /* ModelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7AF7782DF4DB5300A0A7EC /* ModelError.swift */; };
+		CF7AF77A2DF4DB5500A0A7EC /* ModelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7AF7782DF4DB5300A0A7EC /* ModelError.swift */; };
+		CF7AF77C2DF4FC9800A0A7EC /* CurrencySelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7AF77B2DF4FC8D00A0A7EC /* CurrencySelectorView.swift */; };
 		CF8104522C037BE4009599B8 /* ProcessInfo+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8104512C037BE4009599B8 /* ProcessInfo+Extension.swift */; };
 		CF82EC652D982D06002F875A /* TransactionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF82EC642D982D01002F875A /* TransactionsListViewModel.swift */; };
 		CF8CF26D2D20CE840008A0F3 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B3522BACEBC500E8E050 /* Double+Extension.swift */; };
@@ -232,6 +237,10 @@
 		CF7AF7692DEF1E5400A0A7EC /* CategoryDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailsViewModel.swift; sourceTree = "<group>"; };
 		CF7AF76F2DF4619500A0A7EC /* ModelContext+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ModelContext+Extension.swift"; sourceTree = "<group>"; };
 		CF7AF7722DF46CBC00A0A7EC /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
+		CF7AF7742DF4D33E00A0A7EC /* FilteredCategoriesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredCategoriesList.swift; sourceTree = "<group>"; };
+		CF7AF7762DF4D7F500A0A7EC /* CategoriesPizzaGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesPizzaGraphView.swift; sourceTree = "<group>"; };
+		CF7AF7782DF4DB5300A0A7EC /* ModelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelError.swift; sourceTree = "<group>"; };
+		CF7AF77B2DF4FC8D00A0A7EC /* CurrencySelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySelectorView.swift; sourceTree = "<group>"; };
 		CF8104512C037BE4009599B8 /* ProcessInfo+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+Extension.swift"; sourceTree = "<group>"; };
 		CF82EC642D982D01002F875A /* TransactionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListViewModel.swift; sourceTree = "<group>"; };
 		CF95BC152C566EE900C8C1CE /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -493,6 +502,7 @@
 		CF3116EF2A14437B00171A4D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CF7AF7782DF4DB5300A0A7EC /* ModelError.swift */,
 				CF7AF7722DF46CBC00A0A7EC /* Navigation.swift */,
 				CF2DA1EE2DDDE1E800C91228 /* ModelManager.swift */,
 				CF2DA1F12DDDE1F300C91228 /* Entities */,
@@ -541,6 +551,9 @@
 		CF95BC172C56705A00C8C1CE /* Categories List */ = {
 			isa = PBXGroup;
 			children = (
+				CF7AF77B2DF4FC8D00A0A7EC /* CurrencySelectorView.swift */,
+				CF7AF7762DF4D7F500A0A7EC /* CategoriesPizzaGraphView.swift */,
+				CF7AF7742DF4D33E00A0A7EC /* FilteredCategoriesList.swift */,
 				CF7AF7652DEC9EA300A0A7EC /* CategoriesListViewModel.swift */,
 				CF7A80482A0DAC580067F5A8 /* CategoriesListView.swift */,
 				CF95BC1B2C57C54D00C8C1CE /* CategoryCellView.swift */,
@@ -897,6 +910,7 @@
 				CFBEE24A2A081B7100586164 /* LettersIconView.swift in Sources */,
 				CF7AF7662DEC9EAA00A0A7EC /* CategoriesListViewModel.swift in Sources */,
 				CF2CB0BB2A06FC3E00CBA434 /* ContainerView.swift in Sources */,
+				CF7AF77C2DF4FC9800A0A7EC /* CurrencySelectorView.swift in Sources */,
 				CF2DA2242DE6187D00C91228 /* NewTransactionSelectAccountView.swift in Sources */,
 				CF2DA1F82DDF3BDD00C91228 /* TransactionData.swift in Sources */,
 				CF5155AD2DE883F4008BE241 /* AccountDetailsViewModel.swift in Sources */,
@@ -911,6 +925,7 @@
 				CF44BE312A0FB5000006019F /* Color.swift in Sources */,
 				CFBEE2532A08471100586164 /* PizzaGraphView.swift in Sources */,
 				CFE6D7BF2BA9B4C000E76AB8 /* Transaction.swift in Sources */,
+				CF7AF7772DF4D80000A0A7EC /* CategoriesPizzaGraphView.swift in Sources */,
 				CFBEE23E2A07F3A000586164 /* TransactionsListView.swift in Sources */,
 				CF2DA2162DE238D700C91228 /* FilteredTransactionsListView.swift in Sources */,
 				CF2DA1EC2DDDD8CE00C91228 /* AccountQuery.swift in Sources */,
@@ -945,6 +960,7 @@
 				CF5155AF2DE88723008BE241 /* CardDetailsViewModel.swift in Sources */,
 				CF15B34F2BACE84F00E8E050 /* AccountCellView.swift in Sources */,
 				CF2DA1F62DDF3A6100C91228 /* UserDefaults+Extension.swift in Sources */,
+				CF7AF7752DF4D34F00A0A7EC /* FilteredCategoriesList.swift in Sources */,
 				CFF292A82A13B93F00C1A66A /* EditAccountView.swift in Sources */,
 				CFB7F56E2BC02A47009956E9 /* Date+Extension.swift in Sources */,
 				CFDC219E2BAF29AF00295432 /* SelectAccountView.swift in Sources */,
@@ -956,6 +972,7 @@
 				CF2DA1ED2DDDDDEB00C91228 /* SelectAccountEntity.swift in Sources */,
 				CF15B34A2BAC3D1200E8E050 /* NavigationToolbarView.swift in Sources */,
 				CFD3ED5B2DC57B0F0029AC2F /* Bill.swift in Sources */,
+				CF7AF77A2DF4DB5500A0A7EC /* ModelError.swift in Sources */,
 				CFBEE2412A07F9A000586164 /* AccountsAndCardsListView.swift in Sources */,
 				CF2DA21D2DE33A5600C91228 /* AccountCardHeader.swift in Sources */,
 				CF7AF7732DF46CC000A0A7EC /* Navigation.swift in Sources */,
@@ -1000,6 +1017,7 @@
 				CF9DA5A02D170B270061056F /* BarsGraphView.swift in Sources */,
 				CF5746382D22BE30007CC196 /* SelectAccountEntity.swift in Sources */,
 				CF5746392D22C294007CC196 /* NiceColorPicker.swift in Sources */,
+				CF7AF7792DF4DB5500A0A7EC /* ModelError.swift in Sources */,
 				CF44BE342A0FB6220006019F /* Color.swift in Sources */,
 				CF0289F32D9DAD0C008E53DC /* PhotosPickerItem+Extension.swift in Sources */,
 				CF57463F2D240014007CC196 /* AccountBalanceProvider.swift in Sources */,

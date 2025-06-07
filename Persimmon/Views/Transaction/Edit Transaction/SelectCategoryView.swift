@@ -22,7 +22,7 @@ struct SelectCategoryView: View {
             }
         } label: {
             if let category = selected {
-                CategoryCell(category: category, total: nil)
+                CategoryCellView(category: category, total: nil)
                     .tint(.brand)
             } else {
                 Text("Select a category")

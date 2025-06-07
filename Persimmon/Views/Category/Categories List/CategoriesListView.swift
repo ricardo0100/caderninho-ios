@@ -2,39 +2,45 @@ import SwiftUI
 import SwiftData
 
 struct CategoriesListView: View {
-    @Environment(\.modelContext) var modelContext
+    @Query var categories: [Category]
     
     @ObservedObject var viewModel = ViewModel()
+    
+    func getTotal(category: Category) -> Double {
+        do {
+            return try category.getExpensesTransactions(
+                startDate: viewModel.startDate,
+                endDate: viewModel.endDate,
+                currency: viewModel.currency)
+            .reduce(0) { $0 + $1.value }
+        } catch {
+            return .zero
+        }
+    }
+    
+    func getCategoriesWithTotal() -> [(Category, String)] {
+        categories.map { category in
+            (category, getTotal(category: category).toCurrency(with: viewModel.currency ?? ""))
+        }
+        .sorted { $0.1 > $1.1 }
+    }
     
     var body: some View {
         NavigationStack {
             List {
                 Section {
-                    if !viewModel.graphItems.isEmpty {
-                        PizzaGraphView(values: viewModel.graphItems)
-                            .padding(.spacingMedium)
-                            .frame(height: 150)
-                    } else {
-                        Text("Nothing for this period")
-                            .foregroundStyle(.secondary)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 150)
-                    }
+                    CategoriesPizzaGraphView(
+                        startDate: viewModel.startDate,
+                        endDate: viewModel.endDate,
+                        currency: viewModel.currency)
+                    .frame(height: 150)
                 } header: {
                     HStack {
                         PeriodFilterView(
                             startDate: $viewModel.startDate,
                             endDate: $viewModel.endDate)
                         Spacer()
-                        Menu {
-                            ForEach(viewModel.currencyOptions, id: \.self) { currency in
-                                Button(currency) {
-                                    viewModel.currency = currency
-                                }
-                            }
-                        } label: {
-                            Text(viewModel.currency)
-                        }
+                        CurrencySelectorView(selectedCurrency: $viewModel.currency)
 
                     }.padding(.vertical)
                 }
@@ -42,13 +48,8 @@ struct CategoriesListView: View {
                 .textCase(.none)
                 
                 Section {
-                    ForEach(viewModel.items.sorted { $0.total > $1.total }) { item in
-                        NavigationLink {
-                            CategoryDetailsView(category: item.category)
-                        } label: {
-                            CategoryCell(category: item.category,
-                                         total: item.total.toCurrency(with: viewModel.currency))
-                        }
+                    ForEach(getCategoriesWithTotal(), id: \.self.0.id) { item in
+                        CategoryCellView(category: item.0, total: item.1)
                     }
                 } header: {
                     Text("Expenses for the selected period")
@@ -69,13 +70,6 @@ struct CategoriesListView: View {
                 }
             }
         }
-        .onChange(of: [viewModel.startDate, viewModel.endDate]) {
-            viewModel.didChangeDateRange(with: modelContext)
-        }
-        .onChange(of: viewModel.currency) {
-            viewModel.didChangeCurrency(with: modelContext)
-        }
-        .onAppear { viewModel.didAppear(with: modelContext) }
     }
 }
 

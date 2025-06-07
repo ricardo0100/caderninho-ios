@@ -52,7 +52,7 @@ extension EditTransactionView {
             _card = Published(initialValue: transaction?.installments.first?.bill.card)
             _value = Published(initialValue: transaction?.value ?? .zero)
             _category = Published(initialValue: transaction?.category)
-            _operation = Published(initialValue: transaction?.operation ?? .installments)
+            _operation = Published(initialValue: Transaction.Operation(rawValue: transaction?.operation ?? 0)!)
             _date = Published(initialValue: transaction?.date ?? Date())
             _place = Published(initialValue: transaction?.place)
             _numberOfInstallments = Published(initialValue: transaction?.installments.count ?? 1)

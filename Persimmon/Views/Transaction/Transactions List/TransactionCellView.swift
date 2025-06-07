@@ -5,6 +5,8 @@ struct TransactionCellView: View {
     @EnvironmentObject var transaction: Transaction
     
     var body: some View {
+        let operation = Transaction.Operation(rawValue:  transaction.operation)!
+        
         HStack(spacing: .spacingSmall) {
             VStack(alignment: .leading) {
                 Text(transaction.name)
@@ -12,14 +14,15 @@ struct TransactionCellView: View {
                 Text(transaction.value.toCurrency(with: transaction.currency ?? "$"))
                     .font(.subheadline)
                 HStack(spacing: .spacingSmall) {
-                    Image(systemName: transaction.operation.iconName)
+                    
+                    Image(systemName: operation.iconName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 12)
-                    Text(transaction.operation.text)
+                    Text(operation.text)
                         .font(.caption2)
                 }
-                if transaction.operation == .installments {
+                if operation == .installments {
                     let val = transaction.installments.first?.value ?? 0
                     Text("\(transaction.installments.count) x \(val.toCurrency(with: transaction.currency ?? "$"))")
                         .font(.caption2)

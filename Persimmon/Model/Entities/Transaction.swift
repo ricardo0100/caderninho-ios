@@ -20,7 +20,7 @@ class Transaction: ObservableObject {
     var name: String
     var value: Double
     var date: Date
-    var operation: Operation
+    var operation: Int
     var place: Place?
     
     init(
@@ -34,7 +34,7 @@ class Transaction: ObservableObject {
             self.date = date
             self.category = category
             self.place = place
-            self.operation = editOperation.operation
+            self.operation = editOperation.operation.rawValue
             
             switch editOperation {
             case .transferIn(let account, let value), .transferOut(account: let account, let value):
@@ -65,7 +65,7 @@ class Transaction: ObservableObject {
             self.date = date
             self.category = category
             self.place = place
-            self.operation = editOperation.operation
+            self.operation = editOperation.operation.rawValue
 
             switch editOperation {
             case .transferIn(let account, let value):
@@ -130,7 +130,7 @@ class Transaction: ObservableObject {
     }
     
     var operationDetails: OperationDetails {
-        switch operation {
+        switch Operation(rawValue: operation) {
         case .transferIn:
             guard let account = account else { fatalError() }
             return .transferIn(account: account, value: value.toCurrency(with: account.currency))
@@ -141,14 +141,16 @@ class Transaction: ObservableObject {
             return .installments(installments: installments)
         case .refund:
             fatalError()
+        default:
+            fatalError()
         }
     }
     
-    enum Operation: Codable, CaseIterable, Identifiable {
-        case transferIn
-        case transferOut
-        case installments
-        case refund
+    enum Operation: Int, Codable, CaseIterable, Identifiable {
+        case transferIn = 0
+        case transferOut = 1
+        case installments = 2
+        case refund = 3
         
         var id: Int { hashValue }
         

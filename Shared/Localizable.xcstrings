@@ -633,6 +633,9 @@
         }
       }
     },
+    "No categories!" : {
+
+    },
     "No transactions yet!" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -653,9 +656,6 @@
           }
         }
       }
-    },
-    "Nothing for this period" : {
-
     },
     "Number of installments" : {
       "localizations" : {

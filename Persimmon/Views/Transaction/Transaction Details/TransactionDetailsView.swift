@@ -10,21 +10,22 @@ struct TransactionDetailsView: View {
     @State var editingTransaction: Transaction?
     
     var body: some View {
+        let operation = Transaction.Operation(rawValue: transaction.operation)!
         List {
             Section {
                 LabeledView(labelText: "Type") {
                     HStack(spacing: .spacingMedium) {
-                        Image(systemName: transaction.operation.iconName)
+                        Image(systemName: operation.iconName)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 22, height: 22)
                             .foregroundColor(Color.secondary)
-                        Text(transaction.operation.text)
+                        Text(operation.text)
                     }
                 }
                 let name = transaction.accountOrCardName ?? ""
                 let color = transaction.accountOrCardColor ?? ""
-                LabeledView(labelText: transaction.operation == .installments ? "Credit Card" : "Account") {
+                LabeledView(labelText: operation == .installments ? "Credit Card" : "Account") {
                     HStack(spacing: .spacingMedium) {
                         if let icon = transaction.accountOrCardIcon {
                             Image(icon)
@@ -42,7 +43,7 @@ struct TransactionDetailsView: View {
                 LabeledView(labelText: "Value") {
                     Text(transaction.value.toCurrency(with: transaction.currency ?? "$"))
                         .font(.title3).bold()
-                    if transaction.operation == .installments {
+                    if operation == .installments {
                         let installmentValue = transaction.installments.first?.currencyValue ?? ""
                         Text("\(transaction.installments.count) x \(installmentValue)")
                     }
@@ -51,7 +52,7 @@ struct TransactionDetailsView: View {
                 if let category = transaction.category {
                     LabeledView(labelText: "Category") {
                         //TODO: Do not use cell
-                        CategoryCell(category: category, total: nil)
+                        CategoryCellView(category: category, total: nil)
                     }
                 }
                 
@@ -89,7 +90,7 @@ struct TransactionDetailsView: View {
                         .cornerRadius(12)
                     }
                 }
-            if transaction.operation == .installments {
+            if operation == .installments {
                 Section("Installments") {
                     ForEach(transaction.installments.sorted()) { installment in
                         HStack {
