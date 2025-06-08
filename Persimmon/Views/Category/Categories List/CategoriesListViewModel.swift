@@ -17,13 +17,8 @@ extension CategoriesListView {
         }
         
         @Published var currencyOptions: [String] = []
-        @Published var isShowindEdit: Bool = false
         @Published var startDate: Date = .distantPast
         @Published var endDate: Date = .distantFuture
-        
-        func didTapAdd() {
-            isShowindEdit = true
-        }
         
         init() {
             currency = UserDefaults.standard.string(forKey: "currency")

@@ -7,6 +7,7 @@ extension TransactionsListView {
     public class ViewModel: ObservableObject {
         @Published var isShowingNewTransaction: Bool = false
         @Published var isShowingCamera = false
+        @Published var editingTransaction: Transaction?
         
         @Published var selectedId: UUID?
         @Published var filterStartDate = Date()

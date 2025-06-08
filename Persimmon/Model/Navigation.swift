@@ -7,7 +7,14 @@
 
 import SwiftUI
 
-class Navigation: ObservableObject {
+class TransactionsNavigation: ObservableObject {
     @Published var path = NavigationPath()
     @Published var editingTransaction: Transaction?
+    @Published var newTransaction = false
+}
+
+class CategoriesNavigation: ObservableObject {
+    @Published var path = NavigationPath()
+    @Published var editingCategory: Category?
+    @Published var newCategory = false
 }

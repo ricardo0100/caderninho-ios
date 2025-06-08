@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct CategoryDetailsView: View {
-    
+    @EnvironmentObject var navigation: CategoriesNavigation
     @ObservedObject var viewModel: ViewModel
     
     init(category: Category) {
@@ -19,13 +19,17 @@ struct CategoryDetailsView: View {
     var body: some View {
         List {
             Section {} header: {
-                PeriodFilterView(
-                    startDate: $viewModel.startDate,
-                    endDate: $viewModel.endDate)
+                VStack {
+                    Text(viewModel.startDate.formatted())
+                    Text(viewModel.endDate.formatted())
+                    PeriodFilterView(
+                        startDate: $viewModel.startDate,
+                        endDate: $viewModel.endDate)
+                }
             }
             .listRowInsets(EdgeInsets())
             .textCase(.none)
-            
+
             FilteredTransactionsListView(
                 startDate: viewModel.startDate,
                 endDate: viewModel.endDate,
@@ -39,11 +43,11 @@ struct CategoryDetailsView: View {
                     if let icon = viewModel.category.icon {
                         ImageIconView(image: Image(systemName: icon),
                                       color: Color(hex: viewModel.category.color),
-                                      size: 32)
+                                      size: 24)
                     } else {
                         LettersIconView(text: viewModel.category.name,
                                         color: Color(hex: viewModel.category.color),
-                                        size: 32)
+                                        size: 24)
                     }
                     Text(viewModel.category.name)
                         .font(.headline)
@@ -52,19 +56,19 @@ struct CategoryDetailsView: View {
             }
             ToolbarItem(placement: .confirmationAction) {
                 Button("Edit") {
-                    viewModel.isShowindEdit = true
+                    navigation.editingCategory = viewModel.category
                 }
             }
         }
-        .sheet(isPresented: $viewModel.isShowindEdit) {
-            EditCategoryView(category: viewModel.category)
+        .sheet(item: $navigation.editingCategory) {
+            EditCategoryView(category: $0)
         }
     }
 }
 
 #Preview {
     let category = try! ModelContainer.preview.mainContext
-        .fetch(FetchDescriptor<Category>()).first!
+        .fetch(FetchDescriptor<Category>()).first { $0.transactions.count > 0 }!
     
     NavigationStack {
         CategoryDetailsView(category: category)

@@ -636,6 +636,9 @@
     "No categories!" : {
 
     },
+    "No expenses for this period" : {
+
+    },
     "No transactions yet!" : {
       "extractionState" : "stale",
       "localizations" : {

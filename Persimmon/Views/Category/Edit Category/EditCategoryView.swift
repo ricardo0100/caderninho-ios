@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct EditCategoryView: View {
-    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var navigation: CategoriesNavigation
     @Environment(\.modelContext) var modelContext
+    
     var category: Category?
     @State var name: String = ""
     @State var nameErrorMessage: String?
@@ -77,7 +78,8 @@ struct EditCategoryView: View {
                     guard let category else { return }
                     modelContext.delete(category)
                     try? modelContext.save()
-                    dismiss()
+                    navigation.path.removeLast()
+                    navigation.editingCategory = nil
                 }.tint(.red)
                 Button("Cancel") {
                     showDeleteAlert = false
@@ -114,14 +116,14 @@ struct EditCategoryView: View {
                                     icon: niceIcon?.rawValue)
             modelContext.insert(category)
         }
-        withAnimation {
-            try? modelContext.save()
-            dismiss()
-        }
+        try? modelContext.save()
+        navigation.editingCategory = nil
+        navigation.newCategory = false
     }
     
     func didTapCancel() {
-        dismiss()
+        navigation.newCategory = false
+        navigation.editingCategory = nil
     }
 }
 

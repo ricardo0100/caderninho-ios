@@ -3,7 +3,7 @@ import SwiftData
 
 struct CategoriesListView: View {
     @Query var categories: [Category]
-    
+    @StateObject var navigation = CategoriesNavigation()
     @ObservedObject var viewModel = ViewModel()
     
     func getTotal(category: Category) -> Double {
@@ -26,7 +26,7 @@ struct CategoriesListView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigation.path) {
             List {
                 Section {
                     CategoriesPizzaGraphView(
@@ -49,21 +49,30 @@ struct CategoriesListView: View {
                 
                 Section {
                     ForEach(getCategoriesWithTotal(), id: \.self.0.id) { item in
-                        CategoryCellView(category: item.0, total: item.1)
+                        NavigationLink(value: item.0) {
+                            CategoryCellView(category: item.0, total: item.1)
+                        }
                     }
                 } header: {
                     Text("Expenses for the selected period")
                 }
             }
-            .sheet(isPresented: $viewModel.isShowindEdit) {
+            .sheet(isPresented: $navigation.newCategory) {
                 EditCategoryView()
+                    .environmentObject(navigation)
+            }
+            .navigationDestination(for: Category.self) {
+                CategoryDetailsView(category: $0)
+                    .environmentObject(navigation)
             }
             .toolbar {
                 ToolbarItem(placement: .navigation) {
                     NavigationToolbarView(imageName: "chart.pie", title: "Categories")
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(action: viewModel.didTapAdd) {
+                    Button(action: {
+                        navigation.newCategory = true
+                    }) {
                         Image(systemName: "plus")
                             .foregroundColor(.brand)
                     }

@@ -14,8 +14,8 @@ struct PeriodFilterView: View {
     
     func updateDateRange() {
         let range = filterType.dateRange
-        startDate = range.start
-        endDate = range.end
+        startDate = range.start.firstSecondOfDay()
+        endDate = range.end.lastSecondOfDay()
     }
     
     var body: some View {

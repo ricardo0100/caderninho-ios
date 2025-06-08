@@ -13,7 +13,6 @@ extension CategoryDetailsView {
         @Published var endDate: Date = Date()
         @Published var searchText: String = ""
         @Published var debouncedSearchText: String = ""
-        @Published var isShowindEdit: Bool = false
         
         let category: Category
         

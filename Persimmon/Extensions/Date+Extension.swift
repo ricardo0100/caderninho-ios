@@ -104,4 +104,8 @@ extension Date {
         let lastSecond = startOfNextDay.addingTimeInterval(-1)
         return lastSecond
     }
+    
+    func firstSecondOfDay(using calendar: Calendar = .current) -> Date {
+        return calendar.startOfDay(for: self)
+    }
 }

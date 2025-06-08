@@ -10,7 +10,7 @@ import SwiftData
 
 struct FilteredTransactionsListView: View {
     @Query var transactions: [Transaction]
-    
+
     init(
         startDate: Date,
         endDate: Date,
@@ -18,20 +18,47 @@ struct FilteredTransactionsListView: View {
         selectedAccountOrCardId: UUID? = nil,
         categoryId: UUID? = nil
     ) {
-        let containsInstallmentsWithCardId = #Expression<Transaction, UUID, Bool> { transaction, id in
-            !transaction.installments.filter { $0.bill.card.id == id }.isEmpty
-        }
-        
-        _transactions = Query(filter: #Predicate<Transaction> { transaction in
-            transaction.date <= endDate &&
+        let basePredicate = #Predicate<Transaction> { transaction in
             transaction.date >= startDate &&
-            (searchText.isEmpty || transaction.name.localizedStandardContains(searchText)) &&
-            (selectedAccountOrCardId == nil ||
-             transaction.account?.id == selectedAccountOrCardId ||
-             containsInstallmentsWithCardId.evaluate(transaction, selectedAccountOrCardId!)) &&
-            (categoryId == nil || transaction.category?.id == categoryId)
-        }, sort: \.date, order: .reverse)
+            transaction.date <= endDate &&
+            (searchText.isEmpty || transaction.name.localizedStandardContains(searchText))
+        }
+
+        var predicates: [Predicate<Transaction>] = [basePredicate]
+
+        if let selectedId = selectedAccountOrCardId {
+            let accountMatch = #Predicate<Transaction> { transaction in
+                transaction.account?.id == selectedId
+            }
+
+            let installmentMatch = #Expression<Transaction, Bool> { transaction in
+                !transaction.installments.filter { $0.bill.card.id == selectedId }.isEmpty
+            }
+
+            let combined = #Predicate<Transaction> { transaction in
+                accountMatch.evaluate(transaction) || installmentMatch.evaluate(transaction)
+            }
+
+            predicates.append(combined)
+        }
+
+        if let catId = categoryId {
+            predicates.append(
+                #Predicate<Transaction> { transaction in
+                    transaction.category?.id == catId
+                }
+            )
+        }
+
+        let finalPredicate = predicates.reduce(basePredicate) { result, next in
+            #Predicate<Transaction> { transaction in
+                result.evaluate(transaction) && next.evaluate(transaction)
+            }
+        }
+
+        _transactions = Query(filter: finalPredicate, sort: \.date, order: .reverse)
     }
+
     
     private var groupedItems: [Date: [Transaction]] {
         Dictionary(grouping: transactions) {
@@ -50,6 +77,7 @@ struct FilteredTransactionsListView: View {
     var body: some View {
         if transactions.isEmpty {
             Text("No transactions!")
+                .foregroundStyle(Color.secondary)
         }
         ForEach(sectionDates, id: \.self) { date in
             Section(header: sectionHeader(for: date)) {
@@ -65,12 +93,15 @@ struct FilteredTransactionsListView: View {
 }
 
 #Preview {
+    let cat = try! ModelContext.preview.fetch(FetchDescriptor<Category>())
+        .first { $0.transactions.count > 0 }!
     List {
         FilteredTransactionsListView(
             startDate: .distantPast,
             endDate: .distantFuture,
             searchText: "",
-            selectedAccountOrCardId: nil)
+            selectedAccountOrCardId: nil,
+            categoryId: cat.id)
     }
     .modelContainer(.preview)
 }

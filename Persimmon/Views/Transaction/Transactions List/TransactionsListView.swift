@@ -5,7 +5,7 @@ import AppIntents
 
 struct TransactionsListView: View {
     @ObservedObject var viewModel = ViewModel()
-    @StateObject var navigation = Navigation()
+    @StateObject var navigation = TransactionsNavigation()
     
     var body: some View {
         VStack {
@@ -29,6 +29,7 @@ struct TransactionsListView: View {
                         endDate: viewModel.filterEndDate,
                         searchText: viewModel.debouncedSearchText,
                         selectedAccountOrCardId: viewModel.selectedId)
+                    .environmentObject(navigation)
                 }
                 .searchable(text: $viewModel.searchText)
                 .toolbar {
@@ -53,7 +54,7 @@ struct TransactionsListView: View {
                         .environmentObject(transaction)
                         .environmentObject(navigation)
                 }
-                .sheet(item: $navigation.editingTransaction) { transaction in
+                .sheet(item: $viewModel.editingTransaction) { transaction in
                     EditTransactionView(transaction: transaction, navigation: navigation)
                 }
             }
