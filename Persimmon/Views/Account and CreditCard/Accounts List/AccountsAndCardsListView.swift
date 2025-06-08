@@ -2,6 +2,8 @@ import SwiftUI
 import SwiftData
 
 struct AccountsAndCardsListView: View {
+    @Environment(\.modelContext) var modelContext
+    
     @Query(sort: [SortDescriptor(\Account.name)])
     var accounts: [Account]
     
@@ -50,7 +52,7 @@ struct AccountsAndCardsListView: View {
                 EditAccountView(account: nil)
             }
             .sheet(isPresented: $isShowindEditCreditCard) {
-                EditCreditCardView(creditCard: nil)
+                EditCreditCardView(creditCard: nil, context: modelContext)
             }
         }
     }

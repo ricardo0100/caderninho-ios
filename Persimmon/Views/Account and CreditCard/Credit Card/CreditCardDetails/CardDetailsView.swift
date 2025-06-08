@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct CardDetailsView: View {
+    @Environment(\.modelContext) var modelContext
     @EnvironmentObject var card: CreditCard
     @ObservedObject var viewModel = ViewModel()
     
@@ -16,7 +17,7 @@ struct CardDetailsView: View {
         List {
             Section {
                 ForEach(viewModel.installments.sorted {
-                    $0.transaction.date > $1.transaction.date
+                    $0.number < $1.number
                 }, id: \.self) { installment in
                     InstallmentCellView()
                         .environmentObject(installment)
@@ -79,7 +80,7 @@ struct CardDetailsView: View {
             }
         }
         .sheet(isPresented: $viewModel.isShowingEdit) {
-            EditCreditCardView(creditCard: card)
+            EditCreditCardView(creditCard: card, context: modelContext)
         }
         .onAppear {
             // TODO: Move card to ViewModel

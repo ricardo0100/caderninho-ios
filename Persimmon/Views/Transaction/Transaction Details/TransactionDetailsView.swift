@@ -101,12 +101,14 @@ struct TransactionDetailsView: View {
                             VStack(alignment: .trailing) {
                                 Text("Due date")
                                     .font(.caption2)
-                                Text(installment.bill.dueDate.formatted(date: .abbreviated, time: .omitted))
-                                    .font(.caption)
-                                if installment.bill.payedDate != nil {
-                                    Text("Payed")
-                                        .font(.caption2)
-                                        .foregroundStyle(.green)
+                                if let bill = installment.bill {
+                                    Text(bill.dueDate.formatted(date: .abbreviated, time: .omitted))
+                                        .font(.caption)
+                                    if bill.payedDate != nil {
+                                        Text("Payed")
+                                            .font(.caption2)
+                                            .foregroundStyle(.green)
+                                    }
                                 }
                             }
                         }
@@ -133,7 +135,7 @@ struct TransactionDetailsView: View {
 #Preview {
     let transaction = {
         let transaction = try! ModelContainer.preview.mainContext.fetch(FetchDescriptor<Transaction>())[0]
-        transaction.installments.sorted()[0].bill.payedDate = Date()
+        transaction.installments.sorted()[0].bill?.payedDate = Date()
         return transaction
     }()
     

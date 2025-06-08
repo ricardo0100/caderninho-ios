@@ -13,10 +13,9 @@ class Bill: ObservableObject {
     @Attribute(.unique)
     var id: UUID
     
-    @Relationship(deleteRule: .cascade)
-    var card: CreditCard
+    var card: CreditCard?
     
-    @Relationship(deleteRule: .cascade)
+    @Relationship(deleteRule: .cascade, inverse: \Installment.bill)
     var installments: [Installment] = []
     
     @Transient
@@ -33,7 +32,7 @@ class Bill: ObservableObject {
         var dueDateComponents = DateComponents()
         dueDateComponents.year = dueYear
         dueDateComponents.month = dueMonth
-        dueDateComponents.day = card.dueDay
+        dueDateComponents.day = card?.dueDay
 
         guard let dueDate = Calendar.current.date(from: dueDateComponents) else {
             return false
@@ -53,12 +52,12 @@ class Bill: ObservableObject {
     }
     
     var closingCycleDate: Date {
-        let components = DateComponents(year: dueYear, month: dueMonth, day: card.closingCycleDay)
+        let components = DateComponents(year: dueYear, month: dueMonth, day: card?.closingCycleDay)
         return Calendar.current.date(from: components) ?? Date()
     }
     
     var dueDate: Date {
-        let components = DateComponents(year: dueYear, month: dueMonth, day: card.dueDay)
+        let components = DateComponents(year: dueYear, month: dueMonth, day: card?.dueDay)
         return Calendar.current.date(from: components) ?? Date()
     }
     

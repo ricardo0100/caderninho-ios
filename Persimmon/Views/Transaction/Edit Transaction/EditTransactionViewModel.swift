@@ -49,7 +49,7 @@ extension EditTransactionView {
             self.modelManager = ModelManager(context: context)
             _name = Published(initialValue: transaction?.name ?? "")
             _account = Published(initialValue: transaction?.account)
-            _card = Published(initialValue: transaction?.installments.first?.bill.card)
+            _card = Published(initialValue: transaction?.installments.first?.bill?.card)
             _value = Published(initialValue: transaction?.value ?? .zero)
             _category = Published(initialValue: transaction?.category)
             _operation = Published(initialValue: Transaction.Operation(rawValue: transaction?.operation ?? 0)!)
@@ -156,7 +156,7 @@ extension EditTransactionView {
         func fetchLastUsedCard() -> CreditCard? {
             try? context.fetch(FetchDescriptor<Transaction>(
                 sortBy: [SortDescriptor(\.date, order: .reverse)]))
-            .filter { $0.account == nil }.first?.installments.first?.bill.card
+            .filter { $0.account == nil }.first?.installments.first?.bill?.card
         }
         
         func fetchLastUsedCategory() -> Category? {

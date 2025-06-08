@@ -13,6 +13,7 @@ struct ModelManager {
     let context: ModelContext
     let userDefaults: UserDefaults = .widgetsUserDefaults
     
+    // MARK: Transactions
     @discardableResult func createTransaction(
         name: String,
         date: Date,
@@ -56,13 +57,16 @@ struct ModelManager {
         try! context.save()
     }
     
-    func fetchAccounts() throws -> [Account] {
-        return try context.fetch(FetchDescriptor<Account>())
+    // MARK: Credit Cards
+    func deleteCreditCard(_ card: CreditCard) throws {
+        Set(card.bills.flatMap { $0.installments }.compactMap { $0.transaction }).forEach { transaction in
+            deleteTransaction(transaction: transaction)
+        }
+        context.delete(card)
+        try context.save()
     }
     
-    func fetchCards() throws -> [CreditCard] {
-        return try context.fetch(FetchDescriptor<CreditCard>())
-    }
+    // MARK: Widgets
     
     fileprivate func transactionData(_ transaction: Transaction, currency: String) -> TransactionData {
         var categoryData: CategoryData?
@@ -116,5 +120,13 @@ struct ModelManager {
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    private func fetchAccounts() throws -> [Account] {
+        return try context.fetch(FetchDescriptor<Account>())
+    }
+    
+    private func fetchCards() throws -> [CreditCard] {
+        return try context.fetch(FetchDescriptor<CreditCard>())
     }
 }

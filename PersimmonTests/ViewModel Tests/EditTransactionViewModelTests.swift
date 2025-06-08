@@ -65,7 +65,7 @@ struct EditTransactionViewModelTests {
     @Test("Load fields from existing transaction")
     func loadTransactionFields() throws {
         let transaction = try createTransactionInContext()
-        let sut = EditTransactionView.ViewModel(transaction: transaction, context: context)
+        let sut = EditTransactionView.ViewModel(transaction: transaction, context: context, navigation: .init())
         #expect(sut.name == "Test Name")
         #expect(sut.value == 123)
         #expect(sut.account?.name == "Bank of Maya")
@@ -77,7 +77,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Save new transaction")
     func saveNewTransaction() async throws {
-        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context, navigation: .init())
         sut.name = "Test Name"
         sut.account = getAccounts.first!
         sut.operation = .transferIn
@@ -88,7 +88,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Update existing transaction")
     func updateTransaction() async throws {
-        let sut = EditTransactionView.ViewModel(transaction: try createTransactionInContext(), context: context)
+        let sut = EditTransactionView.ViewModel(transaction: try createTransactionInContext(), context: context, navigation: .init())
         sut.name = "Changed Name"
         sut.operation = .transferIn
         sut.didTapSave()
@@ -99,7 +99,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Show Name Error Message")
     func showNameErrorMessage() async throws {
-        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context, navigation: .init())
         sut.didTapSave()
         #expect(sut.nameError == "Mandatory field")
         #expect(getTransactions.isEmpty)
@@ -107,7 +107,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Show Account Error Message")
     func showAccountErrorMessage() async throws {
-        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context, navigation: .init())
         sut.name = "Test"
         sut.operation = .transferIn
         sut.didTapSave()
@@ -117,7 +117,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Show Card Error Message")
     func showCardErrorMessage() async throws {
-        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context, navigation: .init())
         sut.name = "Test"
         sut.operation = .installments
         sut.didTapSave()
@@ -127,7 +127,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Clear Card Error Message")
     func clearCardErrorMessage() async throws {
-        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context, navigation: .init())
         sut.name = "Test"
         sut.operation = .installments
         sut.didTapSave()
@@ -139,7 +139,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Show Account Field")
     func showAccountField() async throws {
-        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context, navigation: .init())
         sut.operation = .transferIn
         #expect(sut.showAccountField)
         #expect(!sut.showCardField)
@@ -147,7 +147,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Show Card Field")
     func showCardField() async throws {
-        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context, navigation: .init())
         sut.operation = .installments
         #expect(!sut.showAccountField)
         #expect(sut.showCardField)
@@ -156,7 +156,7 @@ struct EditTransactionViewModelTests {
     
     @Test("Create Installments", arguments: 1...12)
     func createInstallments(_ numberOfInstallments: Int) async throws {
-        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context, navigation: .init())
         sut.name = "Test"
         sut.card = getCard
         sut.operation = .installments
@@ -173,7 +173,7 @@ struct EditTransactionViewModelTests {
     func createInstallmentsBasedOnTransactionDate() async throws {
         let transactionDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1, day: 12))!
         
-        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context, navigation: .init())
         sut.name = "Test"
         sut.card = getCard
         sut.operation = .installments
@@ -182,15 +182,15 @@ struct EditTransactionViewModelTests {
         sut.date = transactionDate
         sut.didTapSave()
         #expect(getInstalments.count == 3)
-        #expect(getInstalments.sorted()[0].bill.dueMonth == 2)
-        #expect(getInstalments.sorted()[1].bill.dueMonth == 3)
-        #expect(getInstalments.sorted()[2].bill.dueMonth == 4)
+        #expect(getInstalments.sorted()[0].bill?.dueMonth == 2)
+        #expect(getInstalments.sorted()[1].bill?.dueMonth == 3)
+        #expect(getInstalments.sorted()[2].bill?.dueMonth == 4)
     }
     
     @Test("Recreate installments after date transaction change")
     func recreateInstallmentsAfterDateTransactionChange() async throws {
         let transactionDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1, day: 12))!
-        var sut = EditTransactionView.ViewModel(transaction: nil, context: context)
+        var sut = EditTransactionView.ViewModel(transaction: nil, context: context, navigation: .init())
         sut.name = "Test"
         sut.card = getCard
         sut.operation = .installments
@@ -199,21 +199,21 @@ struct EditTransactionViewModelTests {
         sut.date = transactionDate
         sut.didTapSave()
         
-        sut = EditTransactionView.ViewModel(transaction: getTransactions[0], context: context)
+        sut = EditTransactionView.ViewModel(transaction: getTransactions[0], context: context, navigation: .init())
         
         let newDate = Calendar.current.date(from: DateComponents(year: 2000, month: 2, day: 12))!
         sut.date = newDate
         sut.didTapSave()
         #expect(getInstalments.count == 3)
-        #expect(getInstalments.sorted()[0].bill.dueMonth == 3)
-        #expect(getInstalments.sorted()[1].bill.dueMonth == 4)
-        #expect(getInstalments.sorted()[2].bill.dueMonth == 5)
+        #expect(getInstalments.sorted()[0].bill?.dueMonth == 3)
+        #expect(getInstalments.sorted()[1].bill?.dueMonth == 4)
+        #expect(getInstalments.sorted()[2].bill?.dueMonth == 5)
     }
     
     @Test("Create installments in current month if before closing date")
     func createInstallmentsInCurrentMonthIfBeforeClosingDate() async throws {
         let transactionDate = Calendar.current.date(from: DateComponents(year: 2000, month: 1, day: 1))!
-        let sut = EditTransactionView.ViewModel(transaction: nil, context: context)
+        let sut = EditTransactionView.ViewModel(transaction: nil, context: context, navigation: .init())
         sut.name = "Test"
         sut.card = getCard
         sut.operation = .installments
@@ -223,8 +223,8 @@ struct EditTransactionViewModelTests {
         sut.didTapSave()
         
         #expect(getInstalments.count == 3)
-        #expect(getInstalments.sorted()[0].bill.dueMonth == 1)
-        #expect(getInstalments.sorted()[1].bill.dueMonth == 2)
-        #expect(getInstalments.sorted()[2].bill.dueMonth == 3)
+        #expect(getInstalments.sorted()[0].bill?.dueMonth == 1)
+        #expect(getInstalments.sorted()[1].bill?.dueMonth == 2)
+        #expect(getInstalments.sorted()[2].bill?.dueMonth == 3)
     }
 }

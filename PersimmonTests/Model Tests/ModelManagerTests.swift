@@ -87,4 +87,21 @@ struct ModelManagerTests {
         #expect(getTransactions.count == 1)
         #expect(getTransactions[0].name == "Test Up")
     }
+    
+    @Test
+    func testDidDeleteCreditCard() throws {
+        try modelManager.createTransaction(
+            name: "Test",
+            date: Date(),
+            editOperation: .installments(card: getCards[0], numberOfInstallments: 1, value: 1),
+            category: nil,
+            place: nil)
+        #expect(getTransactions.count == 1)
+        #expect(getTransactions[0].name == "Test")
+        
+        try modelManager.deleteCreditCard(getCards[0])
+        
+        #expect(getTransactions.count == 0)
+        #expect(getCards.isEmpty)
+    }
 }

@@ -9,7 +9,7 @@ class Account: ObservableObject {
     var icon: String?
     var currency: String
     
-    @Relationship(deleteRule: .cascade)
+    @Relationship(deleteRule: .cascade, inverse: \Transaction.account)
     var transactions: [Transaction] = []
     
     @Transient

@@ -8,13 +8,10 @@ class Transaction: ObservableObject {
     @Attribute(.unique)
     var id: UUID
     
-    @Relationship(deleteRule: .noAction, inverse: \Account.transactions)
     var account: Account?
-    
-    @Relationship(deleteRule: .noAction, inverse: \Category.transactions)
     var category: Category?
     
-    @Relationship(deleteRule: .cascade)
+    @Relationship(deleteRule: .nullify, inverse: \Installment.transaction)
     var installments: [Installment] = []
     
     var name: String
@@ -105,28 +102,28 @@ class Transaction: ObservableObject {
                 let year = Calendar.current.component(.year, from: date.dateAddingMonths(i))
                 let bill = card.bills.first { $0.dueYear == year && $0.dueMonth == month } ??
                     .init(id: UUID(), card: card, month: month, year: year)
-                return Installment(id: UUID(),
-                                   transaction: transaction,
+                let installment = Installment(id: UUID(),
                                    number: date.day < card.dueDay ? i + 1 : i,
-                                   bill: bill,
                                    value: value / Double(numberOfInstallments))
+                installment.bill = bill
+                return installment
             }
         }
     
     var currency: String? {
-        installments.first?.bill.card.currency ?? account?.currency
+        installments.first?.bill?.card?.currency ?? account?.currency
     }
     
     var accountOrCardName: String? {
-        account?.name ?? installments.first?.bill.card.name
+        account?.name ?? installments.first?.bill?.card?.name
     }
     
     var accountOrCardColor: String? {
-        account?.color ?? installments.first?.bill.card.color
+        account?.color ?? installments.first?.bill?.card?.color
     }
     
     var accountOrCardIcon: String? {
-        account?.icon ?? installments.first?.bill.card.icon
+        account?.icon ?? installments.first?.bill?.card?.icon
     }
     
     var operationDetails: OperationDetails {

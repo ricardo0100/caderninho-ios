@@ -11,6 +11,7 @@ import SwiftData
 extension EditCreditCardView {
     class ViewModel: ObservableObject {
         let creditCard: CreditCard?
+        let modelManager: ModelManager
         
         @Published var name: String
         @Published var nameError: String?
@@ -25,8 +26,9 @@ extension EditCreditCardView {
         @Published var showDeleteAlert = false
         @Published var isShowingColorPicker = false
         
-        init(creditCard: CreditCard? = nil) {
+        init(creditCard: CreditCard? = nil, context: ModelContext) {
             self.creditCard = creditCard
+            self.modelManager = .init(context: context)
             _name = Published(initialValue: creditCard?.name ?? "")
             _niceColor = Published(initialValue: NiceColor(rawValue: creditCard?.color ?? "") ?? .gray)
             _bankIcon = Published(initialValue: BankIcon(rawValue: creditCard?.icon ?? ""))
@@ -74,6 +76,7 @@ extension EditCreditCardView {
         }
         
         func didConfirmDelete() {
+            try! modelManager.deleteCreditCard(creditCard!)
             shouldDismiss = true
         }
         

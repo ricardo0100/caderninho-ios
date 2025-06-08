@@ -14,12 +14,11 @@ struct EditCreditCardView: View {
         case currency
     }
     @Environment(\.dismiss) var dismiss
-    @Environment(\.modelContext) var modelContext
     @FocusState private var focusedField: Field?
     @ObservedObject var viewModel: ViewModel
     
-    init(creditCard: CreditCard?) {
-        viewModel = .init(creditCard: creditCard)
+    init(creditCard: CreditCard?, context: ModelContext) {
+        viewModel = .init(creditCard: creditCard, context: context)
     }
     
     var body: some View {
@@ -120,11 +119,11 @@ struct EditCreditCardView: View {
 }
 
 #Preview {
-    EditCreditCardView(creditCard: nil)
+    EditCreditCardView(creditCard: nil, context: .preview)
 }
 
 #Preview {
     @Previewable @Query var cards: [CreditCard]
     
-    EditCreditCardView(creditCard: cards.first!)
+    EditCreditCardView(creditCard: cards.first!, context: .preview)
 }

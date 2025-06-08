@@ -8,7 +8,7 @@ class Category: ObservableObject {
     var color: String
     var icon: String?
     
-    @Relationship(deleteRule: .nullify)
+    @Relationship(deleteRule: .nullify, inverse: \Transaction.category)
     var transactions: [Transaction] = []
     
     init(id: UUID, name: String, color: String, icon: String?) {

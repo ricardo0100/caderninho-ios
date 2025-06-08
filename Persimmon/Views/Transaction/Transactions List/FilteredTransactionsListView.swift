@@ -32,7 +32,7 @@ struct FilteredTransactionsListView: View {
             }
 
             let installmentMatch = #Expression<Transaction, Bool> { transaction in
-                !transaction.installments.filter { $0.bill.card.id == selectedId }.isEmpty
+                !transaction.installments.filter { $0.bill?.card?.id == selectedId }.isEmpty
             }
 
             let combined = #Predicate<Transaction> { transaction in

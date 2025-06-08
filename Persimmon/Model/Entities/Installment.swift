@@ -13,26 +13,21 @@ class Installment: ObservableObject {
     @Attribute(.unique)
     var id: UUID
     
-    @Relationship(deleteRule: .noAction)
-    var transaction: Transaction
-    
-    @Relationship(deleteRule: .noAction, inverse: \Bill.installments)
-    var bill: Bill
+    var transaction: Transaction?
+    var bill: Bill?
     
     var number: Int
     
     var value: Double
     
-    init(id: UUID, transaction: Transaction, number: Int, bill: Bill, value: Double) {
+    init(id: UUID, number: Int, value: Double) {
         self.id = id
-        self.transaction = transaction
         self.number = number
-        self.bill = bill
         self.value = value
     }
     
     var currencyValue: String {
-        value.toCurrency(with: bill.card.currency)
+        value.toCurrency(with: bill?.card?.currency ?? "")
     }
 }
 
