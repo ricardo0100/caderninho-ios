@@ -10,6 +10,7 @@ class Transaction: ObservableObject {
     
     var account: Account?
     var category: Category?
+    var card: CreditCard?
     
     @Relationship(deleteRule: .nullify, inverse: \Installment.transaction)
     var installments: [Installment] = []
@@ -35,9 +36,11 @@ class Transaction: ObservableObject {
             
             switch editOperation {
             case .transferIn(let account, let value), .transferOut(account: let account, let value):
+                self.card = nil
                 self.account = account
                 self.value = value
             case .installments(let card, let numberOfInstallments, let value):
+                self.card = card
                 self.value = value
                 self.installments.forEach { modelContext?.delete($0) }
                 self.installments = Self.createInstallments(
@@ -57,7 +60,6 @@ class Transaction: ObservableObject {
         editOperation: EditOperation,
         category: Category?,
         place: Place?) {
-            self.id = UUID()
             self.name = name
             self.date = date
             self.category = category
@@ -65,10 +67,8 @@ class Transaction: ObservableObject {
             self.operation = editOperation.operation.rawValue
 
             switch editOperation {
-            case .transferIn(let account, let value):
-                self.account = account
-                self.value = value
-            case .transferOut(account: let account, let value):
+            case .transferIn(let account, let value), .transferOut(account: let account, let value):
+                self.card = nil
                 self.account = account
                 self.value = value
             case .installments(let card, let numberOfInstallments, let value):

@@ -23,22 +23,22 @@ struct FilteredTransactionsListView: View {
             transaction.date <= endDate &&
             (searchText.isEmpty || transaction.name.localizedStandardContains(searchText))
         }
-
+        
         var predicates: [Predicate<Transaction>] = [basePredicate]
-
+        
         if let selectedId = selectedAccountOrCardId {
             let accountMatch = #Predicate<Transaction> { transaction in
                 transaction.account?.id == selectedId
             }
-
-            let installmentMatch = #Expression<Transaction, Bool> { transaction in
-                !transaction.installments.filter { $0.bill?.card?.id == selectedId }.isEmpty
+            
+            let cardMatch = #Predicate<Transaction> { transaction in
+                transaction.card?.id == selectedId
             }
-
+            
             let combined = #Predicate<Transaction> { transaction in
-                accountMatch.evaluate(transaction) || installmentMatch.evaluate(transaction)
+                accountMatch.evaluate(transaction) || cardMatch.evaluate(transaction)
             }
-
+            
             predicates.append(combined)
         }
 

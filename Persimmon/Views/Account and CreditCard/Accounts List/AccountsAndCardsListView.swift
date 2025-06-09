@@ -10,26 +10,45 @@ struct AccountsAndCardsListView: View {
     @Query(sort: [SortDescriptor(\CreditCard.name)])
     var cards: [CreditCard]
     
-    @State var isShowindEditAccount: Bool = false
-    @State var isShowindEditCreditCard: Bool = false
+    @StateObject var navigation = AccountsAndCardsNavigation()
      
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigation.path) {
             List {
                 Section("Accounts") {
                     ForEach(accounts) { account in
-                        NavigationLink(destination: AccountDetailsView().environmentObject(account)) {
-                            AccountCellView().environmentObject(account)
+                        NavigationLink(value: account) {
+                            AccountCellView()
+                                .environmentObject(account)
                         }
                     }
                 }
                 Section("Credit Cards") {
                     ForEach(cards) { card in
-                        NavigationLink(destination: CardDetailsView().environmentObject(card)) {
-                            CreditCardCellView().environmentObject(card)
+                        NavigationLink(value: card) {
+                            CreditCardCellView()
+                                .environmentObject(card)
                         }
                     }
                 }
+            }
+            .sheet(isPresented: $navigation.newAccount) {
+                EditAccountView(account: nil)
+                    .environmentObject(navigation)
+            }
+            .sheet(isPresented: $navigation.newCard) {
+                EditCreditCardView(creditCard: nil, context: modelContext)
+                    .environmentObject(navigation)
+            }
+            .navigationDestination(for: Account.self) {
+                AccountDetailsView()
+                    .environmentObject($0)
+                    .environmentObject(navigation)
+            }
+            .navigationDestination(for: CreditCard.self) {
+                CardDetailsView()
+                    .environmentObject($0)
+                    .environmentObject(navigation)
             }
             .toolbar {
                 ToolbarItem(placement: .navigation) {
@@ -48,21 +67,15 @@ struct AccountsAndCardsListView: View {
                     }
                 }
             }
-            .sheet(isPresented: $isShowindEditAccount) {
-                EditAccountView(account: nil)
-            }
-            .sheet(isPresented: $isShowindEditCreditCard) {
-                EditCreditCardView(creditCard: nil, context: modelContext)
-            }
         }
     }
 
     func didTapAddAccount() {
-        isShowindEditAccount = true
+        navigation.newAccount = true
     }
     
     func didTapAddCreditCard() {
-        isShowindEditCreditCard = true
+        navigation.newCard = true
     }
 }
 
