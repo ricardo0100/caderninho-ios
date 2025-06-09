@@ -49,7 +49,7 @@ struct EditCategoryView: View {
                 }
                 if category != nil {
                     Section {
-                        Button("Delete account") {
+                        Button("Delete category") {
                             showDeleteAlert = true
                         }.tint(.red)
                     }
@@ -99,7 +99,7 @@ struct EditCategoryView: View {
     }
     
     private func validate() -> Bool {
-        nameErrorMessage = name.count > .zero ? nil : "Campo obrigatório"
+        nameErrorMessage = name.count > .zero ? nil : "Mandatory field"
         return nameErrorMessage == nil
     }
     

@@ -183,6 +183,8 @@ extension EditTransactionView {
                     place: place
                 )
             }
+            navigation.editingTransaction = nil
+            navigation.newTransaction = false
         }
         
         private func editOperation() -> Transaction.EditOperation {

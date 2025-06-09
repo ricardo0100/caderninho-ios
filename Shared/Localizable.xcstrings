@@ -413,6 +413,9 @@
         }
       }
     },
+    "Delete category" : {
+
+    },
     "Delete Transaction" : {
       "localizations" : {
         "pt-BR" : {
