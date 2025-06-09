@@ -11,6 +11,7 @@ import SwiftData
 struct CardDetailsView: View {
     @Environment(\.modelContext) var modelContext
     @EnvironmentObject var card: CreditCard
+    @EnvironmentObject var navigation: AccountsAndCardsNavigation
     @ObservedObject var viewModel = ViewModel()
     
     var body: some View {
@@ -75,12 +76,12 @@ struct CardDetailsView: View {
             }
             ToolbarItem(placement: .automatic) {
                 Button("Edit") {
-                    viewModel.isShowingEdit = true
+                    navigation.editingCard = card
                 }
             }
         }
-        .sheet(isPresented: $viewModel.isShowingEdit) {
-            EditCreditCardView(creditCard: card, context: modelContext)
+        .sheet(item: $navigation.editingCard) { card in
+            EditCreditCardView(creditCard: card, context: modelContext, navigation: navigation)
         }
         .onAppear {
             // TODO: Move card to ViewModel

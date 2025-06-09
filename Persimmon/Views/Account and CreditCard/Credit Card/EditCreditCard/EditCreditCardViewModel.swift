@@ -12,7 +12,7 @@ extension EditCreditCardView {
     class ViewModel: ObservableObject {
         let creditCard: CreditCard?
         let modelManager: ModelManager
-        
+        let navigation: AccountsAndCardsNavigation
         @Published var name: String
         @Published var nameError: String?
         @Published var niceColor: NiceColor
@@ -22,13 +22,13 @@ extension EditCreditCardView {
         @Published var closingCycleDay: Int
         @Published var dueDay: Int
         
-        @Published var shouldDismiss = false
         @Published var showDeleteAlert = false
         @Published var isShowingColorPicker = false
         
-        init(creditCard: CreditCard? = nil, context: ModelContext) {
+        init(creditCard: CreditCard? = nil, context: ModelContext, navigation: AccountsAndCardsNavigation) {
             self.creditCard = creditCard
             self.modelManager = .init(context: context)
+            self.navigation = navigation
             _name = Published(initialValue: creditCard?.name ?? "")
             _niceColor = Published(initialValue: NiceColor(rawValue: creditCard?.color ?? "") ?? .gray)
             _bankIcon = Published(initialValue: BankIcon(rawValue: creditCard?.icon ?? ""))
@@ -69,7 +69,8 @@ extension EditCreditCardView {
             }
             do {
                 try context.save()
-                shouldDismiss = true
+                navigation.newCard = false
+                navigation.editingCard = nil
             } catch {
                 print(error.localizedDescription)
             }
@@ -77,7 +78,13 @@ extension EditCreditCardView {
         
         func didConfirmDelete() {
             try! modelManager.deleteCreditCard(creditCard!)
-            shouldDismiss = true
+            navigation.editingCard = nil
+            navigation.path.removeLast()
+        }
+        
+        func didTapCancel() {
+            navigation.editingCard = nil
+            navigation.newCard = false
         }
         
         private func clearErrors() {

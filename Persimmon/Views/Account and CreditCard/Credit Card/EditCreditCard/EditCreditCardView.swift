@@ -13,12 +13,12 @@ struct EditCreditCardView: View {
         case name
         case currency
     }
-    @Environment(\.dismiss) var dismiss
+    
     @FocusState private var focusedField: Field?
     @ObservedObject var viewModel: ViewModel
     
-    init(creditCard: CreditCard?, context: ModelContext) {
-        viewModel = .init(creditCard: creditCard, context: context)
+    init(creditCard: CreditCard?, context: ModelContext, navigation: AccountsAndCardsNavigation) {
+        viewModel = .init(creditCard: creditCard, context: context, navigation: navigation)
     }
     
     var body: some View {
@@ -98,10 +98,10 @@ struct EditCreditCardView: View {
                     }
                 }
             }
-            .onChange(of: viewModel.shouldDismiss) {
-                dismiss()
-            }
             .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel", action: viewModel.didTapCancel)
+                }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save", action: viewModel.didTapSave)
                 }
@@ -119,11 +119,11 @@ struct EditCreditCardView: View {
 }
 
 #Preview {
-    EditCreditCardView(creditCard: nil, context: .preview)
+    EditCreditCardView(creditCard: nil, context: .preview, navigation: .init())
 }
 
 #Preview {
     @Previewable @Query var cards: [CreditCard]
     
-    EditCreditCardView(creditCard: cards.first!, context: .preview)
+    EditCreditCardView(creditCard: cards.first!, context: .preview, navigation: .init())
 }

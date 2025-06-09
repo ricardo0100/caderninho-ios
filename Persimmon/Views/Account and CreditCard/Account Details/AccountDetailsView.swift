@@ -2,6 +2,7 @@ import SwiftUI
 import SwiftData
 
 struct AccountDetailsView: View {
+    @EnvironmentObject var navigation: AccountsAndCardsNavigation
     @EnvironmentObject var account: Account
     @ObservedObject var viewModel: ViewModel = ViewModel()
     
@@ -39,7 +40,7 @@ struct AccountDetailsView: View {
                 Button("Edit", action: didTapEdit)
             }
         }
-        .sheet(isPresented: $viewModel.isShowingEdit) {
+        .sheet(item: $navigation.editingAccount) { account in
             NavigationStack {
                 EditAccountView(account: account)
             }
@@ -47,7 +48,7 @@ struct AccountDetailsView: View {
     }
     
     func didTapEdit() {
-        viewModel.isShowingEdit = true
+        navigation.editingAccount = account
     }
 }
 

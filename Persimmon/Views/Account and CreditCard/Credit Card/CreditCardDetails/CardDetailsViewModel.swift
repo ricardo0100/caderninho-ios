@@ -11,7 +11,6 @@ import Combine
 extension CardDetailsView {
     class ViewModel: ObservableObject {
         @Published var installments: [Installment] = []
-        @Published var isShowingEdit: Bool = false
         @Published var searchText = ""
         @Published var debouncedSearchText = ""
         @Published var selectedBill: Bill? {

@@ -2,7 +2,7 @@ import SwiftUI
 import CoreData
 
 struct EditAccountView: View {
-    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var navigation: AccountsAndCardsNavigation
     @Environment(\.modelContext) var modelContext
     
     var account: Account?
@@ -84,7 +84,8 @@ struct EditAccountView: View {
                     guard let account else { return }
                     modelContext.delete(account)
                     try? modelContext.save()
-                    dismiss()
+                    navigation.editingAccount = nil
+                    navigation.path.removeLast()
                 }.tint(.red)
                 Button("Cancel") {
                     showDeleteAlert = false
@@ -114,14 +115,13 @@ struct EditAccountView: View {
                                   currency: currency)
             modelContext.insert(account)
         }
-        withAnimation {
-            try? modelContext.save()
-            dismiss()
-        }
+        navigation.editingAccount = nil
+        navigation.newAccount = false
+        try? modelContext.save()
     }
     
     private func didTapCancel() {
-        dismiss()
+        navigation.editingAccount = nil
     }
 }
 

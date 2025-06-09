@@ -9,7 +9,6 @@ import Combine
 
 extension AccountDetailsView {
     class ViewModel: ObservableObject {
-        @Published var isShowingEdit: Bool = false
         @Published var startDate: Date = .distantPast
         @Published var endDate: Date = .distantFuture
         @Published var searchText = ""

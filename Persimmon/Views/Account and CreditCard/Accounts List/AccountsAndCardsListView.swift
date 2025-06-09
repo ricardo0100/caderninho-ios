@@ -37,7 +37,7 @@ struct AccountsAndCardsListView: View {
                     .environmentObject(navigation)
             }
             .sheet(isPresented: $navigation.newCard) {
-                EditCreditCardView(creditCard: nil, context: modelContext)
+                EditCreditCardView(creditCard: nil, context: modelContext, navigation: navigation)
                     .environmentObject(navigation)
             }
             .navigationDestination(for: Account.self) {

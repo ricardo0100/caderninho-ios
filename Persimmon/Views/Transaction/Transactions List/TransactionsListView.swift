@@ -29,7 +29,6 @@ struct TransactionsListView: View {
                         endDate: viewModel.filterEndDate,
                         searchText: viewModel.debouncedSearchText,
                         selectedAccountOrCardId: viewModel.selectedId)
-                    .environmentObject(navigation)
                 }
                 .searchable(text: $viewModel.searchText)
                 .toolbar {
