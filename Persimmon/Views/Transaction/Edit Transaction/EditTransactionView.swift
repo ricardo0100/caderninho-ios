@@ -10,8 +10,8 @@ struct EditTransactionView: View {
     @ObservedObject var viewModel: ViewModel
     @FocusState private var focusedField: Field?
     
-    init(transaction: Transaction?, navigation: TransactionsNavigation) {
-        let viewModel = ViewModel(transaction: transaction, context: .main, navigation: navigation)
+    init(transaction: Transaction?) {
+        let viewModel = ViewModel(transaction: transaction, context: .main, navigation: .shared)
         _viewModel = ObservedObject(initialValue: viewModel)
     }
     
@@ -125,11 +125,11 @@ struct EditTransactionView: View {
 }
 
 #Preview {
-    EditTransactionView(transaction: nil, navigation: TransactionsNavigation())
+    EditTransactionView(transaction: nil)
         .modelContainer(.preview)
 }
 
 #Preview {
     let transaction = try! ModelContext.preview.fetch(FetchDescriptor<Transaction>())[0]
-    EditTransactionView(transaction: transaction, navigation: TransactionsNavigation())
+    EditTransactionView(transaction: transaction)
 }

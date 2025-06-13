@@ -2,9 +2,9 @@ import SwiftUI
 import SwiftData
 
 struct AccountDetailsView: View {
-    @EnvironmentObject var navigation: AccountsAndCardsNavigation
+    @EnvironmentObject var navigation: NavigationModel
     @EnvironmentObject var account: Account
-    @ObservedObject var viewModel: ViewModel = ViewModel()
+    @StateObject var viewModel: ViewModel = ViewModel()
     
     var body: some View {
         List {
@@ -38,11 +38,6 @@ struct AccountDetailsView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Edit", action: didTapEdit)
-            }
-        }
-        .sheet(item: $navigation.editingAccount) { account in
-            NavigationStack {
-                EditAccountView(account: account)
             }
         }
     }

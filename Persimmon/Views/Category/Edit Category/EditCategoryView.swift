@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct EditCategoryView: View {
-    @EnvironmentObject var navigation: CategoriesNavigation
+    @EnvironmentObject var navigation: NavigationModel
     @Environment(\.modelContext) var modelContext
     
     var category: Category?
@@ -78,7 +78,7 @@ struct EditCategoryView: View {
                     guard let category else { return }
                     modelContext.delete(category)
                     try? modelContext.save()
-                    navigation.path.removeLast()
+                    navigation.categoriesPath.removeLast()
                     navigation.editingCategory = nil
                 }.tint(.red)
                 Button("Cancel") {

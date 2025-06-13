@@ -3,8 +3,8 @@ import SwiftData
 
 struct CategoriesListView: View {
     @Query var categories: [Category]
-    @StateObject var navigation = CategoriesNavigation()
-    @ObservedObject var viewModel = ViewModel()
+    @EnvironmentObject var navigation: NavigationModel
+    @StateObject var viewModel = ViewModel()
     
     func getTotal(category: Category) -> Double {
         do {
@@ -26,7 +26,7 @@ struct CategoriesListView: View {
     }
     
     var body: some View {
-        NavigationStack(path: $navigation.path) {
+        NavigationStack(path: $navigation.categoriesPath) {
             List {
                 Section {
                     CategoriesPizzaGraphView(
@@ -57,14 +57,13 @@ struct CategoriesListView: View {
                     Text("Expenses for the selected period")
                 }
             }
-            .sheet(isPresented: $navigation.newCategory) {
-                EditCategoryView()
-                    .environmentObject(navigation)
-            }
             .navigationDestination(for: Category.self) {
                 CategoryDetailsView(category: $0)
-                    .environmentObject(navigation)
             }
+            .navigationDestination(for: Transaction.self, destination: { transaction in
+                TransactionDetailsView()
+                    .environmentObject(transaction)
+            })
             .toolbar {
                 ToolbarItem(placement: .navigation) {
                     NavigationToolbarView(imageName: "chart.pie", title: "Categories")

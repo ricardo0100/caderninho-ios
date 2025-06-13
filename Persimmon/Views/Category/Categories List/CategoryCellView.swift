@@ -23,7 +23,7 @@ struct CategoryCellView: View {
 
 #Preview {
     List {
-        CategoryCellView(category: DataController.createRandomCategory(), total: "R$ 123,45")
-        CategoryCellView(category: DataController.createRandomCategory(withIcon: true), total: "R$ 313,55")
+        CategoryCellView(category: PreviewData.createRandomCategory(), total: "R$ 123,45")
+        CategoryCellView(category: PreviewData.createRandomCategory(withIcon: true), total: "R$ 313,55")
     }
 }

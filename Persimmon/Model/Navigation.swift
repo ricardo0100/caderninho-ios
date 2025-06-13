@@ -7,26 +7,23 @@
 
 import SwiftUI
 
-class TransactionsNavigation: ObservableObject {
-    @Published var path = NavigationPath()
+class NavigationModel: ObservableObject {
+    static let shared = NavigationModel()
     
+    // Transactions
+    @Published var transactionsPath = NavigationPath()
     @Published var editingTransaction: Transaction?
     @Published var newTransaction = false
-}
 
-class CategoriesNavigation: ObservableObject {
-    @Published var path = NavigationPath()
-    
+    // Categories
+    @Published var categoriesPath = NavigationPath()
     @Published var editingCategory: Category?
     @Published var newCategory = false
-}
 
-class AccountsAndCardsNavigation: ObservableObject {
-    @Published var path = NavigationPath()
-    
+    // Accounts and Cards
+    @Published var accountsPath = NavigationPath()
     @Published var editingAccount: Account?
     @Published var newAccount = false
-    
     @Published var editingCard: CreditCard?
     @Published var newCard = false
 }

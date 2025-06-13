@@ -14,6 +14,7 @@ struct PersimmonApp: App {
     var body: some Scene {
         WindowGroup {
             ContainerView()
+                .environmentObject(NavigationModel.shared)
                 .modelContainer(.main)
                 .onChange(of: scenePhase) {
                     switch scenePhase {

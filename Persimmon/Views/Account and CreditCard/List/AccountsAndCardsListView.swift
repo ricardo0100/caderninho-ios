@@ -10,10 +10,10 @@ struct AccountsAndCardsListView: View {
     @Query(sort: [SortDescriptor(\CreditCard.name)])
     var cards: [CreditCard]
     
-    @StateObject var navigation = AccountsAndCardsNavigation()
+    @EnvironmentObject var navigation: NavigationModel
      
     var body: some View {
-        NavigationStack(path: $navigation.path) {
+        NavigationStack(path: $navigation.accountsPath) {
             List {
                 Section("Accounts") {
                     ForEach(accounts) { account in
@@ -32,23 +32,13 @@ struct AccountsAndCardsListView: View {
                     }
                 }
             }
-            .sheet(isPresented: $navigation.newAccount) {
-                EditAccountView(account: nil)
-                    .environmentObject(navigation)
-            }
-            .sheet(isPresented: $navigation.newCard) {
-                EditCreditCardView(creditCard: nil, context: modelContext, navigation: navigation)
-                    .environmentObject(navigation)
-            }
             .navigationDestination(for: Account.self) {
                 AccountDetailsView()
                     .environmentObject($0)
-                    .environmentObject(navigation)
             }
             .navigationDestination(for: CreditCard.self) {
                 CardDetailsView()
                     .environmentObject($0)
-                    .environmentObject(navigation)
             }
             .toolbar {
                 ToolbarItem(placement: .navigation) {

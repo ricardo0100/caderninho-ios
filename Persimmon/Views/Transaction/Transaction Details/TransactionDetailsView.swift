@@ -6,7 +6,7 @@ struct TransactionDetailsView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var transaction: Transaction
-    @EnvironmentObject var navigation: TransactionsNavigation
+    @EnvironmentObject var navigation: NavigationModel
     
     var body: some View {
         let operation = Transaction.Operation(rawValue: transaction.operation)!
@@ -117,9 +117,6 @@ struct TransactionDetailsView: View {
             }
         }
         .navigationTitle(transaction.name)
-        .sheet(item: $navigation.editingTransaction) {
-            EditTransactionView(transaction: $0, navigation: navigation)
-        }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Edit", action: didTapEdit)

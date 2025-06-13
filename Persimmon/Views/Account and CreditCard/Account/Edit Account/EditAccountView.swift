@@ -2,7 +2,7 @@ import SwiftUI
 import CoreData
 
 struct EditAccountView: View {
-    @EnvironmentObject var navigation: AccountsAndCardsNavigation
+    @EnvironmentObject var navigation: NavigationModel
     @Environment(\.modelContext) var modelContext
     
     var account: Account?
@@ -85,7 +85,7 @@ struct EditAccountView: View {
                     modelContext.delete(account)
                     try? modelContext.save()
                     navigation.editingAccount = nil
-                    navigation.path.removeLast()
+                    navigation.accountsPath.removeLast()
                 }.tint(.red)
                 Button("Cancel") {
                     showDeleteAlert = false

@@ -9,11 +9,11 @@ import SwiftUI
 import SwiftData
 
 struct CategoryDetailsView: View {
-    @EnvironmentObject var navigation: CategoriesNavigation
-    @ObservedObject var viewModel: ViewModel
+    @EnvironmentObject var navigation: NavigationModel
+    @StateObject var viewModel: ViewModel
     
     init(category: Category) {
-        _viewModel = ObservedObject(initialValue: ViewModel(category: category))
+        _viewModel = StateObject(wrappedValue: ViewModel(category: category))
     }
     
     var body: some View {
@@ -60,9 +60,6 @@ struct CategoryDetailsView: View {
                 }
             }
         }
-        .sheet(item: $navigation.editingCategory) {
-            EditCategoryView(category: $0)
-        }
     }
 }
 
@@ -73,5 +70,6 @@ struct CategoryDetailsView: View {
     NavigationStack {
         CategoryDetailsView(category: category)
             .modelContext(ModelContainer.preview.mainContext)
+            .environmentObject(NavigationModel())
     }
 }

@@ -5,11 +5,11 @@ import AppIntents
 
 struct TransactionsListView: View {
     @ObservedObject var viewModel = ViewModel()
-    @StateObject var navigation = TransactionsNavigation()
+    @EnvironmentObject var navigation: NavigationModel
     
     var body: some View {
         VStack {
-            NavigationStack(path: $navigation.path) {
+            NavigationStack(path: $navigation.transactionsPath) {
                 List {
                     Section {
                     } footer: {
@@ -36,6 +36,15 @@ struct TransactionsListView: View {
                         NavigationToolbarView(imageName: "book.pages",
                                               title: "Transactions")
                     }
+                    #if DEBUG
+                    ToolbarItem(placement: .automatic) {
+                        Menu("Debug") {
+                            Button("Create Preview Data") {
+                                try? PreviewData.createRandomData(.main)
+                            }
+                        }
+                    }
+                    #endif
                 }
                 .overlay(alignment: .bottomTrailing) {
                     Button(action: viewModel.didTapAdd) {
@@ -51,10 +60,6 @@ struct TransactionsListView: View {
                 .navigationDestination(for: Transaction.self) { transaction in
                     TransactionDetailsView()
                         .environmentObject(transaction)
-                        .environmentObject(navigation)
-                }
-                .sheet(item: $viewModel.editingTransaction) { transaction in
-                    EditTransactionView(transaction: transaction, navigation: navigation)
                 }
             }
             .onAppear(perform: viewModel.didAppear)

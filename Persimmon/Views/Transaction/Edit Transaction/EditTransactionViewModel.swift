@@ -16,7 +16,7 @@ extension EditTransactionView {
     public class ViewModel: ObservableObject {
         private let transaction: Transaction?
         private let modelManager: ModelManager
-        private let navigation: TransactionsNavigation
+        private let navigation: NavigationModel
         private let context: ModelContext
         // Model vars
         @Published var name: String
@@ -42,7 +42,7 @@ extension EditTransactionView {
         @Published var showAccountField: Bool = false
         @Published var showCardField: Bool = false
         
-        init(transaction: Transaction? = nil, context: ModelContext, navigation: TransactionsNavigation) {
+        init(transaction: Transaction? = nil, context: ModelContext, navigation: NavigationModel) {
             self.transaction = transaction
             self.context = context
             self.navigation = navigation
@@ -61,7 +61,7 @@ extension EditTransactionView {
         
         init(ticketData: TicketData, context: ModelContext) {
             self.transaction = nil
-            self.navigation = TransactionsNavigation()
+            self.navigation = NavigationModel()
             self.context = context
             self.modelManager = ModelManager(context: context)
             _name = Published(initialValue: "")
@@ -119,7 +119,7 @@ extension EditTransactionView {
         func didConfirmDelete() {
             guard let transaction = transaction else { return }
             modelManager.deleteTransaction(transaction: transaction)
-            navigation.path.removeLast()
+            navigation.transactionsPath.removeLast()
             navigation.editingTransaction = nil
         }
         

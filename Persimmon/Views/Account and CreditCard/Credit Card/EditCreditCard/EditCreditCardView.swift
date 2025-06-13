@@ -17,7 +17,7 @@ struct EditCreditCardView: View {
     @FocusState private var focusedField: Field?
     @ObservedObject var viewModel: ViewModel
     
-    init(creditCard: CreditCard?, context: ModelContext, navigation: AccountsAndCardsNavigation) {
+    init(creditCard: CreditCard?, context: ModelContext, navigation: NavigationModel) {
         viewModel = .init(creditCard: creditCard, context: context, navigation: navigation)
     }
     

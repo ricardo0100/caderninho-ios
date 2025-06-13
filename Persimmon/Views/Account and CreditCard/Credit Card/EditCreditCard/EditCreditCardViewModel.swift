@@ -12,7 +12,7 @@ extension EditCreditCardView {
     class ViewModel: ObservableObject {
         let creditCard: CreditCard?
         let modelManager: ModelManager
-        let navigation: AccountsAndCardsNavigation
+        let navigation: NavigationModel
         @Published var name: String
         @Published var nameError: String?
         @Published var niceColor: NiceColor
@@ -25,7 +25,7 @@ extension EditCreditCardView {
         @Published var showDeleteAlert = false
         @Published var isShowingColorPicker = false
         
-        init(creditCard: CreditCard? = nil, context: ModelContext, navigation: AccountsAndCardsNavigation) {
+        init(creditCard: CreditCard? = nil, context: ModelContext, navigation: NavigationModel) {
             self.creditCard = creditCard
             self.modelManager = .init(context: context)
             self.navigation = navigation
@@ -79,7 +79,7 @@ extension EditCreditCardView {
         func didConfirmDelete() {
             try! modelManager.deleteCreditCard(creditCard!)
             navigation.editingCard = nil
-            navigation.path.removeLast()
+            navigation.accountsPath.removeLast()
         }
         
         func didTapCancel() {

@@ -11,7 +11,7 @@ import SwiftData
 struct CardDetailsView: View {
     @Environment(\.modelContext) var modelContext
     @EnvironmentObject var card: CreditCard
-    @EnvironmentObject var navigation: AccountsAndCardsNavigation
+    @EnvironmentObject var navigation: NavigationModel
     @ObservedObject var viewModel = ViewModel()
     
     var body: some View {
@@ -79,9 +79,6 @@ struct CardDetailsView: View {
                     navigation.editingCard = card
                 }
             }
-        }
-        .sheet(item: $navigation.editingCard) { card in
-            EditCreditCardView(creditCard: card, context: modelContext, navigation: navigation)
         }
         .onAppear {
             // TODO: Move card to ViewModel

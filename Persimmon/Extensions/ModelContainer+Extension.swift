@@ -16,6 +16,6 @@ extension ModelContainer {
         try! ModelContainer(for: schema, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     }
     
-    @MainActor static let preview: ModelContainer = DataController.createPreviewContainerWithExampleData()
+    @MainActor static let preview: ModelContainer = PreviewData.createPreviewContainerWithExampleData()
     #endif
 }

@@ -357,6 +357,15 @@
 			path = "Transaction Details";
 			sourceTree = "<group>";
 		};
+		CF20F9522DFB9E8600AE2DF2 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				CF15B33F2BAB047600E8E050 /* Account Details */,
+				CFE6D7B92BA62D0D00E76AB8 /* Edit Account */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
 		CF2CB0982A06F8D600CBA434 = {
 			isa = PBXGroup;
 			children = (
@@ -634,9 +643,8 @@
 			isa = PBXGroup;
 			children = (
 				CFD3ED682DC986860029AC2F /* Credit Card */,
-				CF15B33F2BAB047600E8E050 /* Account Details */,
-				CFE6D7B82BA62D0400E76AB8 /* Accounts List */,
-				CFE6D7B92BA62D0D00E76AB8 /* Edit Account */,
+				CF20F9522DFB9E8600AE2DF2 /* Account */,
+				CFE6D7B82BA62D0400E76AB8 /* List */,
 			);
 			path = "Account and CreditCard";
 			sourceTree = "<group>";
@@ -740,14 +748,14 @@
 			path = "Edit Transaction";
 			sourceTree = "<group>";
 		};
-		CFE6D7B82BA62D0400E76AB8 /* Accounts List */ = {
+		CFE6D7B82BA62D0400E76AB8 /* List */ = {
 			isa = PBXGroup;
 			children = (
 				CFD3ED632DC8332E0029AC2F /* CreditCardCellView.swift */,
 				CF15B34E2BACE84F00E8E050 /* AccountCellView.swift */,
 				CFBEE2402A07F9A000586164 /* AccountsAndCardsListView.swift */,
 			);
-			path = "Accounts List";
+			path = List;
 			sourceTree = "<group>";
 		};
 		CFE6D7B92BA62D0D00E76AB8 /* Edit Account */ = {
