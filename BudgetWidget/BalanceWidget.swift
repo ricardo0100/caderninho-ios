@@ -13,6 +13,7 @@ struct BalanceWidget: Widget {
             ) { entry in
                 if let account = entry.accountData {
                     AccountBalanceView(account: account)
+                        .widgetURL(URL(string: "caderninho://open?id=\(account.id)"))
                 } else {
                     AccountBalancePlaceholderView()
                 }
@@ -57,38 +58,36 @@ fileprivate struct AccountBalanceView: View {
                 .bold()
 
             if let transaction = account.lastTransaction {
-                Spacer()
-                Text("Last transaction")
-                    .foregroundStyle(foregroundColor)
-                    .font(.system(size: 9))
-                Spacer().frame(height: .spacingNano)
-                HStack {
-                    VStack(alignment: .leading, spacing: .spacingNano) {
-                        HStack(alignment: .center, spacing: .spacingSmall) {
-                            Image(systemName: transaction.operationIcon)
+                Spacer().frame(height: .spacingMedium)
+//                Text("Last transaction")
+//                    .foregroundStyle(foregroundColor)
+//                    .font(.system(size: 9))
+//                Spacer().frame(height: .spacingNano)
+                VStack(alignment: .leading, spacing: .spacingNano) {
+                    HStack(alignment: .center, spacing: .spacingSmall) {
+                        Image(systemName: transaction.operationIcon)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 6)
+                            .foregroundStyle(foregroundColor)
+                        Text(transaction.name)
+                            .font(.system(size: 10))
+                            .foregroundStyle(foregroundColor)
+                    }
+                    
+                    HStack(spacing: .spacingSmall) {
+                        if let category = transaction.category {
+                            Image(systemName: category.icon ?? "")
+                                .symbolRenderingMode(.monochrome)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 6)
-                                .foregroundStyle(foregroundColor)
-                            Text(transaction.name)
-                                .font(.system(size: 10))
-                                .foregroundStyle(foregroundColor)
+                                .foregroundStyle(Color(hex: category.color))
+                                .frame(width: 10, height: 10)
                         }
-                        
-                        HStack(spacing: .spacingSmall) {
-                            if let icon = transaction.category?.icon {
-                                Image(systemName: icon)
-                                    .symbolRenderingMode(.multicolor)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 10, height: 10)
-                            }
-                            Text(transaction.value)
-                                .font(.caption2)
-                                .foregroundStyle(foregroundColor)
-                        }
+                        Text(transaction.value)
+                            .font(.caption2)
+                            .foregroundStyle(foregroundColor)
                     }
-                    Spacer()
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.spacingSmall)
@@ -158,8 +157,8 @@ fileprivate struct AccountBalanceView: View {
                     category:
                         CategoryData(
                             name: "Food",
-                            color: "#F807FF",
-                            icon: nil
+                            color: "#7807FF",
+                            icon: NiceIcon.brain.rawValue
                         ),
                     operationIcon: "arrow.up"
                 )

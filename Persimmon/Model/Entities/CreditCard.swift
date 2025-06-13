@@ -50,8 +50,9 @@ class CreditCard: ObservableObject {
     }
     
     var lastTransaction: Transaction? {
-        nil
-//        currentBill?.installments.sorted { $0.transaction?.date < $1.transaction?.date }.last?.transaction
+        currentBill?.installments.sorted {
+            $0.transaction?.date ?? Date() < $1.transaction?.date ?? Date()
+        }.last?.transaction
     }
     
     func toAccountOrCardData() -> AccountOrCardData {

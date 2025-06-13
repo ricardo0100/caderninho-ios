@@ -10,6 +10,8 @@ import SwiftUI
 class NavigationModel: ObservableObject {
     static let shared = NavigationModel()
     
+    @Published var selectedTab = 0
+    
     // Transactions
     @Published var transactionsPath = NavigationPath()
     @Published var editingTransaction: Transaction?

@@ -57,7 +57,22 @@ struct ModelManager {
         try! context.save()
     }
     
+    // MARK: Accounts
+    func getAccount(with id: UUID) -> Account? {
+        let predicate = #Predicate<Account> {
+            $0.id == id
+        }
+        return try? context.fetch(FetchDescriptor(predicate: predicate)).first
+    }
+    
     // MARK: Credit Cards
+    func getCard(with id: UUID) -> CreditCard? {
+        let predicate = #Predicate<CreditCard> {
+            $0.id == id
+        }
+        return try? context.fetch(FetchDescriptor(predicate: predicate)).first
+    }
+    
     func deleteCreditCard(_ card: CreditCard) throws {
         Set(card.bills.flatMap { $0.installments }.compactMap { $0.transaction }).forEach { transaction in
             deleteTransaction(transaction: transaction)

@@ -4,7 +4,7 @@ import PhotosUI
 import AppIntents
 
 struct TransactionsListView: View {
-    @ObservedObject var viewModel = ViewModel()
+    @StateObject var viewModel = ViewModel()
     @EnvironmentObject var navigation: NavigationModel
     
     var body: some View {
