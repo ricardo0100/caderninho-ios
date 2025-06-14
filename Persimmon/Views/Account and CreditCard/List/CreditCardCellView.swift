@@ -17,7 +17,7 @@ struct CreditCardCellView: View {
                 Image(icon)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 24)
+                    .frame(width: 32)
             } else {
                 LettersIconView(
                     text: card.name.firstLetters(),
@@ -27,29 +27,31 @@ struct CreditCardCellView: View {
             
             VStack(alignment: .leading) {
                 Text(card.name)
-                    .font(.subheadline)
-                Text("Due: 10/05")
-                    .font(.caption)
-                Text("Closing: 03/05")
-                    .font(.caption)
-            }
-            Spacer()
-            if let bill = card.currentBill {
-                VStack(alignment: .leading) {
-                    Text("Current bill:")
-                        .font(.caption2)
+                    .font(.headline)
+                if let bill = card.currentBill {
                     Text(bill.total.toCurrency(with: card.currency))
-                        .font(.caption)
-                        .bold()
-                    if bill.isDelayed {
-                        Text("Delayed!")
-                            .foregroundStyle(Color.red)
+                        .font(.subheadline)
+                }
+            }
+            
+            if let bill = card.currentBill {
+                Spacer()
+                VStack(alignment: .trailing) {
+                    HStack(spacing: .spacingNano) {
+                        Text("Due:")
+                            .font(.caption)
+                        Text(bill.dueDate.formatted(date: .numeric, time: .omitted))
+                            .font(.caption)
+                            .bold()
                     }
-                    Text("Total card debits")
-                        .font(.caption2)
-                    Text(card.totalDebit.toCurrency(with: card.currency))
-                        .font(.caption)
-                        .bold()
+                    HStack(spacing: .spacingNano) {
+                        Text("Closing:")
+                            .font(.caption)
+                        Text(bill.closingCycleDate.formatted(date: .numeric, time: .omitted))
+                            .foregroundStyle(bill.isDelayed ? Color(.systemRed) : .primary)
+                            .font(.caption)
+                            .bold()
+                    }
                 }
             }
         }

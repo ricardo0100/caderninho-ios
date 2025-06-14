@@ -119,8 +119,7 @@ extension EditTransactionView {
         func didConfirmDelete() {
             guard let transaction = transaction else { return }
             modelManager.deleteTransaction(transaction: transaction)
-            navigation.transactionsPath.removeLast()
-            navigation.editingTransaction = nil
+            navigation.dismissDeletedTransaction()
         }
         
         func didTapSave() {

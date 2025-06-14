@@ -40,6 +40,10 @@ struct AccountsAndCardsListView: View {
                 CardDetailsView()
                     .environmentObject($0)
             }
+            .navigationDestination(for: Transaction.self) {
+                TransactionDetailsView()
+                    .environmentObject($0)
+            }
             .toolbar {
                 ToolbarItem(placement: .navigation) {
                     NavigationToolbarView(imageName: "creditcard", title: "Accounts and Cards")
@@ -71,5 +75,6 @@ struct AccountsAndCardsListView: View {
 
 #Preview {
     AccountsAndCardsListView()
+        .environmentObject(NavigationModel())
         .modelContainer(.preview)
 }

@@ -247,9 +247,6 @@
     "Closing:" : {
 
     },
-    "Closing: 03/05" : {
-      "shouldTranslate" : false
-    },
     "Color" : {
       "localizations" : {
         "pt-BR" : {
@@ -316,6 +313,7 @@
       }
     },
     "Current bill:" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
@@ -380,6 +378,7 @@
       }
     },
     "Delayed!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
@@ -464,9 +463,6 @@
     },
     "Due:" : {
 
-    },
-    "Due: 10/05" : {
-      "shouldTranslate" : false
     },
     "Edit" : {
       "localizations" : {
@@ -642,9 +638,6 @@
           }
         }
       }
-    },
-    "No categories!" : {
-
     },
     "No expenses for this period" : {
 
@@ -890,6 +883,7 @@
       }
     },
     "Total card debits" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {

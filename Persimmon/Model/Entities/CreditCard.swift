@@ -55,6 +55,10 @@ class CreditCard: ObservableObject {
         }.last?.transaction
     }
     
+    var isDelayed: Bool {
+        bills.contains { $0.isDelayed }
+    }
+    
     func toAccountOrCardData() -> AccountOrCardData {
         AccountOrCardData(
             id: self.id.uuidString,

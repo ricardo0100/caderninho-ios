@@ -20,8 +20,10 @@ struct CardDetailsView: View {
                 ForEach(viewModel.installments.sorted {
                     $0.number < $1.number
                 }, id: \.self) { installment in
-                    InstallmentCellView()
-                        .environmentObject(installment)
+                    NavigationLink(value: installment.transaction) {
+                        InstallmentCellView()
+                            .environmentObject(installment)
+                    }
                 }
             } header: {
                 VStack(alignment: .leading) {

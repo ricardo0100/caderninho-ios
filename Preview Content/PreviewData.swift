@@ -39,9 +39,7 @@ class PreviewData {
     ]
     
     static let accountCurrencyExamples = [
-        "R$",
-        "元",
-        "US$"
+        "R$"
     ]
     
     static let categoryNameExamples = [

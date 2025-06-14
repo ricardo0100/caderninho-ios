@@ -24,8 +24,6 @@ struct AccountCardHeader: View {
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 32)
-                        } else {
-                            
                         }
                         VStack(alignment: .leading) {
                             Text(item.name)
