@@ -25,7 +25,7 @@ class NavigationModel: ObservableObject {
     @Published var categoriesPath = NavigationPath()
     @Published var editingCategory: Category?
     @Published var newCategory = false
-
+    
     // Accounts and Cards
     @Published var accountsPath = NavigationPath()
     @Published var editingAccount: Account?
