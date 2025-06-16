@@ -29,6 +29,9 @@
       },
       "shouldTranslate" : false
     },
+    "%@%%" : {
+
+    },
     "%lld" : {
       "shouldTranslate" : false
     },
@@ -58,6 +61,9 @@
         }
       },
       "shouldTranslate" : false
+    },
+    "⚠️ Soon" : {
+
     },
     "$" : {
       "shouldTranslate" : false
@@ -441,6 +447,9 @@
         }
       }
     },
+    "Distribution" : {
+
+    },
     "Due" : {
       "localizations" : {
         "pt-BR" : {
@@ -494,6 +503,9 @@
           }
         }
       }
+    },
+    "Evolution" : {
+
     },
     "Expenses for the selected period" : {
 

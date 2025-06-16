@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 import UIKit
 
-struct AccountCardHeader: View {
+struct AccountCardHeaderView: View {
     @Query var accounts: [Account]
     @Query var cards: [CreditCard]
     @Binding var selectedId: UUID?
@@ -88,6 +88,6 @@ struct AccountCardHeader: View {
 
 #Preview {
     @Previewable @State var selectedId: UUID?
-    AccountCardHeader(selectedId: $selectedId)
+    AccountCardHeaderView(selectedId: $selectedId)
         .modelContainer(.preview)
 }

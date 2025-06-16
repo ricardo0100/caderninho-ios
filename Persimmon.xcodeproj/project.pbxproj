@@ -47,7 +47,7 @@
 		CF2DA2182DE26D8400C91228 /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA2172DE26D7E00C91228 /* Image+Extension.swift */; };
 		CF2DA2192DE26D8400C91228 /* Image+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA2172DE26D7E00C91228 /* Image+Extension.swift */; };
 		CF2DA21B2DE3386A00C91228 /* PeriodFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA21A2DE3385C00C91228 /* PeriodFilterView.swift */; };
-		CF2DA21D2DE33A5600C91228 /* AccountCardHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA21C2DE33A3500C91228 /* AccountCardHeader.swift */; };
+		CF2DA21D2DE33A5600C91228 /* AccountCardHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA21C2DE33A3500C91228 /* AccountCardHeaderView.swift */; };
 		CF2DA21F2DE364DA00C91228 /* NewTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA21E2DE364CF00C91228 /* NewTransactionView.swift */; };
 		CF2DA2212DE6186400C91228 /* NewTransactionValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA2202DE6186400C91228 /* NewTransactionValueView.swift */; };
 		CF2DA2242DE6187D00C91228 /* NewTransactionSelectAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2DA2232DE6187D00C91228 /* NewTransactionSelectAccountView.swift */; };
@@ -63,6 +63,8 @@
 		CF5155AD2DE883F4008BE241 /* AccountDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5155AC2DE883EE008BE241 /* AccountDetailsViewModel.swift */; };
 		CF5155AF2DE88723008BE241 /* CardDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5155AE2DE8871D008BE241 /* CardDetailsViewModel.swift */; };
 		CF5309F02DFE1A0300124072 /* NavigationModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5309EF2DFE19FE00124072 /* NavigationModelTests.swift */; };
+		CF5309F22E00477600124072 /* AccountsAndCardsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5309F12E00476D00124072 /* AccountsAndCardsHeaderView.swift */; };
+		CF5309F42E004EC900124072 /* AccountsDistributionGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5309F32E004B9B00124072 /* AccountsDistributionGraphView.swift */; };
 		CF5746352D22BDED007CC196 /* LettersIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBEE2492A081B7100586164 /* LettersIconView.swift */; };
 		CF5746382D22BE30007CC196 /* SelectAccountEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5746372D22BE2C007CC196 /* SelectAccountEntity.swift */; };
 		CF5746392D22C294007CC196 /* NiceColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9D2A712A09967F0003DC39 /* NiceColorPicker.swift */; };
@@ -212,7 +214,7 @@
 		CF2DA2152DE238C900C91228 /* FilteredTransactionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredTransactionsListView.swift; sourceTree = "<group>"; };
 		CF2DA2172DE26D7E00C91228 /* Image+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Extension.swift"; sourceTree = "<group>"; };
 		CF2DA21A2DE3385C00C91228 /* PeriodFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodFilterView.swift; sourceTree = "<group>"; };
-		CF2DA21C2DE33A3500C91228 /* AccountCardHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardHeader.swift; sourceTree = "<group>"; };
+		CF2DA21C2DE33A3500C91228 /* AccountCardHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardHeaderView.swift; sourceTree = "<group>"; };
 		CF2DA21E2DE364CF00C91228 /* NewTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTransactionView.swift; sourceTree = "<group>"; };
 		CF2DA2202DE6186400C91228 /* NewTransactionValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTransactionValueView.swift; sourceTree = "<group>"; };
 		CF2DA2232DE6187D00C91228 /* NewTransactionSelectAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTransactionSelectAccountView.swift; sourceTree = "<group>"; };
@@ -224,6 +226,8 @@
 		CF5155AC2DE883EE008BE241 /* AccountDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewModel.swift; sourceTree = "<group>"; };
 		CF5155AE2DE8871D008BE241 /* CardDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsViewModel.swift; sourceTree = "<group>"; };
 		CF5309EF2DFE19FE00124072 /* NavigationModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationModelTests.swift; sourceTree = "<group>"; };
+		CF5309F12E00476D00124072 /* AccountsAndCardsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsAndCardsHeaderView.swift; sourceTree = "<group>"; };
+		CF5309F32E004B9B00124072 /* AccountsDistributionGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsDistributionGraphView.swift; sourceTree = "<group>"; };
 		CF5746372D22BE2C007CC196 /* SelectAccountEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectAccountEntity.swift; sourceTree = "<group>"; };
 		CF57463E2D240007007CC196 /* AccountBalanceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountBalanceProvider.swift; sourceTree = "<group>"; };
 		CF5746402D24114D007CC196 /* Persimmon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Persimmon.entitlements; sourceTree = "<group>"; };
@@ -340,7 +344,7 @@
 		CF15B3572BAE004500E8E050 /* Transactions List */ = {
 			isa = PBXGroup;
 			children = (
-				CF2DA21C2DE33A3500C91228 /* AccountCardHeader.swift */,
+				CF2DA21C2DE33A3500C91228 /* AccountCardHeaderView.swift */,
 				CF15B3602BAE5BD600E8E050 /* TransactionCellView.swift */,
 				CF82EC642D982D01002F875A /* TransactionsListViewModel.swift */,
 				CFBEE23D2A07F3A000586164 /* TransactionsListView.swift */,
@@ -751,6 +755,8 @@
 		CFE6D7B82BA62D0400E76AB8 /* List */ = {
 			isa = PBXGroup;
 			children = (
+				CF5309F32E004B9B00124072 /* AccountsDistributionGraphView.swift */,
+				CF5309F12E00476D00124072 /* AccountsAndCardsHeaderView.swift */,
 				CFD3ED632DC8332E0029AC2F /* CreditCardCellView.swift */,
 				CF15B34E2BACE84F00E8E050 /* AccountCellView.swift */,
 				CFBEE2402A07F9A000586164 /* AccountsAndCardsListView.swift */,
@@ -916,6 +922,7 @@
 			files = (
 				CFD3ED3D2DBE568F0029AC2F /* FilterType.swift in Sources */,
 				CFBEE24A2A081B7100586164 /* LettersIconView.swift in Sources */,
+				CF5309F22E00477600124072 /* AccountsAndCardsHeaderView.swift in Sources */,
 				CF7AF7662DEC9EAA00A0A7EC /* CategoriesListViewModel.swift in Sources */,
 				CF2CB0BB2A06FC3E00CBA434 /* ContainerView.swift in Sources */,
 				CF7AF77C2DF4FC9800A0A7EC /* CurrencySelectorView.swift in Sources */,
@@ -935,6 +942,7 @@
 				CFE6D7BF2BA9B4C000E76AB8 /* Transaction.swift in Sources */,
 				CF7AF7772DF4D80000A0A7EC /* CategoriesPizzaGraphView.swift in Sources */,
 				CFBEE23E2A07F3A000586164 /* TransactionsListView.swift in Sources */,
+				CF5309F42E004EC900124072 /* AccountsDistributionGraphView.swift in Sources */,
 				CF2DA2162DE238D700C91228 /* FilteredTransactionsListView.swift in Sources */,
 				CF2DA1EC2DDDD8CE00C91228 /* AccountQuery.swift in Sources */,
 				CF15B3412BAB048A00E8E050 /* AccountDetailsView.swift in Sources */,
@@ -981,7 +989,7 @@
 				CFD3ED5B2DC57B0F0029AC2F /* Bill.swift in Sources */,
 				CF7AF77A2DF4DB5500A0A7EC /* ModelError.swift in Sources */,
 				CFBEE2412A07F9A000586164 /* AccountsAndCardsListView.swift in Sources */,
-				CF2DA21D2DE33A5600C91228 /* AccountCardHeader.swift in Sources */,
+				CF2DA21D2DE33A5600C91228 /* AccountCardHeaderView.swift in Sources */,
 				CF7AF7732DF46CC000A0A7EC /* NavigationModel.swift in Sources */,
 				CFD3ED872DCBF3DC0029AC2F /* SelectCardView.swift in Sources */,
 				CF9D2A722A0996800003DC39 /* NiceColorPicker.swift in Sources */,

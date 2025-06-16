@@ -11,7 +11,7 @@ struct TransactionsListView: View {
         NavigationStack(path: $navigation.transactionsPath) {
             List {
                 Section {
-                    AccountCardHeader(selectedId: $viewModel.selectedId)
+                    AccountCardHeaderView(selectedId: $viewModel.selectedId)
                 } header: {
                     HStack {
                         PeriodFilterView(

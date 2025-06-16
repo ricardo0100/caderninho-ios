@@ -15,6 +15,10 @@ struct AccountsAndCardsListView: View {
     var body: some View {
         NavigationStack(path: $navigation.accountsPath) {
             List {
+                Section {
+                    AccountsAndCardsHeaderView()
+                }
+                
                 Section("Accounts") {
                     ForEach(accounts) { account in
                         NavigationLink(value: account) {
@@ -23,6 +27,7 @@ struct AccountsAndCardsListView: View {
                         }
                     }
                 }
+                
                 Section("Credit Cards") {
                     ForEach(cards) { card in
                         NavigationLink(value: card) {

@@ -40,13 +40,15 @@ struct PizzaGraphView: View {
             }.clipped()
             ScrollView {
                 VStack {
-                    ForEach(values.sorted(by: { $0.value > $1.value })) { value in
+                    ForEach(values.sorted(by: { $0.value > $1.value })) { item in
                         HStack {
                             Circle()
-                                .fill(value.color)
+                                .fill(item.color)
                                 .frame(width: 8, height: 8)
-                            Text(value.title)
+                            Text(item.title)
                                 .font(.caption)
+                            Text("\(String(format: "%.0f", (item.value / sum) * 100))%")
+                                .font(.caption2)
                             Spacer()
                         }
                     }
