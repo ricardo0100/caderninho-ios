@@ -81,6 +81,7 @@ struct ModelManager {
         try context.save()
     }
     
+    // TODO: Move Widgets logic
     // MARK: Widgets
     
     fileprivate func transactionData(_ transaction: Transaction, currency: String) -> TransactionData {

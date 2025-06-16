@@ -12,7 +12,7 @@ struct BalanceWidget: Widget {
                 provider: AccountDataProvider()
             ) { entry in
                 if let account = entry.accountData {
-                    AccountBalanceView(account: account)
+                    AccountBalanceView(accountOrCard: account)
                         .widgetURL(URL(string: "caderninho://open?id=\(account.id)"))
                 } else {
                     AccountBalancePlaceholderView()
@@ -23,7 +23,7 @@ struct BalanceWidget: Widget {
 
 fileprivate struct AccountBalancePlaceholderView: View {
     var body: some View {
-        Text("Edit this Widget to select an account or card!")
+        Text("Tap and hold to select an account or card!")
             .tint(Color.brand)
             .font(.caption2)
             .containerBackground(for: .widget) {}
@@ -31,82 +31,91 @@ fileprivate struct AccountBalancePlaceholderView: View {
 }
 
 fileprivate struct AccountBalanceView: View {
-    let account: AccountOrCardData
+    let accountOrCard: AccountOrCardData
     
     var body: some View {
-        let backgroundColor = UIImage(named: account.icon ?? "")?
+        let backgroundColor = UIImage(named: accountOrCard.icon ?? "")?
             .predominantColor() ?? Color(.systemBackground)
-        let foregroundColor = backgroundColor.bestContrastingColor()
-        VStack(alignment: .leading, spacing: .spacingZero) {
-            HStack(spacing: .spacingSmall) {
-                if let icon = account.icon {
+        
+        VStack {
+            Spacer()
+            HStack {
+                if let icon = accountOrCard.icon {
                     Image(icon)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 16)
-                } else {
-                    LettersIconView(text: account.name.firstLetters(),
-                                    color: Color(hex: account.color))
+                        .frame(width: 20)
                 }
-                Text(account.name)
+                Text(accountOrCard.name)
                     .font(.caption)
-                    .foregroundStyle(foregroundColor)
+                Spacer()
             }
-            .padding(.top)
-            Text(account.balance.toCurrency(with: account.currency))
-                .foregroundStyle(foregroundColor)
-                .bold()
-
-            if let transaction = account.lastTransaction {
-                Spacer().frame(height: .spacingMedium)
-//                Text("Last transaction")
-//                    .foregroundStyle(foregroundColor)
-//                    .font(.system(size: 9))
-//                Spacer().frame(height: .spacingNano)
-                VStack(alignment: .leading, spacing: .spacingNano) {
-                    HStack(alignment: .center, spacing: .spacingSmall) {
-                        Image(systemName: transaction.operationIcon)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 6)
-                            .foregroundStyle(foregroundColor)
-                        Text(transaction.name)
-                            .font(.system(size: 10))
-                            .foregroundStyle(foregroundColor)
-                    }
-                    
-                    HStack(spacing: .spacingSmall) {
-                        if let category = transaction.category {
-                            Image(systemName: category.icon ?? "")
-                                .symbolRenderingMode(.monochrome)
+            
+            HStack {
+                Text(accountOrCard.balanceString)
+                    .font(.caption2)
+                    .bold()
+                Spacer()
+            }
+            
+            if let transaction = accountOrCard.lastTransaction {
+                HStack {
+                    VStack(alignment: .leading, spacing: .zero) {
+                        HStack {
+                            Text(transaction.name)
+                                .font(.caption2)
+                            Spacer()
+                        }
+                        HStack(spacing: .spacingSmall) {
+                            Image(systemName: transaction.operationIcon)
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .foregroundStyle(Color(hex: category.color))
-                                .frame(width: 10, height: 10)
+                                .foregroundStyle(.primary)
+                                .frame(width: 6)
+                            Text(transaction.value)
+                                .font(.caption2)
                         }
-                        Text(transaction.value)
-                            .font(.caption2)
-                            .foregroundStyle(foregroundColor)
+                    }
+                    .padding(.spacingSmall)
+                    .background(Color.white.opacity(0.3))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    
+                    Link(destination: URL(string: "caderninho://new?id=\(accountOrCard.id)")!) {
+                        Image(systemName: "plus.circle.fill")
+                            .resizable()
+                            .foregroundStyle(.primary.opacity(0.7))
+                            .frame(width: 16, height: 16)
                     }
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.spacingSmall)
-                .background(
-                    Color(.systemBackground)
-                        .clipShape(RoundedRectangle(cornerRadius: 5))
-                        .shadow(color: Color(.systemBackground), radius: 0, x: 1, y: 1)
-                        .opacity(0.15)
-                )
+            }
+            
+            Spacer()
+        }
+        .overlay(alignment: .topTrailing) {
+            if accountOrCard.lastTransaction == nil {
+                Link(destination: URL(string: "caderninho://new?id=\(accountOrCard.id)")!) {
+                    Image(systemName: "plus.circle.fill")
+                        .resizable()
+                        .foregroundStyle(.primary.opacity(0.7))
+                        .frame(width: 16, height: 16)
+                }
             }
         }
+        .frame(maxWidth: .infinity)
         .containerBackground(for: .widget) {
             LinearGradient(
                 gradient: Gradient(colors: [
-                    backgroundColor.opacity(0.65),
-                    backgroundColor
+                    backgroundColor.opacity(0.4),
+                    backgroundColor.opacity(0.5),
+                    backgroundColor.opacity(0.4),
+                    backgroundColor.opacity(0.7),
+                    backgroundColor.opacity(0.6),
+                    backgroundColor.opacity(0.8),
+                    backgroundColor.opacity(0.9),
+                    backgroundColor.opacity(1.0)
                 ]),
                 startPoint: .top,
-                endPoint: .bottom
+                endPoint: .bottomTrailing
             )
         }
     }
@@ -115,19 +124,18 @@ fileprivate struct AccountBalanceView: View {
 #Preview(as: .systemSmall) {
     BalanceWidget()
 } timeline: {
-    AccountOrCardDataEntry(date: Date(), accountData: nil)
     AccountOrCardDataEntry(
         date: Date(),
         accountData: AccountOrCardData(
             id: "",
-            name: "Test Bank",
+            name: "Banco do Brasil",
             currency: "R$",
             balance: 12345.67,
             color: "#0089FF",
-            icon: "itau",
+            icon: "bb",
             lastTransaction:
                 TransactionData(
-                    name: "Buy in Supermarket",
+                    name: "Dinner",
                     date: Date(),
                     value: "R$ 123,45",
                     category:
@@ -140,6 +148,7 @@ fileprivate struct AccountBalanceView: View {
                 )
         )
     )
+    AccountOrCardDataEntry(date: Date(), accountData: nil)
     AccountOrCardDataEntry(
         date: Date(),
         accountData: AccountOrCardData(
@@ -190,7 +199,7 @@ fileprivate struct AccountBalanceView: View {
             currency: "R$",
             balance: 12345.67,
             color: "#0089FF",
-            icon: "nubank",
+            icon: "itau",
             lastTransaction: nil)
         )
 }

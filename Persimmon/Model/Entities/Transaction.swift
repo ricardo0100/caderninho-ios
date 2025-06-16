@@ -187,9 +187,9 @@ class Transaction: ObservableObject {
         var icon: String {
             switch self {
             case .transferIn:
-                return "arrowshape.down.circle"
+                return "plus"
             case .transferOut:
-                return "banknote"
+                return "minus"
             case .installments:
                 return "creditcard"
             case .refund:

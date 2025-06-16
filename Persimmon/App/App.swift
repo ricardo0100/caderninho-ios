@@ -11,6 +11,7 @@ import SwiftData
 struct PersimmonApp: App {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.modelContext) var modelContext
+    let modelManager = ModelManager(context: .main)
     
     var body: some Scene {
         WindowGroup {
@@ -50,13 +51,25 @@ struct PersimmonApp: App {
             if let id = items.first(where: { $0.name == "id" })?.value {
                 presentAccountOrCard(with: id)
             }
+        case "new":
+            if let id = items.first(where: { $0.name == "id" })?.value {
+                presentNewTransactionWithAccountOrCard(with: id)
+            }
         default:
             print("Invalid URL scheme: \(url)")
         }
     }
     
+    private func presentNewTransactionWithAccountOrCard(with id: String) {
+        guard let uuid = UUID(uuidString: id) else { return }
+        if let account = modelManager.getAccount(with: uuid) {
+            NavigationModel.shared.presentNewTransaction(for: account)
+        } else if let card = modelManager.getCard(with: uuid) {
+            NavigationModel.shared.presentNewTransaction(for: card)
+        }
+    }
+    
     private func presentAccountOrCard(with id: String) {
-        let modelManager = ModelManager(context: .main)
         guard let uuid = UUID(uuidString: id) else { return }
         
         if let account = modelManager.getAccount(with: uuid) {

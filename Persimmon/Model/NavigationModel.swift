@@ -20,6 +20,8 @@ class NavigationModel: ObservableObject {
     @Published var transactionsPath = NavigationPath()
     @Published var editingTransaction: Transaction?
     @Published var newTransaction = false
+    @Published var newTransactionWithAccount: Account?
+    @Published var newTransactionWithCard: CreditCard?
 
     // Categories
     @Published var categoriesPath = NavigationPath()
@@ -59,5 +61,17 @@ class NavigationModel: ObservableObject {
         case .accountsAndCards:
             accountsPath.removeLast()
         }
+    }
+    
+    func presentNewTransaction(for account: Account) {
+        selectedTab = .transactions
+        transactionsPath.removeLast(transactionsPath.count)
+        newTransactionWithAccount = account
+    }
+    
+    func presentNewTransaction(for card: CreditCard) {
+        selectedTab = .transactions
+        transactionsPath.removeLast(transactionsPath.count)
+        newTransactionWithCard = card
     }
 }

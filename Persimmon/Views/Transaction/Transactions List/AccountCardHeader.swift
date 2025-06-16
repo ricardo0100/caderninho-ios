@@ -16,7 +16,7 @@ struct AccountCardHeader: View {
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: .spacingBig) {
+            HStack(spacing: .spacingZero) {
                 ForEach(makeArray(accounts: accounts, cards: cards), id: \.self) { item in
                     HStack {
                         if let icon = item.icon {
@@ -36,6 +36,7 @@ struct AccountCardHeader: View {
                     .padding(.spacingMedium)
                     .background(selectedId == item.id ? Color.gray.opacity(0.3) : .clear)
                     .clipShape(RoundedRectangle(cornerRadius: .spacingSmall))
+                    .padding(.spacingSmall)
                     .onTapGesture {
                         withAnimation {
                             if selectedId == item.id {
@@ -88,4 +89,5 @@ struct AccountCardHeader: View {
 #Preview {
     @Previewable @State var selectedId: UUID?
     AccountCardHeader(selectedId: $selectedId)
+        .modelContainer(.preview)
 }

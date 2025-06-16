@@ -10,18 +10,15 @@ import SwiftUI
 import SwiftData
 
 struct NewTransactionSelectAccountView: View {
-    
-    @Binding var isPresented: Bool
     @Query var accounts: [Account]
     @Query var cards: [CreditCard]
+    @EnvironmentObject var navigationModel: NavigationModel
     
     var body: some View {
         List {
             Section("Accounts") {
                 ForEach(accounts) { account in
-                    NavigationLink {
-                        NewTransactionValueView(isPresented: $isPresented, account:  account)
-                    } label: {
+                    NavigationLink(value: account) {
                         HStack {
                             if let icon = account.icon {
                                 Image(icon)
@@ -35,9 +32,7 @@ struct NewTransactionSelectAccountView: View {
             
             Section("Credit Cards") {
                 ForEach(cards) { card in
-                    NavigationLink {
-                        NewTransactionValueView(isPresented: $isPresented, card: card)
-                    } label: {
+                    NavigationLink(value: card) {
                         HStack {
                             if let icon = card.icon {
                                 Image(icon)
@@ -54,7 +49,9 @@ struct NewTransactionSelectAccountView: View {
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel") {
-                    isPresented.toggle()
+                    navigationModel.newTransaction = false
+                    navigationModel.newTransactionWithAccount = nil
+                    navigationModel.newTransactionWithCard = nil
                 }
             }
         }

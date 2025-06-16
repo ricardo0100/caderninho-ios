@@ -28,14 +28,12 @@ extension TransactionsListView {
         }
         
         func didTapAdd() {
-            isShowingNewTransaction = true
+            //TODO: Inject NavigationModel
+            NavigationModel.shared.newTransaction = true
         }
         
         func didTapCamera() {
             isShowingCamera = true
-        }
-        
-        func didAppear() {
         }
     }
 }

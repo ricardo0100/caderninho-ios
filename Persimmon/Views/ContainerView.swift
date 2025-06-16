@@ -46,6 +46,15 @@ struct ContainerView: View {
         .sheet(item: $navigation.editingCategory) {
             EditCategoryView(category: $0)
         }
+        .fullScreenCover(isPresented: $navigation.newTransaction) {
+            NewTransactionView()
+        }
+        .fullScreenCover(item: $navigation.newTransactionWithCard) { card in
+            NewTransactionView(with: card)
+        }
+        .fullScreenCover(item: $navigation.newTransactionWithAccount) { account in
+            NewTransactionView(with: account)
+        }
     }
 }
 

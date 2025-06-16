@@ -13,4 +13,8 @@ struct AccountOrCardData: Codable {
     let color: String
     let icon: String?
     let lastTransaction: TransactionData?
+    
+    var balanceString: String {
+        balance.toCurrency(with: currency)
+    }
 }

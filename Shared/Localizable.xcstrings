@@ -475,6 +475,7 @@
       }
     },
     "Edit this Widget to select an account or card!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
@@ -861,6 +862,9 @@
           }
         }
       }
+    },
+    "Tap and hold to select an account or card!" : {
+
     },
     "This month" : {
       "localizations" : {

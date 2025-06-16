@@ -417,6 +417,7 @@
 		CF2CB0B52A06FBCC00CBA434 /* Transaction */ = {
 			isa = PBXGroup;
 			children = (
+				CF2DA2222DE6187000C91228 /* New Transaction */,
 				CFDC21952BAF08B600295432 /* Edit Transaction */,
 				CF15B3582BAE004E00E8E050 /* Transaction Details */,
 				CF15B3572BAE004500E8E050 /* Transactions List */,
@@ -737,7 +738,6 @@
 		CFDC21952BAF08B600295432 /* Edit Transaction */ = {
 			isa = PBXGroup;
 			children = (
-				CF2DA2222DE6187000C91228 /* New Transaction */,
 				CFDC21962BAF094000295432 /* EditTransactionView.swift */,
 				CF9DA5B02D1839210061056F /* EditTransactionViewModel.swift */,
 				CF95BC212C581C0C00C8C1CE /* SelectCategoryView.swift */,

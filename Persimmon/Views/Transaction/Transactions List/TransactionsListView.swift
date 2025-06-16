@@ -12,7 +12,6 @@ struct TransactionsListView: View {
             List {
                 Section {
                     AccountCardHeader(selectedId: $viewModel.selectedId)
-                        .padding(.top, .spacingSmall)
                 } header: {
                     HStack {
                         PeriodFilterView(
@@ -61,10 +60,6 @@ struct TransactionsListView: View {
                 TransactionDetailsView()
                     .environmentObject(transaction)
             }
-        }
-        .onAppear(perform: viewModel.didAppear)
-        .fullScreenCover(isPresented: $viewModel.isShowingNewTransaction) {
-            NewTransactionView(isPresented: $viewModel.isShowingNewTransaction)
         }
     }
 }

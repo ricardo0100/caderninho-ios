@@ -11,7 +11,7 @@ import SwiftData
 
 struct NewTransactionNameView: View {
     @Environment(\.modelContext) var modelContext: ModelContext
-    @Binding var isPresented: Bool
+    @EnvironmentObject var navigation: NavigationModel
     
     enum Field: Hashable {
         case name
@@ -69,9 +69,11 @@ struct NewTransactionNameView: View {
                     editOperation: operation,
                     category: selectedCategory,
                     place: nil)
+            navigation.newTransaction = false
+            navigation.newTransactionWithCard = nil
+            navigation.newTransactionWithAccount = nil
         } catch {
             print(error.localizedDescription)
         }
-        isPresented = false
     }
 }

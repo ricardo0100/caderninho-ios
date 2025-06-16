@@ -14,7 +14,6 @@ struct NewTransactionValueView: View {
         case value
     }
     @FocusState private var focusedField: Field?
-    @Binding var isPresented: Bool
     @State var value: Double = .zero
     @State var installments: Int = 1
     @State var isOut = true
@@ -22,14 +21,12 @@ struct NewTransactionValueView: View {
     let account: Account?
     let card: CreditCard?
     
-    init(isPresented: Binding<Bool>, account: Account) {
-        _isPresented = isPresented
+    init(account: Account) {
         self.account = account
         self.card = nil
     }
     
-    init (isPresented: Binding<Bool>, card: CreditCard) {
-        _isPresented = isPresented
+    init (card: CreditCard) {
         self.card = card
         self.account = nil
     }
@@ -128,7 +125,7 @@ struct NewTransactionValueView: View {
             }
             Section {} footer: {
                 NavigationLink("Next") {
-                    NewTransactionNameView(isPresented: $isPresented, operation: operation)
+                    NewTransactionNameView(operation: operation)
                 }
                 .font(.title2)
                 .buttonStyle(.borderedProminent)
