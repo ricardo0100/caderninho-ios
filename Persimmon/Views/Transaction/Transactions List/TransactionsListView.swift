@@ -31,10 +31,6 @@ struct TransactionsListView: View {
             }
             .searchable(text: $viewModel.searchText)
             .toolbar {
-                ToolbarItem(placement: .navigation) {
-                    NavigationToolbarView(imageName: "book.pages",
-                                          title: "Transactions")
-                }
                 #if DEBUG
                 ToolbarItem(placement: .automatic) {
                     Menu("Debug") {
@@ -45,6 +41,7 @@ struct TransactionsListView: View {
                 }
                 #endif
             }
+            .navigationTitle("Transactions")
             .overlay(alignment: .bottomTrailing) {
                 Button(action: viewModel.didTapAdd) {
                     Image(systemName: "plus")

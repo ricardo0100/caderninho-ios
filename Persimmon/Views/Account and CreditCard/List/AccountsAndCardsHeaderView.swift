@@ -12,7 +12,7 @@ import SwiftData
 struct AccountsAndCardsHeaderView: View {
     enum Option: LocalizedStringKey, CaseIterable, Identifiable {
         case distribution = "Distribution"
-        case evoution = "Evolution"
+        case evolution = "Evolution"
 
         var id: Self { self }
     }
@@ -33,7 +33,7 @@ struct AccountsAndCardsHeaderView: View {
             case .distribution:
                 AccountsDistributionGraphView()
                     .frame(height: 80)
-            case .evoution:
+            case .evolution:
                 Text("⚠️ Soon")
             }
         }

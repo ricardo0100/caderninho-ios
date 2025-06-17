@@ -285,6 +285,9 @@
         }
       }
     },
+    "Continue" : {
+
+    },
     "Create Preview Data" : {
 
     },
@@ -328,6 +331,9 @@
           }
         }
       }
+    },
+    "Current bill: " : {
+
     },
     "Custom period" : {
       "localizations" : {
@@ -642,7 +648,11 @@
         }
       }
     },
+    "New transaction" : {
+
+    },
     "Next" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {
@@ -801,6 +811,7 @@
       }
     },
     "Select an account or card" : {
+      "extractionState" : "stale",
       "localizations" : {
         "pt-BR" : {
           "stringUnit" : {

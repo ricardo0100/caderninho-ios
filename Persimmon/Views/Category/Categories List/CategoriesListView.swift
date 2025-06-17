@@ -57,6 +57,7 @@ struct CategoriesListView: View {
                     Text("Expenses for the selected period")
                 }
             }
+            .navigationTitle("Categories")
             .navigationDestination(for: Category.self) {
                 CategoryDetailsView(category: $0)
             }
@@ -65,9 +66,6 @@ struct CategoriesListView: View {
                     .environmentObject(transaction)
             })
             .toolbar {
-                ToolbarItem(placement: .navigation) {
-                    NavigationToolbarView(imageName: "chart.pie", title: "Categories")
-                }
                 ToolbarItem(placement: .confirmationAction) {
                     Button(action: {
                         navigation.newCategory = true

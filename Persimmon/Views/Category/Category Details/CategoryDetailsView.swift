@@ -19,13 +19,9 @@ struct CategoryDetailsView: View {
     var body: some View {
         List {
             Section {} header: {
-                VStack {
-                    Text(viewModel.startDate.formatted())
-                    Text(viewModel.endDate.formatted())
-                    PeriodFilterView(
-                        startDate: $viewModel.startDate,
-                        endDate: $viewModel.endDate)
-                }
+                PeriodFilterView(
+                    startDate: $viewModel.startDate,
+                    endDate: $viewModel.endDate)
             }
             .listRowInsets(EdgeInsets())
             .textCase(.none)

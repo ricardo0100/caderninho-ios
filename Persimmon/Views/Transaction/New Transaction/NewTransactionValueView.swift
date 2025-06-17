@@ -58,57 +58,20 @@ struct NewTransactionValueView: View {
                             focusedField = .value
                         }
                 }
-            }
-            header: {
+            } header: {
                 HStack {
                     if let icon = icon {
                         Image(icon)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 32)
+                            .frame(width: 48)
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
                     }
                     Text(name)
                         .font(.headline)
                 }
                 .textCase(.none)
                 .padding(.bottom)
-            }
-            footer: {
-                if !isCard {
-                   HStack {
-                       Spacer()
-                       VStack {
-                           Button(action: {
-                               isOut = false
-                           }) {
-                               Image(systemName: "arrow.down.circle")
-                                   .resizable()
-                                   .frame(width: 36, height: 36)
-                                   .padding()
-                           }
-                           .foregroundStyle(isOut ? Color.blue : .white)
-                           .background(isOut ? Color.clear : .blue)
-                           .clipShape(RoundedRectangle(cornerRadius: .spacingLarge))
-                           Text("Transfer In")
-                       }
-                       Spacer()
-                       VStack {
-                           Button(action: {
-                               isOut = true
-                           }) {
-                               Image(systemName: "arrow.up.circle")
-                                   .resizable()
-                                   .frame(width: 36, height: 36)
-                                   .padding()
-                           }
-                           .foregroundStyle(isOut ? Color.white : .blue)
-                           .background(isOut ? Color.blue : .clear)
-                           .clipShape(RoundedRectangle(cornerRadius: .spacingLarge))
-                           Text("Transfer Out")
-                       }
-                       Spacer()
-                   }.padding(.top)
-               }
             }
             Section {
                 if isCard {
@@ -122,16 +85,49 @@ struct NewTransactionValueView: View {
                         }
                     }
                 }
-            }
-            Section {} footer: {
-                NavigationLink("Next") {
-                    NewTransactionNameView(operation: operation)
+            } footer: {
+                if let account = account {
+                    HStack {
+                        Spacer()
+                        NavigationLink {
+                            NewTransactionNameView(operation: .transferOut(account: account, value: value))
+                        } label: {
+                            VStack {
+                                Image(systemName: "tray.and.arrow.up.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 32)
+                                Text("Transfer Out")
+                            }
+                        }
+                        Spacer()
+                        NavigationLink {
+                            NewTransactionNameView(operation: .transferIn(account: account, value: value))
+                        } label: {
+                            VStack {
+                                Image(systemName: "tray.and.arrow.down.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 32)
+                                Text("Transfer In")
+                            }
+                        }
+                        Spacer()
+                    }
+                    .disabled(value == 0)
+                } else if let card = card {
+                    HStack {
+                        Spacer()
+                        NavigationLink("Continue") {
+                            NewTransactionNameView(operation: .installments(card: card, numberOfInstallments: installments, value: value))
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .padding(.top)
+                        .disabled(value == 0)
+                        Spacer()
+                    }
                 }
-                .font(.title2)
-                .buttonStyle(.borderedProminent)
             }
-            .textCase(.none)
-            .frame(maxWidth: .infinity)
         }
     }
     
@@ -143,5 +139,18 @@ struct NewTransactionValueView: View {
         } else {
             return .transferIn(account: account!, value: value)
         }
+    }
+}
+
+
+#Preview {
+    NavigationStack {
+        NewTransactionValueView(card: CreditCard(id: UUID(),
+                                                 name: "Credit Card",
+                                                 color: "#567F7F",
+                                                 icon: "bb",
+                                                 currency: "R$",
+                                                 closingCycleDay: 3,
+                                                 dueDay: 10))
     }
 }

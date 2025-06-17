@@ -21,6 +21,10 @@ class Account: ObservableObject {
         transactions.sorted { $0.date < $1.date }.last
     }
     
+    var balanceWithCurrency: String {
+        balance.toCurrency(with: currency)
+    }
+    
     init(id: UUID, name: String, color: String, icon: String?, currency: String) {
         self.id = id
         self.name = name

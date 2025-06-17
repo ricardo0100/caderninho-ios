@@ -10,7 +10,6 @@
 		CF0289F32D9DAD0C008E53DC /* PhotosPickerItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0289F22D9DAD04008E53DC /* PhotosPickerItem+Extension.swift */; };
 		CF0289F42D9DAD0C008E53DC /* PhotosPickerItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0289F22D9DAD04008E53DC /* PhotosPickerItem+Extension.swift */; };
 		CF15B3412BAB048A00E8E050 /* AccountDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B3402BAB048A00E8E050 /* AccountDetailsView.swift */; };
-		CF15B34A2BAC3D1200E8E050 /* NavigationToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B3492BAC3D1200E8E050 /* NavigationToolbarView.swift */; };
 		CF15B34F2BACE84F00E8E050 /* AccountCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B34E2BACE84F00E8E050 /* AccountCellView.swift */; };
 		CF15B3532BACEBC500E8E050 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B3522BACEBC500E8E050 /* Double+Extension.swift */; };
 		CF15B35C2BAE006600E8E050 /* TransactionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15B35B2BAE006600E8E050 /* TransactionDetailsView.swift */; };
@@ -190,7 +189,6 @@
 /* Begin PBXFileReference section */
 		CF0289F22D9DAD04008E53DC /* PhotosPickerItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosPickerItem+Extension.swift"; sourceTree = "<group>"; };
 		CF15B3402BAB048A00E8E050 /* AccountDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsView.swift; sourceTree = "<group>"; };
-		CF15B3492BAC3D1200E8E050 /* NavigationToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationToolbarView.swift; sourceTree = "<group>"; };
 		CF15B34E2BACE84F00E8E050 /* AccountCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCellView.swift; sourceTree = "<group>"; };
 		CF15B3522BACEBC500E8E050 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		CF15B35B2BAE006600E8E050 /* TransactionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsView.swift; sourceTree = "<group>"; };
@@ -664,7 +662,6 @@
 				CFBEE2492A081B7100586164 /* LettersIconView.swift */,
 				CF7A804E2A0DBAE20067F5A8 /* ImageIconView.swift */,
 				CFE6D7BC2BA9277500E76AB8 /* LabeledView.swift */,
-				CF15B3492BAC3D1200E8E050 /* NavigationToolbarView.swift */,
 				CF72A07E2BB9FB9900E0FDB1 /* CurrencyTextField.swift */,
 			);
 			path = Components;
@@ -985,7 +982,6 @@
 				CFD3ED602DC7CF440029AC2F /* EditCreditCardView.swift in Sources */,
 				CFD3ED542DC2C5E60029AC2F /* TicketReaderViewModel.swift in Sources */,
 				CF2DA1ED2DDDDDEB00C91228 /* SelectAccountEntity.swift in Sources */,
-				CF15B34A2BAC3D1200E8E050 /* NavigationToolbarView.swift in Sources */,
 				CFD3ED5B2DC57B0F0029AC2F /* Bill.swift in Sources */,
 				CF7AF77A2DF4DB5500A0A7EC /* ModelError.swift in Sources */,
 				CFBEE2412A07F9A000586164 /* AccountsAndCardsListView.swift in Sources */,

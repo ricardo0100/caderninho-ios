@@ -167,9 +167,9 @@ class Transaction: ObservableObject {
         var iconName: String {
             switch self {
             case .transferIn:
-                return "arrowshape.down.circle"
+                return "tray.and.arrow.down.fill"
             case .transferOut:
-                return "arrowshape.up.circle"
+                return "tray.and.arrow.up.fill"
             case .installments:
                 return "creditcard"
             case .refund:
@@ -232,6 +232,28 @@ class Transaction: ObservableObject {
             case .transferOut(_, let value): return value
             case .installments(_, _, let value): return value
             case .refund(_, let value): return value
+            }
+        }
+        
+        var description: String {
+            switch self {
+            case .transferIn(let account, let value), .transferOut(let account, let value):
+                return value.toCurrency(with: account.currency)
+            case .installments(let card, let numberOfInstallments, let value):
+                return "\(value.toCurrency(with: card.currency)) \(numberOfInstallments) x \((value / Double(numberOfInstallments)).toCurrency(with: card.currency))"
+            case .refund:
+                fatalError()
+            }
+        }
+        
+        var accountOrCardIcon: String? {
+            switch self {
+            case .transferIn(let account, _), .transferOut(let account, _):
+                return account.icon
+            case .installments(let card, _, _):
+                return card.icon
+            case .refund:
+                fatalError()
             }
         }
     }

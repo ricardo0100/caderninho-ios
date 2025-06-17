@@ -47,9 +47,8 @@ struct CategoriesPizzaGraphView: View {
                     startDate: startDate,
                     endDate: endDate,
                     currency: currency).reduce(Double.zero) { $0 + $1.value } / sum
-                let title = "\(category.name) - \(String(format: "%.0f", value * 100))%"
                 return GraphItem(
-                    title: title,
+                    title: category.name,
                     value: value,
                     color: Color(hex: category.color))
             }

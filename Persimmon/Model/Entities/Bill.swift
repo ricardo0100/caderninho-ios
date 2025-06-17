@@ -61,6 +61,10 @@ class Bill: ObservableObject {
         return Calendar.current.date(from: components) ?? Date()
     }
     
+    var totalWithCurrency: String {
+        total.toCurrency(with: card?.currency ?? "")
+    }
+    
     init(id: UUID, card: CreditCard, month: Int, year: Int) {
         self.id = id
         self.card = card

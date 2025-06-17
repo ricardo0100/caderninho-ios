@@ -37,12 +37,35 @@ struct NewTransactionNameView: View {
                 .onAppear {
                     focusedField = .name
                 }
+            } header: {
+                HStack {
+                    if let icon = operation.accountOrCardIcon {
+                        Image(icon)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 32)
+                            .clipShape(RoundedRectangle(cornerRadius: 4))
+                    }
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Image(systemName: operation.operation.iconName)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 18)
+                            Text(operation.operation.text)
+                        }
+                        Text(operation.description)
+                            .font(.caption)
+                    }
+                }
             }
+            
             Section {
                 LabeledView(labelText: "Category") {
                     SelectCategoryView(selected: $selectedCategory)
                 }
             }
+            
             Section {} footer: {
                 Button("Save") {
                     if name.isEmpty {
@@ -76,4 +99,18 @@ struct NewTransactionNameView: View {
             print(error.localizedDescription)
         }
     }
+}
+
+#Preview {
+    NewTransactionNameView(
+        operation: .installments(
+            card: CreditCard(id: UUID(),
+                             name: "Credit Card",
+                             color: "#0077FF",
+                             icon: "caixa",
+                             currency: "R$",
+                             closingCycleDay: 3,
+                             dueDay: 10),
+            numberOfInstallments: 3,
+            value: 1234))
 }

@@ -49,10 +49,8 @@ struct AccountsAndCardsListView: View {
                 TransactionDetailsView()
                     .environmentObject($0)
             }
+            .navigationTitle("Accounts and Cards")
             .toolbar {
-                ToolbarItem(placement: .navigation) {
-                    NavigationToolbarView(imageName: "creditcard", title: "Accounts and Cards")
-                }
                 ToolbarItem(placement: .confirmationAction) {
                     Menu {
                         Button(action: didTapAddAccount) {
