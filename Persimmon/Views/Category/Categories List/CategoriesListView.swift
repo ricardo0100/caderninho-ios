@@ -29,23 +29,21 @@ struct CategoriesListView: View {
         NavigationStack(path: $navigation.categoriesPath) {
             List {
                 Section {
-                    CategoriesPizzaGraphView(
-                        startDate: viewModel.startDate,
-                        endDate: viewModel.endDate,
-                        currency: viewModel.currency)
-                    .frame(height: 150)
-                } header: {
-                    HStack {
-                        PeriodFilterView(
-                            startDate: $viewModel.startDate,
-                            endDate: $viewModel.endDate)
-                        Spacer()
-                        CurrencySelectorView(selectedCurrency: $viewModel.currency)
-
-                    }.padding(.vertical)
+                    VStack {
+                        HStack {
+                            PeriodFilterView(
+                                startDate: $viewModel.startDate,
+                                endDate: $viewModel.endDate)
+                            Spacer()
+                            CurrencySelectorView(selectedCurrency: $viewModel.currency)
+                            
+                        }
+                        CategoriesPizzaGraphView(
+                            startDate: viewModel.startDate,
+                            endDate: viewModel.endDate,
+                            currency: viewModel.currency)
+                    }
                 }
-                .listRowInsets(EdgeInsets())
-                .textCase(.none)
                 
                 Section {
                     ForEach(getCategoriesWithTotal(), id: \.self.0.id) { item in
@@ -82,6 +80,7 @@ struct CategoriesListView: View {
 #Preview {
     NavigationStack {
         CategoriesListView()
+            .environmentObject(NavigationModel())
             .modelContainer(.preview)
     }
 }

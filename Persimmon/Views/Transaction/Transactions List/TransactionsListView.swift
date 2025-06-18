@@ -12,16 +12,14 @@ struct TransactionsListView: View {
             List {
                 Section {
                     AccountCardHeaderView(selectedId: $viewModel.selectedId)
-                } header: {
-                    HStack {
-                        PeriodFilterView(
-                            startDate: $viewModel.filterStartDate,
-                            endDate: $viewModel.filterEndDate)
-                    }
-                    .padding(.vertical)
+                }
+                
+                Section {} footer: {
+                    PeriodFilterView(
+                        startDate: $viewModel.filterStartDate,
+                        endDate: $viewModel.filterEndDate)
                 }
                 .listRowInsets(EdgeInsets())
-                .textCase(.none)
                 
                 FilteredTransactionsListView(
                     startDate: viewModel.filterStartDate,

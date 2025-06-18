@@ -42,7 +42,7 @@ struct PeriodFilterView: View {
                 Image(systemName: "calendar.circle")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 28, height: 28)
+                    .frame(width: 20, height: 20)
                     .foregroundStyle(Color(.systemBlue))
             }
             switch filterType {
@@ -54,10 +54,9 @@ struct PeriodFilterView: View {
                     DatePicker("End Date",
                                selection: $endDate,
                                displayedComponents: .date).labelsHidden()
-                }.frame(height: 32)
+                }
             default:
                 Text(filterType.title)
-                    .font(.headline)
             }
         }
         .onAppear {

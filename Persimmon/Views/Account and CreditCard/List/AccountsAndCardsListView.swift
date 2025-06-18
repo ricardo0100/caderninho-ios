@@ -11,14 +11,15 @@ struct AccountsAndCardsListView: View {
     var cards: [CreditCard]
     
     @EnvironmentObject var navigation: NavigationModel
-     
+    @StateObject var viewModel = ViewModel()
+    
     var body: some View {
         NavigationStack(path: $navigation.accountsPath) {
             List {
                 Section {
-                    AccountsAndCardsHeaderView()
+                    AccountsDistributionGraphView()
                 }
-                
+                 
                 Section("Accounts") {
                     ForEach(accounts) { account in
                         NavigationLink(value: account) {

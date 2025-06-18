@@ -6,6 +6,7 @@
 //
 import SwiftUI
 import SwiftData
+import Charts
 
 struct CategoriesPizzaGraphView: View {
     @Query var categories: [Category]
@@ -64,8 +65,13 @@ struct CategoriesPizzaGraphView: View {
                 .frame(maxWidth: .infinity)
                 .foregroundStyle(.secondary)
         } else {
-            PizzaGraphView(values: items)
-                .padding(.spacingMedium)
+            Chart(items.filter { $0.value > .zero }) { item in
+                SectorMark(angle: .value(item.title, item.value),
+                           angularInset: 0.5)
+                    .foregroundStyle(by: .value("Name", item.title))
+            }
+            .frame(height: 120)
+            .chartLegend(position: .bottom)
         }
     }
 }
@@ -73,7 +79,6 @@ struct CategoriesPizzaGraphView: View {
 #Preview {
     List {
         Section {
-        } header: {
             CategoriesPizzaGraphView(
                 startDate: .distantPast,
                 endDate: .distantFuture,
